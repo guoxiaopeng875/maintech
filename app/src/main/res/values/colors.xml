@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="toolbar_bg">#383838</color>
+    <color name="white">#fff</color>
+    <color name="item_font_gray">#646464</color>
+    <color name="item_font_black">#323232</color>
+    <color name="text_blue">#0380f4</color>
+    <color name="green">#A0CE6B</color>
+    <color name="red">#FF0000</color>
+    <color name="bg_gray">#efefef</color>
+    <color name="yellow">#ffeec8</color>
+    <color name="activity_bg_color">#80666666</color>
+    <color name="comui_tab_text_color">#ff333333</color>
+</resources>
