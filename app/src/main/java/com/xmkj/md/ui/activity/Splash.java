@@ -1,17 +1,24 @@
 package com.xmkj.md.ui.activity;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.ToastUtils;
+
+import butterknife.BindView;
 
 public class Splash extends BaseActivity {
 
-    protected static final int MSG_INIT_OK = 0;
+
+    @BindView(R.id.btn_quick_apply)
+    Button mBtnQuickApply;
+    @BindView(R.id.rl_login_splash)
+    RelativeLayout mRlLoginSplash;
 
     @Override
     protected int getLayoutId() {
@@ -31,26 +38,15 @@ public class Splash extends BaseActivity {
         }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        mHandler.postDelayed(timeOutTask, 2000*600);
     }
 
     @Override
     public void setListener() {
-
+        // TODO 跳转到快速报单单页面(h5?)
+        mBtnQuickApply.setOnClickListener(view -> ToastUtils.showToast("快速报单"));
+        // 跳转到登录页面
+        mRlLoginSplash.setOnClickListener(view -> AppUtils.jump2Next(Splash.this, Main.class));
     }
 
-
-    private Handler mHandler = new Handler() {
-        public void handleMessage(android.os.Message msg) {
-            AppUtils.jump2Next(Splash.this, Main.class);
-        }
-    };
-
-    Runnable timeOutTask = () -> {
-        Message msg = Message.obtain();
-        msg.what = MSG_INIT_OK;
-        mHandler.sendMessage(msg);
-    };
-
-
 }
+
