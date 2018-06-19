@@ -31,7 +31,7 @@ public class Splash extends BaseActivity {
         }
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        mHandler.postDelayed(timeOutTask, 2000);
+        mHandler.postDelayed(timeOutTask, 2000*600);
     }
 
     @Override

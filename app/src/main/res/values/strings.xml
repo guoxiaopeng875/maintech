@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MD</string>
+    <string name="splash_quick_apply">快速报单</string>
+    <string name="splash_login">员工用户登录</string>
 </resources>

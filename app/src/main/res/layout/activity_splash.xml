@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg_splash">
 
+    <Button
+        android:textSize="@dimen/x14"
+        android:textColor="@color/white"
+        android:background="@drawable/shape_btn_splash"
+        android:layout_marginBottom="@dimen/x20"
+        android:id="@+id/btn_quick_apply"
+        android:layout_width="@dimen/x176"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/iv_splash"
+        android:layout_centerHorizontal="true"
+        android:text="@string/splash_quick_apply" />
+    <ImageView
+        android:id="@+id/iv_splash"
+        android:layout_marginBottom="@dimen/x24"
+        android:layout_above="@id/rl_login_splash"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/logo_splash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:id="@+id/rl_login_splash"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x49"
+        android:layout_alignParentBottom="true"
+        android:background="@color/green_splash_bg">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="@dimen/x5">
+
+            <TextView
+                android:id="@+id/tx_login_splash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/splash_login"
+                android:textColor="@color/white"
+                android:textSize="@dimen/x14" />
+
+            <ImageButton
+                android:background="@null"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/x8"
+                android:contentDescription="@string/splash_login"
+                android:src="@mipmap/ic_login_splash" />
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>
