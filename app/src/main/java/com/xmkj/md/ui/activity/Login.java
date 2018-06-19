@@ -1,11 +1,12 @@
 package com.xmkj.md.ui.activity;
 
+import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
 
 public class Login extends BaseActivity {
     @Override
     protected int getLayoutId() {
-        return 0;
+        return R.layout.activity_login;
     }
 
     @Override
