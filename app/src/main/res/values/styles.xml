@@ -59,5 +59,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/x1</item>
+        <item name="android:background">@color/line_login</item>
+    </style>
+
 
 </resources>

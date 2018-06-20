@@ -17,4 +17,8 @@
     <color name="comui_tab_text_color">#ff333333</color>
     <color name="green_splash_bg">#05bb75</color>
     <color name="black">#000</color>
+    <!--透明度为0.87-->
+    <color name="black87">#de000000</color>
+    <color name="black54">#8a000000</color>
+    <color name="line_login">#efefef</color>
 </resources>
