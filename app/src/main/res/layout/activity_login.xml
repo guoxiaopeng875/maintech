@@ -19,20 +19,9 @@
         android:layout_below="@id/ll_toolbar_login"
         android:orientation="vertical">
 
-        <LinearLayout
-            style="@style/margin_start_x13"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x40">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:text="@string/login_user"
-                android:textColor="@color/black87"
-                android:textSize="26.4sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+        <TextView
+            style="@style/md_title"
+            android:text="@string/login_user" />
 
         <LinearLayout
             style="@style/margin_start_x13"
@@ -99,13 +88,8 @@
 
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x37"
+        style="@style/md_btn"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/x13"
-        android:background="@drawable/shape_btn_green"
-        android:text="@string/login"
-        android:textColor="@color/white"
-        android:textSize="15.4sp" />
+        android:text="@string/login" />
 </RelativeLayout>
