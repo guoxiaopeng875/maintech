@@ -5,8 +5,23 @@
     android:background="@color/white">
 
     <LinearLayout
+        android:id="@+id/ll_toolbar_login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x37">
+
+        <ImageView
+            android:id="@+id/iv_back_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/x13"
+            android:src="@mipmap/ic_back_green" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ll_toolbar_login"
         android:orientation="vertical">
 
         <LinearLayout
@@ -41,16 +56,18 @@
                 android:textSize="15.4sp" />
 
             <EditText
-                android:singleLine="true"
-                android:background="@null"
-                android:textSize="15.4sp"
-                android:textColor="@color/black87"
+                android:id="@+id/et_account_login"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center_vertical" />
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textColor="@color/black87"
+                android:textSize="15.4sp" />
 
         </LinearLayout>
+
         <View style="@style/line" />
 
         <LinearLayout
@@ -70,16 +87,30 @@
                 android:textSize="15.4sp" />
 
             <EditText
-                android:textSize="15.4sp"
-                android:inputType="textPassword"
-                android:background="@null"
-                android:textColor="@color/black54"
+                android:id="@+id/et_pwd_login"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center_vertical" />
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:inputType="textPassword"
+                android:textColor="@color/black54"
+                android:textSize="15.4sp" />
 
         </LinearLayout>
+
         <View style="@style/line" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x37"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/x13"
+        android:background="@drawable/shape_btn_green"
+        android:text="@string/login"
+        android:textColor="@color/white"
+        android:textSize="15.4sp" />
 </RelativeLayout>
