@@ -40,6 +40,7 @@ public class Login extends BaseActivity {
     // TODO 调登录接口
     private void doLogin(String account, String pwd) {
         ToastUtils.showToast("调登录接口:" + account + "||" + pwd);
+        AppUtils.jump2Next(this, PendingItems.class);
     }
 
     @Override

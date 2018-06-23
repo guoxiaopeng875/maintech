@@ -3,11 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\workSpace\WB\maintech\app\app.iml" filepath="C:\workSpace\WB\maintech\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/mainnavigatetabbar/mainnavigatetabbar.iml" filepath="$PROJECT_DIR$/mainnavigatetabbar/mainnavigatetabbar.iml" />
-      <module fileurl="file://C:\workSpace\WB\maintech\mainnavigatetabbar\mainnavigatetabbar.iml" filepath="C:\workSpace\WB\maintech\mainnavigatetabbar\mainnavigatetabbar.iml" />
       <module fileurl="file://$PROJECT_DIR$/maintech.iml" filepath="$PROJECT_DIR$/maintech.iml" />
-      <module fileurl="file://C:\workSpace\WB\maintech\maintech.iml" filepath="C:\workSpace\WB\maintech\maintech.iml" />
     </modules>
   </component>
 </project>
