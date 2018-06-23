@@ -18,8 +18,8 @@ public class Main extends BaseActivity {
     @BindView(R.id.mainTabBar)
     MainNavigateTabBar mNavigateTabBar;
 
-    private static final String TAG_PAGE_HOME = "提交审核";
-    private static final String TAG_PAGE_CITY = "到店审核";
+    private static final String TAG_PAGE_HOME = "待办事项";
+    private static final String TAG_PAGE_CITY = "我的业务";
     private static final String TAG_PAGE_PUBLISH = "添加";
     private static final String TAG_PAGE_MESSAGE = "证件上传";
     private static final String TAG_PAGE_PERSON = "合同上传";
