@@ -67,6 +67,7 @@
         <activity
             android:name=".ui.activity.PendingItems"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.QuicklyApply" />
     </application>
 
 </manifest>

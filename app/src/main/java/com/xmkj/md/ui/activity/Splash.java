@@ -42,8 +42,7 @@ public class Splash extends BaseActivity {
 
     @Override
     public void setListener() {
-        // TODO 跳转到快速报单单页面(h5?)
-        mBtnQuickApply.setOnClickListener(view -> ToastUtils.showToast("快速报单"));
+        mBtnQuickApply.setOnClickListener(view -> AppUtils.jump2Next(Splash.this, QuicklyApply.class));
         // 跳转到登录页面
         mRlLoginSplash.setOnClickListener(view -> AppUtils.jump2Next(Splash.this, Main.class));
     }

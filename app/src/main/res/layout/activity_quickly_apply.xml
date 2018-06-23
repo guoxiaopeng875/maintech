@@ -1,28 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/ll_toolbar_login"
         style="@style/toolbar_ll">
 
         <ImageButton
-            android:id="@+id/iv_back_login"
+            android:id="@+id/iv_back_quick"
             style="@style/toolbar_iv" />
     </LinearLayout>
 
+    <TextView
+        style="@style/md_title"
+        android:text="@string/splash_quick_apply" />
+
     <Button
         android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x37"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="@dimen/x13"
-        android:background="@drawable/shape_btn_green"
-        android:text="@string/login"
-        android:textColor="@color/white"
-        android:textSize="15.4sp" />
+        style="@style/md_btn"
+        android:text="@string/quickly_submit" />
 </LinearLayout>
