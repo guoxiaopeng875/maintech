@@ -7,7 +7,9 @@ import android.view.View;
 import com.startsmake.mainnavigatetabbar.widget.MainNavigateTabBar;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
+import com.xmkj.md.ui.fragment.Home;
 import com.xmkj.md.ui.fragment.TestFragment;
+import com.xmkj.md.utils.StatusBarSettingUtils;
 import com.xmkj.md.utils.ToastUtils;
 
 import butterknife.BindView;
@@ -18,11 +20,11 @@ public class Main extends BaseActivity {
     @BindView(R.id.mainTabBar)
     MainNavigateTabBar mNavigateTabBar;
 
-    private static final String TAG_PAGE_HOME = "待办事项";
-    private static final String TAG_PAGE_CITY = "我的业务";
-    private static final String TAG_PAGE_PUBLISH = "添加";
-    private static final String TAG_PAGE_MESSAGE = "证件上传";
-    private static final String TAG_PAGE_PERSON = "合同上传";
+    private static final String TAG_PAGE_HOME = "主页";
+    private static final String TAG_PAGE_BUSINESS = "业务办理";
+    private static final String TAG_PAGE_PUBLISH = "报单";
+    private static final String TAG_PAGE_CONTROLER = "贷后管理";
+    private static final String TAG_PAGE_MINE = "我的";
     private long lastTime = 0;
 
     @Override
@@ -32,12 +34,12 @@ public class Main extends BaseActivity {
 
     @Override
     public void initView() {
-        mNavigateTabBar.addTab(TestFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.icon_submit_line, R.mipmap.icon_submit, TAG_PAGE_HOME));
-        mNavigateTabBar.addTab(TestFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.icon_shop_line, R.mipmap.icon_shop, TAG_PAGE_CITY));
+        mNavigateTabBar.addTab(Home.class, new MainNavigateTabBar.TabParam(R.mipmap.ic_navbar_home, R.mipmap.ic_navbar_home_active, TAG_PAGE_HOME));
+        mNavigateTabBar.addTab(TestFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.ic_navbar_business, R.mipmap.ic_navbar_business_active, TAG_PAGE_BUSINESS));
         mNavigateTabBar.addTab(null, new MainNavigateTabBar.TabParam(0, 0, TAG_PAGE_PUBLISH));
-        mNavigateTabBar.addTab(TestFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.icon_certificate_line, R.mipmap.icon_certificate, TAG_PAGE_MESSAGE));
-        mNavigateTabBar.addTab(TestFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.icon_contract_line, R.mipmap.icon_contract, TAG_PAGE_PERSON));
-
+        mNavigateTabBar.addTab(TestFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.ic_navbar_manage, R.mipmap.ic_navbar_manage_active, TAG_PAGE_CONTROLER));
+        mNavigateTabBar.addTab(TestFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.ic_navbar_my, R.mipmap.ic_navbar_my_active, TAG_PAGE_MINE));
+        StatusBarSettingUtils.setStatusBarTransparent(this);
     }
 
     @Override
