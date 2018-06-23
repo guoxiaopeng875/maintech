@@ -13,6 +13,7 @@ import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.model.HomeListBean;
 import com.xmkj.md.ui.activity.Contacts;
+import com.xmkj.md.ui.activity.MineInfo;
 import com.xmkj.md.ui.adapter.HomeAdapter;
 import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.ToastUtils;
@@ -85,6 +86,7 @@ public class Home extends BaseFragment {
                 break;
             case R.id.rl_commission_home:
                 ToastUtils.showToast("我的佣金");
+                AppUtils.jump2Next(getContext(), MineInfo.class);
                 break;
             case R.id.rl_contact_home:
                 ToastUtils.showToast("通讯录");
@@ -98,6 +100,7 @@ public class Home extends BaseFragment {
                 break;
             case R.id.rl_commission_flow:
                 ToastUtils.showToast("我的佣金");
+                AppUtils.jump2Next(getContext(), MineInfo.class);
                 break;
             case R.id.rl_contact_flow:
                 ToastUtils.showToast("通讯录");

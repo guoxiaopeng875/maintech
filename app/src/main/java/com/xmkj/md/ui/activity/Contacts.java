@@ -69,7 +69,7 @@ public class Contacts extends BaseActivity {
 
     }
 
-    @OnClick(R.id.ib_back_about)
+    @OnClick(R.id.ib_back_contacts)
     public void onViewClicked() {
         finish();
     }
