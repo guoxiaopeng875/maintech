@@ -44,7 +44,7 @@ public class Splash extends BaseActivity {
     public void setListener() {
         mBtnQuickApply.setOnClickListener(view -> AppUtils.jump2Next(Splash.this, QuicklyApply.class));
         // 跳转到登录页面
-        mRlLoginSplash.setOnClickListener(view -> AppUtils.jump2Next(Splash.this, Login.class));
+        mRlLoginSplash.setOnClickListener(view -> AppUtils.jump2Next(Splash.this, Main.class));
     }
 
 }

@@ -40,7 +40,6 @@
             android:configChanges="keyboardHidden|orientation"
             android:launchMode="singleTask"
             android:noHistory="true"
-            android:screenOrientation="portrait"
             android:theme="@style/ThemeSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -56,6 +55,11 @@
             android:name=".ui.activity.Login"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.Contacts"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.activity.PendingItems"
             android:screenOrientation="portrait" />
