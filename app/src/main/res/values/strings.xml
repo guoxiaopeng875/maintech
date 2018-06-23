@@ -6,4 +6,5 @@
     <string name="login_account">账号</string>
     <string name="login_pwd">密码</string>
     <string name="login">登录</string>
+    <string name="pending_items">代办事项</string>
 </resources>

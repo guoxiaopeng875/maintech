@@ -65,5 +65,28 @@
         <item name="android:background">@color/line_login</item>
     </style>
 
+    <!--toolbar-->
+    <style name="toolbar_ll">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/x37</item>
+    </style>
+    <style name="toolbar_iv" parent="margin_start_x13">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:src">@mipmap/ic_back_green</item>
+        <item name="android:background">@null</item>
+    </style>
+    <style name="toolbar_iv_rl" parent="margin_start_x13">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:src">@mipmap/ic_back_white</item>
+        <item name="android:background">@null</item>
+    </style>
 
+    <!--项目布局左边距x13-->
+    <style name="margin_start_x13">
+        <item name="android:layout_marginStart">@dimen/x13</item>
+    </style>
 </resources>
