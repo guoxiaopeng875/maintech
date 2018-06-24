@@ -6,11 +6,11 @@
 
     <LinearLayout
         android:id="@+id/ll_toolbar_login"
-        style="@style/toolbar_ll">
+        style="@style/toolbar_common">
 
         <ImageButton
             android:id="@+id/iv_back_login"
-            style="@style/toolbar_iv" />
+            style="@style/toolbar_back_green" />
     </LinearLayout>
 
     <LinearLayout

@@ -5,14 +5,14 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-    <LinearLayout
+    <android.support.v7.widget.Toolbar
         android:id="@+id/ll_toolbar_login"
-        style="@style/toolbar_ll">
+        style="@style/toolbar_common">
 
         <ImageButton
             android:id="@+id/iv_back_quick"
-            style="@style/toolbar_iv" />
-    </LinearLayout>
+            style="@style/toolbar_back_green" />
+    </android.support.v7.widget.Toolbar>
 
     <TextView
         style="@style/md_title"

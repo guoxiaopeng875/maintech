@@ -66,23 +66,25 @@
     </style>
 
     <!--toolbar-->
-    <style name="toolbar_ll">
+    <style name="toolbar_common">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/x37</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
     </style>
-    <style name="toolbar_iv" parent="margin_start_x13">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:src">@mipmap/ic_back_green</item>
-        <item name="android:background">@null</item>
-    </style>
-    <style name="toolbar_iv_rl" parent="margin_start_x13">
+    <!--toolbar返回按钮-->
+    <style name="toolbar_back_common" parent="margin_start_x13">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_centerVertical">true</item>
-        <item name="android:src">@mipmap/ic_back_white</item>
         <item name="android:background">@null</item>
+    </style>
+    <!--toolbar返回绿色按钮-->
+    <style name="toolbar_back_green" parent="toolbar_back_common">
+        <item name="android:src">@mipmap/ic_back_green</item>
+    </style>
+    <!--toolbar返回白色按钮-->
+    <style name="toolbar_back_white" parent="toolbar_back_common">
+        <item name="android:src">@mipmap/ic_back_white</item>
     </style>
 
     <!--项目布局左边距x13-->

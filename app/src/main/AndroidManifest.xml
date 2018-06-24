@@ -35,11 +35,7 @@
         android:theme="@style/MyTheme">
         <activity
             android:name=".ui.activity.Splash"
-            android:alwaysRetainTaskState="true"
-            android:clearTaskOnLaunch="false"
             android:configChanges="keyboardHidden|orientation"
-            android:launchMode="singleTask"
-            android:noHistory="true"
             android:theme="@style/ThemeSplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
