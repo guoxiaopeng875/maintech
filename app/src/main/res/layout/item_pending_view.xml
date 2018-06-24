@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black87"
-            android:textSize="18.7sp"
+            android:textSize="17sp"
             android:textStyle="bold" />
         <!--日期-->
         <TextView
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/x5"
             android:textColor="@color/black54"
-            android:textSize="15.4sp" />
+            android:textSize="14sp" />
         <!--状态-->
         <LinearLayout
             android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
                 android:paddingStart="@dimen/x5"
                 android:paddingTop="@dimen/x1"
                 android:textColor="@color/white"
-                android:textSize="12.1sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_loan_status_pending"
@@ -54,7 +54,7 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/x7"
                 android:textColor="@color/font_pending"
-                android:textSize="15.4sp" />
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
 
