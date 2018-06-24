@@ -26,7 +26,8 @@ public class PendingItemsAdapter extends BaseQuickAdapter<PendingItemsBean, Base
                 .setText(R.id.tv_date_pending, item.getLoanDate())
                 .setText(R.id.tv_loan_type_pending, item.getLoanType())
                 .setText(R.id.tv_loan_status_pending, item.getLoanStatus())
-                .setText(R.id.btn_status_pending, item.getBtnStatus());
+                .setText(R.id.btn_status_pending, item.getBtnStatus())
+                .addOnClickListener(R.id.btn_status_pending);
     }
 
 }
