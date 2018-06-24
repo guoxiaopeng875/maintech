@@ -1,15 +1,25 @@
 package com.xmkj.md.base;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 import com.orhanobut.logger.Logger;
 import com.xmkj.md.R;
 import com.xmkj.md.model.MessageEvent;
+import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.EventBusUtil;
+import com.xmkj.md.utils.SoftInputUitl;
 import com.xmkj.md.utils.StatusBarSettingUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -139,6 +149,21 @@ public abstract class BaseActivity extends SupportActivity {
         if (isRegisterEventBus()) {
             EventBusUtil.unregister(this);
         }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                AppUtils.printLog("ACTION_DOWN");
+
+                View view = getCurrentFocus();
+                SoftInputUitl.hideKeyboard(ev, view, BaseActivity.this);
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
 

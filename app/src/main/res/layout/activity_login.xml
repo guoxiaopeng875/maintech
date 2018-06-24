@@ -5,7 +5,7 @@
     android:background="@color/white">
 
     <LinearLayout
-        android:id="@+id/ll_toolbar_login"
+        android:id="@+id/ll_toolbar_quick"
         style="@style/toolbar_common">
 
         <ImageButton
@@ -16,7 +16,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ll_toolbar_login"
+        android:layout_below="@id/ll_toolbar_quick"
         android:orientation="vertical">
 
         <TextView

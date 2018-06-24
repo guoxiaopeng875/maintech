@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_quick"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:background="@color/white">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/ll_toolbar_login"
+        android:id="@+id/ll_toolbar_quick"
         style="@style/toolbar_common">
 
         <ImageButton
@@ -14,12 +14,141 @@
             style="@style/toolbar_back_green" />
     </android.support.v7.widget.Toolbar>
 
-    <TextView
-        style="@style/md_title"
-        android:text="@string/splash_quick_apply" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ll_toolbar_quick">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/md_title"
+                android:text="@string/splash_quick_apply" />
+            <!--产品优势-->
+            <LinearLayout
+                android:id="@+id/ll_product_advantage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/x27"
+                android:layout_marginTop="@dimen/x27"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/product_advantage_quick"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!--客户姓名-->
+            <LinearLayout
+                style="@style/margin_start_x13"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x73"
+                android:layout_marginTop="@dimen/x13"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/name_quick"
+                    android:textColor="@color/black54"
+                    android:textSize="15.4sp" />
+
+                <EditText
+                    android:id="@+id/et_name_quick"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:textColor="@color/black87"
+                    android:textSize="15.4sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+            <!--联系方式-->
+            <LinearLayout
+                style="@style/margin_start_x13"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x73"
+                android:layout_marginTop="@dimen/x13"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/cellphone_quick"
+                    android:textColor="@color/black54"
+                    android:textSize="15.4sp" />
+
+                <EditText
+                    android:id="@+id/et_pwd_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:inputType="phone"
+                    android:textColor="@color/black54"
+                    android:textSize="15.4sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+            <!--推荐码-->
+            <LinearLayout
+                style="@style/margin_start_x13"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x73"
+                android:layout_marginTop="@dimen/x13"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="@string/code_quick"
+                    android:textColor="@color/black54"
+                    android:textSize="15.4sp" />
+
+                <EditText
+                    android:id="@+id/et_code_quick"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:singleLine="true"
+                    android:textColor="@color/black87"
+                    android:textSize="15.4sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <View style="@style/line" />
+        </LinearLayout>
+
+    </ScrollView>
 
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_submit_quick"
         style="@style/md_btn"
+        android:layout_alignParentBottom="true"
         android:text="@string/quickly_submit" />
-</LinearLayout>
+</RelativeLayout>

@@ -77,6 +77,9 @@
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:background">@null</item>
+        <item name="android:paddingTop">@dimen/x8</item>
+        <item name="android:paddingBottom">@dimen/x8</item>
+        <item name="android:paddingEnd">@dimen/x8</item>
     </style>
     <!--toolbar返回绿色按钮-->
     <style name="toolbar_back_green" parent="toolbar_back_common">
