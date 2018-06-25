@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
-import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.ToastUtils;
 
 import butterknife.BindView;
@@ -26,10 +25,10 @@ public class QuicklyApply extends BaseActivity {
     LinearLayout mLlProductAdvantage;
     @BindView(R.id.et_name_quick)
     EditText mEtNameQuick;
-    @BindView(R.id.et_pwd_login)
-    EditText mEtPwdLogin;
     @BindView(R.id.et_code_quick)
     EditText mEtCodeQuick;
+    @BindView(R.id.et_cellphone_quick)
+    EditText mEtCellphoneQuick;
 
     @Override
     protected int getLayoutId() {
@@ -63,10 +62,18 @@ public class QuicklyApply extends BaseActivity {
                 break;
             case R.id.btn_submit_quick:
                 // 提交
-                ToastUtils.showToast("提交意向");
+                String name = mEtNameQuick.getText().toString();
+                String code = mEtCodeQuick.getText().toString();
+                String cellphone = mEtCellphoneQuick.getText().toString();
+                doSubmit(name, code, cellphone);
                 break;
         }
     }
+
+    private void doSubmit(String name, String code, String cellphone) {
+        ToastUtils.showToastStrings("提交意向", name, code, cellphone);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,5 +81,4 @@ public class QuicklyApply extends BaseActivity {
         // TODO: add setContentView(...) invocation
         ButterKnife.bind(this);
     }
-
 }

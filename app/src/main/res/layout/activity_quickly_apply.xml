@@ -96,7 +96,7 @@
                     android:textSize="15.4sp" />
 
                 <EditText
-                    android:id="@+id/et_pwd_login"
+                    android:id="@+id/et_cellphone_quick"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"

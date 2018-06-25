@@ -28,7 +28,7 @@ public class ToastUtils {
         showToast(text, Toast.LENGTH_SHORT);
     }
 
-    public static void showToast(Context context,String text) {
+    public static void showToast(Context context, String text) {
         showToast(context, text, 3000);
     }
 
@@ -67,7 +67,25 @@ public class ToastUtils {
         });
     }
 
-
+    public static void showToastStrings(String... text) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < text.length; i++) {
+            String str = text[i];
+            switch (i) {
+                case 0:
+                    // 第一个
+                    sb.append(str).append(": ");
+                    break;
+                case 1:
+                    // 最后一个
+                    sb.append(str);
+                    break;
+                default:
+                    sb.append(str).append("||");
+            }
+        }
+        showToast(sb.toString(), Toast.LENGTH_SHORT);
+    }
 
 
 }

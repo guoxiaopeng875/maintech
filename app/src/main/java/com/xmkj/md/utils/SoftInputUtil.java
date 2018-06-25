@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
  * 软键盘工具类
  */
 public class SoftInputUtil {
+    // 软键盘是否弹出
     public static boolean isSoftShowing(Activity activity) {
         //获取当前屏幕内容的高度
         int screenHeight = activity.getWindow().getDecorView().getHeight();
@@ -21,6 +22,7 @@ public class SoftInputUtil {
         return screenHeight - rect.bottom != 0;
     }
 
+    // 隐藏软键盘
     public static void hideKeyboard(MotionEvent event, View focusView,
                                     Activity activity) {
 //        if (focusView == null || !(focusView instanceof EditText)) {
