@@ -14,6 +14,7 @@ import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.model.HomeListBean;
 import com.xmkj.md.ui.activity.Contacts;
 import com.xmkj.md.ui.activity.MineInfo;
+import com.xmkj.md.ui.activity.MyBusiness;
 import com.xmkj.md.ui.adapter.HomeAdapter;
 import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.ToastUtils;
@@ -83,6 +84,7 @@ public class Home extends BaseFragment {
                 break;
             case R.id.rl_mybusiness_home:
                 ToastUtils.showToast("我的业务");
+                AppUtils.jump2Next(getContext(), MyBusiness.class);
                 break;
             case R.id.rl_commission_home:
                 ToastUtils.showToast("我的佣金");
@@ -97,6 +99,7 @@ public class Home extends BaseFragment {
                 break;
             case R.id.rl_mybusiness_flow:
                 ToastUtils.showToast("我的业务");
+                AppUtils.jump2Next(getContext(), MyBusiness.class);
                 break;
             case R.id.rl_commission_flow:
                 ToastUtils.showToast("我的佣金");

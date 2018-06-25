@@ -25,7 +25,7 @@
         android:layout_toRightOf="@+id/tv_surname_contacts"
         android:textStyle="bold"
         android:textSize="15sp"
-        android:textColor="@color/item_font_black"/>
+        android:textColor="@color/black87"/>
 
     <TextView
         android:id="@+id/tv_type_contacts"
@@ -35,7 +35,7 @@
         android:layout_below="@+id/tv_name_contacts"
         android:layout_marginTop="@dimen/x5"
         android:textSize="14sp"
-        android:textColor="@color/item_font_gray"/>
+        android:textColor="@color/black54"/>
 
     <TextView
         android:id="@+id/tv_mobile_contacts"
@@ -46,19 +46,19 @@
         android:layout_below="@+id/tv_type_contacts"
         android:layout_marginTop="@dimen/x8"
         android:textSize="15sp"
-        android:textColor="@color/item_font_gray"/>
+        android:textColor="@color/black87"/>
 
 
     <Button
         android:id="@+id/bt_call_contacts"
-        style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="@dimen/x60"
         android:layout_height="@dimen/x28"
         android:layout_marginRight="@dimen/x20"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
-        android:background="@drawable/selector_green_bt"
         android:text="拨打"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:background="@drawable/selector_green_bt"
         android:textColor="@color/white"
         android:textSize="15sp" />
 

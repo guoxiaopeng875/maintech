@@ -20,6 +20,7 @@
     <!--透明度为0.87-->
     <color name="black87">#de000000</color>
     <color name="black54">#8a000000</color>
+    <color name="black38">#61000000</color>
     <color name="line_login">#efefef</color>
     <color name="md_bg">#eee</color>
     <color name="toolbar_green">#05bb75</color>
