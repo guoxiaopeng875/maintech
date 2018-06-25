@@ -5,34 +5,32 @@
     android:background="@color/md_bg"
     android:orientation="vertical">
 
-    <RelativeLayout
-        style="@style/toolbar_ll"
+    <android.support.v7.widget.Toolbar
+        style="@style/toolbar_common"
         android:background="@color/toolbar_green">
 
         <ImageButton
-            android:id="@+id/iv_back_pending"
-            style="@style/toolbar_iv_rl" />
+            android:id="@+id/ib_back_pending"
+            style="@style/toolbar_back_white" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+            android:layout_gravity="center"
             android:text="@string/pending_items"
             android:textColor="@color/white"
             android:textSize="18.7sp" />
-    </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/x7"
         android:background="@drawable/shape_shadow" />
 
-    <LinearLayout
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_pending"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical">
+        android:layout_height="wrap_content" />
 
-    </LinearLayout>
 
 </LinearLayout>

@@ -8,4 +8,8 @@
     <string name="login">登录</string>
     <string name="pending_items">代办事项</string>
     <string name="quickly_submit">提交意向</string>
+    <string name="product_advantage_quick">产品优势</string>
+    <string name="name_quick">客户姓名</string>
+    <string name="cellphone_quick">联系方式</string>
+    <string name="code_quick">推荐码(选填)</string>
 </resources>

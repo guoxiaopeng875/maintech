@@ -4,12 +4,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 
 
 import com.orhanobut.logger.Logger;
 import com.xmkj.md.R;
 import com.xmkj.md.model.MessageEvent;
+import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.EventBusUtil;
+import com.xmkj.md.utils.SoftInputUtil;
 import com.xmkj.md.utils.StatusBarSettingUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -139,6 +143,21 @@ public abstract class BaseActivity extends SupportActivity {
         if (isRegisterEventBus()) {
             EventBusUtil.unregister(this);
         }
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        switch (ev.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                AppUtils.printLog("ACTION_DOWN");
+
+                View view = getCurrentFocus();
+                SoftInputUtil.hideKeyboard(ev, view, BaseActivity.this);
+                break;
+            default:
+                break;
+        }
+        return super.dispatchTouchEvent(ev);
     }
 
 
