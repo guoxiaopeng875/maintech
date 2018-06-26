@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
+import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.ToastUtils;
 
 import butterknife.BindView;
@@ -70,15 +71,9 @@ public class QuicklyApply extends BaseActivity {
         }
     }
 
+    // TODO 调用快速报单接口
     private void doSubmit(String name, String code, String cellphone) {
         ToastUtils.showToastStrings("提交意向", name, code, cellphone);
-    }
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+        AppUtils.jump2Next(this, QuicklyApplySuccess.class);
     }
 }
