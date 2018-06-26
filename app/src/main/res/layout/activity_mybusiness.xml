@@ -34,53 +34,65 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/toolbar_bg"
-        android:paddingTop="@dimen/x8"
-        android:paddingBottom="@dimen/x8">
+        android:paddingBottom="@dimen/x8"
+        android:paddingTop="@dimen/x8">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="@dimen/x32"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/tv_search_mybusiness"
             android:layout_marginLeft="@dimen/x8"
             android:layout_marginRight="@dimen/x15"
+            android:layout_toLeftOf="@+id/tv_search_mybusiness"
+            android:background="@drawable/shape_search_et_bg"
+            android:drawableLeft="@mipmap/ic_search"
+            android:drawablePadding="@dimen/x10"
             android:gravity="center_vertical"
             android:hint="客户姓名"
             android:maxLength="10"
+            android:paddingLeft="@dimen/x10"
             android:singleLine="true"
             android:textColor="@color/black87"
             android:textColorHint="@color/black38"
-            android:drawableLeft="@mipmap/ic_search"
-            android:drawablePadding="@dimen/x10"
-            android:paddingLeft="@dimen/x10"
-            android:textSize="15sp"
-            android:background="@drawable/shape_search_et_bg"/>
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tv_search_mybusiness"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/x10"
-            android:gravity="center"
-            android:layout_marginRight="@dimen/x15"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x15"
+            android:gravity="center"
+            android:padding="@dimen/x10"
             android:text="搜索"
-            android:textSize="15sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="15sp" />
     </RelativeLayout>
 
-    <LinearLayout
+
+    <com.scwang.smartrefresh.layout.SmartRefreshLayout
+        android:id="@+id/refresh_view_receive"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray">
+
+
+        <com.scwang.smartrefresh.layout.header.ClassicsHeader
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_mybusiness"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
-    </LinearLayout>
+        <com.scwang.smartrefresh.layout.footer.ClassicsFooter
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_gray" />
+
+    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 
 </LinearLayout>
