@@ -12,4 +12,5 @@
     <string name="name_quick">客户姓名</string>
     <string name="cellphone_quick">联系方式</string>
     <string name="code_quick">推荐码(选填)</string>
+    <string name="apply_success">提交成功</string>
 </resources>
