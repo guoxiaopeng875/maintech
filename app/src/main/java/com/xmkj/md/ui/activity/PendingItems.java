@@ -1,10 +1,13 @@
 package com.xmkj.md.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
-import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.model.PendingItemsBean;
@@ -25,6 +28,8 @@ public class PendingItems extends BaseActivity {
 
     @BindView(R.id.rv_pending)
     RecyclerView mRvPending;
+    @BindView(R.id.srl_pending)
+    SmartRefreshLayout mSrlPending;
     private PendingItemsAdapter mPendingItemsAdapter;
     private List<PendingItemsBean> mPendItems;
 
@@ -63,10 +68,27 @@ public class PendingItems extends BaseActivity {
                     break;
             }
         });
+        // 下拉刷新
+        mSrlPending.setOnRefreshListener(refreshLayout -> onRefresh());
+        // 上拉加载更多
+        mSrlPending.setOnLoadMoreListener(refreshLayout -> onLoadMore());
+    }
+
+    // TODO 刷新
+    private void onRefresh() {
+        mPendingItemsAdapter.setNewData(getPendItems());
+        mSrlPending.finishRefresh(1000);
+    }
+
+    // TODO 上拉加载更多
+    private void onLoadMore() {
+        mPendingItemsAdapter.addData(getPendItems());
+        mSrlPending.finishLoadMore(1000);
     }
 
     @OnClick(R.id.ib_back_pending)
     public void onViewClicked() {
         finish();
     }
+
 }

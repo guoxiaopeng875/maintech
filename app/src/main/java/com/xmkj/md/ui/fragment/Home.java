@@ -15,6 +15,7 @@ import com.xmkj.md.model.HomeListBean;
 import com.xmkj.md.ui.activity.Contacts;
 import com.xmkj.md.ui.activity.MineInfo;
 import com.xmkj.md.ui.activity.MyBusiness;
+import com.xmkj.md.ui.activity.PendingItems;
 import com.xmkj.md.ui.activity.UpLoadInfo;
 import com.xmkj.md.ui.adapter.HomeAdapter;
 import com.xmkj.md.utils.AppUtils;
@@ -82,6 +83,7 @@ public class Home extends BaseFragment {
         switch (view.getId()) {
             case R.id.rl_upcoming_home:
                 ToastUtils.showToast("待办事项");
+                AppUtils.jump2Next(getContext(), PendingItems.class);
                 break;
             case R.id.rl_mybusiness_home:
                 ToastUtils.showToast("我的业务");
