@@ -59,7 +59,7 @@
                     android:textSize="15.4sp" />
 
                 <EditText
-                    android:id="@+id/et_name_quick"
+                    android:id="@+id/et_name_apply"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -91,7 +91,7 @@
                     android:textSize="15.4sp" />
 
                 <EditText
-                    android:id="@+id/et_cellphone_quick"
+                    android:id="@+id/et_cellphone_apply"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -123,7 +123,7 @@
                     android:textSize="15.4sp" />
 
                 <EditText
-                    android:id="@+id/et_code_quick"
+                    android:id="@+id/et_customer_name_apply"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
