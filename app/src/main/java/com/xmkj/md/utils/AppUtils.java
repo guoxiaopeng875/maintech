@@ -41,6 +41,14 @@ import java.util.regex.PatternSyntaxException;
  */
 public class AppUtils {
     /**
+     * 跳到指定页面，并清空之前的activity栈
+     */
+    public static void jumpAndClearTask(Context ctx, Class<?> target) {
+        Intent intent = new Intent(ctx, target).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        ctx.startActivity(intent);
+    }
+
+    /**
      * Jump 2 next.
      *
      * @param context the context
@@ -541,8 +549,6 @@ public class AppUtils {
         }
         return hasNavigationBar;
     }
-
-
 
 
 }

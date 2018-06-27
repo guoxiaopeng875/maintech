@@ -13,4 +13,8 @@
     <string name="cellphone_quick">联系方式</string>
     <string name="code_quick">推荐码(选填)</string>
     <string name="apply_success">提交成功</string>
+    <string name="cancel_apply">取消报单</string>
+    <string name="user_info">客户信息</string>
+    <string name="title_user_name">户主姓名</string>
+    <string name="next">下一步</string>
 </resources>

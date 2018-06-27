@@ -12,6 +12,7 @@ import android.widget.ScrollView;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.model.HomeListBean;
+import com.xmkj.md.ui.activity.ApplyUserInfo;
 import com.xmkj.md.ui.activity.Contacts;
 import com.xmkj.md.ui.activity.MineInfo;
 import com.xmkj.md.ui.activity.MyBusiness;
@@ -83,7 +84,8 @@ public class Home extends BaseFragment {
         switch (view.getId()) {
             case R.id.rl_upcoming_home:
                 ToastUtils.showToast("待办事项");
-                AppUtils.jump2Next(getContext(), PendingItems.class);
+//                AppUtils.jump2Next(getContext(), PendingItems.class);
+                AppUtils.jump2Next(getContext(), ApplyUserInfo.class);
                 break;
             case R.id.rl_mybusiness_home:
                 ToastUtils.showToast("我的业务");

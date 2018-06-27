@@ -81,6 +81,11 @@
             android:name=".ui.activity.QuicklyApplySuccess"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.ApplyUserInfo"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
 
     </application>
 
