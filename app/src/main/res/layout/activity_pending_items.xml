@@ -7,7 +7,7 @@
 
     <android.support.v7.widget.Toolbar
         style="@style/toolbar_common"
-        android:background="@color/toolbar_green">
+        android:background="@color/green87">
 
         <ImageButton
             android:id="@+id/ib_back_pending"

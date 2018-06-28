@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="@dimen/x90"
+        android:layout_height="@dimen/x90"
+        android:background="@drawable/shape_pic_select_bg">
+
+        <com.xmkj.md.widget.PhotoView
+            android:id="@+id/pv_company_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/icon_add" />
+
+        <ImageButton
+            android:id="@+id/ib_delete_company_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@null"
+            android:padding="@dimen/x3"
+            android:src="@mipmap/ic_photo_delete"
+            android:visibility="gone" />
+    </RelativeLayout>
+</RelativeLayout>

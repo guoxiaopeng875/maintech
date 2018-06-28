@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar_contacts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:minHeight="?attr/actionBarSize">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        android:id="@+id/ib_back_infoconfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:background="@null"
+                        android:padding="@dimen/x8"
+                        android:src="@mipmap/ic_back_green" />
+
+                    <TextView
+                        android:id="@+id/tv_cancel_infoconfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/x10"
+                        android:text="取消报单"
+                        android:textColor="@color/black87"
+                        android:textSize="15sp" />
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x8"
+                android:layout_marginTop="@dimen/x10"
+                android:text="信息确认"
+                android:textColor="@color/black87"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_business_and_company"
+                style="@style/md_cv_info_confirm"
+                android:layout_marginTop="@dimen/x10">
+
+                <RelativeLayout style="@style/md_rl_info_confirm">
+
+                    <TextView
+                        android:id="@+id/text_type_comfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="业务类型"
+                        android:textColor="@color/black54"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_type_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text_type_comfirm"
+                        android:layout_marginTop="@dimen/x6"
+                        android:text="正租类型A"
+                        android:textColor="@color/black87"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_company_comfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_type_confirm"
+                        android:layout_marginTop="@dimen/x15"
+                        android:text="平台方"
+                        android:textColor="@color/black54"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_company_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text_company_comfirm"
+                        android:layout_marginTop="@dimen/x6"
+                        android:text="融金所"
+                        android:textColor="@color/black87"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_business_and_company_change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="修改"
+                        android:textColor="@color/green87"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_baseinfo_info_confirm"
+                style="@style/md_cv_info_confirm"
+                android:layout_marginTop="@dimen/x5">
+
+                <RelativeLayout style="@style/md_rl_info_confirm">
+
+                    <TextView
+                        android:id="@+id/text_name_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="客户姓名"
+                        android:textColor="@color/black54"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_name_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text_name_confirm"
+                        android:layout_marginTop="@dimen/x6"
+                        android:text="李先生"
+                        android:textColor="@color/black87"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_mobile_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_name_confirm"
+                        android:layout_marginTop="@dimen/x10"
+                        android:text="联系方式"
+                        android:textColor="@color/black54"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_mobile_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text_mobile_confirm"
+                        android:layout_marginTop="@dimen/x6"
+                        android:text="13800138000"
+                        android:textColor="@color/black87"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_idcard_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_mobile_confirm"
+                        android:layout_marginTop="@dimen/x10"
+                        android:text="身份证号码"
+                        android:textColor="@color/black54"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_idcard_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text_idcard_confirm"
+                        android:layout_marginTop="@dimen/x6"
+                        android:text="3827835791759816"
+                        android:textColor="@color/black87"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_baseinfo_change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="修改"
+                        android:textColor="@color/green87"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/cv_remark_confirm"
+                style="@style/md_cv_info_confirm"
+                android:layout_marginTop="@dimen/x5">
+
+                <RelativeLayout style="@style/md_rl_info_confirm">
+
+                    <TextView
+                        android:id="@+id/text_remark_comfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="报单备注"
+                        android:textColor="@color/black54"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_remark_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text_remark_comfirm"
+                        android:layout_marginBottom="@dimen/x40"
+                        android:layout_marginTop="@dimen/x6"
+                        android:text="本单核对无误"
+                        android:textColor="@color/black87"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tv_remark_change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="修改"
+                        android:textColor="@color/green87"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

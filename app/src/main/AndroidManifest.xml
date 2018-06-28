@@ -67,6 +67,10 @@
             android:name=".ui.activity.UpLoadInfo"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.InfoConfirm"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.activity.PendingItems"
