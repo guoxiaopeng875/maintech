@@ -69,9 +69,17 @@ public class ApplyUserInfo extends BaseActivity {
                 AppUtils.jumpAndClearTask(ApplyUserInfo.this, Main.class);
                 break;
             case R.id.btn_submit_user_info:
-                ToastUtils.showToast("下一步");
+                onSubmit();
                 break;
         }
+    }
+
+    private void onSubmit() {
+        if (!btnClickable) {
+            ToastUtils.showToast("请填写完整信息");
+            return;
+        }
+        ToastUtils.showToast("下一步");
     }
 
     private void setBtnClickable() {
@@ -80,7 +88,11 @@ public class ApplyUserInfo extends BaseActivity {
 
     // 改变提交按钮的样式
     private void changeSubBtn() {
-//        btnClickable ? mBtnSubmitUserInfo.setBackgroundResource(R.drawable.shape_btn_gray) : mBtnSubmitUserInfo.setBackgroundResource(R.drawable.shape_btn_gray);
+        if (btnClickable) {
+            mBtnSubmitUserInfo.setBackgroundResource(R.drawable.shape_btn_gray);
+        }else {
+            mBtnSubmitUserInfo.setBackgroundResource(R.drawable.shape_btn_gray);
+        }
     }
 
     // 返回客户姓名，联系方式， 户主姓名
@@ -109,10 +121,12 @@ public class ApplyUserInfo extends BaseActivity {
             for (String text : texts) {
                 if ("".equals(text)) {
                     btnClickable = false;
+                    changeSubBtn();
                     return;
                 }
             }
             btnClickable = true;
+            changeSubBtn();
         }
     }
 
