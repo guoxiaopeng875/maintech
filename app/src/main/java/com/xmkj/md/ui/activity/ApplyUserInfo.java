@@ -44,7 +44,6 @@ public class ApplyUserInfo extends BaseActivity {
     @Override
     public void initView() {
         mBtnSubmitUserInfo.setBackgroundResource(R.drawable.shape_btn_gray);
-        setBtnClickable();
     }
 
     @Override
@@ -69,11 +68,13 @@ public class ApplyUserInfo extends BaseActivity {
                 AppUtils.jumpAndClearTask(ApplyUserInfo.this, Main.class);
                 break;
             case R.id.btn_submit_user_info:
+                ToastUtils.showToast("btn_submit_user_info");
                 onSubmit();
                 break;
         }
     }
 
+    // TODO 调用提交接口
     private void onSubmit() {
         if (!btnClickable) {
             ToastUtils.showToast("请填写完整信息");
@@ -82,14 +83,10 @@ public class ApplyUserInfo extends BaseActivity {
         ToastUtils.showToast("下一步");
     }
 
-    private void setBtnClickable() {
-        mBtnSubmitUserInfo.setClickable(btnClickable);
-    }
-
     // 改变提交按钮的样式
     private void changeSubBtn() {
         if (btnClickable) {
-            mBtnSubmitUserInfo.setBackgroundResource(R.drawable.shape_btn_gray);
+            mBtnSubmitUserInfo.setBackgroundResource(R.drawable.shape_btn_green);
         }else {
             mBtnSubmitUserInfo.setBackgroundResource(R.drawable.shape_btn_gray);
         }

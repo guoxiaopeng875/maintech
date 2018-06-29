@@ -14,6 +14,7 @@
             style="@style/toolbar_back_green" />
 
         <Button
+            android:textStyle="bold"
             android:id="@+id/btn_cancel_apply_info"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
