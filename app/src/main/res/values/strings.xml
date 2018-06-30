@@ -17,4 +17,6 @@
     <string name="user_info">客户信息</string>
     <string name="title_user_name">户主姓名</string>
     <string name="next">下一步</string>
+    <string name="business_process">业务办理</string>
+    <string name="processing">办理中</string>
 </resources>

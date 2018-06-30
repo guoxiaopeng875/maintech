@@ -7,6 +7,7 @@ import android.view.View;
 import com.startsmake.mainnavigatetabbar.widget.MainNavigateTabBar;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
+import com.xmkj.md.ui.fragment.BusinessProcess;
 import com.xmkj.md.ui.fragment.Home;
 import com.xmkj.md.ui.fragment.TestFragment;
 import com.xmkj.md.utils.StatusBarSettingUtils;
@@ -35,7 +36,7 @@ public class Main extends BaseActivity {
     @Override
     public void initView() {
         mNavigateTabBar.addTab(Home.class, new MainNavigateTabBar.TabParam(R.mipmap.ic_navbar_home, R.mipmap.ic_navbar_home_active, TAG_PAGE_HOME));
-        mNavigateTabBar.addTab(TestFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.ic_navbar_business, R.mipmap.ic_navbar_business_active, TAG_PAGE_BUSINESS));
+        mNavigateTabBar.addTab(BusinessProcess.class, new MainNavigateTabBar.TabParam(R.mipmap.ic_navbar_business, R.mipmap.ic_navbar_business_active, TAG_PAGE_BUSINESS));
         mNavigateTabBar.addTab(null, new MainNavigateTabBar.TabParam(0, 0, TAG_PAGE_PUBLISH));
         mNavigateTabBar.addTab(TestFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.ic_navbar_manage, R.mipmap.ic_navbar_manage_active, TAG_PAGE_CONTROLER));
         mNavigateTabBar.addTab(TestFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.ic_navbar_my, R.mipmap.ic_navbar_my_active, TAG_PAGE_MINE));
@@ -49,7 +50,14 @@ public class Main extends BaseActivity {
 
     @Override
     public void setListener() {
-
+        // 根据不同的tab显示不同的statusBar
+        mNavigateTabBar.setTabSelectListener(holder -> {
+            if (TAG_PAGE_BUSINESS.equals(holder.pageParam.title)) {
+                StatusBarSettingUtils.setStatusBarColor(Main.this, R.color.toolbar_bg);
+            } else {
+                StatusBarSettingUtils.setStatusBarTransparent(Main.this);
+            }
+        });
     }
 
 

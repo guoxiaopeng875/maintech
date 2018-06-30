@@ -52,4 +52,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     implementation project(':mainnavigatetabbar')
     implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
 }

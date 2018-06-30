@@ -21,6 +21,7 @@ import com.xmkj.md.ui.activity.PendingItems;
 import com.xmkj.md.ui.activity.UpLoadInfo;
 import com.xmkj.md.ui.adapter.HomeAdapter;
 import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.StatusBarSettingUtils;
 import com.xmkj.md.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -51,7 +52,7 @@ public class Home extends BaseFragment {
 
     @Override
     protected void initView() {
-
+        StatusBarSettingUtils.setStatusBarTransparent(this.getActivity());
     }
 
     @Override

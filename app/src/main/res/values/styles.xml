@@ -133,7 +133,27 @@
         <item name="android:layout_marginBottom">@dimen/x8</item>
     </style>
 
+    <!--toolbar标题样式-->
+    <style name="toolbar_title">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18.7sp</item>
+    </style>
 
+    <style name="process_tab_layout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+        <item name="tabBackground">@color/toolbar_bg</item>
+        <item name="tabGravity">center</item>
+
+    </style>
+
+    <style name="process_tab_layout_text" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">15.4sp</item>
+        <item name="android:textColor">@color/white60</item>
+    </style>
 
 
 </resources>

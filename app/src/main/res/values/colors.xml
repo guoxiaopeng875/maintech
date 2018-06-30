@@ -28,4 +28,5 @@
     <color name="font_pending">#35394d</color>
     <color name="md_red_warn">#f44336</color>
     <color name="apply_user_name">#05bb75</color>
+    <color name="white60">#99ffffff</color>
 </resources>
