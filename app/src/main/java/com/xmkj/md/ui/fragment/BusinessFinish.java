@@ -14,12 +14,11 @@ import com.xmkj.md.utils.ToastUtils;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * 代办事项
  */
-public class BusinessProcessing extends BaseFragment {
+public class BusinessFinish extends BaseFragment {
 
     @BindView(R.id.rv_processing)
     RecyclerView mRvProcessing;
@@ -40,7 +39,7 @@ public class BusinessProcessing extends BaseFragment {
     @Override
     public void initData() {
         mPendItems = getPendItems();
-        mPendingItemsAdapter = new PendingItemsAdapter(R.layout.item_pending_view, mPendItems);
+        mPendingItemsAdapter = new PendingItemsAdapter(R.layout.item_business_finish_view, mPendItems);
         mRvProcessing.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         mRvProcessing.setAdapter(mPendingItemsAdapter);
     }
