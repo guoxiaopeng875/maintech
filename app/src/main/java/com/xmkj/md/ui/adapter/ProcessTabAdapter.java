@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.xmkj.md.ui.fragment.TestFragment;
+import com.xmkj.md.ui.fragment.BusinessProcessing;
 
 /**
  * 作者: 郭晓鹏
@@ -24,11 +24,11 @@ public class ProcessTabAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new TestFragment();
+                return new BusinessProcessing();
             case 1:
-                return new TestFragment();
+                return new BusinessProcessing();
             default:
-                return new TestFragment();
+                return new BusinessProcessing();
         }
     }
 
