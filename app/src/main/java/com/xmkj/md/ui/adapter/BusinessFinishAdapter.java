@@ -6,6 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xmkj.md.R;
 import com.xmkj.md.model.PendingItemsBean;
+import com.xmkj.md.utils.StringUtils;
 
 import java.util.List;
 
@@ -20,12 +21,17 @@ public class BusinessFinishAdapter extends BaseQuickAdapter<PendingItemsBean, Ba
 
     @Override
     protected void convert(BaseViewHolder helper, PendingItemsBean item) {
-//        helper.setText(R.id.tv_name_pending, item.getName())
-//                .setText(R.id.tv_date_pending, item.getLoanDate())
-//                .setText(R.id.tv_loan_type_pending, item.getLoanType())
-//                .setText(R.id.tv_loan_status_pending, item.getLoanStatus())
-//                .setText(R.id.btn_status_pending, item.getBtnStatus())
-//                .addOnClickListener(R.id.btn_status_pending);
+        helper.setText(R.id.tv_name_finish, item.getName())
+                .setText(R.id.tv_date_finish, item.getLoanDate())
+                .setText(R.id.tv_loan_type_finish, item.getLoanType())
+                .setText(R.id.tv_loan_status_finish, item.getLoanStatus())
+                .setText(R.id.tv_loan_amount_finish, getFormatAmount(item.getLoanAmount()))
+                .setText(R.id.tv_broker_amount_finish, getFormatAmount(item.getBrokerAmount()))
+                .addOnClickListener(R.id.tv_detail_finish);
+    }
+
+    private String getFormatAmount(String amountStr) {
+        return "￥ " + StringUtils.numberFormat(amountStr);
     }
 
 }

@@ -19,4 +19,7 @@
     <string name="next">下一步</string>
     <string name="business_process">业务办理</string>
     <string name="processing">办理中</string>
+    <string name="loan">放款</string>
+    <string name="broker_amount">佣金</string>
+    <string name="detail_finish">详情</string>
 </resources>

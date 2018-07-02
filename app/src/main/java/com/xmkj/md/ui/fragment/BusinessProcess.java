@@ -9,6 +9,9 @@ import com.xmkj.md.ui.adapter.ProcessTabAdapter;
 
 import butterknife.BindView;
 
+/**
+ * 业务办理
+ */
 public class BusinessProcess extends BaseFragment {
 
 

@@ -2,111 +2,126 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="@dimen/x10"
-    android:paddingLeft="@dimen/x15"
-    android:paddingRight="@dimen/x15"
-    android:paddingTop="@dimen/x10">
+    android:background="@color/white">
 
-    <TextView
-        android:id="@+id/tv_name_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="姓名"
-        android:textColor="@color/black87"
-        android:textSize="15sp"
-        android:textStyle="bold" />
+    <LinearLayout
+        style="@style/margin_start_x13"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/x10"
+        android:paddingTop="@dimen/x10">
+        <!--姓名-->
+        <TextView
+            android:id="@+id/tv_name_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black87"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+        <!--日期-->
+        <TextView
+            android:id="@+id/tv_date_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x5"
+            android:textColor="@color/black54"
+            android:textSize="14sp" />
+        <!--状态-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x6">
 
-    <TextView
-        android:id="@+id/tv_date_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_name_finish"
-        android:layout_marginTop="@dimen/x5"
-        android:text="2018.06.16"
-        android:textColor="@color/black54"
-        android:textSize="14sp" />
+            <TextView
+                android:id="@+id/tv_loan_type_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/shape_loan_type_bg"
+                android:gravity="center"
+                android:paddingBottom="@dimen/x2"
+                android:paddingEnd="@dimen/x5"
+                android:paddingStart="@dimen/x5"
+                android:paddingTop="@dimen/x1"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
-    <TextView
-        android:id="@+id/tv_type_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_date_finish"
-        android:layout_marginTop="@dimen/x8"
-        android:background="@drawable/shape_loan_type_bg"
-        android:gravity="center"
-        android:paddingLeft="@dimen/x5"
-        android:paddingRight="@dimen/x5"
-        android:text="回租"
-        android:textColor="@color/white"
-        android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tv_loan_status_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/x7"
+                android:textColor="@color/font_pending"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_date_finish"
-        android:layout_marginStart="@dimen/x5"
-        android:layout_marginTop="@dimen/x8"
-        android:layout_toEndOf="@+id/tv_type_finish"
-        android:text="还款中"
-        android:textColor="@color/black87"
-        android:textSize="13sp" />
+    <LinearLayout
+        style="@style/margin_end_x13"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="end"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/x10"
+        android:paddingTop="@dimen/x10">
+        <!--放款金额-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/text_money_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:background="@mipmap/line_tag_green"
-        android:gravity="center_vertical|end"
-        android:text="放款"
-        android:textColor="@color/white"
-        android:textSize="13sp" />
+            <TextView
+                android:layout_marginEnd="@dimen/x10"
+                android:id="@+id/tv_loan_amount_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black87"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_money_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/x8"
-        android:layout_toStartOf="@+id/text_money_finish"
-        android:text="8888888888"
-        android:textColor="@color/black87"
-        android:textSize="14sp"
-        android:textStyle="bold" />
+            <TextView
+                style="@style/style_text_tag"
+                android:background="@mipmap/line_tag_green"
+                android:text="@string/loan" />
+        </LinearLayout>
+        <!--佣金-->
+        <LinearLayout
+            android:layout_marginTop="@dimen/x5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/text_company_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/text_money_finish"
-        android:layout_marginTop="@dimen/x8"
-        android:background="@mipmap/line_tag_blue"
-        android:gravity="center_vertical|end"
-        android:text="平台"
-        android:textColor="@color/white"
-        android:textSize="13sp" />
+            <TextView
+                android:layout_marginEnd="@dimen/x10"
+                android:id="@+id/tv_broker_amount_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black87"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tv_company_finish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/text_money_finish"
-        android:layout_marginEnd="@dimen/x8"
-        android:layout_marginTop="@dimen/x8"
-        android:layout_toStartOf="@+id/text_company_finish"
-        android:text="深圳三金财富"
-        android:textColor="@color/black87"
-        android:textSize="13sp"
-        android:textStyle="bold" />
+            <TextView
+                style="@style/style_text_tag"
+                android:background="@mipmap/line_tag_blue"
+                android:text="@string/broker_amount" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/tv_company_finish"
-        android:text="详情"
-        android:textColor="@color/black54"
-        android:textSize="13sp" />
+        </LinearLayout>
+
+        <!--详情-->
+        <TextView
+            android:layout_marginTop="@dimen/x6"
+            android:id="@+id/tv_detail_finish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:text="@string/detail_finish"
+            android:textColor="@color/black54"
+            android:textSize="15.4sp" />
+
+    </LinearLayout>
+
+    <View
+        style="@style/line"
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

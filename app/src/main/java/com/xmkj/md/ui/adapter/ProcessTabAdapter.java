@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.xmkj.md.ui.fragment.BusinessFinish;
 import com.xmkj.md.ui.fragment.BusinessProcessing;
 
 /**
@@ -26,7 +27,7 @@ public class ProcessTabAdapter extends FragmentPagerAdapter {
             case 0:
                 return new BusinessProcessing();
             case 1:
-                return new BusinessProcessing();
+                return new BusinessFinish();
             default:
                 return new BusinessProcessing();
         }
