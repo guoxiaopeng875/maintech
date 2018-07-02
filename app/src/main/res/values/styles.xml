@@ -133,6 +133,17 @@
         <item name="android:layout_marginBottom">@dimen/x8</item>
     </style>
 
+    <style name="md_rl_d40">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/x40</item>
+        <item name="android:paddingLeft">@dimen/x15</item>
+        <item name="android:paddingRight">@dimen/x15</item>
+    </style>
+
+    <style name="md_rl_d40_white" parent="md_rl_d40">
+        <item name="android:background">@color/white</item>
+    </style>
+
     <!--toolbar标题样式-->
     <style name="toolbar_title">
         <item name="android:layout_width">wrap_content</item>

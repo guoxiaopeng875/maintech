@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_followup"
+        style="@style/toolbar_common"
+        android:background="@color/green87">
+
+        <ImageButton
+            android:id="@+id/ib_back_followup"
+            style="@style/toolbar_back_white" />
+
+        <TextView
+            style="@style/toolbar_title"
+            android:text="贷后跟进" />
+    </android.support.v7.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_followup">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/black12"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                style="@style/md_rl_d40_white"
+                android:layout_marginTop="@dimen/x8">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="客户姓名"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_name_followup"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="张薇"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/md_rl_d40_white"
+                android:layout_marginTop="@dimen/x1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="联系方式"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="13800138000"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/md_rl_d40_white"
+                android:layout_marginTop="@dimen/x1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="客户姓名"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="440589196710097880"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/md_rl_d40_white"
+                android:layout_marginTop="@dimen/x8">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="业务类型A"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="深圳三金财富"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/x15"
+                android:paddingRight="@dimen/x15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x10"
+                    android:text="跟进说明"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x60"
+                    android:layout_marginBottom="@dimen/x10">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/x12"
+                        android:background="@null"
+                        android:hint="请输入"
+                        android:maxLength="300"
+                        android:textColor="@color/black87"
+                        android:textColorHint="@color/black54"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x8"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/x15"
+                android:paddingRight="@dimen/x15">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x10"
+                    android:text="添加资料"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
+
+                <com.xmkj.md.widget.MyGridView
+                    android:id="@+id/gv_followup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x12"
+                    android:layout_marginBottom="@dimen/x10"
+                    android:horizontalSpacing="@dimen/x5"
+                    android:numColumns="3"
+                    android:verticalSpacing="@dimen/x5" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btn_submit_followup"
+        style="@style/md_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/x20"
+        android:text="提交" />
+
+</RelativeLayout>

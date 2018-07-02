@@ -14,9 +14,11 @@ import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.model.HomeListBean;
 import com.xmkj.md.ui.activity.ApplyUserInfo;
 import com.xmkj.md.ui.activity.Contacts;
+import com.xmkj.md.ui.activity.FollowUp;
 import com.xmkj.md.ui.activity.InfoConfirm;
 import com.xmkj.md.ui.activity.MineInfo;
 import com.xmkj.md.ui.activity.MyBusiness;
+import com.xmkj.md.ui.activity.Overdue;
 import com.xmkj.md.ui.activity.PendingItems;
 import com.xmkj.md.ui.activity.UpLoadInfo;
 import com.xmkj.md.ui.adapter.HomeAdapter;
@@ -99,7 +101,7 @@ public class Home extends BaseFragment {
                 break;
             case R.id.rl_contact_home:
                 ToastUtils.showToast("通讯录");
-                AppUtils.jump2Next(getContext(), InfoConfirm.class);
+                AppUtils.jump2Next(getContext(), Overdue.class);
                 break;
             case R.id.rl_upcoming_flow:
                 ToastUtils.showToast("待办事项");
@@ -114,7 +116,7 @@ public class Home extends BaseFragment {
                 break;
             case R.id.rl_contact_flow:
                 ToastUtils.showToast("通讯录");
-                AppUtils.jump2Next(getContext(), InfoConfirm.class);
+                AppUtils.jump2Next(getContext(), Overdue.class);
                 break;
         }
     }

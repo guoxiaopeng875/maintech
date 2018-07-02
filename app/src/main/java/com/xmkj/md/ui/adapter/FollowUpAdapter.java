@@ -1,7 +1,6 @@
 package com.xmkj.md.ui.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +18,14 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by 晴天 on 2018/6/26.
+ * Created by 晴天 on 2018/7/2.
  */
 
-public class UploadInfoPicAdapter extends BaseAdapter {
+public class FollowUpAdapter extends BaseAdapter {
     private List<String> mList_url;
     private Activity mActivity;
 
-    public UploadInfoPicAdapter(Activity activity, List<String> list) {
+    public FollowUpAdapter(Activity activity, List<String> list) {
         mActivity = activity;
         mList_url = list;
     }
@@ -35,8 +34,8 @@ public class UploadInfoPicAdapter extends BaseAdapter {
     public int getCount() {
         if (mList_url == null) {
             return 1;
-        } else if (mList_url.size() == 20) {
-            return 20;
+        } else if (mList_url.size() == 6) {
+            return 6;
         } else {
             return mList_url.size() + 1;
         }
@@ -44,7 +43,7 @@ public class UploadInfoPicAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        if (mList_url != null && mList_url.size() == 20) {
+        if (mList_url != null && mList_url.size() == 6) {
             return mList_url.get(position);
         } else if (mList_url == null || position - 1 < 0 || position > mList_url.size()) {
             return null;
@@ -60,13 +59,13 @@ public class UploadInfoPicAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
-        ViewHolder holder;
+        UploadInfoPicAdapter.ViewHolder holder;
         if (view == null) {
             view = View.inflate(mActivity, R.layout.item_pic_uploadinfo, null);
-            holder = new ViewHolder(view);
+            holder = new UploadInfoPicAdapter.ViewHolder(view);
             view.setTag(holder);
         } else {
-            holder = (ViewHolder) view.getTag();
+            holder = (UploadInfoPicAdapter.ViewHolder) view.getTag();
         }
 
         if (isShowUploadItem(position)) {

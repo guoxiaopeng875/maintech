@@ -1,18 +1,16 @@
 package com.xmkj.md.ui.activity;
 
 import android.content.Intent;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.config.Constants;
-import com.xmkj.md.ui.adapter.UploadInfoAdapter;
+import com.xmkj.md.ui.adapter.FollowUpAdapter;
 import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.PhotoUtil;
-import com.xmkj.md.utils.StatusBarSettingUtils;
+import com.xmkj.md.widget.MyGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,38 +19,30 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * Created by 晴天 on 2018/6/26.
+ * Created by 晴天 on 2018/7/2.
  */
 
-public class UpLoadInfo extends BaseActivity {
+public class FollowUp extends BaseActivity {
+    @BindView(R.id.gv_followup)
+    MyGridView mGvFollowUp;
 
-    @BindView(R.id.rv_uploadinfo)
-    RecyclerView mRv;
-
-
-    private UploadInfoAdapter mUploadInfoAdapter;
-
+    private FollowUpAdapter mFollowUpAdapter;
+    private List<String> mList = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_uploadinfo;
+        return R.layout.activity_followup;
     }
 
     @Override
     public void initView() {
-        StatusBarSettingUtils.setStatusBarColor(this, R.color.white);
 
     }
 
     @Override
     public void initData() {
-        List list = new ArrayList();
-        for (int i = 0; i < 3; i++) {
-            list.add(i);
-        }
-        mUploadInfoAdapter = new UploadInfoAdapter(this, R.layout.item_uploadinfo, list);
-        mRv.setLayoutManager(new LinearLayoutManager(this));
-        mRv.setAdapter(mUploadInfoAdapter);
+        mFollowUpAdapter = new FollowUpAdapter(this, mList);
+        mGvFollowUp.setAdapter(mFollowUpAdapter);
     }
 
     @Override
@@ -65,21 +55,24 @@ public class UpLoadInfo extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && resultCode != RESULT_CANCELED) {
             final String fileName;
+            String url = "https://image.baidu.com/search/detail?ct=503316480&z=undefined&tn=baiduimagedetail&ipn=d&word=%E5%A4%A7%E6%B3%A2%E5%A6%B9&step_word=&ie=utf-8&in=&cl=2&lm=-1&st=undefined&cs=1901284709,406802359&os=1276168661,393752376&simid=4172698726,760910483&pn=0&rn=1&di=167122539760&ln=560&fr=&fmq=1530545604633_R&fm=&ic=undefined&s=undefined&se=&sme=&tab=0&width=undefined&height=undefined&face=undefined&is=0,0&istype=0&ist=&jit=&bdtype=0&spn=0&pi=0&gsm=0&objurl=http%3A%2F%2Fs9.rr.itc.cn%2Fr%2FwapChange%2F20164_16_10%2Fa1b1su08474445790596.jpg&rpstart=0&rpnum=0&adpicid=0&ctd=1530545682129^3_1347X677%1";
             switch (requestCode) {
                 case Constants.IMAGE_CAPTURE://拍照回来
-                    fileName = PhotoUtil.getFileName(UpLoadInfo.this, Constants.IMAGE_CAPTURE, data);
+                    fileName = PhotoUtil.getFileName(FollowUp.this, Constants.IMAGE_CAPTURE, data);
                     if (!TextUtils.isEmpty(fileName)) {
-                        uploadPicture(fileName);
-
+                        //uploadPicture(fileName);
+                        mList.add(url);
                     }
                     break;
                 case Constants.IMAGE_SELECT://选择图片回来
-                    fileName = PhotoUtil.getFileName(UpLoadInfo.this, Constants.IMAGE_SELECT, data);
+                    fileName = PhotoUtil.getFileName(FollowUp.this, Constants.IMAGE_SELECT, data);
                     if (!TextUtils.isEmpty(fileName)) {
-                        uploadPicture(fileName);
+                        //uploadPicture(fileName);
+                        mList.add(url);
                     }
                     break;
             }
+            mFollowUpAdapter.notifyDataSetChanged();
         }
     }
 
@@ -99,17 +92,14 @@ public class UpLoadInfo extends BaseActivity {
         });
     }
 
-
-    @OnClick({R.id.ib_back_contacts, R.id.tv_cancel_uploadinfo})
+    @OnClick({R.id.ib_back_followup, R.id.btn_submit_followup})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.ib_back_contacts://返回按钮
+            case R.id.ib_back_followup:
                 finish();
                 break;
-            case R.id.tv_cancel_uploadinfo://取消报单
+            case R.id.btn_submit_quick:
                 break;
         }
     }
-
-
 }
