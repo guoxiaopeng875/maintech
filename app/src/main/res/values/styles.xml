@@ -95,6 +95,11 @@
         <item name="android:layout_marginStart">@dimen/x13</item>
     </style>
 
+    <!--项目布局右边距x13-->
+    <style name="margin_end_x13">
+        <item name="android:layout_marginEnd">@dimen/x13</item>
+    </style>
+
     <!--标题-->
     <style name="md_title" parent="margin_start_x13">
         <item name="android:layout_width">wrap_content</item>
@@ -152,7 +157,16 @@
 
     <style name="process_tab_layout_text" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textSize">15.4sp</item>
-        <item name="android:textColor">@color/white60</item>
+        <item name="android:textColor">@color/white70</item>
+    </style>
+
+    <!--标签样式-->
+    <style name="style_text_tag">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center_vertical|end</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
 

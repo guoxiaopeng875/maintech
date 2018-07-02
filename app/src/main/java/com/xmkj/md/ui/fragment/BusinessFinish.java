@@ -7,7 +7,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.model.PendingItemsBean;
-import com.xmkj.md.ui.adapter.PendingItemsAdapter;
+import com.xmkj.md.ui.adapter.BusinessFinishAdapter;
 import com.xmkj.md.utils.GenDataUtil;
 import com.xmkj.md.utils.ToastUtils;
 
@@ -16,7 +16,7 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * 代办事项
+ * 办理完成
  */
 public class BusinessFinish extends BaseFragment {
 
@@ -24,7 +24,7 @@ public class BusinessFinish extends BaseFragment {
     RecyclerView mRvProcessing;
     @BindView(R.id.srl_processing)
     SmartRefreshLayout mSrlProcessing;
-    private PendingItemsAdapter mPendingItemsAdapter;
+    private BusinessFinishAdapter mPendingItemsAdapter;
     private List<PendingItemsBean> mPendItems;
 
     @Override
@@ -39,7 +39,7 @@ public class BusinessFinish extends BaseFragment {
     @Override
     public void initData() {
         mPendItems = getPendItems();
-        mPendingItemsAdapter = new PendingItemsAdapter(R.layout.item_business_finish_view, mPendItems);
+        mPendingItemsAdapter = new BusinessFinishAdapter(R.layout.item_business_finish_view, mPendItems);
         mRvProcessing.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         mRvProcessing.setAdapter(mPendingItemsAdapter);
     }

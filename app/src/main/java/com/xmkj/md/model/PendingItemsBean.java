@@ -14,6 +14,26 @@ public class PendingItemsBean {
     private String loanStatus;
     // 按钮状态
     private String btnStatus;
+    // 放款金额
+    private String loanAmount;
+    // 佣金
+    private String brokerAmount;
+
+    public String getLoanAmount() {
+        return loanAmount;
+    }
+
+    public void setLoanAmount(String loanAmount) {
+        this.loanAmount = loanAmount;
+    }
+
+    public String getBrokerAmount() {
+        return brokerAmount;
+    }
+
+    public void setBrokerAmount(String brokerAmount) {
+        this.brokerAmount = brokerAmount;
+    }
 
     public String getName() {
         return name;

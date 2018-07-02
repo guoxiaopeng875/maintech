@@ -2,6 +2,8 @@ package com.xmkj.md.utils;
 
 import android.text.TextUtils;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -121,5 +123,13 @@ public class StringUtils {
             }
         }
         return true;
+    }
+
+    public static String numberFormat(String amount) {
+        if (!isNumber(amount)) {
+            return amount;
+        }
+        NumberFormat nf = new DecimalFormat("#,###.##");
+        return nf.format(Float.valueOf(amount));
     }
 }

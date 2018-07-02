@@ -45,6 +45,8 @@ public class GenDataUtil {
             item.setLoanDate(loanDate);
             item.setLoanType(loanType);
             item.setLoanStatus(loanStatus);
+            item.setLoanAmount("100000");
+            item.setBrokerAmount("20000000");
             items.add(item);
         }
         return items;
