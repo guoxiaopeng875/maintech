@@ -62,7 +62,7 @@
         style="@style/margin_end_x13"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentEnd="true"
+        android:gravity="end"
         android:orientation="vertical"
         android:paddingBottom="@dimen/x10"
         android:paddingTop="@dimen/x10">
@@ -72,6 +72,7 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:layout_marginEnd="@dimen/x10"
                 android:id="@+id/tv_loan_amount_finish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -86,10 +87,12 @@
         </LinearLayout>
         <!--佣金-->
         <LinearLayout
+            android:layout_marginTop="@dimen/x5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
+                android:layout_marginEnd="@dimen/x10"
                 android:id="@+id/tv_broker_amount_finish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -101,14 +104,15 @@
                 style="@style/style_text_tag"
                 android:background="@mipmap/line_tag_blue"
                 android:text="@string/broker_amount" />
+
         </LinearLayout>
+
         <!--详情-->
         <TextView
-            android:clickable="true"
+            android:layout_marginTop="@dimen/x6"
             android:id="@+id/tv_detail_finish"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:gravity="end"
             android:text="@string/detail_finish"
             android:textColor="@color/black54"
