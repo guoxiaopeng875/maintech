@@ -10,6 +10,7 @@ import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.ui.fragment.AfterLoan;
 import com.xmkj.md.ui.fragment.BusinessProcess;
 import com.xmkj.md.ui.fragment.Home;
+import com.xmkj.md.ui.fragment.Mine;
 import com.xmkj.md.ui.fragment.TestFragment;
 import com.xmkj.md.utils.StatusBarSettingUtils;
 import com.xmkj.md.utils.ToastUtils;
@@ -43,7 +44,7 @@ public class Main extends BaseActivity {
         mNavigateTabBar.addTab(BusinessProcess.class, new MainNavigateTabBar.TabParam(R.mipmap.ic_navbar_business, R.mipmap.ic_navbar_business_active, TAG_PAGE_BUSINESS));
         mNavigateTabBar.addTab(null, new MainNavigateTabBar.TabParam(0, 0, TAG_PAGE_PUBLISH));
         mNavigateTabBar.addTab(AfterLoan.class, new MainNavigateTabBar.TabParam(R.mipmap.ic_navbar_manage, R.mipmap.ic_navbar_manage_active, TAG_PAGE_CONTROLER));
-        mNavigateTabBar.addTab(TestFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.ic_navbar_my, R.mipmap.ic_navbar_my_active, TAG_PAGE_MINE));
+        mNavigateTabBar.addTab(Mine.class, new MainNavigateTabBar.TabParam(R.mipmap.ic_navbar_my, R.mipmap.ic_navbar_my_active, TAG_PAGE_MINE));
         StatusBarSettingUtils.setStatusBarTransparent(this);
     }
 

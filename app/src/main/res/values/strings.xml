@@ -23,4 +23,14 @@
     <string name="broker_amount">佣金</string>
     <string name="detail_finish">详情</string>
     <string name="after_loan">贷后管理</string>
+    <string name="mine">我的</string>
+    <string name="quota_left">“</string>
+    <string name="quota_right">”</string>
+    <string name="code_mine">我的推荐码</string>
+    <string name="my_commission">我的佣金</string>
+    <string name="my_business">我的业务</string>
+    <string name="my_chart">我的业绩</string>
+    <string name="my_contacts">我的通讯录</string>
+    <string name="my_profile">我的资料</string>
+    <string name="my_recommend">我的推荐码</string>
 </resources>
