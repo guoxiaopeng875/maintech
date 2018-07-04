@@ -51,4 +51,74 @@ public class GenDataUtil {
         }
         return items;
     }
+
+    public static List<PendingItemsBean> fakeAfterLoans() {
+        List<PendingItemsBean> items = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            PendingItemsBean item = new PendingItemsBean();
+            // 姓名
+            String name = "傻吊" + i;
+            // 代办日期
+            String loanDate = "2013.12.12";
+            // 贷款类型
+            String loanType;
+            // 贷款状态
+            String loanStatus;
+            // 按钮状态
+            String btnStatus = "办理";
+            switch (i) {
+                case 0:
+                    loanType = "回租";
+                    loanStatus = "未抵押跟进";
+                    break;
+                default:
+                    loanType = "车抵贷";
+                    loanStatus = "其他跟进";
+            }
+            item.setBtnStatus(btnStatus);
+            item.setName(name);
+            item.setLoanDate(loanDate);
+            item.setLoanType(loanType);
+            item.setLoanStatus(loanStatus);
+            item.setLoanAmount("100000");
+            item.setBrokerAmount("20000000");
+            items.add(item);
+        }
+        return items;
+    }
+
+    public static List<PendingItemsBean> fakeOverdueFollow() {
+        List<PendingItemsBean> items = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            PendingItemsBean item = new PendingItemsBean();
+            // 姓名
+            String name = "傻吊" + i;
+            // 代办日期
+            String loanDate = "2013.12.12";
+            // 贷款类型
+            String loanType;
+            // 贷款状态
+            String loanStatus;
+            // 按钮状态
+            String btnStatus = "详情";
+            switch (i) {
+                case 0:
+                    loanType = "回租";
+                    loanStatus = "逾期7天";
+                    break;
+                default:
+                    loanType = "车抵贷";
+                    loanStatus = "逾期12天";
+            }
+            item.setBtnStatus(btnStatus);
+            item.setName(name);
+            item.setLoanDate(loanDate);
+            item.setLoanType(loanType);
+            item.setLoanStatus(loanStatus);
+            item.setLoanAmount("100000");
+            item.setBrokerAmount("20000000");
+            items.add(item);
+        }
+        return items;
+    }
 }
