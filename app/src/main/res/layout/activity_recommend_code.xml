@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black12"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_overdue"
+        style="@style/toolbar_common"
+        android:background="@color/green87">
+
+        <ImageButton
+            android:id="@+id/ib_back_followup"
+            style="@style/toolbar_back_white" />
+
+        <TextView
+            style="@style/toolbar_title"
+            android:text="我的推荐码" />
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        style="@style/md_rl_d40_white"
+        android:layout_marginTop="@dimen/x8">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="默认推荐码"
+            android:textColor="@color/black54"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="13800138000"
+            android:textColor="@color/black87"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x8"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="@dimen/x50"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginTop="@dimen/x12"
+            android:text="自定义推荐码"
+            android:textColor="@color/black54"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/x12">
+
+        <ImageView
+            android:id="@+id/iv_info_recommend_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:src="@mipmap/ic_info" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_toRightOf="@+id/iv_info_recommend_code"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="自定义推荐码只能是6位数字，可与当前业务员在系统中设定的手机号同时作为推荐码使用；"
+                android:textColor="@color/black54"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x12"
+                android:text="自定义推荐码若与他人推荐码重复则无法设置，仅可使用手机号作为推荐码；"
+                android:textColor="@color/black54"
+                android:textSize="13sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x12"
+                android:text="自定义推荐码设置后不可更改。"
+                android:textColor="@color/black54"
+                android:textSize="13sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_submit_recommend_code"
+        style="@style/md_btn"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/x20"
+        android:text="提交" />
+</LinearLayout>
