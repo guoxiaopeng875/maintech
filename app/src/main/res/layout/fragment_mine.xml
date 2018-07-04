@@ -6,8 +6,6 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-
-        android:id="@+id/toolbar_after"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/toolbar_bg"
@@ -138,8 +136,9 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/x7"
         android:background="@drawable/shape_shadow" />
-
+    <!--我的佣金-->
     <LinearLayout
+        android:id="@+id/ll_commission_mine"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x46"
         android:background="@color/white"
@@ -232,9 +231,9 @@
     <View style="@style/line" />
 
     <LinearLayout
-        android:layout_marginTop="@dimen/x6"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x46"
+        android:layout_marginTop="@dimen/x6"
         android:background="@color/white"
         android:gravity="center_vertical"
         android:paddingStart="@dimen/x13">

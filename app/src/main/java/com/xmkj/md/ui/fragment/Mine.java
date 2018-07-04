@@ -1,7 +1,13 @@
 package com.xmkj.md.ui.fragment;
 
+import android.view.View;
+
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
+import com.xmkj.md.ui.activity.MyCommission;
+import com.xmkj.md.utils.AppUtils;
+
+import butterknife.OnClick;
 
 /**
  * 我的
@@ -11,6 +17,7 @@ import com.xmkj.md.base.BaseFragment;
  */
 
 public class Mine extends BaseFragment {
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_mine;
@@ -29,5 +36,14 @@ public class Mine extends BaseFragment {
     @Override
     public void setListener() {
 
+    }
+
+    @OnClick(R.id.ll_commission_mine)
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_commission_mine:
+                AppUtils.jump2Next(this.getActivity(), MyCommission.class);
+                break;
+        }
     }
 }

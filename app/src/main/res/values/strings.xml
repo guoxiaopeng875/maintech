@@ -33,4 +33,8 @@
     <string name="my_contacts">我的通讯录</string>
     <string name="my_profile">我的资料</string>
     <string name="my_recommend">我的推荐码</string>
+    <string name="balance_commission">佣金余额(元)</string>
+    <string name="withdraw_btn">佣金提现</string>
+    <string name="withdraw_record">提现记录</string>
+    <string name="rmb">￥</string>
 </resources>

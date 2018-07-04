@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_bg"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+
+        android:id="@+id/toolbar_after"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_bg"
+        android:minHeight="?attr/actionBarSize">
+
+        <ImageButton
+            android:id="@+id/toolbar_back_commission"
+            style="@style/toolbar_back_white" />
+
+        <TextView
+            style="@style/toolbar_title"
+            android:text="@string/my_commission" />
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/x13"
+        android:paddingTop="@dimen/x13">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/balance_commission"
+            android:textColor="@color/white"
+            android:textSize="15.4sp" />
+        <!--佣金余额-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rmb"
+                android:textColor="@color/white"
+                android:textSize="23sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/x10"
+                android:layout_marginTop="@dimen/x13"
+                android:text="943,999.50"
+                android:textColor="@color/white"
+                android:textSize="37sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+        <!--提现-->
+        <Button
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/x32"
+            android:layout_marginTop="@dimen/x8"
+            android:background="@drawable/shape_btn_white"
+            android:text="@string/withdraw_btn"
+            android:textColor="@color/md_green"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/md_bg"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10"
+            android:layout_marginTop="@dimen/x8"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="@dimen/x3">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/x13"
+                android:paddingTop="@dimen/x13">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/bg_withdraw_processing" />
+
+                <TextView
+                    android:id="@+id/tv_withdraw_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="提现中"
+                    android:textColor="@color/black54"
+                    android:textSize="15.4sp" />
+
+                <TextView
+                    android:id="@+id/tv_withdraw_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_withdraw_status"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/x13"
+                    android:text="￥ 13,100.50"
+                    android:textColor="@color/black87"
+                    android:textSize="21sp"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/x32"
+                    android:layout_below="@id/tv_withdraw_amount"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/x13"
+                    android:background="@drawable/shape_btn_white"
+                    android:text="@string/withdraw_record"
+                    android:textColor="@color/md_green"
+                    android:textSize="18sp" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+
+
+</LinearLayout>
