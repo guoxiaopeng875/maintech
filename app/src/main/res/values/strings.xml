@@ -36,5 +36,6 @@
     <string name="balance_commission">佣金余额(元)</string>
     <string name="withdraw_btn">佣金提现</string>
     <string name="withdraw_record">提现记录</string>
+    <string name="settle_record">结清记录</string>
     <string name="rmb">￥</string>
 </resources>
