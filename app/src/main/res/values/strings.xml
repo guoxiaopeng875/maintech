@@ -38,4 +38,12 @@
     <string name="withdraw_record">提现记录</string>
     <string name="settle_record">结清记录</string>
     <string name="rmb">￥</string>
+    <string name="bind_card">绑定银行卡</string>
+    <string name="withdraw_bank">提现银行</string>
+    <string name="withdraw_sub_bank">支行名称</string>
+    <string name="withdraw_user_name">户主姓名</string>
+    <string name="withdraw_card">提现卡号</string>
+    <string name="pls_input">请输入</string>
+    <string name="submit">提交</string>
+    <string name="apply_withdraw">申请提现</string>
 </resources>

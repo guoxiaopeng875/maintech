@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
+import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.ToastUtils;
 
 import butterknife.OnClick;
@@ -38,7 +39,8 @@ public class MyCommission extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_withdraw:
-                ToastUtils.showToast("佣金提现");
+                // 佣金提现
+                AppUtils.jump2Next(this, BindCard.class);
                 break;
             case R.id.btn_withdraw_record:
                 ToastUtils.showToast("提现记录");

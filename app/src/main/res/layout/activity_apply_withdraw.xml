@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_bg">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_apply_withdraw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/toolbar_bg"
+        android:minHeight="?attr/actionBarSize">
+
+        <ImageButton
+            android:id="@+id/toolbar_back_apply_withdraw"
+            style="@style/toolbar_back_white" />
+
+        <TextView
+            style="@style/toolbar_title"
+            android:text="@string/apply_withdraw" />
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar_apply_withdraw"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x7"
+            android:background="@drawable/shape_shadow" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x37"
+            android:background="@color/white"
+            android:paddingEnd="@dimen/x13"
+            android:paddingStart="@dimen/x13">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="@string/withdraw_bank"
+                android:textColor="@color/black54"
+                android:textSize="15.4sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="工商银行"
+                android:textColor="@color/black87"
+                android:textSize="15.4sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <View style="@style/line" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_submit_bind_card"
+        style="@style/md_btn"
+        android:layout_alignParentBottom="true"
+        android:text="@string/submit" />
+
+</RelativeLayout>

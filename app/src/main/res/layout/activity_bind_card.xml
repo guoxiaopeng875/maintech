@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/md_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+
+            android:id="@+id/toolbar_after"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/toolbar_bg"
+            android:minHeight="?attr/actionBarSize">
+
+            <ImageButton
+                android:id="@+id/toolbar_back_bind_card"
+                style="@style/toolbar_back_white" />
+
+            <TextView
+                style="@style/toolbar_title"
+                android:text="@string/bind_card" />
+        </android.support.v7.widget.Toolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x7"
+            android:background="@drawable/shape_shadow" />
+        <!--提现银行-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x73"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/x13">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/withdraw_bank"
+                android:textColor="@color/black54"
+                android:textSize="15.4sp" />
+
+            <EditText
+                android:id="@+id/et_bank_withdraw"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/pls_input"
+                android:singleLine="true"
+                android:textColor="@color/black87"
+                android:textColorHint="@color/black54"
+                android:textSize="15.4sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+        <!--支行名称-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x73"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/x13">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/withdraw_sub_bank"
+                android:textColor="@color/black54"
+                android:textSize="15.4sp" />
+
+            <EditText
+                android:id="@+id/et_sub_bank_withdraw"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/pls_input"
+                android:singleLine="true"
+                android:textColor="@color/black87"
+                android:textColorHint="@color/black54"
+                android:textSize="15.4sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+        <!--户主姓名-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x73"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/x13">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/withdraw_user_name"
+                android:textColor="@color/black54"
+                android:textSize="15.4sp" />
+
+            <EditText
+                android:id="@+id/et_user_name_withdraw"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/pls_input"
+                android:singleLine="true"
+                android:textColor="@color/black87"
+                android:textColorHint="@color/black54"
+                android:textSize="15.4sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+        <!--提现卡号-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x73"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/x13">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/withdraw_card"
+                android:textColor="@color/black54"
+                android:textSize="15.4sp" />
+
+            <EditText
+                android:id="@+id/et_card_withdraw"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/pls_input"
+                android:singleLine="true"
+                android:textColor="@color/black87"
+                android:textColorHint="@color/black54"
+                android:textSize="15.4sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <View style="@style/line" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_submit_bind_card"
+        style="@style/md_btn"
+        android:layout_alignParentBottom="true"
+        android:text="@string/submit" />
+</RelativeLayout>
