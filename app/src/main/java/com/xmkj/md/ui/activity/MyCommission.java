@@ -43,7 +43,8 @@ public class MyCommission extends BaseActivity {
                 AppUtils.jump2Next(this, BindCard.class);
                 break;
             case R.id.btn_withdraw_record:
-                ToastUtils.showToast("提现记录");
+                // 提现记录
+                AppUtils.jump2Next(this, WithdrawRecords.class);
                 break;
             case R.id.btn_settle_record:
                 ToastUtils.showToast("结清记录");

@@ -1,6 +1,8 @@
 package com.xmkj.md.utils;
 
 import com.xmkj.md.model.PendingItemsBean;
+import com.xmkj.md.model.WithdrawRecordBean;
+import com.xmkj.md.ui.activity.WithdrawRecords;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,25 @@ import java.util.List;
  */
 
 public class GenDataUtil {
+    public static List<WithdrawRecordBean> fakeWithdrawRecords() {
+        List<WithdrawRecordBean> records = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            WithdrawRecordBean record = new WithdrawRecordBean();
+            record.setCard("123123");
+            record.setAmount("91293.11");
+            record.setBank("中国银行");
+            record.setDate("2020年1月1日 12:12:12");
+            if (i % 2 == 0) {
+                record.setStatus("提现中");
+            } else {
+                record.setStatus("提现完成");
+
+            }
+            records.add(record);
+        }
+        return records;
+    }
+
     public static List<PendingItemsBean> fakePendingItems() {
         List<PendingItemsBean> items = new ArrayList<>();
         for (int i = 0; i < 10; i++) {

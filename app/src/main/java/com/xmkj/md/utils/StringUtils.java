@@ -111,12 +111,14 @@ public class StringUtils {
     }
 
     /**
-     * 判断字符串是否为纯数字
+     * 判断字符串是否为纯数字(包含小数点)
      *
      * @param str 字符串
      * @return 是否纯数字
      */
     public static boolean isNumber(String str) {
+        // 替换小数点
+        str = str.replace(".", "");
         for (int i = 0; i < str.length(); i++) {
             if (!Character.isDigit(str.charAt(i))) {
                 return false;
