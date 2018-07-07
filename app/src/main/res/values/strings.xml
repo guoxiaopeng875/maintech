@@ -46,4 +46,5 @@
     <string name="pls_input">请输入</string>
     <string name="submit">提交</string>
     <string name="apply_withdraw">申请提现</string>
+    <string name="withdraw_amount">提现金额</string>
 </resources>

@@ -48,6 +48,7 @@
                 android:textSize="15.4sp" />
 
             <TextView
+                android:id="@+id/tv_bank_apply_withdraw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -59,10 +60,151 @@
         </RelativeLayout>
 
         <View style="@style/line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x37"
+            android:background="@color/white"
+            android:paddingEnd="@dimen/x13"
+            android:paddingStart="@dimen/x13">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="@string/withdraw_sub_bank"
+                android:textColor="@color/black54"
+                android:textSize="15.4sp" />
+
+            <TextView
+                android:id="@+id/tv_sub_bank_apply_withdraw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="罗湖支行"
+                android:textColor="@color/black87"
+                android:textSize="15.4sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <View style="@style/line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x37"
+            android:background="@color/white"
+            android:paddingEnd="@dimen/x13"
+            android:paddingStart="@dimen/x13">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="@string/withdraw_user_name"
+                android:textColor="@color/black54"
+                android:textSize="15.4sp" />
+
+            <TextView
+                android:id="@+id/tv_username_apply_withdraw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="来来来"
+                android:textColor="@color/black87"
+                android:textSize="15.4sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <View style="@style/line" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x37"
+            android:background="@color/white"
+            android:paddingEnd="@dimen/x13"
+            android:paddingStart="@dimen/x13">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:text="@string/withdraw_card"
+                android:textColor="@color/black54"
+                android:textSize="15.4sp" />
+
+            <TextView
+                android:id="@+id/tv_card_apply_withdraw"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="400001*****391293"
+                android:textColor="@color/black87"
+                android:textSize="15.4sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <View style="@style/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x73"
+            android:layout_marginTop="@dimen/x7"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingEnd="@dimen/x13"
+            android:paddingStart="@dimen/x13">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="@string/withdraw_amount"
+                android:textColor="@color/black54"
+                android:textSize="15.4sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="@string/rmb"
+                    android:textColor="@color/black87"
+                    android:textStyle="bold" />
+
+                <EditText
+                    android:inputType="numberDecimal"
+                    android:layout_marginStart="@dimen/x5"
+                    android:id="@+id/et_amount_withdraw"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/pls_input"
+                    android:singleLine="true"
+                    android:textColor="@color/black87"
+                    android:textColorHint="@color/black54"
+                    android:textSize="15.4sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View style="@style/line" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/btn_submit_bind_card"
+        android:id="@+id/btn_submit_apply_withdraw"
         style="@style/md_btn"
         android:layout_alignParentBottom="true"
         android:text="@string/submit" />
