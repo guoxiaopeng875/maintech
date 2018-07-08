@@ -47,7 +47,8 @@ public class MyCommission extends BaseActivity {
                 AppUtils.jump2Next(this, WithdrawRecords.class);
                 break;
             case R.id.btn_settle_record:
-                ToastUtils.showToast("结清记录");
+                // 结清记录
+                AppUtils.jump2Next(this, SettleRecords.class);
                 break;
         }
     }

@@ -122,6 +122,10 @@
             android:name=".ui.activity.WithdrawRecords"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.SettleRecords"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
 
     </application>
 

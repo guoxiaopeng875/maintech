@@ -48,4 +48,5 @@
     <string name="apply_withdraw">申请提现</string>
     <string name="withdraw_amount">提现金额</string>
     <string name="already_withdraw_amount">已提现金额</string>
+    <string name="already_settle_amount">待结算金额</string>
 </resources>

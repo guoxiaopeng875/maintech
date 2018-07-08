@@ -12,12 +12,12 @@
         android:minHeight="?attr/actionBarSize">
 
         <ImageButton
-            android:id="@+id/toolbar_back_withdraw_records"
+            android:id="@+id/toolbar_back_settle_records"
             style="@style/toolbar_back_white" />
 
         <TextView
             style="@style/toolbar_title"
-            android:text="@string/withdraw_record" />
+            android:text="@string/settle_record" />
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout
@@ -31,7 +31,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/already_withdraw_amount"
+            android:text="@string/already_settle_amount"
             android:textColor="@color/white"
             android:textSize="15.4sp" />
 
@@ -65,7 +65,7 @@
         android:background="@drawable/shape_shadow" />
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/srl_withdraw_records"
+        android:id="@+id/srl_settle_records"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/md_bg">
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_withdraw_records"
+            android:id="@+id/rv_settle_records"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
