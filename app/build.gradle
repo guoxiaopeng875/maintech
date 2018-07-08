@@ -53,4 +53,5 @@ dependencies {
     implementation project(':mainnavigatetabbar')
     implementation 'com.android.support:cardview-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'
+    implementation 'com.github.pinguo-zhouwei:CustomPopwindow:2.1.1'
 }

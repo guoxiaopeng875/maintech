@@ -49,4 +49,7 @@
     <string name="withdraw_amount">提现金额</string>
     <string name="already_withdraw_amount">已提现金额</string>
     <string name="already_settle_amount">待结算金额</string>
+    <string name="withdraw_not_use">提现功能暂未启用</string>
+    <string name="withdraw_dialog_tip">您需先绑定用于提现的银行卡</string>
+    <string name="do_bind_card">立即绑定</string>
 </resources>

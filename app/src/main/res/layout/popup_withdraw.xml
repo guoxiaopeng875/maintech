@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/x27"
+    android:paddingEnd="@dimen/x27">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_withdraw_dialog_top"
+        android:gravity="center_horizontal"
+        android:paddingBottom="@dimen/x27"
+        android:paddingTop="@dimen/x27">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_warning_dialog" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x200"
+        android:background="@drawable/shape_withdraw_dialog_bottom">
+
+        <TextView
+            android:id="@+id/tv_withdraw_not_use"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x10"
+            android:text="@string/withdraw_not_use"
+            android:textColor="@color/black87"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_withdraw_not_use"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/x10"
+            android:text="@string/withdraw_dialog_tip"
+            android:textColor="@color/black87"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btn_bind_card_popup"
+            android:layout_width="@dimen/x147"
+            android:layout_height="@dimen/x37"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/x27"
+            android:background="@drawable/shape_btn_green"
+            android:text="@string/do_bind_card"
+            android:textColor="@color/white"
+            android:textSize="15.4sp" />
+    </RelativeLayout>
+
+</LinearLayout>
