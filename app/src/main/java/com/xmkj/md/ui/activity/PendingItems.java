@@ -40,7 +40,7 @@ public class PendingItems extends BaseActivity {
 
     @Override
     public void initView() {
-        StatusBarSettingUtils.setStatusBarColor(this, R.color.green87);
+        StatusBarSettingUtils.setStatusBarColor(this, R.color.toolbar_bg);
     }
 
     @Override

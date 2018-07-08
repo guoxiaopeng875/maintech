@@ -19,5 +19,7 @@ public class StringUtilsTest {
         assertEquals("1,200,000", str);
         str = StringUtils.numberFormat("100");
         assertEquals("100", str);
+        str = StringUtils.numberFormat("10000.12");
+        assertEquals("10,000.12", str);
     }
 }

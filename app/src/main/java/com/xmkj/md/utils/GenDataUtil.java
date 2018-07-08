@@ -1,6 +1,8 @@
 package com.xmkj.md.utils;
 
 import com.xmkj.md.model.PendingItemsBean;
+import com.xmkj.md.model.SettleRecordBean;
+import com.xmkj.md.model.WithdrawRecordBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,46 @@ import java.util.List;
  */
 
 public class GenDataUtil {
+    public static List<SettleRecordBean> fakeSettleRecords() {
+        List<SettleRecordBean> records = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            SettleRecordBean record = new SettleRecordBean();
+            record.setCompany("傻不拉几有限公司");
+            record.setAmount("91293.11");
+            record.setDate("2020年1月1日 12:12:12");
+            record.setUsername("李先生");
+            if (i % 2 == 0) {
+                record.setLoanType("正租");
+                record.setStatus("结算中");
+            } else {
+                record.setLoanType("回租");
+                record.setStatus("结算完成");
+
+            }
+            records.add(record);
+        }
+        return records;
+    }
+
+    public static List<WithdrawRecordBean> fakeWithdrawRecords() {
+        List<WithdrawRecordBean> records = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            WithdrawRecordBean record = new WithdrawRecordBean();
+            record.setCard("123123");
+            record.setAmount("91293.11");
+            record.setBank("中国银行");
+            record.setDate("2020年1月1日 12:12:12");
+            if (i % 2 == 0) {
+                record.setStatus("提现中");
+            } else {
+                record.setStatus("提现完成");
+
+            }
+            records.add(record);
+        }
+        return records;
+    }
+
     public static List<PendingItemsBean> fakePendingItems() {
         List<PendingItemsBean> items = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
