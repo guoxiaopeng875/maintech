@@ -181,5 +181,27 @@
         <item name="android:paddingEnd">@dimen/x2</item>
     </style>
 
+    <style name="line_black12_d8">
+        <item name="android:background">@color/black12</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/x8</item>
+    </style>
+
+    <style name="line_black12_dp">
+        <item name="android:background">@color/black12</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0.3dp</item>
+    </style>
+
+    <style name="textview_style">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:layout_width">41dp</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/green87</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 
 </resources>

@@ -5,10 +5,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import com.xmkj.md.ui.fragment.BusinessFinish;
-import com.xmkj.md.ui.fragment.BusinessProcessing;
-import com.xmkj.md.ui.fragment.LoanProcess;
-import com.xmkj.md.ui.fragment.OverdueFollow;
+import com.xmkj.md.ui.fragment.MonthAchievement;
+import com.xmkj.md.ui.fragment.YearAchievement;
 
 /**
  * 贷后管理
@@ -17,10 +15,10 @@ import com.xmkj.md.ui.fragment.OverdueFollow;
  * 地点: 深圳
  */
 
-public class AfterLoanAdapter extends FragmentPagerAdapter {
-    private static final String[] titles = {"待处理", "逾期跟进"};
+public class AchievementAdapter extends FragmentPagerAdapter {
+    private static final String[] titles = {"本月业绩", "本年度业绩"};
 
-    public AfterLoanAdapter(FragmentManager fm) {
+    public AchievementAdapter(FragmentManager fm) {
         super(fm);
     }
 
@@ -28,11 +26,11 @@ public class AfterLoanAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new LoanProcess();
+                return new MonthAchievement();
             case 1:
-                return new OverdueFollow();
+                return new YearAchievement();
             default:
-                return new LoanProcess();
+                return new MonthAchievement();
         }
     }
 

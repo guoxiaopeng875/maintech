@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_businessdetail"
+        style="@style/toolbar_common"
+        android:background="@color/green87">
+
+        <ImageButton
+            android:id="@+id/ib_back_businessdetail"
+            style="@style/toolbar_back_white" />
+
+        <TextView
+            style="@style/toolbar_title"
+            android:text="业务详情" />
+    </android.support.v7.widget.Toolbar>
+
+    <View style="@style/line_black12_d8" />
+
+    <RelativeLayout style="@style/md_rl_d40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="客户姓名"
+            android:textColor="@color/black54"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="李先生"
+            android:textColor="@color/black87"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <View style="@style/line_black12_dp" />
+
+    <RelativeLayout style="@style/md_rl_d40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="联系方式"
+            android:textColor="@color/black54"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="13800138000"
+            android:textColor="@color/black87"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <View style="@style/line_black12_dp" />
+
+    <RelativeLayout style="@style/md_rl_d40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="身份证号码"
+            android:textColor="@color/black54"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="440582199310032890"
+            android:textColor="@color/black87"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <View style="@style/line_black12_d8" />
+
+    <RelativeLayout style="@style/md_rl_d40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="业务类型"
+            android:textColor="@color/black54"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="回租类型A"
+            android:textColor="@color/black87"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <View style="@style/line_black12_dp" />
+
+    <RelativeLayout style="@style/md_rl_d40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="平台方"
+            android:textColor="@color/black54"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="深圳三金财富"
+            android:textColor="@color/black87"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <View style="@style/line_black12_dp" />
+
+    <RelativeLayout style="@style/md_rl_d40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="放款金额"
+            android:textColor="@color/black54"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="200,000"
+            android:textColor="@color/black87"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <View style="@style/line_black12_dp" />
+
+    <RelativeLayout style="@style/md_rl_d40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="佣金金额"
+            android:textColor="@color/black54"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="200,000"
+            android:textColor="@color/black87"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <View style="@style/line_black12_d8" />
+
+    <RelativeLayout style="@style/md_rl_d40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="保单时间"
+            android:textColor="@color/black54"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="2018-08-08"
+            android:textColor="@color/black87"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <View style="@style/line_black12_dp" />
+
+    <RelativeLayout style="@style/md_rl_d40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="费用"
+            android:textColor="@color/black54"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/iv_arr_cost"
+            android:layout_marginRight="@dimen/x10"
+            android:layout_centerVertical="true"
+            android:text="2000"
+            android:textColor="@color/black87"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/iv_arr_cost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_arrow_right" />
+    </RelativeLayout>
+
+    <View style="@style/line_black12_d8" />
+
+    <RelativeLayout style="@style/md_rl_d40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="订单流程"
+            android:textColor="@color/black54"
+            android:textSize="15sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x10"
+            android:layout_toLeftOf="@+id/iv_arr_process"
+            android:text="佣金结算"
+            android:textColor="@color/black87"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/iv_arr_process"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_arrow_right" />
+    </RelativeLayout>
+
+    <View style="@style/line_black12_dp" />
+
+
+</LinearLayout>
