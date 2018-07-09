@@ -10,7 +10,7 @@ import com.xmkj.md.base.BaseFragment;
 public class YearAchievement extends BaseFragment {
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_business_process;
+        return R.layout.fragment_year_achievement;
     }
 
     @Override

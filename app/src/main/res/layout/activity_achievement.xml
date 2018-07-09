@@ -14,6 +14,10 @@
         android:background="@color/toolbar_bg"
         android:minHeight="?attr/actionBarSize">
 
+        <ImageButton
+            android:id="@+id/ib_back_achievement"
+            style="@style/toolbar_back_white" />
+
         <TextView
             style="@style/toolbar_title"
             android:text="我的业绩" />

@@ -94,8 +94,10 @@
             android:name=".ui.activity.BusinessDetail"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
-
-
+        <activity
+            android:name=".ui.activity.ProcessDetail"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
 
 
         <activity

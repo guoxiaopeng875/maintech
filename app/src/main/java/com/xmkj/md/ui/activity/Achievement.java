@@ -6,9 +6,9 @@ import android.support.v4.view.ViewPager;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.ui.adapter.AchievementAdapter;
-import com.xmkj.md.ui.adapter.AfterLoanAdapter;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 /**
  * Created by 晴天 on 2018/7/5.
@@ -41,4 +41,12 @@ public class Achievement extends BaseActivity {
     public void setListener() {
 
     }
+
+
+    @OnClick(R.id.ib_back_achievement)
+    public void onViewClicked() {
+        finish();
+    }
+
+
 }
