@@ -22,6 +22,7 @@ import com.xmkj.md.ui.activity.MineInfo;
 import com.xmkj.md.ui.activity.MyBusiness;
 import com.xmkj.md.ui.activity.Overdue;
 import com.xmkj.md.ui.activity.PendingItems;
+import com.xmkj.md.ui.activity.ProcessDetail;
 import com.xmkj.md.ui.activity.RecommendCode;
 import com.xmkj.md.ui.activity.UpLoadInfo;
 import com.xmkj.md.ui.adapter.HomeAdapter;
@@ -104,7 +105,7 @@ public class Home extends BaseFragment {
                 break;
             case R.id.rl_contact_home:
                 ToastUtils.showToast("通讯录");
-                AppUtils.jump2Next(getContext(), RecommendCode.class);
+                AppUtils.jump2Next(getContext(), ProcessDetail.class);
                 break;
             case R.id.rl_upcoming_flow:
                 ToastUtils.showToast("待办事项");
@@ -119,7 +120,7 @@ public class Home extends BaseFragment {
                 break;
             case R.id.rl_contact_flow:
                 ToastUtils.showToast("通讯录");
-                AppUtils.jump2Next(getContext(), RecommendCode.class);
+                AppUtils.jump2Next(getContext(), ProcessDetail.class);
                 break;
         }
     }

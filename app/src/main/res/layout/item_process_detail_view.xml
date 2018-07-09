@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_type_process_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x60">
+
+        <View
+            android:id="@+id/line_top_process_detail"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/iv_type_process_detail"
+            android:layout_marginBottom="@dimen/x3"
+            android:background="@color/green87"/>
+
+        <ImageView
+            android:id="@+id/iv_type_process_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x15"
+            android:src="@mipmap/ic_home_commission"/>
+
+        <View
+            android:id="@+id/line_bottom_process_detail"
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/iv_type_process_detail"
+            android:layout_marginTop="@dimen/x3"
+            android:background="@color/green87"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/x10"
+        android:layout_marginBottom="@dimen/x10"
+        android:layout_marginRight="@dimen/x15"
+        android:layout_toRightOf="@+id/rl_type_process_detail">
+
+        <TextView
+            android:id="@+id/tv_type_process_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:text="报单"
+            android:textSize="15sp"
+            android:textColor="@color/black87"/>
+
+        <TextView
+            android:id="@+id/tv_time_process_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_type_process_detail"
+            android:layout_marginTop="@dimen/x5"
+            android:text="2018.06.08"
+            android:textSize="13sp"
+            android:textColor="@color/black54"/>
+
+        <TextView
+            android:id="@+id/tv_status_process_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="通过"
+            android:textSize="13sp"
+            android:textColor="@color/black54"/>
+
+        <TextView
+            android:id="@+id/tv_name_process_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_status_process_detail"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/x5"
+            android:text="操作人: 张"
+            android:textSize="13sp"
+            android:textColor="@color/black54"/>
+    </RelativeLayout>
+
+    <View
+        style="@style/line"
+        android:layout_toRightOf="@+id/rl_type_process_detail"
+        android:layout_alignParentBottom="true"/>
+    
+
+
+</RelativeLayout>

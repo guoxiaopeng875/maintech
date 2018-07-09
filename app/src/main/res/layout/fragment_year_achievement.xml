@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/line_chart_month"
+        android:id="@+id/line_chart_year"
         android:layout_width="match_parent"
         android:layout_height="240dp"
         android:layout_marginTop="@dimen/x10" />
