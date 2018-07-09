@@ -8,15 +8,27 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener;
+import com.squareup.okhttp.Response;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
+import com.xmkj.md.config.Constants;
+import com.xmkj.md.http.OkHttpHelper;
+import com.xmkj.md.http.SpotsCallback;
+import com.xmkj.md.model.DataBean;
 import com.xmkj.md.model.PendingItemsBean;
+import com.xmkj.md.model.UserBean;
 import com.xmkj.md.ui.adapter.PendingItemsAdapter;
+import com.xmkj.md.utils.AppData;
+import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.GenDataUtil;
 import com.xmkj.md.utils.StatusBarSettingUtils;
 import com.xmkj.md.utils.ToastUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -45,15 +57,24 @@ public class PendingItems extends BaseActivity {
 
     @Override
     public void initData() {
-        mPendItems = getPendItems();
+        getPendItems();
         mPendingItemsAdapter = new PendingItemsAdapter(R.layout.item_pending_view, mPendItems);
         mRvPending.setLayoutManager(new LinearLayoutManager(this));
         mRvPending.setAdapter(mPendingItemsAdapter);
     }
 
-    // TODO 获取代办事项数据
-    private List<PendingItemsBean> getPendItems() {
-        return GenDataUtil.fakePendingItems();
+    // 获取代办事项数据
+    private void getPendItems() {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(this);
+        Map<String, Object> params = new HashMap<>();
+        httpHelper.post(Constants.BASE_URL + "/GetUpcomingList", params, new SpotsCallback<DataBean<PendingItemsBean>>(this, "加载中") {
+
+            @Override
+            public void onSuccess(Response response, DataBean<PendingItemsBean> items) {
+                mPendingItemsAdapter.setNewData(items.getData());
+                mSrlPending.finishRefresh();
+            }
+        });
     }
 
     @Override
@@ -74,15 +95,14 @@ public class PendingItems extends BaseActivity {
         mSrlPending.setOnLoadMoreListener(refreshLayout -> onLoadMore());
     }
 
-    // TODO 刷新
+    // 刷新
     private void onRefresh() {
-        mPendingItemsAdapter.setNewData(getPendItems());
-        mSrlPending.finishRefresh(1000);
+        getPendItems();
     }
 
     // TODO 上拉加载更多
     private void onLoadMore() {
-        mPendingItemsAdapter.addData(getPendItems());
+//        mPendingItemsAdapter.addData(getPendItems());
         mSrlPending.finishLoadMore(1000);
     }
 

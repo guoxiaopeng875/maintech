@@ -7,7 +7,7 @@ public class Constants {
 
 
     // http://220.231.228.90:18067  http://192.168.1.161:8093
-    public static String BASE_URL = "http://192.168.1.161:8093/openapi/router?method=";
+    public static String BASE_URL = "http://47.106.189.17:81/Api/App";
     public static final String LOGIN = "";//1登录
 
 

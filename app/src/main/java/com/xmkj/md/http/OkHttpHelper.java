@@ -15,6 +15,8 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+import com.xmkj.md.model.BaseResponseBean;
+import com.xmkj.md.utils.AppData;
 import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.ToastUtils;
 
@@ -46,6 +48,8 @@ public class OkHttpHelper {
         mInstance = new OkHttpHelper();
     }
 
+    private static String mToken;
+
     private OkHttpHelper() {
         mHttpClient = new OkHttpClient();
         mHttpClient.setConnectTimeout(20, TimeUnit.SECONDS);
@@ -66,6 +70,7 @@ public class OkHttpHelper {
 
     public static OkHttpHelper getInstance(Context context) {
         mContext = context;
+        mToken = AppData.GetInstance(context).getAccessToken();
         return mInstance;
     }
 
@@ -102,71 +107,93 @@ public class OkHttpHelper {
             @Override
             public void onResponse(Response response) throws IOException {
                 callbackResponse(callback, response);
-                if (response.isSuccessful()) {
-                    String resultStr = response.body().string();
-                    Logger.json(resultStr);
-                    AppUtils.printLog(resultStr);
-                    JSONObject jsonObject;
-                    String code = "0000";
-                    String msg = "";
-                    try {
-                        jsonObject = new JSONObject(resultStr);
-                        code = jsonObject.getString("code");
-                        msg = jsonObject.getString("message");
-                    } catch (JSONException e) {
-                        Logger.e(TAG + e);
-                        if (resultStr.contains("error_description") || resultStr.contains("access_token")) {//oauth接口
-                            callbackSuccess(callback, response, resultStr);
-                            return;
-                        }
-                    }
-                    if (("0000").equals(code) || "ok".equals(code)) {
-                        //请求成功，不做处理
-                    } else if ("0001".equals(code)) {
-                        Message message = new Message();
-                        message.what = 0;
-                        message.obj = "鉴权失败";
-                        handler.sendMessage(message);
-                        return;
-                    } else if ("0021".equals(code)) {//登录已过期，请重新登录
-                        Message message = new Message();
-                        message.what = 0;
-                        message.obj = msg;
-                        handler.sendMessage(message);
-                        return;
-                    } else if ("1002".equals(code)) {//缺少token参数
-                        handler.sendEmptyMessage(1);
-                        return;
-                    } else if ("1003".equals(code)) {//用户权限不通过
-                        handler.sendEmptyMessage(2);
-                        return;
-                    } else if ("-10".equals(code)) {//版本过低，需要升级
-                        callbackUpdate(callback, response);
-                        return;
-                    } else {//其他错误
-                        Message message = new Message();
-                        message.what = 4;
-                        message.obj = msg;
-                        handler.sendMessage(message);
-                        return;
-                    }
-                    if (callback.mType == String.class) {//返回数据为string类型
-                        callbackSuccess(callback, response, resultStr);
-                    } else {//返回数据为数据模型对象
-                        try {
-                            Object obj = mGson.fromJson(resultStr, callback.mType);
-                            callbackSuccess(callback, response, obj);
-                        } catch (com.google.gson.JsonParseException e) {//Json解析的错误
-                            callback.onError(response, response.code(), e);
-                        }
-                    }
-                } else if (response.code() == TOKEN_ERROR || response.code() == TOKEN_EXPIRE || response.code() == TOKEN_MISSING) {
-                    Logger.d(response.body().string());
-                    callbackTokenError(callback, response);
-                } else {
-                    Logger.d(response.body().string());
-                    callbackError(callback, response, null);
+                String resultStr = response.body().string();
+                Logger.d(resultStr);
+                BaseResponseBean baseResp = mGson.fromJson(resultStr, BaseResponseBean.class);
+                Logger.d(baseResp.toString());
+                switch (response.code()) {
+                    case 200:
+                        Object obj = mGson.fromJson(resultStr, callback.mType);
+                        callbackSuccess(callback, response, obj);
+                        break;
+                    case TOKEN_ERROR:
+                    case TOKEN_EXPIRE:
+                    case TOKEN_MISSING:
+                        // 处理token失效
+                        callbackTokenError(callback, response);
+                        break;
+                    default:
+                        String errMsg = baseResp.getMessage();
+                        callback.onFailure(request, "".equals(errMsg) ? "服务器错误" : errMsg);
+
                 }
+//                if (response.isSuccessful()) {
+//                    String resultStr = response.body().string();
+//                    Logger.json(resultStr);
+//                    AppUtils.printLog(resultStr);
+//                    JSONObject jsonObject;
+//                    int status = 0;
+//                    String msg = "";
+//                    boolean isSuccess = false;
+//                    try {
+//                        jsonObject = new JSONObject(resultStr);
+//                        status = jsonObject.getInt("Status");
+//                        msg = jsonObject.getString("Message");
+//                        isSuccess = jsonObject.getBoolean("Success");
+//                    } catch (JSONException e) {
+//                        Logger.e(TAG + e);
+//                        if (resultStr.contains("error_description") || resultStr.contains("access_token")) {//oauth接口
+//                            callbackSuccess(callback, response, resultStr);
+//                            return;
+//                        }
+//                    }
+//                    if (("0000").equals(code) || "ok".equals(code)) {
+//                        //请求成功，不做处理
+//                    } else if ("0001".equals(code)) {
+//                        Message message = new Message();
+//                        message.what = 0;
+//                        message.obj = "鉴权失败";
+//                        handler.sendMessage(message);
+//                        return;
+//                    } else if ("0021".equals(code)) {//登录已过期，请重新登录
+//                        Message message = new Message();
+//                        message.what = 0;
+//                        message.obj = msg;
+//                        handler.sendMessage(message);
+//                        return;
+//                    } else if ("1002".equals(code)) {//缺少token参数
+//                        handler.sendEmptyMessage(1);
+//                        return;
+//                    } else if ("1003".equals(code)) {//用户权限不通过
+//                        handler.sendEmptyMessage(2);
+//                        return;
+//                    } else if ("-10".equals(code)) {//版本过低，需要升级
+//                        callbackUpdate(callback, response);
+//                        return;
+//                    } else {//其他错误
+//                        Message message = new Message();
+//                        message.what = 4;
+//                        message.obj = msg;
+//                        handler.sendMessage(message);
+//                        return;
+//                    }
+//                    if (callback.mType == String.class) {//返回数据为string类型
+//                        callbackSuccess(callback, response, resultStr);
+//                    } else {//返回数据为数据模型对象
+//                        try {
+//                            Object obj = mGson.fromJson(resultStr, callback.mType);
+//                            callbackSuccess(callback, response, obj);
+//                        } catch (com.google.gson.JsonParseException e) {//Json解析的错误
+//                            callback.onError(response, response.code(), e);
+//                        }
+//                    }
+//                } else if (response.code() == TOKEN_ERROR || response.code() == TOKEN_EXPIRE || response.code() == TOKEN_MISSING) {
+//                    Logger.d(response.body().string());
+//                    callbackTokenError(callback, response);
+//                } else {
+//                    Logger.d(response.body().string());
+//                    callbackError(callback, response, null);
+//                }
             }
         });
     }
@@ -255,6 +282,9 @@ public class OkHttpHelper {
             Logger.i(TAG + "URL===" + url);
             builder.url(url);
             builder.get();
+        }
+        if (!"".equals(mToken)) {
+            builder.addHeader("Acount-Token-BYKJProjectSimplify", mToken);
         }
         return builder.build();
     }

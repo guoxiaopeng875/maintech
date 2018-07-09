@@ -9,6 +9,7 @@ import com.orhanobut.logger.Logger;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
 import com.xmkj.md.ui.activity.Login;
+import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.ToastUtils;
 import com.xmkj.md.widget.MyProgressDialog;
 
@@ -29,7 +30,7 @@ public abstract class SpotsCallback<T> extends SimpleCallback<T> {
 
     //初始化
     private void initSpotsDialog() {
-        mDialog = MyProgressDialog.creatDialog(mContext);
+        mDialog = MyProgressDialog.createDialog(mContext);
         mDialog.setMessage(mMessage);
         mDialog.setCancelable(false);//是否可以手动关闭
     }
@@ -66,6 +67,14 @@ public abstract class SpotsCallback<T> extends SimpleCallback<T> {
     public void onFailure(Request request, Exception e) {
         mMsg.what = 0;
         mMsg.obj = e;
+        notifyHandler.sendMessage(mMsg);
+        dismissDialog();
+    }
+
+    @Override
+    public void onFailure(Request request, String errMsg) {
+        mMsg.what = 3;
+        mMsg.obj = errMsg;
         notifyHandler.sendMessage(mMsg);
         dismissDialog();
     }
@@ -112,9 +121,11 @@ public abstract class SpotsCallback<T> extends SimpleCallback<T> {
                 case 2:
                     dismissDialog();
                     ToastUtils.showToast(mContext, "账号被挤下线");
-                    Intent intent = new Intent();
-                    intent.setClass(mContext, Login.class);
-                    mContext.startActivity(intent);
+                    AppUtils.jumpAndClearTask(mContext, Login.class);
+                    break;
+                case 3:
+                    dismissDialog();
+                    ToastUtils.showToast(mContext, (String) msg.obj);
                     break;
             }
         }

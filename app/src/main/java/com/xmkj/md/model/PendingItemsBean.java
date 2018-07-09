@@ -4,6 +4,7 @@ package com.xmkj.md.model;
  * 待办事项模型
  */
 public class PendingItemsBean {
+
     // 姓名
     private String name;
     // 代办日期
