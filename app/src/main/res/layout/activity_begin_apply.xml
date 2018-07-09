@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_begin_apply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:minHeight="?attr/actionBarSize">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/ib_back_begin_apply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@null"
+                android:padding="@dimen/x8"
+                android:src="@mipmap/ic_back_green" />
+
+            <TextView
+                android:id="@+id/tv_cancel_begin_apply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/x10"
+                android:text="取消报单"
+                android:textColor="@color/black87"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/text_begin_apply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar_begin_apply"
+        android:textStyle="bold"
+        android:layout_marginTop="@dimen/x10"
+        android:layout_marginLeft="@dimen/x10"
+        android:text="开始报单"
+        android:textSize="20sp"
+        android:textColor="@color/black87"/>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_begin_apply"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/x20"
+        android:layout_below="@+id/text_begin_apply"/>
+
+    <Button
+        android:id="@+id/bt_commit_begin_apply"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x38"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_marginBottom="@dimen/x20"
+        android:background="@drawable/selector_green_bt"
+        android:layout_alignParentBottom="true"
+        android:text="下一步"
+        android:textColor="@color/white"
+        android:textSize="15sp" />
+
+</RelativeLayout>
