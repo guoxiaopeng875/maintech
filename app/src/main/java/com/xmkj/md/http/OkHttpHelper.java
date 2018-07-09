@@ -16,6 +16,7 @@ import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.xmkj.md.model.BaseResponseBean;
+import com.xmkj.md.utils.AppData;
 import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.ToastUtils;
 
@@ -47,6 +48,8 @@ public class OkHttpHelper {
         mInstance = new OkHttpHelper();
     }
 
+    private static String mToken;
+
     private OkHttpHelper() {
         mHttpClient = new OkHttpClient();
         mHttpClient.setConnectTimeout(20, TimeUnit.SECONDS);
@@ -67,6 +70,7 @@ public class OkHttpHelper {
 
     public static OkHttpHelper getInstance(Context context) {
         mContext = context;
+        mToken = AppData.GetInstance(context).getAccessToken();
         return mInstance;
     }
 
@@ -116,7 +120,6 @@ public class OkHttpHelper {
                     case TOKEN_EXPIRE:
                     case TOKEN_MISSING:
                         // 处理token失效
-                        Logger.d(response.body().string());
                         callbackTokenError(callback, response);
                         break;
                     default:
@@ -279,6 +282,9 @@ public class OkHttpHelper {
             Logger.i(TAG + "URL===" + url);
             builder.url(url);
             builder.get();
+        }
+        if (!"".equals(mToken)) {
+            builder.addHeader("Acount-Token-BYKJProjectSimplify", mToken);
         }
         return builder.build();
     }
