@@ -29,7 +29,7 @@ public abstract class SpotsCallback<T> extends SimpleCallback<T> {
 
     //初始化
     private void initSpotsDialog() {
-        mDialog = MyProgressDialog.creatDialog(mContext);
+        mDialog = MyProgressDialog.createDialog(mContext);
         mDialog.setMessage(mMessage);
         mDialog.setCancelable(false);//是否可以手动关闭
     }
@@ -66,6 +66,14 @@ public abstract class SpotsCallback<T> extends SimpleCallback<T> {
     public void onFailure(Request request, Exception e) {
         mMsg.what = 0;
         mMsg.obj = e;
+        notifyHandler.sendMessage(mMsg);
+        dismissDialog();
+    }
+
+    @Override
+    public void onFailure(Request request, String errMsg) {
+        mMsg.what = 3;
+        mMsg.obj = errMsg;
         notifyHandler.sendMessage(mMsg);
         dismissDialog();
     }
@@ -115,6 +123,10 @@ public abstract class SpotsCallback<T> extends SimpleCallback<T> {
                     Intent intent = new Intent();
                     intent.setClass(mContext, Login.class);
                     mContext.startActivity(intent);
+                    break;
+                case 3:
+                    dismissDialog();
+                    ToastUtils.showToast(mContext, (String) msg.obj);
                     break;
             }
         }

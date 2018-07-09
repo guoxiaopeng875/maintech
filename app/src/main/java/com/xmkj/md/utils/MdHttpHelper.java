@@ -13,7 +13,6 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
-import com.xmkj.md.config.Constants;
 import com.xmkj.md.widget.MyProgressDialog;
 
 import java.io.File;
@@ -90,7 +89,7 @@ public class MdHttpHelper {
 
     //初始化加载提示框
     public static void showDialog(Context context) {
-        mDialog = MyProgressDialog.creatDialog(context);
+        mDialog = MyProgressDialog.createDialog(context);
         mDialog.setMessage("正在上传图片");
         mDialog.setCancelable(false);//是否可以手动关闭
         mDialog.show();

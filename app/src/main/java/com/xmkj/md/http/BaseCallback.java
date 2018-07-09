@@ -31,6 +31,7 @@ public abstract class BaseCallback<T> {
     public  abstract void onBeforeRequest(Request request);
 
     public abstract  void onFailure(Request request, Exception e) ;
+    public abstract  void onFailure(Request request, String msg) ;
 
 
     /**

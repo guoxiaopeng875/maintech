@@ -46,7 +46,7 @@ public class AppData {
      * @param accessToken the access token
      */
     public void setAccessToken(String accessToken) {
-        sp.edit().putString("accessToken", accessToken).commit();
+        sp.edit().putString("accessToken", accessToken).apply();
     }
 
     public String getAccessToken() {

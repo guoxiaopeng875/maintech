@@ -22,7 +22,7 @@ public class MyProgressDialog extends Dialog {
 		super(context, theme);
 	}
 
-	public static MyProgressDialog creatDialog(Context context){//创建dialog
+	public static MyProgressDialog createDialog(Context context){//创建dialog
 		dialog = new MyProgressDialog(context, R.style.MyProgressDialog);
 		dialog.setContentView(R.layout.view_myprogress_dialog);
 		WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
