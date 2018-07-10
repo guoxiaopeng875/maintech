@@ -4,7 +4,10 @@ import android.view.View;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
+import com.xmkj.md.ui.activity.Contacts;
+import com.xmkj.md.ui.activity.MineInfo;
 import com.xmkj.md.ui.activity.MyCommission;
+import com.xmkj.md.ui.activity.RecommendCode;
 import com.xmkj.md.utils.AppUtils;
 
 import butterknife.OnClick;
@@ -38,11 +41,20 @@ public class Mine extends BaseFragment {
 
     }
 
-    @OnClick(R.id.ll_commission_mine)
+    @OnClick({R.id.ll_commission_mine,R.id.ll_contacts_mine,R.id.ll_mine_info_mine,R.id.ll_recommend_code_mine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_commission_mine:
                 AppUtils.jump2Next(this.getActivity(), MyCommission.class);
+                break;
+            case R.id.ll_contacts_mine://通讯录
+                AppUtils.jump2Next(getActivity(), Contacts.class);
+                break;
+            case R.id.ll_mine_info_mine://我的资料
+                AppUtils.jump2Next(getActivity(), MineInfo.class);
+                break;
+            case R.id.ll_recommend_code_mine://推荐码
+                AppUtils.jump2Next(getActivity(), RecommendCode.class);
                 break;
         }
     }

@@ -208,6 +208,7 @@
     <View style="@style/line" />
 
     <LinearLayout
+        android:id="@+id/ll_contacts_mine"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x46"
         android:background="@color/white"
@@ -231,6 +232,7 @@
     <View style="@style/line" />
 
     <LinearLayout
+        android:id="@+id/ll_mine_info_mine"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x46"
         android:layout_marginTop="@dimen/x6"
@@ -255,6 +257,7 @@
     <View style="@style/line" />
 
     <LinearLayout
+        android:id="@+id/ll_recommend_code_mine"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x46"
         android:background="@color/white"

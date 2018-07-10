@@ -87,9 +87,6 @@ public class OkHttpHelper {
         request(request, callback);
     }
 
-    public void get(String url, BaseCallback callback) {
-        get(url, null, callback);
-    }
 
     public void post(String url, Map<String, Object> param, BaseCallback callback) {
         Request request = buildPostRequest(url, param);
@@ -113,8 +110,12 @@ public class OkHttpHelper {
                 Logger.d(baseResp.toString());
                 switch (response.code()) {
                     case 200:
-                        Object obj = mGson.fromJson(resultStr, callback.mType);
-                        callbackSuccess(callback, response, obj);
+                        if (callback.mType == String.class) {//返回数据为string类型
+                            callbackSuccess(callback, response, resultStr);
+                        } else {
+                            Object obj = mGson.fromJson(resultStr, callback.mType);
+                            callbackSuccess(callback, response, obj);
+                        }
                         break;
                     case TOKEN_ERROR:
                     case TOKEN_EXPIRE:
@@ -293,9 +294,6 @@ public class OkHttpHelper {
         if (params == null) {
             params = new HashMap<>(1);
         }
-        params.put("v", "1.0");
-        params.put("format", "json");
-        params.put("appkey", "biaoyue");
         Logger.d(params);
         StringBuffer sb = new StringBuffer();
         for (Map.Entry<String, Object> entry : params.entrySet()) {
@@ -317,9 +315,6 @@ public class OkHttpHelper {
     private RequestBody builderFormData(Map<String, Object> params) {
         FormEncodingBuilder builder = new FormEncodingBuilder();
         if (params != null) {
-            params.put("v", "1.0");
-            params.put("format", "json");
-            params.put("appkey", "biaoyue");
             Logger.d(params);
             for (Map.Entry<String, Object> entry : params.entrySet()) {
                 builder.add(entry.getKey(), entry.getValue() == null ? "" : entry.getValue().toString());

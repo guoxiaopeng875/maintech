@@ -13,10 +13,16 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+import com.xmkj.md.config.Constants;
+import com.xmkj.md.http.OkHttpHelper;
+import com.xmkj.md.http.SpotsCallback;
+import com.xmkj.md.model.RecommendCodeBean;
 import com.xmkj.md.widget.MyProgressDialog;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -36,8 +42,31 @@ public class MdHttpHelper {
     private static Gson mGson = new Gson();
     private static AppData mAppData = AppData.GetInstance(MyApplication.getContext());
 
+
+    public static void getRecommendCode(Context context, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        httpHelper.get(Constants.BASE_URL + Constants.RECOMMEND_CODE, null, new SpotsCallback<RecommendCodeBean>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, RecommendCodeBean recommendCodeBean) {
+                callback.onSuccess(recommendCodeBean.getData());
+            }
+        });
+    }
+
+    public static void setRecommendCode(Context context, String recommendedCode, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        String url = Constants.BASE_URL + Constants.SET_RECOMMEND_CODE + "?recommendedCode=" + recommendedCode;
+        httpHelper.post(url, null, new SpotsCallback<String>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, String json) {
+                callback.onSuccess(json);
+            }
+        });
+
+    }
+
     /**
-     * 22图片上传
+     * 图片上传
      *
      * @param context 上下文
      * @param path    图片上传到服务器后存储的地址
@@ -121,6 +150,10 @@ public class MdHttpHelper {
                 cb.onFailure();
             }
         });
+    }
+
+    public interface SuccessCallback<T> {
+        void onSuccess(T data);
     }
 
     /**

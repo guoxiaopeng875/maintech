@@ -92,35 +92,27 @@ public class Home extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_upcoming_home:
-                ToastUtils.showToast("待办事项");
                 AppUtils.jump2Next(getContext(), PendingItems.class);
                 break;
             case R.id.rl_mybusiness_home:
-                ToastUtils.showToast("我的业务");
                 AppUtils.jump2Next(getContext(), MyBusiness.class);
                 break;
             case R.id.rl_commission_home:
-                ToastUtils.showToast("我的佣金");
                 AppUtils.jump2Next(getContext(), MineInfo.class);
                 break;
             case R.id.rl_contact_home:
-                ToastUtils.showToast("通讯录");
-                AppUtils.jump2Next(getContext(), BeginApply.class);
+                AppUtils.jump2Next(getContext(), Contacts.class);
                 break;
             case R.id.rl_upcoming_flow:
-                ToastUtils.showToast("待办事项");
                 break;
             case R.id.rl_mybusiness_flow:
-                ToastUtils.showToast("我的业务");
                 AppUtils.jump2Next(getContext(), MyBusiness.class);
                 break;
             case R.id.rl_commission_flow:
-                ToastUtils.showToast("我的佣金");
                 AppUtils.jump2Next(getContext(), MineInfo.class);
                 break;
             case R.id.rl_contact_flow:
-                ToastUtils.showToast("通讯录");
-                AppUtils.jump2Next(getContext(), BeginApply.class);
+                AppUtils.jump2Next(getContext(), Contacts.class);
                 break;
         }
     }
