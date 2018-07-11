@@ -1,6 +1,6 @@
 package com.xmkj.md.utils;
 
-import com.xmkj.md.model.PendingItemsBean;
+import com.xmkj.md.model.OrderBean;
 import com.xmkj.md.model.SettleRecordBean;
 import com.xmkj.md.model.WithdrawRecordBean;
 
@@ -52,10 +52,10 @@ public class GenDataUtil {
         return records;
     }
 
-    public static List<PendingItemsBean> fakePendingItems() {
-        List<PendingItemsBean> items = new ArrayList<>();
+    public static List<OrderBean> fakePendingItems() {
+        List<OrderBean> items = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            PendingItemsBean item = new PendingItemsBean();
+            OrderBean item = new OrderBean();
             // 姓名
             String name = "傻吊" + i;
             // 代办日期
@@ -94,10 +94,10 @@ public class GenDataUtil {
         return items;
     }
 
-    public static List<PendingItemsBean> fakeAfterLoans() {
-        List<PendingItemsBean> items = new ArrayList<>();
+    public static List<OrderBean> fakeAfterLoans() {
+        List<OrderBean> items = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            PendingItemsBean item = new PendingItemsBean();
+            OrderBean item = new OrderBean();
             // 姓名
             String name = "傻吊" + i;
             // 代办日期
@@ -129,10 +129,10 @@ public class GenDataUtil {
         return items;
     }
 
-    public static List<PendingItemsBean> fakeOverdueFollow() {
-        List<PendingItemsBean> items = new ArrayList<>();
+    public static List<OrderBean> fakeOverdueFollow() {
+        List<OrderBean> items = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            PendingItemsBean item = new PendingItemsBean();
+            OrderBean item = new OrderBean();
             // 姓名
             String name = "傻吊" + i;
             // 代办日期

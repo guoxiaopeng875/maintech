@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xmkj.md.R;
-import com.xmkj.md.model.PendingItemsBean;
 import com.xmkj.md.model.WithdrawRecordBean;
 
 import java.util.List;

@@ -5,21 +5,21 @@ import android.support.annotation.Nullable;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xmkj.md.R;
-import com.xmkj.md.model.PendingItemsBean;
+import com.xmkj.md.model.OrderBean;
 
 import java.util.List;
 
 /**
  * 代办事项适配器
  */
-public class PendingItemsAdapter extends BaseQuickAdapter<PendingItemsBean, BaseViewHolder> {
+public class PendingItemsAdapter extends BaseQuickAdapter<OrderBean, BaseViewHolder> {
 
-    public PendingItemsAdapter(int layoutResId, @Nullable List<PendingItemsBean> data) {
+    public PendingItemsAdapter(int layoutResId, @Nullable List<OrderBean> data) {
         super(layoutResId, data);
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, PendingItemsBean item) {
+    protected void convert(BaseViewHolder helper, OrderBean item) {
         helper.setText(R.id.tv_name_pending, item.getCustomerName())
                 .setText(R.id.tv_date_pending, item.wrapCreateTime())
                 .setText(R.id.tv_loan_type_pending, item.getBusinessTypeName())

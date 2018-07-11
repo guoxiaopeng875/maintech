@@ -1,18 +1,24 @@
 package com.xmkj.md.ui.activity;
 
-import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.okhttp.Response;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
+import com.xmkj.md.config.Constants;
+import com.xmkj.md.http.OkHttpHelper;
+import com.xmkj.md.http.SpotsCallback;
+import com.xmkj.md.model.BaseResponseBean;
 import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.ToastUtils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -71,9 +77,23 @@ public class QuicklyApply extends BaseActivity {
         }
     }
 
-    // TODO 调用快速报单接口
+    // 调用快速报单接口
     private void doSubmit(String name, String code, String cellphone) {
-        ToastUtils.showToastStrings("提交意向", name, code, cellphone);
-        AppUtils.jump2Next(this, QuicklyApplySuccess.class);
+        if ("".equals(name) || "".equals(code) || "".equals(cellphone)) {
+            ToastUtils.showToastStrings("请填写完整信息");
+            return;
+        }
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(this);
+        Map<String, Object> params = new HashMap<>();
+        params.put("CustomerName", name);
+        params.put("Phone", cellphone);
+        params.put("RecommendedCode", code);
+        httpHelper.post(Constants.BASE_URL + "/AddExpressOrder", params, new SpotsCallback<BaseResponseBean>(this, "加载中") {
+
+            @Override
+            public void onSuccess(Response response, BaseResponseBean items) {
+                AppUtils.jump2Next(mContext, QuicklyApplySuccess.class);
+            }
+        });
     }
 }

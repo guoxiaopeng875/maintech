@@ -7,16 +7,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.squareup.okhttp.Response;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
+import com.xmkj.md.config.Constants;
+import com.xmkj.md.http.OkHttpHelper;
+import com.xmkj.md.http.SpotsCallback;
+import com.xmkj.md.model.BaseResponseBean;
 import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.StringUtils;
 import com.xmkj.md.utils.ToastUtils;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 /**
- * 客户信息
+ * 报单-客户信息
  */
 public class ApplyUserInfo extends BaseActivity {
 
@@ -29,8 +38,8 @@ public class ApplyUserInfo extends BaseActivity {
     EditText mEtNameApply;
     @BindView(R.id.et_cellphone_apply)
     EditText mEtCellphoneApply;
-    @BindView(R.id.et_customer_name_apply)
-    EditText mEtCustomerNameApply;
+    @BindView(R.id.et_customer_id_no)
+    EditText mEtCustomerIdNo;
     @BindView(R.id.btn_submit_user_info)
     Button mBtnSubmitUserInfo;
     // 提交按钮是否可以点击
@@ -55,7 +64,7 @@ public class ApplyUserInfo extends BaseActivity {
         OnTextChanged listener = new OnTextChanged();
         mEtCellphoneApply.addTextChangedListener(listener);
         mEtNameApply.addTextChangedListener(listener);
-        mEtCustomerNameApply.addTextChangedListener(listener);
+        mEtCustomerIdNo.addTextChangedListener(listener);
     }
 
     @OnClick({R.id.iv_back_user_info, R.id.btn_cancel_apply_info, R.id.btn_submit_user_info})
@@ -74,20 +83,39 @@ public class ApplyUserInfo extends BaseActivity {
         }
     }
 
-    // TODO 调用提交接口
+    // 调用提交接口
     private void onSubmit() {
         if (!btnClickable) {
             ToastUtils.showToast("请填写完整信息");
             return;
         }
-        ToastUtils.showToast("下一步");
+        String cellphone = mEtCellphoneApply.getText().toString();
+        if (!StringUtils.isPhoneNumberValid(cellphone)) {
+            ToastUtils.showToast("请输入正确手机号");
+            return;
+        }
+        // TODO orderID是前面一个页面传过来
+        String orderID = "";
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(this);
+        Map<String, Object> params = new HashMap<>();
+        params.put("OrderId", orderID);
+        params.put("CustomerName", mEtNameApply.getText().toString());
+        params.put("MobilePhone", cellphone);
+        params.put("IdCard", mEtCustomerIdNo.getText().toString());
+        httpHelper.post(Constants.BASE_URL + "/UpdateOrderConfirmed", params, new SpotsCallback<BaseResponseBean>(this, "加载中") {
+
+            @Override
+            public void onSuccess(Response response, BaseResponseBean items) {
+                ToastUtils.showToast("下一步");
+            }
+        });
     }
 
     // 改变提交按钮的样式
     private void changeSubBtn() {
         if (btnClickable) {
             mBtnSubmitUserInfo.setBackgroundResource(R.drawable.shape_btn_green);
-        }else {
+        } else {
             mBtnSubmitUserInfo.setBackgroundResource(R.drawable.shape_btn_gray);
         }
     }
@@ -96,7 +124,7 @@ public class ApplyUserInfo extends BaseActivity {
     private String[] getInputTexts() {
         String phone = mEtCellphoneApply.getText().toString();
         String name = mEtNameApply.getText().toString();
-        String cusName = mEtCustomerNameApply.getText().toString();
+        String cusName = mEtCustomerIdNo.getText().toString();
         return new String[]{name, phone, cusName};
     }
 

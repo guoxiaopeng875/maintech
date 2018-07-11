@@ -15,7 +15,7 @@
     <string name="apply_success">提交成功</string>
     <string name="cancel_apply">取消报单</string>
     <string name="user_info">客户信息</string>
-    <string name="title_user_name">户主姓名</string>
+    <string name="id_no">身份证号</string>
     <string name="next">下一步</string>
     <string name="business_process">业务办理</string>
     <string name="processing">办理中</string>
