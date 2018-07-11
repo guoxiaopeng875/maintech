@@ -106,7 +106,7 @@
             </LinearLayout>
 
             <View style="@style/line" />
-            <!--户主姓名-->
+            <!--身份证号-->
             <LinearLayout
                 style="@style/margin_start_x13"
                 android:layout_width="match_parent"
@@ -119,12 +119,12 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
-                    android:text="@string/title_user_name"
+                    android:text="@string/id_no"
                     android:textColor="@color/apply_user_name"
                     android:textSize="15.4sp" />
 
                 <EditText
-                    android:id="@+id/et_customer_name_apply"
+                    android:id="@+id/et_customer_id_no"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"

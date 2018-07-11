@@ -285,6 +285,7 @@ public class OkHttpHelper {
             builder.get();
         }
         if (!"".equals(mToken)) {
+            Logger.i(TAG + "mToken===" + mToken);
             builder.addHeader("Acount-Token-BYKJProjectSimplify", mToken);
         }
         return builder.build();

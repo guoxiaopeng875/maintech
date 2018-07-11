@@ -2,7 +2,6 @@ package com.xmkj.md.ui.activity;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.squareup.okhttp.Response;
@@ -12,14 +11,13 @@ import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
 import com.xmkj.md.model.DataBean;
-import com.xmkj.md.model.PendingItemsBean;
+import com.xmkj.md.model.OrderBean;
 import com.xmkj.md.ui.adapter.PendingItemsAdapter;
 import com.xmkj.md.utils.StatusBarSettingUtils;
 import com.xmkj.md.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -60,16 +58,13 @@ public class PendingItems extends BaseActivity {
     private void getPendItems(boolean isRefresh) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(this);
         Map<String, Object> params = new HashMap<>();
-        Map<String, Object> pageParams = new HashMap<>();
-        System.out.println(pageIndex + "");
-        Log.d("isRefresh", isRefresh + "");
-        pageParams.put("PageIndex", pageIndex);
-        pageParams.put("PageSize", PAGE_SIZE);
-        params.put("pageinfo", pageParams);
-        httpHelper.post(Constants.BASE_URL + "/GetUpcomingList", params, new SpotsCallback<DataBean<PendingItemsBean>>(this, "加载中") {
+        params.put("PageIndex", pageIndex);
+        params.put("PageSize", PAGE_SIZE);
+        params.put("PageTrem", new Object());
+        httpHelper.post(Constants.BASE_URL + "/GetUpcomingList", params, new SpotsCallback<DataBean<OrderBean>>(this, "加载中") {
 
             @Override
-            public void onSuccess(Response response, DataBean<PendingItemsBean> items) {
+            public void onSuccess(Response response, DataBean<OrderBean> items) {
                 if (isRefresh) {
                     mPendingItemsAdapter.setNewData(items.getData());
                     mSrlPending.finishRefresh();

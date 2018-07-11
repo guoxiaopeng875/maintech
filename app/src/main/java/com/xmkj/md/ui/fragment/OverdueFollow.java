@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
-import com.xmkj.md.model.PendingItemsBean;
+import com.xmkj.md.model.OrderBean;
 import com.xmkj.md.ui.adapter.PendingItemsAdapter;
 import com.xmkj.md.utils.GenDataUtil;
 import com.xmkj.md.utils.ToastUtils;
@@ -25,7 +25,7 @@ public class OverdueFollow extends BaseFragment {
     @BindView(R.id.srl_loan)
     SmartRefreshLayout mSrlLoan;
     private PendingItemsAdapter mPendingItemsAdapter;
-    private List<PendingItemsBean> mPendItems;
+    private List<OrderBean> mPendItems;
 
     @Override
     protected int getLayoutId() {
@@ -45,7 +45,7 @@ public class OverdueFollow extends BaseFragment {
     }
 
     // TODO 获取代办事项数据
-    private List<PendingItemsBean> getPendItems() {
+    private List<OrderBean> getPendItems() {
         return GenDataUtil.fakeOverdueFollow();
     }
 
