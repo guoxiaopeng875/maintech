@@ -1,17 +1,25 @@
 package com.xmkj.md.ui.fragment;
 
+import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.squareup.okhttp.Response;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
+import com.xmkj.md.config.Constants;
+import com.xmkj.md.http.OkHttpHelper;
+import com.xmkj.md.http.SpotsCallback;
+import com.xmkj.md.model.DataBean;
+import com.xmkj.md.model.LoanProcessBean;
 import com.xmkj.md.model.OrderBean;
-import com.xmkj.md.ui.adapter.PendingItemsAdapter;
-import com.xmkj.md.utils.GenDataUtil;
+import com.xmkj.md.ui.adapter.LoanProcessAdapter;
 import com.xmkj.md.utils.ToastUtils;
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 
@@ -24,8 +32,10 @@ public class LoanProcess extends BaseFragment {
     RecyclerView mRvLoan;
     @BindView(R.id.srl_loan)
     SmartRefreshLayout mSrlLoan;
-    private PendingItemsAdapter mPendingItemsAdapter;
-    private List<OrderBean> mPendItems;
+    private LoanProcessAdapter mLoanProcessAdapter;
+    private int pageIndex = 1;
+    private static final int PAGE_SIZE = 10;
+    private Context mContext;
 
     @Override
     protected int getLayoutId() {
@@ -38,45 +48,60 @@ public class LoanProcess extends BaseFragment {
 
     @Override
     public void initData() {
-        mPendItems = getPendItems();
-        mPendingItemsAdapter = new PendingItemsAdapter(R.layout.item_pending_view, mPendItems);
+        mContext = this.getContext();
+        mLoanProcessAdapter = new LoanProcessAdapter(R.layout.item_pending_view, new ArrayList<>());
         mRvLoan.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        mRvLoan.setAdapter(mPendingItemsAdapter);
+        mRvLoan.setAdapter(mLoanProcessAdapter);
+        mSrlLoan.autoRefresh();
     }
 
-    // TODO 获取代办事项数据
-    private List<OrderBean> getPendItems() {
-        return GenDataUtil.fakeAfterLoans();
+    // 获取贷后管理(待处理)列表
+    private void getProcessingList(boolean isRefresh) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(mContext);
+        Map<String, Object> params = new HashMap<>();
+        params.put("PageIndex", pageIndex);
+        params.put("PageSize", PAGE_SIZE);
+        params.put("PageTrem", new Object());
+        httpHelper.post(Constants.BASE_URL + "/GetPostloanList", params, new SpotsCallback<DataBean<LoanProcessBean>>(mContext, "加载中") {
+
+            @Override
+            public void onSuccess(Response response, DataBean<LoanProcessBean> items) {
+                if (isRefresh) {
+                    mLoanProcessAdapter.setNewData(items.getData());
+                    mSrlLoan.finishRefresh();
+                } else {
+                    mLoanProcessAdapter.addData(items.getData());
+                    mSrlLoan.finishLoadMore();
+                }
+            }
+        });
     }
 
     @Override
     public void setListener() {
-        if (mPendingItemsAdapter == null || mPendItems == null) return;
-        mPendingItemsAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-            ToastUtils.showToast(position + view.getId());
-            switch (view.getId()) {
-                case R.id.btn_status_pending:
-                    // TODO 根据按钮状态跳到不同页面
-//                    ToastUtils.showToast(mPendItems.get(position).getBtnStatus());
-                    break;
-            }
-        });
-        // 下拉刷新
-        mSrlLoan.setOnRefreshListener(refreshLayout -> onRefresh());
-        // 上拉加载更多
-        mSrlLoan.setOnLoadMoreListener(refreshLayout -> onLoadMore());
+        if (mLoanProcessAdapter != null) {
+            mLoanProcessAdapter.setOnItemChildClickListener((adapter, view, position) -> {
+                ToastUtils.showToast(position + view.getId());
+            });
+        }
+        if (mSrlLoan != null) {
+            // 下拉刷新
+            mSrlLoan.setOnRefreshListener(refreshLayout -> onRefresh());
+            // 上拉加载更多
+            mSrlLoan.setOnLoadMoreListener(refreshLayout -> onLoadMore());
+        }
     }
 
-    // TODO 刷新
+    // 刷新
     private void onRefresh() {
-        mPendingItemsAdapter.setNewData(getPendItems());
-        mSrlLoan.finishRefresh(1000);
+        pageIndex = 1;
+        getProcessingList(true);
     }
 
-    // TODO 上拉加载更多
+    // 上拉加载更多
     private void onLoadMore() {
-        mPendingItemsAdapter.addData(getPendItems());
-        mSrlLoan.finishLoadMore(1000);
+        pageIndex++;
+        getProcessingList(false);
     }
 
 }
