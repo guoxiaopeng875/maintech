@@ -4,6 +4,10 @@ import android.text.TextUtils;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -133,5 +137,18 @@ public class StringUtils {
         }
         NumberFormat nf = new DecimalFormat("#,###.##");
         return nf.format(Float.valueOf(amount));
+    }
+
+    public static String formatTime(String dateStr) {
+        String targetDate = "";
+        try {
+            SimpleDateFormat originFmt = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
+            Date date = originFmt.parse(dateStr);
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd", Locale.CHINA);
+            targetDate = sdf.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return targetDate;
     }
 }

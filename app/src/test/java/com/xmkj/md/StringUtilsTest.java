@@ -22,4 +22,9 @@ public class StringUtilsTest {
         str = StringUtils.numberFormat("10000.12");
         assertEquals("10,000.12", str);
     }
+    @Test
+    public void testFormatTime() {
+        String str = StringUtils.formatTime("2018-07-10T22:31:56");
+        assertEquals("2018.07.10", str);
+    }
 }

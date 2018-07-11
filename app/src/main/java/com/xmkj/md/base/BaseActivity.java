@@ -149,8 +149,6 @@ public abstract class BaseActivity extends SupportActivity {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                AppUtils.printLog("ACTION_DOWN");
-
                 View view = getCurrentFocus();
                 SoftInputUtil.hideKeyboard(ev, view, BaseActivity.this);
                 break;

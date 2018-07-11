@@ -57,7 +57,7 @@ public class LoanProcess extends BaseFragment {
             switch (view.getId()) {
                 case R.id.btn_status_pending:
                     // TODO 根据按钮状态跳到不同页面
-                    ToastUtils.showToast(mPendItems.get(position).getBtnStatus());
+//                    ToastUtils.showToast(mPendItems.get(position).getBtnStatus());
                     break;
             }
         });

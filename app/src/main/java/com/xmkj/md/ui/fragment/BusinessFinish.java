@@ -54,7 +54,7 @@ public class BusinessFinish extends BaseFragment {
         if (mPendingItemsAdapter == null || mPendItems == null) return;
         mPendingItemsAdapter.setOnItemClickListener((adapter, view, position) -> {
             // TODO 根据按钮状态跳到不同页面
-            ToastUtils.showToast(mPendItems.get(position).getName());
+//            ToastUtils.showToast(mPendItems.get(position).getName());
         });
         // 下拉刷新
         mSrlProcessing.setOnRefreshListener(refreshLayout -> onRefresh());

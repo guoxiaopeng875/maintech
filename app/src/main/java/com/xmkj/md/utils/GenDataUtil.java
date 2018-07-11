@@ -82,13 +82,13 @@ public class GenDataUtil {
                     loanStatus = "初审打回";
                     btnStatus = "上传资料";
             }
-            item.setBtnStatus(btnStatus);
-            item.setName(name);
-            item.setLoanDate(loanDate);
-            item.setLoanType(loanType);
-            item.setLoanStatus(loanStatus);
-            item.setLoanAmount("100000");
-            item.setBrokerAmount("20000000");
+//            item.setBtnStatus(btnStatus);
+//            item.setName(name);
+//            item.setLoanDate(loanDate);
+//            item.setLoanType(loanType);
+//            item.setLoanStatus(loanStatus);
+//            item.setLoanAmount("100000");
+//            item.setBrokerAmount("20000000");
             items.add(item);
         }
         return items;
@@ -117,13 +117,13 @@ public class GenDataUtil {
                     loanType = "车抵贷";
                     loanStatus = "其他跟进";
             }
-            item.setBtnStatus(btnStatus);
-            item.setName(name);
-            item.setLoanDate(loanDate);
-            item.setLoanType(loanType);
-            item.setLoanStatus(loanStatus);
-            item.setLoanAmount("100000");
-            item.setBrokerAmount("20000000");
+//            item.setBtnStatus(btnStatus);
+//            item.setName(name);
+//            item.setLoanDate(loanDate);
+//            item.setLoanType(loanType);
+//            item.setLoanStatus(loanStatus);
+//            item.setLoanAmount("100000");
+//            item.setBrokerAmount("20000000");
             items.add(item);
         }
         return items;
@@ -152,13 +152,13 @@ public class GenDataUtil {
                     loanType = "车抵贷";
                     loanStatus = "逾期12天";
             }
-            item.setBtnStatus(btnStatus);
-            item.setName(name);
-            item.setLoanDate(loanDate);
-            item.setLoanType(loanType);
-            item.setLoanStatus(loanStatus);
-            item.setLoanAmount("100000");
-            item.setBrokerAmount("20000000");
+//            item.setBtnStatus(btnStatus);
+//            item.setName(name);
+//            item.setLoanDate(loanDate);
+//            item.setLoanType(loanType);
+//            item.setLoanStatus(loanStatus);
+//            item.setLoanAmount("100000");
+//            item.setBrokerAmount("20000000");
             items.add(item);
         }
         return items;

@@ -20,11 +20,11 @@ public class PendingItemsAdapter extends BaseQuickAdapter<PendingItemsBean, Base
 
     @Override
     protected void convert(BaseViewHolder helper, PendingItemsBean item) {
-        helper.setText(R.id.tv_name_pending, item.getName())
-                .setText(R.id.tv_date_pending, item.getLoanDate())
-                .setText(R.id.tv_loan_type_pending, item.getLoanType())
-                .setText(R.id.tv_loan_status_pending, item.getLoanStatus())
-                .setText(R.id.btn_status_pending, item.getBtnStatus())
+        helper.setText(R.id.tv_name_pending, item.getCustomerName())
+                .setText(R.id.tv_date_pending, item.wrapCreateTime())
+                .setText(R.id.tv_loan_type_pending, item.getBusinessTypeName())
+                .setText(R.id.tv_loan_status_pending, item.getStatusName())
+                .setText(R.id.btn_status_pending, item.getBtnName())
                 .addOnClickListener(R.id.btn_status_pending);
     }
 

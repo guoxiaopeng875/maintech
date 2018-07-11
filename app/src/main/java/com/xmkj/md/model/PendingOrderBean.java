@@ -1,20 +1,22 @@
 package com.xmkj.md.model;
 
-import com.xmkj.md.utils.StringUtils;
-
 /**
- * 待办事项模型
+ * 作者: 郭晓鹏
+ * 时间: 2018/7/10
+ * 地点: 深圳
  */
-public class PendingItemsBean {
+
+public class PendingOrderBean {
+
     /**
      * OrderId : 5b44c35b6c95a312447ee52a
-     * CustomerName : 客户姓名
-     * PlatformName : 平台名称
-     * BusinessTypeName : 业务类型
+     * CustomerName : null
+     * PlatformName : null
+     * BusinessTypeName : null
      * CreateTime : 2018-07-10T22:31:56
      * Status : 0
-     * StatusName : 报单 状态
-     * BtnName : 上传资料    按钮状态
+     * StatusName : 报单
+     * BtnName : 上传资料
      */
 
     private String OrderId;
@@ -25,13 +27,6 @@ public class PendingItemsBean {
     private int Status;
     private String StatusName;
     private String BtnName;
-
-    public String wrapCreateTime() {
-        if (CreateTime == null) {
-            return "";
-        }
-        return StringUtils.formatTime(CreateTime);
-    }
 
     public String getOrderId() {
         return OrderId;
@@ -96,5 +91,4 @@ public class PendingItemsBean {
     public void setBtnName(String btnName) {
         BtnName = btnName;
     }
-
 }
