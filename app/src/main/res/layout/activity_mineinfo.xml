@@ -49,11 +49,11 @@
             android:textColor="@color/item_font_gray"/>
 
         <TextView
+            android:id="@+id/tv_name_mineinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:text="郭晓鹏"
             android:textSize="15sp"
             android:textColor="@color/item_font_gray"/>
     </RelativeLayout>
@@ -75,11 +75,12 @@
             android:textColor="@color/item_font_gray"/>
 
         <TextView
+            android:id="@+id/tv_phone_mineinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="13800138000"
+            android:text="undefind"
             android:textSize="15sp"
             android:textColor="@color/item_font_gray"/>
     </RelativeLayout>
@@ -99,13 +100,19 @@
             android:textSize="15sp"
             android:textColor="@color/item_font_gray"/>
 
-        <TextView
+        <EditText
+            android:id="@+id/et_tag_mineinfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/x20"
-            android:text="点击编辑"
+            android:singleLine="true"
+            android:maxLength="30"
+            android:hint="点击编辑"
+            android:textColorHint="@color/black54"
+            android:focusableInTouchMode="true"
             android:textSize="15sp"
-            android:textColor="@color/item_font_black"/>
+            android:textColor="@color/item_font_black"
+            android:background="@null"/>
     </LinearLayout>
 
     <Button
@@ -115,6 +122,7 @@
         android:layout_marginLeft="@dimen/x10"
         android:layout_marginRight="@dimen/x10"
         android:layout_marginTop="@dimen/x30"
+        android:cursorVisible="false"
         android:background="@drawable/selector_green_bt"
         android:layout_gravity="bottom"
         android:text="提交"

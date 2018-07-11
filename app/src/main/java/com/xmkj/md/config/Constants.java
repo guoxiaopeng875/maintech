@@ -11,6 +11,8 @@ public class Constants {
     public static final String LOGIN = "";//1登录
     public static final String RECOMMEND_CODE = "/GetRecommendedCode";
     public static final String SET_RECOMMEND_CODE = "/UpdateRecommendedCode";
+    public static final String MINE_INFO = "/GetMyProfileDetails";
+    public static final String SET_MINE_INFO = "/UpdateMyProfileDetails";
 
 
 
@@ -24,27 +26,11 @@ public class Constants {
     public static final String NoSDCardPermission = "需要访问内存卡权限，请开启！";
     public static final String NoPushPermission = "检测到您没有打开通知权限，是否去打开?";
 
-    /***订单中心3个fragment***/
-    public static final String FRAGMENT_RECEIVE = "已接受订单";
-    public static final String FRAGMENT_CHECK = "待悬赏方核实";
-    public static final String FRAGMENT_FINISH = "已结束订单";
 
-    /***我的钱包3个fragment***/
-    public static final String FRAGMENT_ALL = "全部";
-    public static final String FRAGMENT_INCOME = "收入";
-    public static final String FRAGMENT_DEPOSIT = "提现";
 
-    /***订单中心接口-3种订单状态***/
-    public static final String ORDER_CENTER_RECEIVE = "received";
-    public static final String ORDER_CENTER_RECOVER = "recovered";
-    public static final String ORDER_CENTER_END = "ended";
+    public static final int CODE_MINE_INFO = 0x000001;
 
-    /***认证状态-5***/
-    public static final String UNVERIFIED = "UNVERIFIED";//未认证
-    public static final String NO_BIND_BANK = "NO_BIND_BANK";//未绑定银行卡
-    public static final String UNDER_REVIEW = "UNDER_REVIEW";//认证审核中
-    public static final String PASS = "PASS";//认证审核通过
-    public static final String NO_PASS = "NO_PASS";//认证审核未通过
+
 
 
 }
