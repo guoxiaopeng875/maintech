@@ -1,5 +1,7 @@
 package com.xmkj.md.model;
 
+import com.xmkj.md.utils.StringUtils;
+
 /**
  * Created by 晴天 on 2018/7/11.
  */
@@ -44,6 +46,20 @@ public class MineInfoBean {
     private String CardBranch;
     private String CardHost;
     private String CardNumber;
+
+    public String wrapRealName() {
+        if (RealName == null) {
+            return "";
+        }
+        return StringUtils.formatName(RealName);
+    }
+
+    public String wrapPhone() {
+        if (Phone == null) {
+            return "";
+        }
+        return StringUtils.formatCellphone(Phone);
+    }
 
     public String getUserId() {
         return UserId;

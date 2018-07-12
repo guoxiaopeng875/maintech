@@ -151,4 +151,19 @@ public class StringUtils {
         }
         return targetDate;
     }
+
+    public static String formatName(String name) {
+        if (name.length() < 2) {
+            return name;
+        }
+        return name.substring(0, 1) + " " + name.substring(1);
+    }
+
+    public static String formatCellphone(String phone) {
+        if (phone.length() < 11) {
+            return phone;
+        }
+        String blankStr = " ";
+        return phone.substring(0, 3) + blankStr + phone.substring(3, 7) + blankStr + phone.substring(7);
+    }
 }

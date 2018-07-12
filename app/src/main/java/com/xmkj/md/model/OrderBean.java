@@ -29,6 +29,20 @@ public class OrderBean {
     private String PayAmount;
     // 佣金提成
     private String CommissionMoney;
+    // 逾期天数
+    private int LiquidatedDay;
+
+    public String wrapOverdueDay() {
+        return "逾期 " + LiquidatedDay + " 天";
+    }
+
+    public int getLiquidatedDay() {
+        return LiquidatedDay;
+    }
+
+    public void setLiquidatedDay(int liquidatedDay) {
+        LiquidatedDay = liquidatedDay;
+    }
 
     public String getPayAmount() {
         return PayAmount;

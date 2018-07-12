@@ -15,6 +15,7 @@ import com.xmkj.md.ui.activity.RecommendCode;
 import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.EventBusUtil;
 import com.xmkj.md.utils.MdHttpHelper;
+import com.xmkj.md.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,7 +40,6 @@ public class Mine extends BaseFragment {
 
     private MineInfoBean mMineInfoData;
 
-
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_mine;
@@ -60,13 +60,30 @@ public class Mine extends BaseFragment {
 
     }
 
+    // 切换fragment时刷新数据
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        // 显示时刷新页面
+        if (!hidden) {
+            getMineInfo();
+        }
+    }
+
+    // 跳转页面，返回时刷新数据
+    @Override
+    public void onResume() {
+        super.onResume();
+        getMineInfo();
+    }
+
     private void getMineInfo() {
         MdHttpHelper.getMineInfo(getContext(), new MdHttpHelper.SuccessCallback<MineInfoBean>() {
             @Override
             public void onSuccess(MineInfoBean data) {
                 mMineInfoData = data;
-                mTvName.setText(data.getRealName());
-                mTvPhone.setText(data.getPhone());
+                mTvName.setText(data.wrapRealName());
+                mTvPhone.setText(data.wrapPhone());
                 mTvCode.setText(data.getPromotionCode());
                 mTvTag.setText(data.getEnunciation());
             }

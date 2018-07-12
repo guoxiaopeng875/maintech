@@ -27,4 +27,18 @@ public class StringUtilsTest {
         String str = StringUtils.formatTime("2018-07-10T22:31:56");
         assertEquals("2018.07.10", str);
     }
+    @Test
+    public void testFormatName() {
+        String str = StringUtils.formatName("郭晓鹏");
+        assertEquals("郭 晓鹏", str);
+        str = StringUtils.formatName("郭");
+        assertEquals("郭", str);
+    }
+    @Test
+    public void testFormatCellphone() {
+        String str = StringUtils.formatCellphone("134123");
+        assertEquals("134123", str);
+        str = StringUtils.formatCellphone("13888888888");
+        assertEquals("138 8888 8888", str);
+    }
 }
