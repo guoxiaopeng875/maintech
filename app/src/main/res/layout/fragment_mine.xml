@@ -51,7 +51,6 @@
                         android:id="@+id/tv_name_mine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="李 丽丽"
                         android:textColor="@color/white"
                         android:textSize="18.7sp"
                         android:textStyle="bold" />
@@ -81,7 +80,6 @@
                         android:id="@+id/tv_phone_mine"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="134 8888 8888"
                         android:textColor="@color/white"
                         android:textSize="18.7sp" />
 
@@ -90,7 +88,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/x3"
-                        android:text="6666666"
                         android:textColor="@color/white"
                         android:textSize="15.4sp"
                         android:textStyle="bold" />
@@ -111,13 +108,13 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_sign_mine"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="@dimen/x2"
                     android:layout_marginEnd="@dimen/x3"
                     android:layout_marginStart="@dimen/x3"
                     android:gravity="center_vertical"
-                    android:text="啊啊啊啊啊啊啊啊啊啊"
                     android:textColor="@color/white"
                     android:textSize="13.2sp" />
 

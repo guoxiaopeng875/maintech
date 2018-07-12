@@ -10,7 +10,7 @@ import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
-import com.xmkj.md.model.DataBean;
+import com.xmkj.md.model.DataListBean;
 import com.xmkj.md.model.OrderBean;
 import com.xmkj.md.ui.adapter.PendingItemsAdapter;
 import com.xmkj.md.utils.StatusBarSettingUtils;
@@ -61,10 +61,10 @@ public class PendingItems extends BaseActivity {
         params.put("PageIndex", pageIndex);
         params.put("PageSize", PAGE_SIZE);
         params.put("PageTrem", new Object());
-        httpHelper.post(Constants.BASE_URL + "/GetUpcomingList", params, new SpotsCallback<DataBean<OrderBean>>(this, "加载中") {
+        httpHelper.post(Constants.BASE_URL + "/GetUpcomingList", params, new SpotsCallback<DataListBean<OrderBean>>(this, "加载中") {
 
             @Override
-            public void onSuccess(Response response, DataBean<OrderBean> items) {
+            public void onSuccess(Response response, DataListBean<OrderBean> items) {
                 if (isRefresh) {
                     mPendingItemsAdapter.setNewData(items.getData());
                     mSrlPending.finishRefresh();

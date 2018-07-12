@@ -11,9 +11,8 @@ import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
-import com.xmkj.md.model.DataBean;
+import com.xmkj.md.model.DataListBean;
 import com.xmkj.md.model.LoanProcessBean;
-import com.xmkj.md.model.OrderBean;
 import com.xmkj.md.ui.adapter.LoanProcessAdapter;
 import com.xmkj.md.utils.ToastUtils;
 
@@ -62,10 +61,10 @@ public class LoanProcess extends BaseFragment {
         params.put("PageIndex", pageIndex);
         params.put("PageSize", PAGE_SIZE);
         params.put("PageTrem", new Object());
-        httpHelper.post(Constants.BASE_URL + "/GetPostloanList", params, new SpotsCallback<DataBean<LoanProcessBean>>(mContext, "加载中") {
+        httpHelper.post(Constants.BASE_URL + "/GetPostloanList", params, new SpotsCallback<DataListBean<LoanProcessBean>>(mContext, "加载中") {
 
             @Override
-            public void onSuccess(Response response, DataBean<LoanProcessBean> items) {
+            public void onSuccess(Response response, DataListBean<LoanProcessBean> items) {
                 if (isRefresh) {
                     mLoanProcessAdapter.setNewData(items.getData());
                     mSrlLoan.finishRefresh();

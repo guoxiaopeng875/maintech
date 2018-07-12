@@ -9,7 +9,7 @@ import java.util.List;
  * data数组
  */
 
-public class DataBean<T> {
+public class DataListBean<T> {
 
     /**
      * Success : true

@@ -11,16 +11,13 @@ import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
-import com.xmkj.md.model.DataBean;
+import com.xmkj.md.model.DataListBean;
 import com.xmkj.md.model.OrderBean;
 import com.xmkj.md.ui.adapter.BusinessFinishAdapter;
-import com.xmkj.md.ui.adapter.PendingItemsAdapter;
-import com.xmkj.md.utils.GenDataUtil;
 import com.xmkj.md.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -64,10 +61,10 @@ public class BusinessFinish extends BaseFragment {
         params.put("PageIndex", pageIndex);
         params.put("PageSize", PAGE_SIZE);
         params.put("PageTrem", new Object());
-        httpHelper.post(Constants.BASE_URL + "/GetOrderOverList", params, new SpotsCallback<DataBean<OrderBean>>(mContext, "加载中") {
+        httpHelper.post(Constants.BASE_URL + "/GetOrderOverList", params, new SpotsCallback<DataListBean<OrderBean>>(mContext, "加载中") {
 
             @Override
-            public void onSuccess(Response response, DataBean<OrderBean> items) {
+            public void onSuccess(Response response, DataListBean<OrderBean> items) {
                 if (isRefresh) {
                     mPendingItemsAdapter.setNewData(items.getData());
                     mSrlProcessing.finishRefresh();
