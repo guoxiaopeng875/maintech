@@ -4,6 +4,7 @@ import android.view.View;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
+import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.RecommendCodeBean;
 import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.ToastUtils;
@@ -49,9 +50,9 @@ public class RecommendCode extends BaseActivity {
     }
 
     private void setCode(String code) {
-        MdHttpHelper.setRecommendCode(this, code, new MdHttpHelper.SuccessCallback<String>() {
+        MdHttpHelper.setRecommendCode(this, code, new MdHttpHelper.SuccessCallback<BaseBean>() {
             @Override
-            public void onSuccess(String data) {
+            public void onSuccess(BaseBean data) {
                 ToastUtils.showToast(RecommendCode.this,"设置成功");
                 finish();
             }

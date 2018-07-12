@@ -16,6 +16,8 @@ import com.squareup.okhttp.Response;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
+import com.xmkj.md.model.BaseBean;
+import com.xmkj.md.model.MineInfoBean;
 import com.xmkj.md.model.RecommendCodeBean;
 import com.xmkj.md.widget.MyProgressDialog;
 
@@ -43,6 +45,12 @@ public class MdHttpHelper {
     private static AppData mAppData = AppData.GetInstance(MyApplication.getContext());
 
 
+    /**
+     * 获取推荐码
+     *
+     * @param context  the context
+     * @param callback the callback
+     */
     public static void getRecommendCode(Context context, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         httpHelper.get(Constants.BASE_URL + Constants.RECOMMEND_CODE, null, new SpotsCallback<RecommendCodeBean>(context, MSG_LOADING) {
@@ -53,16 +61,75 @@ public class MdHttpHelper {
         });
     }
 
+    /**
+     * 设置推荐码
+     *
+     * @param context         the context
+     * @param recommendedCode the recommended code
+     * @param callback        the callback
+     */
     public static void setRecommendCode(Context context, String recommendedCode, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         String url = Constants.BASE_URL + Constants.SET_RECOMMEND_CODE + "?recommendedCode=" + recommendedCode;
-        httpHelper.post(url, null, new SpotsCallback<String>(context, MSG_LOADING) {
+        httpHelper.post(url, null, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
             @Override
-            public void onSuccess(Response response, String json) {
-                callback.onSuccess(json);
+            public void onSuccess(Response response, BaseBean baseBean) {
+                if (baseBean.isSuccess()) {
+                    callback.onSuccess(baseBean);
+                    return;
+                }
+                ToastUtils.showToast(context, baseBean.getMessage());
             }
         });
+    }
 
+    /**
+     * 我的资料
+     *
+     * @param context  the context
+     * @param callback the callback
+     */
+    public static void getMineInfo(Context context, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        String url = Constants.BASE_URL + Constants.MINE_INFO;
+        httpHelper.post(url, new HashMap<>(), new SpotsCallback<BaseBean<MineInfoBean>>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean<MineInfoBean> dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 修改我的资料
+     *
+     * @param context  the context
+     * @param name     the name
+     * @param phone    the phone
+     * @param tag      the tag
+     * @param callback the callback
+     */
+    public static void setMineInfo(Context context, String name, String phone,
+                                   String tag, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("Name", name);
+        params.put("Phone", phone);
+        params.put("signature", tag);
+        httpHelper.post(Constants.BASE_URL + Constants.SET_MINE_INFO, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
     }
 
     /**

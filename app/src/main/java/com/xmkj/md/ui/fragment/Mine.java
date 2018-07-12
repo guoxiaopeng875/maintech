@@ -1,29 +1,23 @@
 package com.xmkj.md.ui.fragment;
 
-import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
-import com.squareup.okhttp.Response;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.config.Constants;
-import com.xmkj.md.http.OkHttpHelper;
-import com.xmkj.md.http.SpotsCallback;
-import com.xmkj.md.model.DataListBean;
-import com.xmkj.md.model.ProfileBean;
+import com.xmkj.md.model.MessageEvent;
+import com.xmkj.md.model.MineInfoBean;
 import com.xmkj.md.ui.activity.Contacts;
 import com.xmkj.md.ui.activity.MineInfo;
 import com.xmkj.md.ui.activity.MyCommission;
 import com.xmkj.md.ui.activity.RecommendCode;
 import com.xmkj.md.utils.AppUtils;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.xmkj.md.utils.EventBusUtil;
+import com.xmkj.md.utils.MdHttpHelper;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import butterknife.Unbinder;
 
 /**
  * 我的
@@ -35,15 +29,16 @@ import butterknife.Unbinder;
 public class Mine extends BaseFragment {
 
     @BindView(R.id.tv_name_mine)
-    TextView mTvNameMine;
+    TextView mTvName;
     @BindView(R.id.tv_phone_mine)
-    TextView mTvPhoneMine;
+    TextView mTvPhone;
     @BindView(R.id.tv_code_mine)
-    TextView mTvCodeMine;
-    @BindView(R.id.tv_sign_mine)
-    TextView mTvSignMine;
-    Unbinder unbinder;
-    private Context mContext;
+    TextView mTvCode;
+    @BindView(R.id.tv_tag_mine)
+    TextView mTvTag;
+
+    private MineInfoBean mMineInfoData;
+
 
     @Override
     protected int getLayoutId() {
@@ -57,25 +52,25 @@ public class Mine extends BaseFragment {
 
     @Override
     protected void initData() {
-        mContext = getContext();
-    }
-
-    // 获取我的资料数据
-    private void getProfileData() {
-        OkHttpHelper httpHelper = OkHttpHelper.getInstance(mContext);
-        Map<String, Object> params = new HashMap<>();
-        httpHelper.post(Constants.BASE_URL + "/GetMyProfileDetails", params, new SpotsCallback<DataListBean<ProfileBean>>(mContext, "加载中") {
-
-            @Override
-            public void onSuccess(Response response, DataListBean<ProfileBean> profileData) {
-//                mTvNameMine.setText(profileData.getData().);
-            }
-        });
+        getMineInfo();
     }
 
     @Override
     public void setListener() {
 
+    }
+
+    private void getMineInfo() {
+        MdHttpHelper.getMineInfo(getContext(), new MdHttpHelper.SuccessCallback<MineInfoBean>() {
+            @Override
+            public void onSuccess(MineInfoBean data) {
+                mMineInfoData = data;
+                mTvName.setText(data.getRealName());
+                mTvPhone.setText(data.getPhone());
+                mTvCode.setText(data.getPromotionCode());
+                mTvTag.setText(data.getEnunciation());
+            }
+        });
     }
 
     @OnClick({R.id.ll_commission_mine, R.id.ll_contacts_mine, R.id.ll_mine_info_mine, R.id.ll_recommend_code_mine})
@@ -88,6 +83,8 @@ public class Mine extends BaseFragment {
                 AppUtils.jump2Next(getActivity(), Contacts.class);
                 break;
             case R.id.ll_mine_info_mine://我的资料
+                MessageEvent messageEvent = new MessageEvent(Constants.CODE_MINE_INFO, mMineInfoData);
+                EventBusUtil.sendStickyEvent(messageEvent);
                 AppUtils.jump2Next(getActivity(), MineInfo.class);
                 break;
             case R.id.ll_recommend_code_mine://推荐码
