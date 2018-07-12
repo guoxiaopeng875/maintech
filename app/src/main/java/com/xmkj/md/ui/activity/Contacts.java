@@ -10,6 +10,7 @@ import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.model.ContactsBean;
 import com.xmkj.md.ui.adapter.ContactsAdapter;
 import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.StatusBarSettingUtils;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class Contacts extends BaseActivity {
     RecyclerView mRv;
 
     private ContactsAdapter mContactsAdapter;
+    private int mCurrentPage;
 
     @Override
     protected int getLayoutId() {
@@ -42,13 +44,13 @@ public class Contacts extends BaseActivity {
     @Override
     public void initData() {
         List<ContactsBean> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            ContactsBean contactsBean = new ContactsBean();
-            contactsBean.setName("郭小鹏");
-            contactsBean.setMobile("13800138000");
-            contactsBean.setType("CTO");
-            list.add(contactsBean);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            ContactsBean contactsBean = new ContactsBean();
+//            contactsBean.setName("郭小鹏");
+//            contactsBean.setMobile("13800138000");
+//            contactsBean.setType("CTO");
+//            list.add(contactsBean);
+//        }
         mContactsAdapter = new ContactsAdapter(R.layout.item_contacts_view, list);
         mContactsAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
@@ -62,11 +64,21 @@ public class Contacts extends BaseActivity {
         });
         mRv.setLayoutManager(new LinearLayoutManager(this));
         mRv.setAdapter(mContactsAdapter);
+        getContacts();
     }
 
     @Override
     public void setListener() {
 
+    }
+
+    private void getContacts(){
+        MdHttpHelper.getContacts(this, mCurrentPage, new MdHttpHelper.SuccessCallback() {
+            @Override
+            public void onSuccess(Object data) {
+
+            }
+        });
     }
 
     @OnClick(R.id.ib_back_contacts)

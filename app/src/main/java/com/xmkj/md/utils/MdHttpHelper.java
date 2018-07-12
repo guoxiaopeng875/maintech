@@ -17,6 +17,7 @@ import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
 import com.xmkj.md.model.BaseBean;
+import com.xmkj.md.model.HomeDataBean;
 import com.xmkj.md.model.MineInfoBean;
 import com.xmkj.md.model.RecommendCodeBean;
 import com.xmkj.md.widget.MyProgressDialog;
@@ -24,6 +25,7 @@ import com.xmkj.md.widget.MyProgressDialog;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -121,6 +123,37 @@ public class MdHttpHelper {
         params.put("Phone", phone);
         params.put("signature", tag);
         httpHelper.post(Constants.BASE_URL + Constants.SET_MINE_INFO, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+    public static void getHome(Context context,SuccessCallback callback){
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        httpHelper.post(Constants.BASE_URL + Constants.HOME, null, new SpotsCallback<BaseBean<List<HomeDataBean>>>(context, MSG_UPLOAD) {
+            @Override
+            public void onSuccess(Response response, BaseBean<List<HomeDataBean>> dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+    public static void getContacts(Context context,int currentPage,SuccessCallback callback){
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String,Object> params = new HashMap<>();
+        params.put("PageIndex",currentPage);
+        params.put("PageSize",20);
+        httpHelper.post(Constants.BASE_URL + Constants.CONTACTS, null, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {

@@ -6,9 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
 import com.xmkj.md.R;
-import com.xmkj.md.model.HomeListBean;
+import com.xmkj.md.model.HomeDataBean;
+import com.xmkj.md.utils.ToastUtils;
 
 import java.util.List;
 
@@ -24,22 +27,13 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private LayoutInflater layoutInflater;
-    private Context context;
-    private List<HomeListBean> mList;
+    private Context mContext;
+    private List<HomeDataBean> mList;
 
-    public HomeAdapter(Context context, List<HomeListBean> list) {
+    public HomeAdapter(Context context, List<HomeDataBean> list) {
         layoutInflater = LayoutInflater.from(context);
-        context = context;
+        mContext = context;
         mList = list;
-        for (int i = 0; i < 10; i++) {
-            HomeListBean homeListBean = new HomeListBean();
-            if (i % 2 == 0) {
-                homeListBean.setType(0);
-            } else {
-                homeListBean.setType(1);
-            }
-            mList.add(homeListBean);
-        }
     }
 
     @Override
@@ -63,6 +57,13 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (mList.get(position).getType() == 0) {
+            ((LeftViewHolder) holder).tvTitle.setText(mList.get(position).getTitle());
+            ((LeftViewHolder) holder).tvContent.setText(mList.get(position).getContent());
+        } else {
+            ((RightViewHolder) holder).tvTitle.setText(mList.get(position).getTitle());
+            ((RightViewHolder) holder).tvContent.setText(mList.get(position).getContent());
+        }
         switch (position) {
             case 0:
                 ((LeftViewHolder) holder).ivNum.setImageResource(R.mipmap.num_01);
@@ -97,30 +98,34 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             default:
                 break;
         }
-//        if (holder instanceof LeftViewHolder) {
-//            ((LeftViewHolder) holder).ivNum.setText(contents.get(position).getMessage());
-//        } else if (holder instanceof RightViewHolder) {
-//            ((RightViewHolder) holder).ivNum.setText(contents.get(position).getMessage());
-//        }
+
     }
 
     public static class LeftViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView ivNum;
+        public TextView tvTitle;
+        public TextView tvContent;
 
         public LeftViewHolder(View v) {
             super(v);
             ivNum = v.findViewById(R.id.iv_num_textleft);
+            tvTitle = v.findViewById(R.id.tv_title_left);
+            tvContent = v.findViewById(R.id.tv_content_left);
         }
     }
 
     public static class RightViewHolder extends RecyclerView.ViewHolder {
 
         public ImageView ivNum;
+        public TextView tvTitle;
+        public TextView tvContent;
 
         public RightViewHolder(View v) {
             super(v);
             ivNum = v.findViewById(R.id.iv_num_textright);
+            tvTitle = v.findViewById(R.id.tv_title_right);
+            tvContent = v.findViewById(R.id.tv_content_right);
         }
     }
 

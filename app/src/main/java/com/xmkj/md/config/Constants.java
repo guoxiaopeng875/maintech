@@ -13,6 +13,8 @@ public class Constants {
     public static final String SET_RECOMMEND_CODE = "/UpdateRecommendedCode";
     public static final String MINE_INFO = "/GetMyProfileDetails";
     public static final String SET_MINE_INFO = "/UpdateMyProfileDetails";
+    public static final String HOME = "/GetHomeInformation";
+    public static final String CONTACTS = "/GetContacts";
 
 
 

@@ -11,6 +11,7 @@ import android.widget.ScrollView;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
+import com.xmkj.md.model.HomeDataBean;
 import com.xmkj.md.model.HomeListBean;
 import com.xmkj.md.ui.activity.Achievement;
 import com.xmkj.md.ui.activity.ApplyUserInfo;
@@ -28,6 +29,7 @@ import com.xmkj.md.ui.activity.RecommendCode;
 import com.xmkj.md.ui.activity.UpLoadInfo;
 import com.xmkj.md.ui.adapter.HomeAdapter;
 import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.StatusBarSettingUtils;
 import com.xmkj.md.utils.ToastUtils;
 
@@ -51,6 +53,9 @@ public class Home extends BaseFragment {
     @BindView(R.id.rv_home)
     RecyclerView mRv;
 
+    private List<HomeDataBean> mList = new ArrayList<>();
+    private HomeAdapter mHomeAdapter;
+
 
     @Override
     protected int getLayoutId() {
@@ -65,9 +70,10 @@ public class Home extends BaseFragment {
     @Override
     protected void initData() {
         mRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        List<HomeListBean> list = new ArrayList<>();
-        mRv.setAdapter(new HomeAdapter(getContext(), list));
+        mHomeAdapter = new HomeAdapter(getContext(),mList);
+        mRv.setAdapter(mHomeAdapter);
         mRv.setNestedScrollingEnabled(false);
+        getHomeData();
     }
 
     @Override
@@ -86,6 +92,24 @@ public class Home extends BaseFragment {
                 }
             });
         }
+    }
+
+    private void getHomeData(){
+        MdHttpHelper.getHome(getContext(), new MdHttpHelper.SuccessCallback<List<HomeDataBean>>() {
+            @Override
+            public void onSuccess(List<HomeDataBean> list) {
+                mList.clear();
+                mList.addAll(list);
+                for (int i = 0; i < mList.size(); i++) {
+                    if (i % 2 == 0) {
+                        mList.get(i).setType(0);
+                    } else {
+                        mList.get(i).setType(1);
+                    }
+                }
+                mHomeAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @OnClick({R.id.rl_upcoming_home, R.id.rl_mybusiness_home, R.id.rl_commission_home, R.id.rl_contact_home, R.id.rl_upcoming_flow, R.id.rl_mybusiness_flow, R.id.rl_commission_flow, R.id.rl_contact_flow})
@@ -116,4 +140,7 @@ public class Home extends BaseFragment {
                 break;
         }
     }
+
+
+
 }

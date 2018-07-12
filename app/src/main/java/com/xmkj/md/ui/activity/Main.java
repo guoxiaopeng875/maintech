@@ -11,7 +11,7 @@ import com.xmkj.md.ui.fragment.AfterLoan;
 import com.xmkj.md.ui.fragment.BusinessProcess;
 import com.xmkj.md.ui.fragment.Home;
 import com.xmkj.md.ui.fragment.Mine;
-import com.xmkj.md.ui.fragment.TestFragment;
+import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.StatusBarSettingUtils;
 import com.xmkj.md.utils.ToastUtils;
 
@@ -95,9 +95,8 @@ public class Main extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tab_post_icon:
-                ToastUtils.showToast(Main.this, "接单页面");
-//                AppUtils.jump2Next(Main.this,AddOrder.class);
-//                this.overridePendingTransition(R.anim.activity_open, R.anim.activity_noanimate);
+                AppUtils.jump2Next(Main.this, BeginApply.class);
+                this.overridePendingTransition(R.anim.activity_open, R.anim.activity_noanimate);
                 break;
         }
     }

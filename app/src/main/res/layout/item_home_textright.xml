@@ -33,19 +33,19 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tv_title_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:text="德玛西亚"
                     android:textColor="@color/item_font_black"
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tv_content_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/x5"
-                    android:text="的那开了大姐夫拉克的叫法"
                     android:textColor="@color/item_font_gray"
                     android:textSize="15sp" />
             </LinearLayout>
