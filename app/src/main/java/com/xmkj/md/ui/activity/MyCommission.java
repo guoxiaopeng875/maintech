@@ -1,17 +1,26 @@
 package com.xmkj.md.ui.activity;
 
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.example.zhouwei.library.CustomPopWindow;
+import com.squareup.okhttp.Response;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
+import com.xmkj.md.config.Constants;
+import com.xmkj.md.http.OkHttpHelper;
+import com.xmkj.md.http.SpotsCallback;
+import com.xmkj.md.model.BaseBean;
+import com.xmkj.md.model.CommissionBean;
 import com.xmkj.md.utils.AppUtils;
-import com.xmkj.md.utils.PopWinUtil;
-import com.xmkj.md.utils.ToastUtils;
 
+import java.util.HashMap;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -20,6 +29,12 @@ import butterknife.OnClick;
 public class MyCommission extends BaseActivity {
 
 
+    @BindView(R.id.tv_balance_commission)
+    TextView mTvBalanceCommission;
+    @BindView(R.id.tv_withdraw_amount)
+    TextView mTvWithdrawAmount;
+    @BindView(R.id.tv_settle_amount)
+    TextView mTvSettleAmount;
     private CustomPopWindow mCustomPopWindow;
 
     @Override
@@ -33,6 +48,26 @@ public class MyCommission extends BaseActivity {
 
     @Override
     public void initData() {
+        getCommissionData();
+    }
+
+    private void getCommissionData() {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(this);
+        String url = Constants.BASE_URL + "/GetMyCommission";
+        httpHelper.post(url, new HashMap<>(), new SpotsCallback<BaseBean<CommissionBean>>(this, "加载中") {
+            @Override
+            public void onSuccess(Response response, BaseBean<CommissionBean> dataBean) {
+                mTvBalanceCommission.setText(dataBean.getData().wrapRealSurplus());
+                mTvWithdrawAmount.setText(dataBean.getData().wrapWithdrawSurplus());
+                mTvSettleAmount.setText(dataBean.getData().wrapSettleSurplus());
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getCommissionData();
     }
 
     @Override
@@ -79,4 +114,5 @@ public class MyCommission extends BaseActivity {
         };
         popView.findViewById(R.id.btn_bind_card_popup).setOnClickListener(listener);
     }
+
 }

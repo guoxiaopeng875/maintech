@@ -52,11 +52,11 @@
                 android:textSize="23sp" />
 
             <TextView
+                android:id="@+id/tv_balance_commission"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/x10"
                 android:layout_marginTop="@dimen/x13"
-                android:text="943,999.50"
                 android:textColor="@color/white"
                 android:textSize="37sp"
                 android:textStyle="bold" />
@@ -119,7 +119,6 @@
                     android:layout_below="@id/tv_withdraw_status"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/x8"
-                    android:text="￥ 13,100.50"
                     android:textColor="@color/black87"
                     android:textSize="21sp"
                     android:textStyle="bold" />
@@ -181,7 +180,6 @@
                     android:layout_below="@id/tv_settle_status"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/x8"
-                    android:text="￥ 13,100.50"
                     android:textColor="@color/black87"
                     android:textSize="21sp"
                     android:textStyle="bold" />

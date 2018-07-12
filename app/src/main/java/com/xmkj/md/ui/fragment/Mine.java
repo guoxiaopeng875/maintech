@@ -15,7 +15,6 @@ import com.xmkj.md.ui.activity.RecommendCode;
 import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.EventBusUtil;
 import com.xmkj.md.utils.MdHttpHelper;
-import com.xmkj.md.utils.ToastUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
