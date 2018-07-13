@@ -12,6 +12,7 @@ import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
+import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.UserBean;
 import com.xmkj.md.utils.AppData;
 import com.xmkj.md.utils.AppUtils;
@@ -51,12 +52,12 @@ public class Login extends BaseActivity {
         Map<String, Object> params = new HashMap<>();
         params.put("userName", account);
         params.put("password", pwd);
-        httpHelper.post(Constants.BASE_URL + "/Login", params, new SpotsCallback<UserBean>(this, "登录中") {
+        httpHelper.post(Constants.BASE_URL + "/Login", params, new SpotsCallback<BaseBean<UserBean>>(this, "登录中") {
 
             @Override
-            public void onSuccess(Response response, UserBean user) {
+            public void onSuccess(Response response, BaseBean<UserBean> user) {
                 // 设置token
-                AppData.GetInstance(mContext).setAccessToken(user.getData().getUserInfo().getToken());
+                AppData.GetInstance(mContext).setAccessToken(user.getData().getToken());
                 AppUtils.jump2Next(Login.this, Main.class);
             }
         });

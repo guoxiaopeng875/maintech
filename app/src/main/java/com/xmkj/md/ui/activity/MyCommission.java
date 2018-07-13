@@ -13,9 +13,12 @@ import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
+import com.xmkj.md.model.BankCardBean;
 import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.CommissionBean;
+import com.xmkj.md.model.MessageEvent;
 import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.EventBusUtil;
 
 import java.util.HashMap;
 
@@ -82,16 +85,7 @@ public class MyCommission extends BaseActivity {
                 break;
             case R.id.btn_withdraw:
                 // 佣金提现
-                View popView = View.inflate(this, R.layout.popup_withdraw, null);
-                handlePopupBtn(popView);
-                mCustomPopWindow = new CustomPopWindow.PopupWindowBuilder(this)
-                        .size(ViewGroup.LayoutParams.MATCH_PARENT,
-                                ViewGroup.LayoutParams.WRAP_CONTENT)
-                        .setView(popView)
-                        .enableBackgroundDark(true) //弹出popWindow时，背景是否变暗
-                        .setBgDarkAlpha(0.7f) // 控制亮度
-                        .create()
-                        .showAtLocation(view, Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
+                doWithdraw(view);
                 break;
             case R.id.btn_withdraw_record:
                 // 提现记录
@@ -102,6 +96,39 @@ public class MyCommission extends BaseActivity {
                 AppUtils.jump2Next(this, SettleRecords.class);
                 break;
         }
+    }
+
+    // 申请提现
+    private void doWithdraw(View view) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(this);
+        String url = Constants.BASE_URL + "/GetWithdraw";
+        httpHelper.post(url, new HashMap<>(), new SpotsCallback<BaseBean<BankCardBean>>(this, "加载中") {
+            @Override
+            public void onSuccess(Response response, BaseBean<BankCardBean> dataBean) {
+                // false:跳转绑定银行，true:跳转提现申请
+                if (!dataBean.isSuccess()) {
+                    showBindCard(view);
+                    return;
+                }
+                MessageEvent messageEvent = new MessageEvent<>(Constants.CODE_BANK_INFO, dataBean.getData());
+                EventBusUtil.sendStickyEvent(messageEvent);
+                AppUtils.jump2Next(mContext, ApplyWithdraw.class);
+            }
+        });
+    }
+
+    // 显示绑卡弹框
+    private void showBindCard(View view) {
+        View popView = View.inflate(this, R.layout.popup_withdraw, null);
+        handlePopupBtn(popView);
+        mCustomPopWindow = new CustomPopWindow.PopupWindowBuilder(this)
+                .size(ViewGroup.LayoutParams.MATCH_PARENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT)
+                .setView(popView)
+                .enableBackgroundDark(true) //弹出popWindow时，背景是否变暗
+                .setBgDarkAlpha(0.7f) // 控制亮度
+                .create()
+                .showAtLocation(view, Gravity.CENTER | Gravity.CENTER_HORIZONTAL, 0, 0);
     }
 
     // 弹窗按钮点击处理

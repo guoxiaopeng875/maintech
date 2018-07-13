@@ -31,6 +31,7 @@ public class Constants {
 
 
     public static final int CODE_MINE_INFO = 0x000001;
+    public static final int CODE_BANK_INFO = 0x000002;
 
 
 

@@ -53,7 +53,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="工商银行"
                 android:textColor="@color/black87"
                 android:textSize="15.4sp"
                 android:textStyle="bold" />
@@ -83,7 +82,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="罗湖支行"
                 android:textColor="@color/black87"
                 android:textSize="15.4sp"
                 android:textStyle="bold" />
@@ -113,7 +111,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="来来来"
                 android:textColor="@color/black87"
                 android:textSize="15.4sp"
                 android:textStyle="bold" />
@@ -143,7 +140,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="400001*****391293"
                 android:textColor="@color/black87"
                 android:textSize="15.4sp"
                 android:textStyle="bold" />

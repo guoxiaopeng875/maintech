@@ -7,50 +7,13 @@ package com.xmkj.md.model;
  */
 
 public class UserBean {
+    private String Taken;
 
-    /**
-     * Data : {"UserInfo":{"Token":"E534CD2E4C36C65A4EC5AA975EC5BEB3"}}
-     */
-
-    private DataBean Data;
-
-    public DataBean getData() {
-        return Data;
+    public String getToken() {
+        return Taken;
     }
 
-    public void setData(DataBean Data) {
-        this.Data = Data;
-    }
-
-    public static class DataBean {
-        /**
-         * UserInfo : {"Token":"E534CD2E4C36C65A4EC5AA975EC5BEB3"}
-         */
-
-        private UserInfoBean UserInfo;
-
-        public UserInfoBean getUserInfo() {
-            return UserInfo;
-        }
-
-        public void setUserInfo(UserInfoBean UserInfo) {
-            this.UserInfo = UserInfo;
-        }
-
-        public static class UserInfoBean {
-            /**
-             * Token : E534CD2E4C36C65A4EC5AA975EC5BEB3
-             */
-
-            private String Token;
-
-            public String getToken() {
-                return Token;
-            }
-
-            public void setToken(String Token) {
-                this.Token = Token;
-            }
-        }
+    public void setToken(String Token) {
+        this.Taken = Token;
     }
 }
