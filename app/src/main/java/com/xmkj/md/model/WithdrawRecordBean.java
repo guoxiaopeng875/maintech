@@ -10,87 +10,91 @@ import com.xmkj.md.utils.StringUtils;
  */
 
 public class WithdrawRecordBean {
+
+    /**
+     * Amount : 100
+     * Status : 1
+     * CreateDate : 2018-07-14T00:04:58
+     * CardBank : 中国建设银行
+     * CardNumber : *9614
+     */
+
     // 提现金额
-    private String amount;
-    // 提现银行
-    private String bank;
-    // 提现银行卡
-    private String card;
+    private int Amount;
+    // 提现状态1：申请中，2：已完成
+    private int Status;
     // 提现日期
-    private String date;
-    // 提现状态
-    private String status;
+    private String CreateDate;
+    // 提现银行
+    private String CardBank;
+    // 提现银行卡
+    private String CardNumber;
 
     public Boolean isWithdrawFinish() {
-        if (status == null) {
-            return false;
-        }
-        return "提现完成".equals(status);
+        return 2 == Status;
     }
 
     public String wrapDate() {
-        if (date == null) {
+        if (CreateDate == null) {
             return "";
         }
-        return date;
+        return StringUtils.formatTime(CreateDate);
     }
 
     public String wrapAmount() {
-        if (amount == null) {
-            return "￥ 0.00";
-        }
-        return "￥ " + StringUtils.numberFormat(amount);
+        return "￥ " + StringUtils.numberFormat(Amount+"");
     }
 
     public String wrapCard() {
-        if (card == null) {
+        if (CardNumber == null) {
             return "";
         }
         String maskTag = "*";
-        int len = card.length();
+        int len = CardNumber.length();
         if (len <= 4) {
-            return maskTag + card;
+            return maskTag + CardNumber;
         }
-        return maskTag + card.substring(len - 4);
+        return maskTag + CardNumber.substring(len - 4);
     }
 
-    public String getAmount() {
-        return amount;
+
+    public int getAmount() {
+        return Amount;
     }
 
-    public void setAmount(String amount) {
-        this.amount = amount;
+    public void setAmount(int Amount) {
+        this.Amount = Amount;
     }
 
-    public String getBank() {
-        return bank;
+    public int getStatus() {
+        return Status;
     }
 
-    public void setBank(String bank) {
-        this.bank = bank;
+    public void setStatus(int Status) {
+        this.Status = Status;
     }
 
-    public String getCard() {
-        return card;
+    public String getCreateDate() {
+        return CreateDate;
     }
 
-    public void setCard(String card) {
-        this.card = card;
+    public void setCreateDate(String CreateDate) {
+        this.CreateDate = CreateDate;
     }
 
-    public String getDate() {
-        return date;
+    public String getCardBank() {
+        return CardBank;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setCardBank(String CardBank) {
+        this.CardBank = CardBank;
     }
 
-    public String getStatus() {
-        return status;
+    public String getCardNumber() {
+        return CardNumber;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setCardNumber(String CardNumber) {
+        this.CardNumber = CardNumber;
     }
 }

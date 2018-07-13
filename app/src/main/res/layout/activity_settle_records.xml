@@ -48,11 +48,11 @@
                 android:textSize="23sp" />
 
             <TextView
+                android:id="@+id/tv_total_amount_settle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/x10"
                 android:layout_marginTop="@dimen/x13"
-                android:text="943,999.50"
                 android:textColor="@color/white"
                 android:textSize="37sp"
                 android:textStyle="bold" />
