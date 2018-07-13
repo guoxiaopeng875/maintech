@@ -150,6 +150,7 @@
                 android:textSize="15.4sp" />
 
             <EditText
+                android:inputType="number"
                 android:id="@+id/et_card_withdraw"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
