@@ -10,7 +10,8 @@ import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
-import com.xmkj.md.model.DataListBean;
+import com.xmkj.md.model.BaseBean;
+import com.xmkj.md.model.PageBean;
 import com.xmkj.md.model.OrderBean;
 import com.xmkj.md.ui.adapter.PendingItemsAdapter;
 import com.xmkj.md.utils.StatusBarSettingUtils;
@@ -18,6 +19,7 @@ import com.xmkj.md.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -56,20 +58,22 @@ public class PendingItems extends BaseActivity {
 
     // 获取代办事项数据
     private void getPendItems(boolean isRefresh) {
+
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(this);
         Map<String, Object> params = new HashMap<>();
         params.put("PageIndex", pageIndex);
         params.put("PageSize", PAGE_SIZE);
         params.put("PageTrem", new Object());
-        httpHelper.post(Constants.BASE_URL + "/GetUpcomingList", params, new SpotsCallback<DataListBean<OrderBean>>(this, "加载中") {
+        httpHelper.post(Constants.BASE_URL + "/GetUpcomingList", params, new SpotsCallback<BaseBean<PageBean<OrderBean>>>(this, "加载中") {
 
             @Override
-            public void onSuccess(Response response, DataListBean<OrderBean> items) {
+            public void onSuccess(Response response, BaseBean<PageBean<OrderBean>> items) {
+                List<OrderBean> orders = items.getData().getPageValues();
                 if (isRefresh) {
-                    mPendingItemsAdapter.setNewData(items.getData());
+                    mPendingItemsAdapter.setNewData(orders);
                     mSrlPending.finishRefresh();
                 } else {
-                    mPendingItemsAdapter.addData(items.getData());
+                    mPendingItemsAdapter.addData(orders);
                     mSrlPending.finishLoadMore();
                 }
             }

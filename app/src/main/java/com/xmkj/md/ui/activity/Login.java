@@ -1,11 +1,9 @@
 package com.xmkj.md.ui.activity;
 
-import android.content.Context;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.google.gson.Gson;
 import com.squareup.okhttp.Response;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;

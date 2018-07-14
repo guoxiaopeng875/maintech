@@ -22,6 +22,7 @@ import com.xmkj.md.ui.activity.FollowUp;
 import com.xmkj.md.ui.activity.InfoConfirm;
 import com.xmkj.md.ui.activity.MineInfo;
 import com.xmkj.md.ui.activity.MyBusiness;
+import com.xmkj.md.ui.activity.MyCommission;
 import com.xmkj.md.ui.activity.Overdue;
 import com.xmkj.md.ui.activity.PendingItems;
 import com.xmkj.md.ui.activity.ProcessDetail;
@@ -70,7 +71,7 @@ public class Home extends BaseFragment {
     @Override
     protected void initData() {
         mRv.setLayoutManager(new LinearLayoutManager(getContext()));
-        mHomeAdapter = new HomeAdapter(getContext(),mList);
+        mHomeAdapter = new HomeAdapter(getContext(), mList);
         mRv.setAdapter(mHomeAdapter);
         mRv.setNestedScrollingEnabled(false);
         getHomeData();
@@ -94,7 +95,7 @@ public class Home extends BaseFragment {
         }
     }
 
-    private void getHomeData(){
+    private void getHomeData() {
         MdHttpHelper.getHome(getContext(), new MdHttpHelper.SuccessCallback<List<HomeDataBean>>() {
             @Override
             public void onSuccess(List<HomeDataBean> list) {
@@ -116,31 +117,27 @@ public class Home extends BaseFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rl_upcoming_home:
+            case R.id.rl_upcoming_flow:
+                // 待办事项
                 AppUtils.jump2Next(getContext(), PendingItems.class);
                 break;
             case R.id.rl_mybusiness_home:
+            case R.id.rl_mybusiness_flow:
+                // 我的业务
                 AppUtils.jump2Next(getContext(), MyBusiness.class);
                 break;
             case R.id.rl_commission_home:
-                AppUtils.jump2Next(getContext(), MineInfo.class);
+            case R.id.rl_commission_flow:
+                // 我的佣金
+                AppUtils.jump2Next(getContext(), MyCommission.class);
                 break;
             case R.id.rl_contact_home:
-                AppUtils.jump2Next(getContext(), Contacts.class);
-                break;
-            case R.id.rl_upcoming_flow:
-                break;
-            case R.id.rl_mybusiness_flow:
-                AppUtils.jump2Next(getContext(), MyBusiness.class);
-                break;
-            case R.id.rl_commission_flow:
-                AppUtils.jump2Next(getContext(), MineInfo.class);
-                break;
             case R.id.rl_contact_flow:
+                // 通讯录
                 AppUtils.jump2Next(getContext(), Contacts.class);
                 break;
         }
     }
-
 
 
 }

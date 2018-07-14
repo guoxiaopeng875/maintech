@@ -4,13 +4,11 @@ import java.util.List;
 
 /**
  * 作者: 郭晓鹏
- * 时间: 2018/7/9
+ * 时间: 2018/7/15
  * 地点: 深圳
- * data数组
  */
 
 public class DataListBean<T> {
-
     /**
      * Success : true
      * Data : []
