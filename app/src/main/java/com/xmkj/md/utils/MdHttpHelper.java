@@ -17,8 +17,10 @@ import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
 import com.xmkj.md.model.BaseBean;
+import com.xmkj.md.model.ContactsBean;
 import com.xmkj.md.model.HomeDataBean;
 import com.xmkj.md.model.MineInfoBean;
+import com.xmkj.md.model.PlatformBean;
 import com.xmkj.md.model.RecommendCodeBean;
 import com.xmkj.md.widget.MyProgressDialog;
 
@@ -55,7 +57,7 @@ public class MdHttpHelper {
      */
     public static void getRecommendCode(Context context, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
-        httpHelper.get(Constants.BASE_URL + Constants.RECOMMEND_CODE, null, new SpotsCallback<RecommendCodeBean>(context, MSG_LOADING) {
+        httpHelper.post(Constants.RECOMMEND_CODE, null, new SpotsCallback<RecommendCodeBean>(context, MSG_LOADING) {
             @Override
             public void onSuccess(Response response, RecommendCodeBean recommendCodeBean) {
                 callback.onSuccess(recommendCodeBean.getData());
@@ -72,7 +74,7 @@ public class MdHttpHelper {
      */
     public static void setRecommendCode(Context context, String recommendedCode, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
-        String url = Constants.BASE_URL + Constants.SET_RECOMMEND_CODE + "?recommendedCode=" + recommendedCode;
+        String url = Constants.SET_RECOMMEND_CODE + "?recommendedCode=" + recommendedCode;
         httpHelper.post(url, null, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
             @Override
             public void onSuccess(Response response, BaseBean baseBean) {
@@ -93,8 +95,7 @@ public class MdHttpHelper {
      */
     public static void getMineInfo(Context context, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
-        String url = Constants.BASE_URL + Constants.MINE_INFO;
-        httpHelper.post(url, new HashMap<>(), new SpotsCallback<BaseBean<MineInfoBean>>(context, MSG_LOADING) {
+        httpHelper.post(Constants.MINE_INFO, new HashMap<>(), new SpotsCallback<BaseBean<MineInfoBean>>(context, MSG_LOADING) {
             @Override
             public void onSuccess(Response response, BaseBean<MineInfoBean> dataBean) {
                 if (dataBean.isSuccess()) {
@@ -122,7 +123,7 @@ public class MdHttpHelper {
         params.put("Name", name);
         params.put("Phone", phone);
         params.put("signature", tag);
-        httpHelper.post(Constants.BASE_URL + Constants.SET_MINE_INFO, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
+        httpHelper.post(Constants.SET_MINE_INFO, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {
@@ -134,9 +135,15 @@ public class MdHttpHelper {
         });
     }
 
-    public static void getHome(Context context,SuccessCallback callback){
+    /**
+     * 首页列表
+     *
+     * @param context  the context
+     * @param callback the callback
+     */
+    public static void getHome(Context context, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
-        httpHelper.post(Constants.BASE_URL + Constants.HOME, null, new SpotsCallback<BaseBean<List<HomeDataBean>>>(context, MSG_UPLOAD) {
+        httpHelper.post(Constants.HOME, null, new SpotsCallback<BaseBean<List<HomeDataBean>>>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean<List<HomeDataBean>> dataBean) {
                 if (dataBean.isSuccess()) {
@@ -148,14 +155,24 @@ public class MdHttpHelper {
         });
     }
 
-    public static void getContacts(Context context,int currentPage,SuccessCallback callback){
+    /**
+     * 获取通讯录
+     *
+     * @param context     the context
+     * @param currentPage the current page
+     * @param callback    the callback
+     */
+    public static void getContacts(Context context, int currentPage, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
-        Map<String,Object> params = new HashMap<>();
-        params.put("PageIndex",currentPage);
-        params.put("PageSize",20);
-        httpHelper.post(Constants.BASE_URL + Constants.CONTACTS, null, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("PageTrem.Phone", "");
+        params.put("PageTrem.Name", "");
+        params.put("PageIndex", currentPage);
+        params.put("PageSize", 10);
+        Logger.d(params);
+        httpHelper.post(Constants.CONTACTS, params, new SpotsCallback<BaseBean<List<ContactsBean>>>(context, MSG_UPLOAD) {
             @Override
-            public void onSuccess(Response response, BaseBean dataBean) {
+            public void onSuccess(Response response, BaseBean<List<ContactsBean>> dataBean) {
                 if (dataBean.isSuccess()) {
                     callback.onSuccess(dataBean.getData());
                     return;
@@ -164,6 +181,36 @@ public class MdHttpHelper {
             }
         });
     }
+
+    /**
+     * 有效的可选平台
+     *
+     * @param context  the context
+     * @param callback the callback
+     */
+    public static void getPlatForm(Context context, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        httpHelper.post(Constants.PLATFORM, null, new SpotsCallback<BaseBean<List<PlatformBean>>>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean<List<PlatformBean>> baseBean) {
+                callback.onSuccess(baseBean.getData());
+            }
+        });
+    }
+
+    public static void getBusiness(Context context, String platformId, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("PlatformId", platformId);
+        httpHelper.post(Constants.BUSINESS, null, new SpotsCallback<String>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, String o) {
+                callback.onSuccess(o);
+
+            }
+        });
+    }
+
 
     /**
      * 图片上传

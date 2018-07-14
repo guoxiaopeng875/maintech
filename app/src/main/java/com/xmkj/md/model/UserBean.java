@@ -7,13 +7,13 @@ package com.xmkj.md.model;
  */
 
 public class UserBean {
-    private String Taken;
+    private String Token;
 
     public String getToken() {
-        return Taken;
+        return Token;
     }
 
     public void setToken(String Token) {
-        this.Taken = Token;
+        this.Token = Token;
     }
 }

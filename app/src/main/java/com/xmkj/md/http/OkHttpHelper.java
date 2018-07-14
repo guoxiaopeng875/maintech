@@ -1,11 +1,9 @@
 package com.xmkj.md.http;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-
 
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
@@ -17,11 +15,7 @@ import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
 import com.xmkj.md.model.BaseResponseBean;
 import com.xmkj.md.utils.AppData;
-import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.ToastUtils;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -286,6 +280,7 @@ public class OkHttpHelper {
         }
         if (!"".equals(mToken)) {
             Logger.i(TAG + "mToken===" + mToken);
+            builder.addHeader("Content-Type", "application/json");
             builder.addHeader("Acount-Token-BYKJProjectSimplify", mToken);
         }
         return builder.build();

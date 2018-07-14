@@ -1,23 +1,24 @@
 package com.xmkj.md.ui.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
+import com.xmkj.md.model.BusinessBean;
 import com.xmkj.md.model.BusinessSelectBean;
 import com.xmkj.md.model.GroupBean;
+import com.xmkj.md.model.PlatformBean;
 import com.xmkj.md.ui.adapter.RecyclerAdapter;
 import com.xmkj.md.ui.adapter.SecondaryListAdapter;
+import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.widget.RvDividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
@@ -27,6 +28,9 @@ import butterknife.OnClick;
 public class BeginApply extends BaseActivity {
     @BindView(R.id.rv_begin_apply)
     RecyclerView mRV;
+
+    private List<PlatformBean> mListPlatform = new ArrayList<>();
+    private List<BusinessBean> mListBusiness = new ArrayList<>();
 
     private List<SecondaryListAdapter.DataTree<GroupBean, BusinessSelectBean>> datas = new ArrayList<>();
 
@@ -49,12 +53,32 @@ public class BeginApply extends BaseActivity {
         RecyclerAdapter adapter = new RecyclerAdapter(this);
         adapter.setData(datas);
         mRV.setAdapter(adapter);
+        getPlatform();
     }
 
     @Override
     public void setListener() {
 
     }
+
+    private void getPlatform() {
+        MdHttpHelper.getPlatForm(this, new MdHttpHelper.SuccessCallback<List<PlatformBean>>() {
+            @Override
+            public void onSuccess(List<PlatformBean> data) {
+                mListPlatform.addAll(data);
+            }
+        });
+    }
+
+    private void getBusiness(String platformId) {
+        MdHttpHelper.getBusiness(this, platformId, new MdHttpHelper.SuccessCallback() {
+            @Override
+            public void onSuccess(Object data) {
+
+            }
+        });
+    }
+
 
     private void setData() {
         for (int i = 0; i < 2; i++) {
@@ -87,6 +111,7 @@ public class BeginApply extends BaseActivity {
                 break;
             case R.id.tv_cancel_begin_apply:
                 finish();
+                this.overridePendingTransition(R.anim.activity_noanimate, R.anim.activity_close);
                 break;
             case R.id.bt_commit_begin_apply:
                 break;

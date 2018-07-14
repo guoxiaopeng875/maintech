@@ -24,8 +24,8 @@ public class ContactsAdapter extends BaseQuickAdapter<ContactsBean, BaseViewHold
     protected void convert(BaseViewHolder helper, ContactsBean item) {
         helper.setText(R.id.tv_surname_contacts, TextUtils.substring(item.getName(), 0, 1))
                 .setText(R.id.tv_name_contacts, item.getName())
-                .setText(R.id.tv_type_contacts, item.getType())
-                .setText(R.id.tv_mobile_contacts, item.getMobile())
+                .setText(R.id.tv_type_contacts, item.getRemark())
+                .setText(R.id.tv_mobile_contacts, item.getPhone())
                 .addOnClickListener(R.id.bt_call_contacts);
     }
 

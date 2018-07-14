@@ -9,12 +9,14 @@ public class Constants {
     // http://220.231.228.90:18067  http://192.168.1.161:8093
     public static String BASE_URL = "http://47.106.189.17:81/Api/App";
     public static final String LOGIN = "";//1登录
-    public static final String RECOMMEND_CODE = "/GetRecommendedCode";
-    public static final String SET_RECOMMEND_CODE = "/UpdateRecommendedCode";
-    public static final String MINE_INFO = "/GetMyProfileDetails";
-    public static final String SET_MINE_INFO = "/UpdateMyProfileDetails";
-    public static final String HOME = "/GetHomeInformation";
-    public static final String CONTACTS = "/GetContacts";
+    public static final String RECOMMEND_CODE = BASE_URL + "/GetRecommendedCode";
+    public static final String SET_RECOMMEND_CODE = BASE_URL + "/UpdateRecommendedCode";
+    public static final String MINE_INFO = BASE_URL + "/GetMyProfileDetails";
+    public static final String SET_MINE_INFO = BASE_URL + "/UpdateMyProfileDetails";
+    public static final String HOME = BASE_URL + "/GetHomeInformation";
+    public static final String CONTACTS = BASE_URL + "/GetContacts";
+    public static final String PLATFORM = BASE_URL + "/AppGetPlatformList";
+    public static final String BUSINESS = BASE_URL + "/AppGetBusinesstypeList";
 
 
 

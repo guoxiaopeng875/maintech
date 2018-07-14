@@ -28,7 +28,8 @@ public class Contacts extends BaseActivity {
     RecyclerView mRv;
 
     private ContactsAdapter mContactsAdapter;
-    private int mCurrentPage;
+    private int mCurrentPage = 1;
+    private List<ContactsBean> mListContacts = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -43,21 +44,13 @@ public class Contacts extends BaseActivity {
 
     @Override
     public void initData() {
-        List<ContactsBean> list = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            ContactsBean contactsBean = new ContactsBean();
-//            contactsBean.setName("郭小鹏");
-//            contactsBean.setMobile("13800138000");
-//            contactsBean.setType("CTO");
-//            list.add(contactsBean);
-//        }
-        mContactsAdapter = new ContactsAdapter(R.layout.item_contacts_view, list);
+        mContactsAdapter = new ContactsAdapter(R.layout.item_contacts_view, mListContacts);
         mContactsAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
                     case R.id.bt_call_contacts:
-                        AppUtils.call(Contacts.this, list.get(position).getMobile());
+                        AppUtils.call(Contacts.this, mListContacts.get(position).getPhone());
                         break;
                 }
             }
@@ -73,10 +66,12 @@ public class Contacts extends BaseActivity {
     }
 
     private void getContacts(){
-        MdHttpHelper.getContacts(this, mCurrentPage, new MdHttpHelper.SuccessCallback() {
+        MdHttpHelper.getContacts(this, mCurrentPage, new MdHttpHelper.SuccessCallback<List<ContactsBean>>() {
             @Override
-            public void onSuccess(Object data) {
-
+            public void onSuccess(List<ContactsBean> list) {
+                mListContacts.clear();
+                mListContacts.addAll(list);
+                mContactsAdapter.notifyDataSetChanged();
             }
         });
     }
