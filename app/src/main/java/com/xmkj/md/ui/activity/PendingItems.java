@@ -73,8 +73,13 @@ public class PendingItems extends BaseActivity {
                     mPendingItemsAdapter.setNewData(orders);
                     mSrlPending.finishRefresh();
                 } else {
-                    mPendingItemsAdapter.addData(orders);
-                    mSrlPending.finishLoadMore();
+                    finishLoadMore(mPendingItemsAdapter, orders, mSrlPending);
+//                    mPendingItemsAdapter.addData(orders);
+//                    if (orders.size() == 0) {
+//                        mSrlPending.finishLoadMoreWithNoMoreData();
+//                        return;
+//                    }
+//                    mSrlPending.finishLoadMore();
                 }
             }
         });
@@ -103,6 +108,7 @@ public class PendingItems extends BaseActivity {
 
     // 刷新
     private void onRefresh() {
+        mSrlPending.setNoMoreData(false);
         pageIndex = 1;
         getPendItems(true);
     }

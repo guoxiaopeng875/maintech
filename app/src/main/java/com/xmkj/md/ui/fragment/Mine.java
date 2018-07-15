@@ -8,6 +8,7 @@ import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.model.MessageEvent;
 import com.xmkj.md.model.MineInfoBean;
+import com.xmkj.md.ui.activity.Achievement;
 import com.xmkj.md.ui.activity.Contacts;
 import com.xmkj.md.ui.activity.MineInfo;
 import com.xmkj.md.ui.activity.MyCommission;
@@ -89,7 +90,7 @@ public class Mine extends BaseFragment {
         });
     }
 
-    @OnClick({R.id.ll_commission_mine, R.id.ll_contacts_mine, R.id.ll_mine_info_mine, R.id.ll_recommend_code_mine})
+    @OnClick({R.id.ll_commission_mine, R.id.ll_contacts_mine, R.id.ll_mine_info_mine, R.id.ll_recommend_code_mine, R.id.ll_achievement_mine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_commission_mine:
@@ -99,12 +100,15 @@ public class Mine extends BaseFragment {
                 AppUtils.jump2Next(getActivity(), Contacts.class);
                 break;
             case R.id.ll_mine_info_mine://我的资料
-                MessageEvent messageEvent = new MessageEvent(Constants.CODE_MINE_INFO, mMineInfoData);
+                MessageEvent messageEvent = new MessageEvent<>(Constants.CODE_MINE_INFO, mMineInfoData);
                 EventBusUtil.sendStickyEvent(messageEvent);
                 AppUtils.jump2Next(getActivity(), MineInfo.class);
                 break;
             case R.id.ll_recommend_code_mine://推荐码
                 AppUtils.jump2Next(getActivity(), RecommendCode.class);
+                break;
+            case R.id.ll_achievement_mine://我的业绩
+                AppUtils.jump2Next(getActivity(), Achievement.class);
                 break;
         }
     }

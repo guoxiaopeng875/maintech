@@ -8,9 +8,13 @@ import android.view.MotionEvent;
 import android.view.View;
 
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.BaseViewHolder;
 import com.orhanobut.logger.Logger;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.xmkj.md.R;
 import com.xmkj.md.model.MessageEvent;
+import com.xmkj.md.model.OrderBean;
 import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.EventBusUtil;
 import com.xmkj.md.utils.SoftInputUtil;
@@ -18,6 +22,8 @@ import com.xmkj.md.utils.StatusBarSettingUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
+import java.util.List;
 
 import butterknife.ButterKnife;
 import me.yokeyword.fragmentation.SupportActivity;
@@ -156,6 +162,19 @@ public abstract class BaseActivity extends SupportActivity {
                 break;
         }
         return super.dispatchTouchEvent(ev);
+    }
+
+    // 完成加载更多
+    public void finishLoadMore(BaseQuickAdapter adapter, List data, SmartRefreshLayout refreshLayout) {
+        if (adapter == null || data == null || refreshLayout == null) {
+            return;
+        }
+        adapter.addData(data);
+        if (data.size() == 0) {
+            refreshLayout.finishLoadMoreWithNoMoreData();
+            return;
+        }
+        refreshLayout.finishLoadMore();
     }
 
 
