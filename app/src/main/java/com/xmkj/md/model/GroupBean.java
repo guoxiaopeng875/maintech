@@ -7,6 +7,7 @@ package com.xmkj.md.model;
 public class GroupBean {
     private String type;
     private String select;
+    private String id;
 
     public String getType() {
         return type;
@@ -22,6 +23,14 @@ public class GroupBean {
 
     public void setSelect(String select) {
         this.select = select;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
 

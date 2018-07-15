@@ -13,6 +13,7 @@ import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.ImageLoaderUtil;
 import com.xmkj.md.widget.PhotoView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,6 +30,9 @@ public class UploadInfoPicAdapter extends BaseAdapter {
     public UploadInfoPicAdapter(Activity activity, List<String> list) {
         mActivity = activity;
         mList_url = list;
+        if (mList_url == null){
+            mList_url = new ArrayList<>();
+        }
     }
 
     @Override

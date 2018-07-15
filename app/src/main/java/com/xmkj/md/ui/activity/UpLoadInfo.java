@@ -9,6 +9,7 @@ import android.view.View;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.config.Constants;
+import com.xmkj.md.model.FiledirsBean;
 import com.xmkj.md.ui.adapter.UploadInfoAdapter;
 import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.PhotoUtil;
@@ -30,7 +31,9 @@ public class UpLoadInfo extends BaseActivity {
     RecyclerView mRv;
 
 
+    private List<FiledirsBean.FileDirListBean> mListDirs = new ArrayList<>();
     private UploadInfoAdapter mUploadInfoAdapter;
+    private String mOrderId;
 
 
     @Override
@@ -41,23 +44,31 @@ public class UpLoadInfo extends BaseActivity {
     @Override
     public void initView() {
         StatusBarSettingUtils.setStatusBarColor(this, R.color.white);
-
     }
 
     @Override
     public void initData() {
-        List list = new ArrayList();
-        for (int i = 0; i < 3; i++) {
-            list.add(i);
-        }
-        mUploadInfoAdapter = new UploadInfoAdapter(this, R.layout.item_uploadinfo, list);
+        mOrderId = getIntent().getExtras().getString("orderId");
+        mUploadInfoAdapter = new UploadInfoAdapter(this, R.layout.item_uploadinfo, mListDirs);
         mRv.setLayoutManager(new LinearLayoutManager(this));
         mRv.setAdapter(mUploadInfoAdapter);
+        getFileDirs();
     }
 
     @Override
     public void setListener() {
 
+    }
+
+    private void getFileDirs() {
+        MdHttpHelper.getFileDirs(this, mOrderId, new MdHttpHelper.SuccessCallback<List<FiledirsBean.FileDirListBean>>() {
+            @Override
+            public void onSuccess(List<FiledirsBean.FileDirListBean> list) {
+                mListDirs.clear();
+                mListDirs.addAll(list);
+                mUploadInfoAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -70,7 +81,6 @@ public class UpLoadInfo extends BaseActivity {
                     fileName = PhotoUtil.getFileName(UpLoadInfo.this, Constants.IMAGE_CAPTURE, data);
                     if (!TextUtils.isEmpty(fileName)) {
                         uploadPicture(fileName);
-
                     }
                     break;
                 case Constants.IMAGE_SELECT://选择图片回来
@@ -107,6 +117,7 @@ public class UpLoadInfo extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_cancel_uploadinfo://取消报单
+                finish();
                 break;
         }
     }

@@ -1,6 +1,8 @@
 package com.xmkj.md.ui.activity;
 
+import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -13,8 +15,11 @@ import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
+import com.xmkj.md.model.AddOrderInfoBean;
 import com.xmkj.md.model.BaseResponseBean;
+import com.xmkj.md.model.MessageEvent;
 import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.StringUtils;
 import com.xmkj.md.utils.ToastUtils;
 
@@ -44,6 +49,9 @@ public class ApplyUserInfo extends BaseActivity {
     Button mBtnSubmitUserInfo;
     // 提交按钮是否可以点击
     private boolean btnClickable = false;
+    private String mOrderId;
+    private String mPlatformId;
+    private String mBusinessTypeId;
 
     @Override
     protected int getLayoutId() {
@@ -77,7 +85,6 @@ public class ApplyUserInfo extends BaseActivity {
                 AppUtils.jumpAndClearTask(ApplyUserInfo.this, Main.class);
                 break;
             case R.id.btn_submit_user_info:
-                ToastUtils.showToast("btn_submit_user_info");
                 onSubmit();
                 break;
         }
@@ -89,19 +96,40 @@ public class ApplyUserInfo extends BaseActivity {
             ToastUtils.showToast("请填写完整信息");
             return;
         }
-        String cellphone = mEtCellphoneApply.getText().toString();
-        if (!StringUtils.isPhoneNumberValid(cellphone)) {
+        String customerName = mEtNameApply.getText().toString().trim();
+        String phone = mEtCellphoneApply.getText().toString();
+        String customerIdCard = mEtCustomerIdNo.getText().toString().trim();
+        if (!StringUtils.isPhoneNumberValid(phone)) {
             ToastUtils.showToast("请输入正确手机号");
             return;
         }
-        // TODO orderID是前面一个页面传过来
-        String orderID = "";
+        if (TextUtils.isEmpty(mOrderId)) {
+            addOrderInfo(customerName, phone, customerIdCard);
+            return;
+        }
+        changeInfo(customerName, phone, customerIdCard);
+    }
+
+    private void addOrderInfo(String customerName, String phone, String customerIdCard) {
+        MdHttpHelper.addOrderInfo(this, customerName, phone, customerIdCard,
+                mPlatformId, mBusinessTypeId, new MdHttpHelper.SuccessCallback<AddOrderInfoBean>() {
+                    @Override
+                    public void onSuccess(AddOrderInfoBean data) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("orderId", data.getOrderId());
+                        AppUtils.jump2Next(ApplyUserInfo.this, UpLoadInfo.class, bundle, false);
+                    }
+                });
+    }
+
+    /***修改报单客户信息***/
+    private void changeInfo(String customerName, String phone, String customerIdCard) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(this);
         Map<String, Object> params = new HashMap<>();
-        params.put("OrderId", orderID);
-        params.put("CustomerName", mEtNameApply.getText().toString());
-        params.put("MobilePhone", cellphone);
-        params.put("IdCard", mEtCustomerIdNo.getText().toString());
+        params.put("OrderId", mOrderId);
+        params.put("CustomerName", customerName);
+        params.put("MobilePhone", phone);
+        params.put("IdCard", customerIdCard);
         httpHelper.post(Constants.BASE_URL + "/UpdateOrderConfirmed", params, new SpotsCallback<BaseResponseBean>(this, "加载中") {
 
             @Override
@@ -154,5 +182,28 @@ public class ApplyUserInfo extends BaseActivity {
             changeSubBtn();
         }
     }
+
+    @Override
+    protected boolean isRegisterEventBus() {
+        return true;
+    }
+
+    @Override
+    protected void receiveStickyEvent(MessageEvent event) {
+        super.receiveStickyEvent(event);
+        switch (event.getCode()) {
+            case Constants.CODE_ORDERID_UPDATE:
+                mOrderId = (String) event.getData();
+                break;
+            case Constants.CODE_PLATFORM_BUSINESS:
+                Bundle bundle = (Bundle) event.getData();
+                mPlatformId = bundle.getString("platformId");
+                mBusinessTypeId = bundle.getString("businessTypeId");
+                break;
+            default:
+                break;
+        }
+    }
+
 
 }

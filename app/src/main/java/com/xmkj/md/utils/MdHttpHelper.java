@@ -4,6 +4,7 @@ package com.xmkj.md.utils;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
@@ -16,10 +17,13 @@ import com.squareup.okhttp.Response;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
+import com.xmkj.md.model.AddOrderInfoBean;
 import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.ContactsBean;
+import com.xmkj.md.model.FiledirsBean;
 import com.xmkj.md.model.HomeDataBean;
 import com.xmkj.md.model.MineInfoBean;
+import com.xmkj.md.model.MyBusinessBean;
 import com.xmkj.md.model.PlatformBean;
 import com.xmkj.md.model.RecommendCodeBean;
 import com.xmkj.md.widget.MyProgressDialog;
@@ -192,23 +196,114 @@ public class MdHttpHelper {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         httpHelper.post(Constants.PLATFORM, null, new SpotsCallback<BaseBean<List<PlatformBean>>>(context, MSG_LOADING) {
             @Override
-            public void onSuccess(Response response, BaseBean<List<PlatformBean>> baseBean) {
-                callback.onSuccess(baseBean.getData());
+            public void onSuccess(Response response, BaseBean<List<PlatformBean>> dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
             }
         });
     }
 
+    /**
+     * 有效业务类型
+     *
+     * @param context    the context
+     * @param platformId the platform id
+     * @param callback   the callback
+     */
     public static void getBusiness(Context context, String platformId, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
         params.put("PlatformId", platformId);
-        httpHelper.post(Constants.BUSINESS, null, new SpotsCallback<String>(context, MSG_LOADING) {
+        httpHelper.post(Constants.BUSINESS, params, new SpotsCallback<BaseBean<List<PlatformBean>>>(context, MSG_LOADING) {
             @Override
-            public void onSuccess(Response response, String o) {
-                callback.onSuccess(o);
-
+            public void onSuccess(Response response, BaseBean<List<PlatformBean>> dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
             }
         });
+    }
+
+    /**
+     * 报单
+     *
+     * @param context        the context
+     * @param customerName   the customer name
+     * @param phone          the phone
+     * @param customerIdCard the customer id card
+     * @param platformId     the platform id
+     * @param BusinessTypeId the business type id
+     * @param callback       the callback
+     */
+    public static void addOrderInfo(Context context, String customerName, String phone,
+                                    String customerIdCard, String platformId, String BusinessTypeId,
+                                    SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("CustomerName", customerName);
+        params.put("MobilePhone", phone);
+        params.put("IdCard", customerIdCard);
+        params.put("PlatformId", platformId);
+        params.put("BusinessTypeId", BusinessTypeId);
+        httpHelper.post(Constants.ADD_ORDER_INFO, params, new SpotsCallback<BaseBean<AddOrderInfoBean>>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean<AddOrderInfoBean> dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+    /**
+     * 需要上传资料的文件夹列表
+     *
+     * @param context  the context
+     * @param orderId  the order id
+     * @param callback the callback
+     */
+    public static void getFileDirs(Context context, String orderId, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("orderId", orderId);
+        httpHelper.post(Constants.FILEDIRS, params, new SpotsCallback<BaseBean<FiledirsBean>>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean<FiledirsBean> dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData().getFileDirList());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+    public static void getMyBusiness(Context context, int currentPage, String customerName, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+
+            params.put("PageTrem.CustomerName", customerName);
+
+        params.put("PageIndex", currentPage);
+        params.put("PageSize", 20);
+        httpHelper.post(Constants.MINE_BUSINESS, params, new SpotsCallback<BaseBean<List<MyBusinessBean>>>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean<List<MyBusinessBean>> dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+
     }
 
 

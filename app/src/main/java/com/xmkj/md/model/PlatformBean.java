@@ -14,6 +14,26 @@ public class PlatformBean {
 
     private String PlatformId;
     private String PlatformName;
+    /**
+     * BusinessTypeId : 5b3f0ceaa970221500ba6bac
+     * Name : 正租
+     * IsEnable : true
+     * Remark : 正租 - 乘用车
+     */
+
+    private String BusinessTypeId;
+    private String Name;
+    private boolean IsEnable;
+    private String Remark;
+    private boolean isSelect;
+
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
 
     public String getPlatformId() {
         return PlatformId;
@@ -29,6 +49,38 @@ public class PlatformBean {
 
     public void setPlatformName(String PlatformName) {
         this.PlatformName = PlatformName;
+    }
+
+    public String getBusinessTypeId() {
+        return BusinessTypeId;
+    }
+
+    public void setBusinessTypeId(String BusinessTypeId) {
+        this.BusinessTypeId = BusinessTypeId;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+
+    public boolean isIsEnable() {
+        return IsEnable;
+    }
+
+    public void setIsEnable(boolean IsEnable) {
+        this.IsEnable = IsEnable;
+    }
+
+    public String getRemark() {
+        return Remark;
+    }
+
+    public void setRemark(String Remark) {
+        this.Remark = Remark;
     }
 
 }

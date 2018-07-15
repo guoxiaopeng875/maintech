@@ -17,6 +17,9 @@ public class Constants {
     public static final String CONTACTS = BASE_URL + "/GetContacts";
     public static final String PLATFORM = BASE_URL + "/AppGetPlatformList";
     public static final String BUSINESS = BASE_URL + "/AppGetBusinesstypeList";
+    public static final String ADD_ORDER_INFO = BASE_URL + "/AddAppOrderInfo";
+    public static final String FILEDIRS = BASE_URL + "/GetFlowFileDir";
+    public static final String MINE_BUSINESS = BASE_URL + "/GetMyBusiness";
 
 
 
@@ -34,6 +37,8 @@ public class Constants {
 
     public static final int CODE_MINE_INFO = 0x000001;
     public static final int CODE_BANK_INFO = 0x000002;
+    public static final int CODE_ORDERID_UPDATE = 0X000003;//修改报单确认信息用的orderId
+    public static final int CODE_PLATFORM_BUSINESS = 0X000004;//业务平台Id,业务类型
 
 
 
