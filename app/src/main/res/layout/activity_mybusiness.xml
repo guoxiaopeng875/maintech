@@ -38,6 +38,7 @@
         android:paddingTop="@dimen/x8">
 
         <EditText
+            android:id="@+id/et_search_mybusiness"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x32"
             android:layout_centerVertical="true"
@@ -48,6 +49,7 @@
             android:drawableLeft="@mipmap/ic_search"
             android:drawablePadding="@dimen/x10"
             android:gravity="center_vertical"
+            android:imeOptions="actionSearch"
             android:hint="客户姓名"
             android:maxLength="10"
             android:paddingLeft="@dimen/x10"

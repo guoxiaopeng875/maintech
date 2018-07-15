@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.xmkj.md.R;
 import com.xmkj.md.model.BusinessSelectBean;
 import com.xmkj.md.model.GroupBean;
+import com.xmkj.md.model.PlatformBean;
+import com.xmkj.md.utils.MdHttpHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +28,7 @@ public class RecyclerAdapter extends SecondaryListAdapter<RecyclerAdapter.GroupI
 
     private Context context;
 
-    private List<DataTree<GroupBean, BusinessSelectBean>> dts = new ArrayList<>();
+    private List<DataTree<GroupBean, PlatformBean>> dts = new ArrayList<>();
 
     public RecyclerAdapter(Context context) {
         this.context = context;
@@ -37,33 +39,38 @@ public class RecyclerAdapter extends SecondaryListAdapter<RecyclerAdapter.GroupI
         notifyNewData(dts);
     }
 
+    public List<DataTree<GroupBean, PlatformBean>> getData(){
+       return dts;
+    }
+
     @Override
     public RecyclerView.ViewHolder groupItemViewHolder(ViewGroup parent) {
-
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
-
         return new GroupItemViewHolder(v);
     }
 
     @Override
     public RecyclerView.ViewHolder subItemViewHolder(ViewGroup parent) {
-
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_child, parent, false);
-
         return new SubItemViewHolder(v);
     }
 
     @Override
     public void onGroupItemBindViewHolder(RecyclerView.ViewHolder holder, int groupItemIndex) {
-
         ((GroupItemViewHolder) holder).tvGroup.setText(dts.get(groupItemIndex).getGroupItem().getType());
         ((GroupItemViewHolder) holder).tvCompany.setText(dts.get(groupItemIndex).getGroupItem().getSelect());
     }
 
     @Override
     public void onSubItemBindViewHolder(RecyclerView.ViewHolder holder, int groupItemIndex, int subItemIndex) {
-        ((SubItemViewHolder) holder).tvType.setText(dts.get(groupItemIndex).getSubItems().get(subItemIndex).getType());
-        ((SubItemViewHolder) holder).ibType.setVisibility(dts.get(groupItemIndex).getSubItems().get(subItemIndex).isSelect() ? View.VISIBLE : View.INVISIBLE);
+        if (groupItemIndex == 0){
+            ((SubItemViewHolder) holder).tvType.setText(dts.get(groupItemIndex).getSubItems().get(subItemIndex).getPlatformName());
+            ((SubItemViewHolder) holder).ibType.setVisibility(dts.get(groupItemIndex).getSubItems().get(subItemIndex).isSelect() ? View.VISIBLE : View.INVISIBLE);
+        }else {
+            ((SubItemViewHolder) holder).tvType.setText(dts.get(groupItemIndex).getSubItems().get(subItemIndex).getName());
+            ((SubItemViewHolder) holder).ibType.setVisibility(dts.get(groupItemIndex).getSubItems().get(subItemIndex).isSelect() ? View.VISIBLE : View.INVISIBLE);
+        }
+
     }
 
     @Override
@@ -77,15 +84,25 @@ public class RecyclerAdapter extends SecondaryListAdapter<RecyclerAdapter.GroupI
 
     @Override
     public void onSubItemClick(SubItemViewHolder holder, int groupItemIndex, int subItemIndex) {
-        List<BusinessSelectBean> list =  dts.get(groupItemIndex).getSubItems();
+        List<PlatformBean> list =  dts.get(groupItemIndex).getSubItems();
         if (list != null){
-            for (BusinessSelectBean businessSelectBean : list){
-                businessSelectBean.setSelect(false);
+            for (PlatformBean platformBean : list){
+                platformBean.setSelect(false);
             }
         }
         dts.get(groupItemIndex).getSubItems().get(subItemIndex).setSelect(true);
-        String select = dts.get(groupItemIndex).getSubItems().get(subItemIndex).getType();
+        String select;
+        if (groupItemIndex == 0){//平台
+            select = dts.get(groupItemIndex).getSubItems().get(subItemIndex).getPlatformName();
+            dts.get(groupItemIndex).getGroupItem().setId(list.get(subItemIndex).getPlatformId());
+        }else {//业务
+            select = dts.get(groupItemIndex).getSubItems().get(subItemIndex).getName();
+            dts.get(groupItemIndex).getGroupItem().setId(list.get(subItemIndex).getBusinessTypeId());
+        }
         dts.get(groupItemIndex).getGroupItem().setSelect(select);
+        if (groupItemIndex == 0){
+            getBusiness(list.get(subItemIndex).getPlatformId());
+        }
         notifyDataSetChanged();
     }
 
@@ -97,9 +114,9 @@ public class RecyclerAdapter extends SecondaryListAdapter<RecyclerAdapter.GroupI
 
         public GroupItemViewHolder(View itemView) {
             super(itemView);
-            tvGroup = (TextView) itemView.findViewById(R.id.tv);
-            ivArr = (ImageView) itemView.findViewById(R.id.iv_arr);
-            tvCompany = (TextView) itemView.findViewById(R.id.tv_company);
+            tvGroup = itemView.findViewById(R.id.tv);
+            ivArr = itemView.findViewById(R.id.iv_arr);
+            tvCompany = itemView.findViewById(R.id.tv_company);
         }
     }
 
@@ -110,9 +127,21 @@ public class RecyclerAdapter extends SecondaryListAdapter<RecyclerAdapter.GroupI
 
         public SubItemViewHolder(View itemView) {
             super(itemView);
-            tvType = (TextView) itemView.findViewById(R.id.tv_type);
-            ibType = (ImageButton) itemView.findViewById(R.id.ib_select);
+            tvType = itemView.findViewById(R.id.tv_type);
+            ibType = itemView.findViewById(R.id.ib_select);
         }
+    }
+
+    private void getBusiness(String platformId) {
+        MdHttpHelper.getBusiness(context, platformId, new MdHttpHelper.SuccessCallback<List<PlatformBean>>() {
+            @Override
+            public void onSuccess(List<PlatformBean> list) {
+                dts.get(1).getSubItems().clear();
+                dts.get(1).getSubItems().addAll(list);
+                dts.get(1).getGroupItem().setSelect("请选择");
+                setData(dts);
+            }
+        });
     }
 
 

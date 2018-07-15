@@ -1,18 +1,23 @@
 package com.xmkj.md.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
-import com.xmkj.md.model.BusinessBean;
-import com.xmkj.md.model.BusinessSelectBean;
+import com.xmkj.md.config.Constants;
 import com.xmkj.md.model.GroupBean;
+import com.xmkj.md.model.MessageEvent;
 import com.xmkj.md.model.PlatformBean;
 import com.xmkj.md.ui.adapter.RecyclerAdapter;
 import com.xmkj.md.ui.adapter.SecondaryListAdapter;
+import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.EventBusUtil;
 import com.xmkj.md.utils.MdHttpHelper;
+import com.xmkj.md.utils.ToastUtils;
 import com.xmkj.md.widget.RvDividerItemDecoration;
 
 import java.util.ArrayList;
@@ -29,10 +34,9 @@ public class BeginApply extends BaseActivity {
     @BindView(R.id.rv_begin_apply)
     RecyclerView mRV;
 
-    private List<PlatformBean> mListPlatform = new ArrayList<>();
-    private List<BusinessBean> mListBusiness = new ArrayList<>();
-
-    private List<SecondaryListAdapter.DataTree<GroupBean, BusinessSelectBean>> datas = new ArrayList<>();
+    private List<PlatformBean> mList = new ArrayList<>();
+    private List<SecondaryListAdapter.DataTree<GroupBean, PlatformBean>> datas = new ArrayList<>();
+    private RecyclerAdapter mAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -50,9 +54,9 @@ public class BeginApply extends BaseActivity {
         mRV.setLayoutManager(new LinearLayoutManager(this));
         mRV.setHasFixedSize(true);
         mRV.addItemDecoration(new RvDividerItemDecoration(this, LinearLayoutManager.VERTICAL));
-        RecyclerAdapter adapter = new RecyclerAdapter(this);
-        adapter.setData(datas);
-        mRV.setAdapter(adapter);
+        mAdapter = new RecyclerAdapter(this);
+        mAdapter.setData(datas);
+        mRV.setAdapter(mAdapter);
         getPlatform();
     }
 
@@ -65,16 +69,8 @@ public class BeginApply extends BaseActivity {
         MdHttpHelper.getPlatForm(this, new MdHttpHelper.SuccessCallback<List<PlatformBean>>() {
             @Override
             public void onSuccess(List<PlatformBean> data) {
-                mListPlatform.addAll(data);
-            }
-        });
-    }
-
-    private void getBusiness(String platformId) {
-        MdHttpHelper.getBusiness(this, platformId, new MdHttpHelper.SuccessCallback() {
-            @Override
-            public void onSuccess(Object data) {
-
+                mList.clear();
+                mList.addAll(data);
             }
         });
     }
@@ -83,23 +79,38 @@ public class BeginApply extends BaseActivity {
     private void setData() {
         for (int i = 0; i < 2; i++) {
             GroupBean groupBean = new GroupBean();
+            groupBean.setSelect("请选择");
             String type;
             if (i == 0) {
                 type = "业务平台方";
+                groupBean.setType(type);
+                datas.add(new SecondaryListAdapter.DataTree<GroupBean, PlatformBean>(groupBean, mList));
             } else {
                 type = "业务类型";
+                groupBean.setType(type);
+                datas.add(new SecondaryListAdapter.DataTree<GroupBean, PlatformBean>(groupBean, new ArrayList<>()));
             }
-            groupBean.setType(type);
-            groupBean.setSelect("请选择");
-            datas.add(new SecondaryListAdapter.DataTree<GroupBean, BusinessSelectBean>(groupBean, new
-                    ArrayList<BusinessSelectBean>() {{
-                        for (int i = 0; i < 3; i++) {
-                            BusinessSelectBean businessSelectBean = new BusinessSelectBean();
-                            businessSelectBean.setType("业务类型" + i);
-                            add(businessSelectBean);
-                        }
-                    }}));
         }
+    }
+
+    private void nextStep() {
+        datas = mAdapter.getData();
+        GroupBean group_platform = datas.get(0).getGroupItem();
+        GroupBean group_business = datas.get(1).getGroupItem();
+        Bundle bundle = new Bundle();
+        bundle.putString("platformId", group_platform.getId());
+        bundle.putString("businessTypeId", group_business.getId());
+        if (TextUtils.equals("请选择", group_platform.getSelect())) {
+            ToastUtils.showToast(this, "请选择业务平台方");
+            return;
+        }
+        if (TextUtils.equals("请选择", group_business.getSelect())) {
+            ToastUtils.showToast(this, "请选择业务类型");
+            return;
+        }
+
+        EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_PLATFORM_BUSINESS, bundle));
+        AppUtils.jump2Next(this, ApplyUserInfo.class);
     }
 
 
@@ -114,6 +125,7 @@ public class BeginApply extends BaseActivity {
                 this.overridePendingTransition(R.anim.activity_noanimate, R.anim.activity_close);
                 break;
             case R.id.bt_commit_begin_apply:
+                nextStep();
                 break;
         }
     }
