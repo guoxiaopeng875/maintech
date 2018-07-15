@@ -11,13 +11,17 @@ import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
+import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.DataListBean;
+import com.xmkj.md.model.LoanProcessBean;
+import com.xmkj.md.model.PageBean;
 import com.xmkj.md.model.OrderBean;
 import com.xmkj.md.ui.adapter.OverdueAdapter;
 import com.xmkj.md.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -65,11 +69,12 @@ public class OverdueFollow extends BaseFragment {
 
             @Override
             public void onSuccess(Response response, DataListBean<OrderBean> items) {
+                List<OrderBean> orders = items.getData();
                 if (isRefresh) {
-                    mOverdueAdapter.setNewData(items.getData());
+                    mOverdueAdapter.setNewData(orders);
                     mSrlLoan.finishRefresh();
                 } else {
-                    mOverdueAdapter.addData(items.getData());
+                    mOverdueAdapter.addData(orders);
                     mSrlLoan.finishLoadMore();
                 }
             }
