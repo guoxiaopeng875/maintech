@@ -4,7 +4,6 @@ package com.xmkj.md.utils;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
@@ -19,6 +18,7 @@ import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
 import com.xmkj.md.model.AddOrderInfoBean;
 import com.xmkj.md.model.BaseBean;
+import com.xmkj.md.model.BaseResponseBean;
 import com.xmkj.md.model.ContactsBean;
 import com.xmkj.md.model.FiledirsBean;
 import com.xmkj.md.model.HomeDataBean;
@@ -26,6 +26,7 @@ import com.xmkj.md.model.MineInfoBean;
 import com.xmkj.md.model.MyBusinessBean;
 import com.xmkj.md.model.PlatformBean;
 import com.xmkj.md.model.RecommendCodeBean;
+import com.xmkj.md.model.UploadInfoUrlBean;
 import com.xmkj.md.widget.MyProgressDialog;
 
 import java.io.File;
@@ -285,12 +286,18 @@ public class MdHttpHelper {
         });
     }
 
+    /**
+     * 我的业务
+     *
+     * @param context      the context
+     * @param currentPage  the current page
+     * @param customerName the customer name
+     * @param callback     the callback
+     */
     public static void getMyBusiness(Context context, int currentPage, String customerName, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
-
-            params.put("PageTrem.CustomerName", customerName);
-
+        params.put("PageTrem.CustomerName", customerName);
         params.put("PageIndex", currentPage);
         params.put("PageSize", 20);
         httpHelper.post(Constants.MINE_BUSINESS, params, new SpotsCallback<BaseBean<List<MyBusinessBean>>>(context, MSG_LOADING) {
@@ -303,7 +310,23 @@ public class MdHttpHelper {
                 ToastUtils.showToast(context, dataBean.getMessage());
             }
         });
+    }
 
+
+    public static void getBusinessDetail(Context context, String orderId, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("OrderId", orderId);
+        httpHelper.post(Constants.BUSINESS_DETAIL, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
     }
 
 
@@ -328,27 +351,30 @@ public class MdHttpHelper {
         multipartBuilder.addFormDataPart("file", file.getName(), RequestBody.create(null, file));
         RequestBody body = multipartBuilder.build();
         Request request = new Request.Builder()
-                .url("")
+                .addHeader("Acount-Token-BYKJProjectSimplify", mAppData.getAccessToken())
+                .url(Constants.UPLOAD_FLOWFILE)
                 .post(body)
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Request request, IOException e) {
-                callbackFailure(context, cb);
+                callbackFailure(context, "网络异常", cb);
                 Logger.d("上传失败:===" + e.getLocalizedMessage() + "===" + request.body() + "===" + e);
             }
+
 
             @Override
             public void onResponse(Response response) {
                 try {
-                    String json = response.body().string();
-                    Logger.d(json);
-                    if (response.isSuccessful()) {
-                        callbackSuccess(context, json, cb);
-                        Logger.d("上传照片成功：=== " + json);
+                    String resultStr = response.body().string();
+                    BaseResponseBean baseResp = mGson.fromJson(resultStr, BaseResponseBean.class);
+                    Logger.d(resultStr);
+                    if (response.isSuccessful() && baseResp.isSuccess()) {
+                        callbackSuccess(context, resultStr, cb);
+                        Logger.d("上传照片成功：=== " + resultStr);
                     } else {//图片上传失败
-                        callbackFailure(context, cb);
-                        Logger.d("上传照片失败：=== " + response.code() + "---" + json);
+                        callbackFailure(context, baseResp.getMessage(), cb);
+                        Logger.d("上传照片失败：=== " + response.code() + "---" + resultStr);
                     }
                 } catch (Exception e) {
                     Logger.e(e + "");
@@ -373,17 +399,16 @@ public class MdHttpHelper {
         }
     }
 
-    public static void callbackSuccess(final Context context, final String url, final UploadCallBack cb) {
+    public static void callbackSuccess(final Context context, final String json, final UploadCallBack cb) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
-                ToastUtils.showToast(context, "上传成功");
-                cb.onSuccess(url);
+                cb.onSuccess(json);
             }
         });
     }
 
-    public static void callbackFailure(final Context context, final UploadCallBack cb) {
+    public static void callbackFailure(final Context context, String msg, final UploadCallBack cb) {
         mHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -405,9 +430,9 @@ public class MdHttpHelper {
         /**
          * 成功
          *
-         * @param imgUrl the img url
+         * @param json the json
          */
-        void onSuccess(String imgUrl);
+        void onSuccess(String json);
 
         /**
          * 失败

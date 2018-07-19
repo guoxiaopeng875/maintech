@@ -7,7 +7,9 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.xmkj.md.R;
 import com.xmkj.md.model.FiledirsBean;
+import com.xmkj.md.model.PicUploadBean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,18 +18,29 @@ import java.util.List;
 
 public class UploadInfoAdapter extends BaseQuickAdapter<FiledirsBean.FileDirListBean, BaseViewHolder> {
     private Activity mActivity;
+    private UploadInfoPicAdapter.OnGetPhotoListener mOnGetPhotoListener;
 
-    public UploadInfoAdapter(Activity activity, int layoutResId, @Nullable List<FiledirsBean.FileDirListBean> data) {
+    public UploadInfoAdapter(Activity activity, int layoutResId,
+                             @Nullable List<FiledirsBean.FileDirListBean> data,
+                             UploadInfoPicAdapter.OnGetPhotoListener onGetPhotoListener) {
         super(layoutResId, data);
         mActivity = activity;
+        mOnGetPhotoListener = onGetPhotoListener;
     }
 
     @Override
     protected void convert(BaseViewHolder helper, FiledirsBean.FileDirListBean item) {
-        UploadInfoPicAdapter uploadInfoPicAdapter = new UploadInfoPicAdapter(mActivity, item.getListPicUrl());
+        List<PicUploadBean> list = new ArrayList<>();
+        for (String url : item.getListPicUrl()) {
+            PicUploadBean picUploadBean = new PicUploadBean();
+            picUploadBean.setUrl(url);
+            list.add(picUploadBean);
+        }
+        UploadInfoPicAdapter uploadInfoPicAdapter = new UploadInfoPicAdapter(mActivity,
+                helper.getLayoutPosition(), list, mOnGetPhotoListener);
         helper.setText(R.id.tv_infotype_uploadinfo, item.getFileDirName())
                 .setAdapter(R.id.gv_infopic_uploadinfo, uploadInfoPicAdapter);
-
     }
+
 
 }

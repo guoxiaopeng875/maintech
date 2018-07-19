@@ -1,7 +1,11 @@
 package com.xmkj.md.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -9,10 +13,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.model.MyBusinessBean;
 import com.xmkj.md.ui.adapter.MyBusinessAdapter;
+import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.ToastUtils;
 
@@ -27,6 +36,8 @@ import butterknife.OnClick;
  */
 
 public class MyBusiness extends BaseActivity {
+    @BindView(R.id.refresh_view_mybusiness)
+    SmartRefreshLayout mSrl;
     @BindView(R.id.rv_mybusiness)
     RecyclerView mRv;
     @BindView(R.id.et_search_mybusiness)
@@ -55,12 +66,29 @@ public class MyBusiness extends BaseActivity {
         mMyBusinessAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-                ToastUtils.showToast(mListMyBusiness.get(position).getPlatformName());
+                Bundle bundle = new Bundle();
+                bundle.putString("orderId", mListMyBusiness.get(position).getOrderId());
+                AppUtils.jump2Next(MyBusiness.this, BusinessDetail.class);
             }
         });
         mRv.setLayoutManager(new LinearLayoutManager(this));
         mRv.setAdapter(mMyBusinessAdapter);
-        getMyBusiness();
+        mEtSearch.addTextChangedListener(new SearchWatcher());
+        mSrl.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                mSrl.setNoMoreData(false);
+                mCurrentPage = 1;
+                getMyBusiness(true);
+            }
+        });
+        mSrl.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                getMyBusiness(false);
+            }
+        });
+        mSrl.autoRefresh();
     }
 
     @Override
@@ -69,7 +97,13 @@ public class MyBusiness extends BaseActivity {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    ToastUtils.showToast("666");
+                    if (TextUtils.isEmpty(mEtSearch.getText().toString().trim())) {
+                        ToastUtils.showToast(MyBusiness.this, "请输入客户名");
+                        return false;
+                    }
+                    mListMyBusiness.clear();
+                    mIsSearch = true;
+                    getMyBusiness(false);
                     return false;
                 }
                 return false;
@@ -77,7 +111,7 @@ public class MyBusiness extends BaseActivity {
         });
     }
 
-    private void getMyBusiness() {
+    private void getMyBusiness(boolean isRefresh) {
         String search = "";
         if (mIsSearch) {
             search = mEtSearch.getText().toString().trim();
@@ -85,10 +119,35 @@ public class MyBusiness extends BaseActivity {
         MdHttpHelper.getMyBusiness(this, mCurrentPage, search, new MdHttpHelper.SuccessCallback<List<MyBusinessBean>>() {
             @Override
             public void onSuccess(List<MyBusinessBean> list) {
-                mListMyBusiness.addAll(list);
-                mMyBusinessAdapter.notifyDataSetChanged();
+                mCurrentPage++;
+                if (isRefresh) {
+                    mMyBusinessAdapter.setNewData(list);
+                    mSrl.finishRefresh();
+                } else {
+                    finishLoadMore(mMyBusinessAdapter, list, mSrl);
+                }
             }
         });
+    }
+
+    private class SearchWatcher implements TextWatcher {
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if (TextUtils.isEmpty(s.toString())) {
+                mIsSearch = false;
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
     }
 
 
@@ -99,9 +158,13 @@ public class MyBusiness extends BaseActivity {
                 finish();
                 break;
             case R.id.tv_search_mybusiness:
+                if (TextUtils.isEmpty(mEtSearch.getText().toString().trim())) {
+                    ToastUtils.showToast(MyBusiness.this, "请输入客户名");
+                    return;
+                }
                 mListMyBusiness.clear();
                 mIsSearch = true;
-                getMyBusiness();
+                getMyBusiness(true);
                 break;
         }
     }

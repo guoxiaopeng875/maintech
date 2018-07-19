@@ -8,7 +8,7 @@ public class Constants {
 
     // http://220.231.228.90:18067  http://192.168.1.161:8093
     public static String BASE_URL = "http://47.106.189.17:81/Api/App";
-    public static final String LOGIN = "";//1登录
+    public static String PIC_BASE_URL = "http://47.106.189.17:81/";
     public static final String RECOMMEND_CODE = BASE_URL + "/GetRecommendedCode";
     public static final String SET_RECOMMEND_CODE = BASE_URL + "/UpdateRecommendedCode";
     public static final String MINE_INFO = BASE_URL + "/GetMyProfileDetails";
@@ -20,7 +20,20 @@ public class Constants {
     public static final String ADD_ORDER_INFO = BASE_URL + "/AddAppOrderInfo";
     public static final String FILEDIRS = BASE_URL + "/GetFlowFileDir";
     public static final String MINE_BUSINESS = BASE_URL + "/GetMyBusiness";
-
+    public static final String BUSINESS_DETAIL = BASE_URL + "/GetMyBusinessDetails";//业务详情
+    public static final String UPLOAD_FLOWFILE = BASE_URL + "/AppUploadFlowFile";//上传订单流程文件
+    public static final String UPLOAD_FILE = BASE_URL + "/AppUploadFile";//上传跟进文件
+    public static final String SET_ORDER_FILE = BASE_URL + "/AppSetOrderFile";//文件上传后整体提交
+    public static final String OVERDUE_DETAIL = BASE_URL + "/OverdueQueryDetails";
+    public static final String ADD_OVERDUE = BASE_URL + "/AddOverdueQueryDetails";//添加逾期
+    public static final String ORDER_CONFIRM = BASE_URL + "/GetOrderConfirmed";//订单确认信息
+    public static final String CANCLE_ORDER = BASE_URL + "/CancelOrder";//取消订单
+    public static final String CHANGE_ORDER_CONFIRM = BASE_URL + "/UpdateOrderConfirmed";
+    public static final String POSTLOAN_FOLLOW = BASE_URL + "/GetPostloanFollow";//贷后跟进
+    public static final String MONTH_ACHIEVEMENT = BASE_URL + "/GetMyPerformance";//月业绩
+    public static final String YEAR_ACHIEVEMENT = BASE_URL + "/GetAnnualPerformance";//年业绩
+    public static final String COST_DETAIL = BASE_URL + "/GetCostDetails";//费用详情
+    public static final String PROCESS_DETAIL = BASE_URL + "/GetProcessDetails";//流程详情
 
 
     public static final int IMAGE_CAPTURE = 1001;// 拍照
@@ -34,13 +47,10 @@ public class Constants {
     public static final String NoPushPermission = "检测到您没有打开通知权限，是否去打开?";
 
 
-
     public static final int CODE_MINE_INFO = 0x000001;
     public static final int CODE_BANK_INFO = 0x000002;
     public static final int CODE_ORDERID_UPDATE = 0X000003;//修改报单确认信息用的orderId
     public static final int CODE_PLATFORM_BUSINESS = 0X000004;//业务平台Id,业务类型
-
-
 
 
 }

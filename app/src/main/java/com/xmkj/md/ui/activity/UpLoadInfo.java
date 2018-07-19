@@ -6,14 +6,19 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.config.Constants;
+import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.FiledirsBean;
+import com.xmkj.md.model.UploadInfoUrlBean;
 import com.xmkj.md.ui.adapter.UploadInfoAdapter;
+import com.xmkj.md.ui.adapter.UploadInfoPicAdapter;
 import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.PhotoUtil;
 import com.xmkj.md.utils.StatusBarSettingUtils;
+import com.xmkj.md.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +39,9 @@ public class UpLoadInfo extends BaseActivity {
     private List<FiledirsBean.FileDirListBean> mListDirs = new ArrayList<>();
     private UploadInfoAdapter mUploadInfoAdapter;
     private String mOrderId;
+    private Gson mGson;
+    private int mParentItemPosition;
+    private int mPhotoPosition;
 
 
     @Override
@@ -48,8 +56,16 @@ public class UpLoadInfo extends BaseActivity {
 
     @Override
     public void initData() {
+        mGson = new Gson();
         mOrderId = getIntent().getExtras().getString("orderId");
-        mUploadInfoAdapter = new UploadInfoAdapter(this, R.layout.item_uploadinfo, mListDirs);
+        mUploadInfoAdapter = new UploadInfoAdapter(this, R.layout.item_uploadinfo, mListDirs,
+                new UploadInfoPicAdapter.OnGetPhotoListener() {
+            @Override
+            public void onGetPhoto(int parentItemPosition,int postion) {
+                mParentItemPosition = parentItemPosition;
+                mPhotoPosition = postion;
+            }
+        });
         mRv.setLayoutManager(new LinearLayoutManager(this));
         mRv.setAdapter(mUploadInfoAdapter);
         getFileDirs();
@@ -93,13 +109,15 @@ public class UpLoadInfo extends BaseActivity {
         }
     }
 
-    //TODO 图片上传
+
     private void uploadPicture(final String fileName) {
         MdHttpHelper.uploadPicture(this, fileName + ".jpg", new MdHttpHelper.UploadCallBack() {
 
             @Override
-            public void onSuccess(String imgUrl) {
-
+            public void onSuccess(String json) {
+                UploadInfoUrlBean uploadInfoUrlBean = mGson.fromJson(json, UploadInfoUrlBean.class);
+                mListDirs.get(mParentItemPosition).getListPicUrl().add(uploadInfoUrlBean.getData().getFileUrl());
+                mUploadInfoAdapter.notifyDataSetChanged();
             }
 
             @Override

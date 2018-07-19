@@ -1,14 +1,16 @@
 package com.xmkj.md.ui.adapter;
 
 import android.app.Activity;
-import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.xmkj.md.R;
+import com.xmkj.md.config.Constants;
+import com.xmkj.md.model.PicUploadBean;
 import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.ImageLoaderUtil;
 import com.xmkj.md.widget.PhotoView;
@@ -24,13 +26,17 @@ import butterknife.ButterKnife;
  */
 
 public class UploadInfoPicAdapter extends BaseAdapter {
-    private List<String> mList_url;
+    private List<PicUploadBean> mList_url;
     private Activity mActivity;
+    private OnGetPhotoListener mOnGetPhotoListener;
+    private int mParentItemPostion;
 
-    public UploadInfoPicAdapter(Activity activity, List<String> list) {
+    public UploadInfoPicAdapter(Activity activity, int parentItemPosition, List<PicUploadBean> list, OnGetPhotoListener onGetPhotoListener) {
         mActivity = activity;
         mList_url = list;
-        if (mList_url == null){
+        mParentItemPostion = parentItemPosition;
+        mOnGetPhotoListener = onGetPhotoListener;
+        if (mList_url == null) {
             mList_url = new ArrayList<>();
         }
     }
@@ -78,20 +84,34 @@ public class UploadInfoPicAdapter extends BaseAdapter {
             ImageLoaderUtil.getImageLoader(mActivity).displayImage(url, holder.pv,
                     ImageLoaderUtil.getDisplayImageOptions(), ImageLoaderUtil.loadingListener);
             holder.ibDel.setVisibility(View.GONE);
+            holder.rl.setVisibility(View.GONE);
         } else {
-            ImageLoaderUtil.getImageLoader(mActivity).displayImage(mList_url.get(position), holder.pv,
+            ImageLoaderUtil.getImageLoader(mActivity).displayImage(Constants.PIC_BASE_URL +
+                            mList_url.get(position).getUrl(), holder.pv,
                     ImageLoaderUtil.getDisplayImageOptions(), ImageLoaderUtil.loadingListener);
-            holder.ibDel.setVisibility(View.VISIBLE);
+
+            holder.ibDel.setVisibility(mList_url.get(position).isSelect() ? View.VISIBLE : View.GONE);
+            holder.rl.setVisibility(mList_url.get(position).isSelect() ? View.VISIBLE : View.GONE);
         }
         holder.pv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (position == mList_url.size()) {
                     AppUtils.showAlertDialog(mActivity);
+                    if (mOnGetPhotoListener != null) {
+                        mOnGetPhotoListener.onGetPhoto(mParentItemPostion, position);
+                    }
                     return;
                 }
-                if (!TextUtils.isEmpty(mList_url.get(position))) {//已拍照
-
+                if (!TextUtils.isEmpty(mList_url.get(position).getUrl())) {//已拍照
+                    for (int i = 0; i < mList_url.size(); i++) {
+                        if (position == i) {
+                            mList_url.get(position).setSelect(mList_url.get(position).isSelect() ? false : true);
+                        } else {
+                            mList_url.get(i).setSelect(false);
+                        }
+                    }
+                    notifyDataSetChanged();
                 }
             }
         });
@@ -110,7 +130,13 @@ public class UploadInfoPicAdapter extends BaseAdapter {
         return position == size;
     }
 
+    public interface OnGetPhotoListener {
+        void onGetPhoto(int parentItemPosition, int position);
+    }
+
     static class ViewHolder {
+        @BindView(R.id.rl_item)
+        RelativeLayout rl;
         @BindView(R.id.pv_company_item)
         PhotoView pv;
         @BindView(R.id.ib_delete_company_item)

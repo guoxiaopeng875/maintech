@@ -1,5 +1,6 @@
 package com.xmkj.md.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,7 +27,7 @@ public class FiledirsBean {
 
         private String FileDirId;
         private String FileDirName;
-        private List<String> listPicUrl;
+        private List<String> listPicUrl = new ArrayList<>();
 
         public String getFileDirId() {
             return FileDirId;
