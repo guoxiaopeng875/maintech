@@ -32,11 +32,12 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_custom_name_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="李先生"
+            android:text="--"
             android:textColor="@color/black87"
             android:textSize="15sp" />
     </RelativeLayout>
@@ -54,11 +55,12 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_phone_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="13800138000"
+            android:text="--"
             android:textColor="@color/black87"
             android:textSize="15sp" />
     </RelativeLayout>
@@ -76,11 +78,12 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_idcard_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="440582199310032890"
+            android:text="--"
             android:textColor="@color/black87"
             android:textSize="15sp" />
     </RelativeLayout>
@@ -98,11 +101,12 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_type_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="回租类型A"
+            android:text="--"
             android:textColor="@color/black87"
             android:textSize="15sp" />
     </RelativeLayout>
@@ -120,11 +124,12 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_company_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="深圳三金财富"
+            android:text="--"
             android:textColor="@color/black87"
             android:textSize="15sp" />
     </RelativeLayout>
@@ -142,11 +147,12 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_money_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="200,000"
+            android:text="--"
             android:textColor="@color/black87"
             android:textSize="15sp" />
     </RelativeLayout>
@@ -164,11 +170,12 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_commission_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="200,000"
+            android:text="--"
             android:textColor="@color/black87"
             android:textSize="15sp" />
     </RelativeLayout>
@@ -186,18 +193,21 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_time_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="2018-08-08"
+            android:text="--"
             android:textColor="@color/black87"
             android:textSize="15sp" />
     </RelativeLayout>
 
     <View style="@style/line_black12_dp" />
 
-    <RelativeLayout style="@style/md_rl_d40">
+    <RelativeLayout
+        android:id="@+id/rl_cost_detail"
+        style="@style/md_rl_d40">
 
         <TextView
             android:layout_width="wrap_content"
@@ -208,12 +218,13 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_cost_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/iv_arr_cost"
-            android:layout_marginRight="@dimen/x10"
+            android:layout_marginRight="@dimen/x8"
             android:layout_centerVertical="true"
-            android:text="2000"
+            android:text="--"
             android:textColor="@color/black87"
             android:textSize="15sp" />
 
@@ -228,7 +239,9 @@
 
     <View style="@style/line_black12_d8" />
 
-    <RelativeLayout style="@style/md_rl_d40">
+    <RelativeLayout
+        android:id="@+id/rl_account_detail"
+        style="@style/md_rl_d40">
 
         <TextView
             android:layout_width="wrap_content"

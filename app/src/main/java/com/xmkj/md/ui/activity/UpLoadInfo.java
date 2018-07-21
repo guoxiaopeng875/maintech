@@ -10,15 +10,14 @@ import com.google.gson.Gson;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.config.Constants;
-import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.FiledirsBean;
 import com.xmkj.md.model.UploadInfoUrlBean;
 import com.xmkj.md.ui.adapter.UploadInfoAdapter;
 import com.xmkj.md.ui.adapter.UploadInfoPicAdapter;
+import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.PhotoUtil;
 import com.xmkj.md.utils.StatusBarSettingUtils;
-import com.xmkj.md.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,12 +59,12 @@ public class UpLoadInfo extends BaseActivity {
         mOrderId = getIntent().getExtras().getString("orderId");
         mUploadInfoAdapter = new UploadInfoAdapter(this, R.layout.item_uploadinfo, mListDirs,
                 new UploadInfoPicAdapter.OnGetPhotoListener() {
-            @Override
-            public void onGetPhoto(int parentItemPosition,int postion) {
-                mParentItemPosition = parentItemPosition;
-                mPhotoPosition = postion;
-            }
-        });
+                    @Override
+                    public void onGetPhoto(int parentItemPosition, int postion) {
+                        mParentItemPosition = parentItemPosition;
+                        mPhotoPosition = postion;
+                    }
+                });
         mRv.setLayoutManager(new LinearLayoutManager(this));
         mRv.setAdapter(mUploadInfoAdapter);
         getFileDirs();
@@ -117,6 +116,7 @@ public class UpLoadInfo extends BaseActivity {
             public void onSuccess(String json) {
                 UploadInfoUrlBean uploadInfoUrlBean = mGson.fromJson(json, UploadInfoUrlBean.class);
                 mListDirs.get(mParentItemPosition).getListPicUrl().add(uploadInfoUrlBean.getData().getFileUrl());
+                mListDirs.get(mParentItemPosition).setFileDirId(uploadInfoUrlBean.getData().getFileId());
                 mUploadInfoAdapter.notifyDataSetChanged();
             }
 
@@ -128,14 +128,17 @@ public class UpLoadInfo extends BaseActivity {
     }
 
 
-    @OnClick({R.id.ib_back_contacts, R.id.tv_cancel_uploadinfo})
+    @OnClick({R.id.ib_back_contacts, R.id.tv_cancel_uploadinfo, R.id.btn_next_upload_info})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ib_back_contacts://返回按钮
                 finish();
                 break;
             case R.id.tv_cancel_uploadinfo://取消报单
-                finish();
+                AppUtils.jumpAndClearTask(UpLoadInfo.this, Main.class);
+                break;
+            case R.id.btn_next_upload_info:
+                //MdHttpHelper.setOrderFile(UpLoadInfo.this,mOrderId,);
                 break;
         }
     }

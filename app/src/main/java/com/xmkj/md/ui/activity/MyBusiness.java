@@ -46,7 +46,6 @@ public class MyBusiness extends BaseActivity {
 
     private MyBusinessAdapter mMyBusinessAdapter;
     private int mCurrentPage = 1;
-    private List<MyBusinessBean> mListMyBusiness = new ArrayList<>();
     private boolean mIsSearch;
 
 
@@ -62,18 +61,22 @@ public class MyBusiness extends BaseActivity {
 
     @Override
     public void initData() {
-        mMyBusinessAdapter = new MyBusinessAdapter(R.layout.item_mybusiness_view, mListMyBusiness);
+        mMyBusinessAdapter = new MyBusinessAdapter(R.layout.item_mybusiness_view, new ArrayList<>());
         mMyBusinessAdapter.setOnItemClickListener(new BaseQuickAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
                 Bundle bundle = new Bundle();
-                bundle.putString("orderId", mListMyBusiness.get(position).getOrderId());
-                AppUtils.jump2Next(MyBusiness.this, BusinessDetail.class);
+                bundle.putString("orderId", mMyBusinessAdapter.getData().get(position).getOrderId());
+                AppUtils.jump2Next(MyBusiness.this, BusinessDetail.class, bundle, false);
             }
         });
         mRv.setLayoutManager(new LinearLayoutManager(this));
         mRv.setAdapter(mMyBusinessAdapter);
         mEtSearch.addTextChangedListener(new SearchWatcher());
+    }
+
+    @Override
+    public void setListener() {
         mSrl.setOnRefreshListener(new OnRefreshListener() {
             @Override
             public void onRefresh(RefreshLayout refreshLayout) {
@@ -89,10 +92,6 @@ public class MyBusiness extends BaseActivity {
             }
         });
         mSrl.autoRefresh();
-    }
-
-    @Override
-    public void setListener() {
         mEtSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -101,7 +100,7 @@ public class MyBusiness extends BaseActivity {
                         ToastUtils.showToast(MyBusiness.this, "请输入客户名");
                         return false;
                     }
-                    mListMyBusiness.clear();
+                    mMyBusinessAdapter.setNewData(null);
                     mIsSearch = true;
                     getMyBusiness(false);
                     return false;
@@ -113,9 +112,7 @@ public class MyBusiness extends BaseActivity {
 
     private void getMyBusiness(boolean isRefresh) {
         String search = "";
-        if (mIsSearch) {
-            search = mEtSearch.getText().toString().trim();
-        }
+        if (mIsSearch) search = mEtSearch.getText().toString().trim();
         MdHttpHelper.getMyBusiness(this, mCurrentPage, search, new MdHttpHelper.SuccessCallback<List<MyBusinessBean>>() {
             @Override
             public void onSuccess(List<MyBusinessBean> list) {
@@ -123,9 +120,9 @@ public class MyBusiness extends BaseActivity {
                 if (isRefresh) {
                     mMyBusinessAdapter.setNewData(list);
                     mSrl.finishRefresh();
-                } else {
-                    finishLoadMore(mMyBusinessAdapter, list, mSrl);
+                    return;
                 }
+                finishLoadMore(mMyBusinessAdapter, list, mSrl);
             }
         });
     }
@@ -162,7 +159,7 @@ public class MyBusiness extends BaseActivity {
                     ToastUtils.showToast(MyBusiness.this, "请输入客户名");
                     return;
                 }
-                mListMyBusiness.clear();
+                mMyBusinessAdapter.setNewData(null);
                 mIsSearch = true;
                 getMyBusiness(true);
                 break;

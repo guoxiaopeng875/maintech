@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.xmkj.md.R;
@@ -113,16 +114,25 @@ public class BeginApply extends BaseActivity {
         AppUtils.jump2Next(this, ApplyUserInfo.class);
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            AppUtils.finishActivity(BeginApply.this);
+            return false;
+        } else {
+            return super.onKeyDown(keyCode, event);
+        }
+    }
+
 
     @OnClick({R.id.ib_back_begin_apply, R.id.tv_cancel_begin_apply, R.id.bt_commit_begin_apply})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ib_back_begin_apply:
-                finish();
+                AppUtils.finishActivity(BeginApply.this);
                 break;
             case R.id.tv_cancel_begin_apply:
-                finish();
-                this.overridePendingTransition(R.anim.activity_noanimate, R.anim.activity_close);
+                AppUtils.finishActivity(BeginApply.this);
                 break;
             case R.id.bt_commit_begin_apply:
                 nextStep();

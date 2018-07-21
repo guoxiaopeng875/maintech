@@ -20,13 +20,6 @@ public class MyApplication extends Application {
     protected static Context context;
     protected static Handler handler;
     protected static int mainThreadId;
-    private static MyApplication mApp;
-
-
-    public static synchronized MyApplication getInstance() {
-        mApp = new MyApplication();
-        return mApp;
-    }
 
     @Override
     public void onCreate() {

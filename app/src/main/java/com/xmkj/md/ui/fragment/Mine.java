@@ -11,6 +11,7 @@ import com.xmkj.md.model.MineInfoBean;
 import com.xmkj.md.ui.activity.Achievement;
 import com.xmkj.md.ui.activity.Contacts;
 import com.xmkj.md.ui.activity.MineInfo;
+import com.xmkj.md.ui.activity.MyBusiness;
 import com.xmkj.md.ui.activity.MyCommission;
 import com.xmkj.md.ui.activity.RecommendCode;
 import com.xmkj.md.utils.AppUtils;
@@ -90,11 +91,14 @@ public class Mine extends BaseFragment {
         });
     }
 
-    @OnClick({R.id.ll_commission_mine, R.id.ll_contacts_mine, R.id.ll_mine_info_mine, R.id.ll_recommend_code_mine, R.id.ll_achievement_mine})
+    @OnClick({R.id.ll_commission_mine, R.id.ll_mybusiness_mine, R.id.ll_contacts_mine, R.id.ll_mine_info_mine, R.id.ll_recommend_code_mine, R.id.ll_achievement_mine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_commission_mine:
-                AppUtils.jump2Next(this.getActivity(), MyCommission.class);
+                AppUtils.jump2Next(getActivity(), MyCommission.class);
+                break;
+            case R.id.ll_mybusiness_mine:
+                AppUtils.jump2Next(getActivity(), MyBusiness.class);
                 break;
             case R.id.ll_contacts_mine://通讯录
                 AppUtils.jump2Next(getActivity(), Contacts.class);

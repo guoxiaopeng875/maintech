@@ -5,6 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.model.ContactsBean;
@@ -24,12 +28,13 @@ import butterknife.OnClick;
  */
 
 public class Contacts extends BaseActivity {
+    @BindView(R.id.refresh_view_contacts)
+    SmartRefreshLayout mSrl;
     @BindView(R.id.rv_contacts)
     RecyclerView mRv;
 
     private ContactsAdapter mContactsAdapter;
     private int mCurrentPage = 1;
-    private List<ContactsBean> mListContacts = new ArrayList<>();
 
     @Override
     protected int getLayoutId() {
@@ -39,39 +44,54 @@ public class Contacts extends BaseActivity {
     @Override
     public void initView() {
         StatusBarSettingUtils.setStatusBarColor(this, R.color.toolbar_bg);
-
     }
 
     @Override
     public void initData() {
-        mContactsAdapter = new ContactsAdapter(R.layout.item_contacts_view, mListContacts);
+        mContactsAdapter = new ContactsAdapter(R.layout.item_contacts_view, new ArrayList<>());
         mContactsAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
             @Override
             public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
                 switch (view.getId()) {
                     case R.id.bt_call_contacts:
-                        AppUtils.call(Contacts.this, mListContacts.get(position).getPhone());
+                        AppUtils.call(Contacts.this, mContactsAdapter.getData().get(position).getPhone());
                         break;
                 }
             }
         });
         mRv.setLayoutManager(new LinearLayoutManager(this));
         mRv.setAdapter(mContactsAdapter);
-        getContacts();
     }
 
     @Override
     public void setListener() {
-
+        mSrl.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshLayout) {
+                mCurrentPage = 1;
+                getContacts(true);
+            }
+        });
+        mSrl.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(RefreshLayout refreshLayout) {
+                mCurrentPage++;
+                getContacts(false);
+            }
+        });
+        mSrl.autoRefresh();
     }
 
-    private void getContacts(){
+    private void getContacts(boolean isRefresh) {
         MdHttpHelper.getContacts(this, mCurrentPage, new MdHttpHelper.SuccessCallback<List<ContactsBean>>() {
             @Override
             public void onSuccess(List<ContactsBean> list) {
-                mListContacts.clear();
-                mListContacts.addAll(list);
-                mContactsAdapter.notifyDataSetChanged();
+                if (isRefresh) {
+                    mContactsAdapter.setNewData(list);
+                    mSrl.finishRefresh();
+                    return;
+                }
+                finishLoadMore(mContactsAdapter, list, mSrl);
             }
         });
     }

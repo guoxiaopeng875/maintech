@@ -159,6 +159,7 @@
     <View style="@style/line" />
 
     <LinearLayout
+        android:id="@+id/ll_mybusiness_mine"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x46"
         android:background="@color/white"

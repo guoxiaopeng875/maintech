@@ -19,6 +19,7 @@ import com.xmkj.md.http.SpotsCallback;
 import com.xmkj.md.model.AddOrderInfoBean;
 import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.BaseResponseBean;
+import com.xmkj.md.model.BusinessDetailBean;
 import com.xmkj.md.model.ContactsBean;
 import com.xmkj.md.model.FiledirsBean;
 import com.xmkj.md.model.HomeDataBean;
@@ -26,7 +27,6 @@ import com.xmkj.md.model.MineInfoBean;
 import com.xmkj.md.model.MyBusinessBean;
 import com.xmkj.md.model.PlatformBean;
 import com.xmkj.md.model.RecommendCodeBean;
-import com.xmkj.md.model.UploadInfoUrlBean;
 import com.xmkj.md.widget.MyProgressDialog;
 
 import java.io.File;
@@ -55,7 +55,7 @@ public class MdHttpHelper {
 
 
     /**
-     * 获取推荐码
+     * 1获取推荐码
      *
      * @param context  the context
      * @param callback the callback
@@ -71,7 +71,7 @@ public class MdHttpHelper {
     }
 
     /**
-     * 设置推荐码
+     * 2设置推荐码
      *
      * @param context         the context
      * @param recommendedCode the recommended code
@@ -93,7 +93,7 @@ public class MdHttpHelper {
     }
 
     /**
-     * 我的资料
+     * 3我的资料
      *
      * @param context  the context
      * @param callback the callback
@@ -113,7 +113,7 @@ public class MdHttpHelper {
     }
 
     /**
-     * 修改我的资料
+     * 4修改我的资料
      *
      * @param context  the context
      * @param name     the name
@@ -141,7 +141,7 @@ public class MdHttpHelper {
     }
 
     /**
-     * 首页列表
+     * 5首页列表
      *
      * @param context  the context
      * @param callback the callback
@@ -161,7 +161,7 @@ public class MdHttpHelper {
     }
 
     /**
-     * 获取通讯录
+     * 6获取通讯录
      *
      * @param context     the context
      * @param currentPage the current page
@@ -188,7 +188,7 @@ public class MdHttpHelper {
     }
 
     /**
-     * 有效的可选平台
+     * 7有效的可选平台
      *
      * @param context  the context
      * @param callback the callback
@@ -208,7 +208,7 @@ public class MdHttpHelper {
     }
 
     /**
-     * 有效业务类型
+     * 8有效业务类型
      *
      * @param context    the context
      * @param platformId the platform id
@@ -231,7 +231,7 @@ public class MdHttpHelper {
     }
 
     /**
-     * 报单
+     * 9报单
      *
      * @param context        the context
      * @param customerName   the customer name
@@ -264,7 +264,7 @@ public class MdHttpHelper {
     }
 
     /**
-     * 需要上传资料的文件夹列表
+     * 10需要上传资料的文件夹列表
      *
      * @param context  the context
      * @param orderId  the order id
@@ -287,7 +287,7 @@ public class MdHttpHelper {
     }
 
     /**
-     * 我的业务
+     * 11我的业务
      *
      * @param context      the context
      * @param currentPage  the current page
@@ -313,11 +313,258 @@ public class MdHttpHelper {
     }
 
 
+    /**
+     * 12业务详情
+     *
+     * @param context  the context
+     * @param orderId  the order id
+     * @param callback the callback
+     */
     public static void getBusinessDetail(Context context, String orderId, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
         params.put("OrderId", orderId);
-        httpHelper.post(Constants.BUSINESS_DETAIL, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+        httpHelper.post(Constants.BUSINESS_DETAIL, params, new SpotsCallback<BaseBean<BusinessDetailBean>>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean<BusinessDetailBean> dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 13费用详情
+     *
+     * @param context  the context
+     * @param orderId  the order id
+     * @param callback the callback
+     */
+    public static void getCostDetail(Context context, String orderId, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("OrderId", orderId);
+        httpHelper.post(Constants.COST_DETAIL, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 14逾期详情
+     *
+     * @param context  the context
+     * @param orderId  the order id
+     * @param callback the callback
+     */
+    public static void getOverDueDetail(Context context, String orderId, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("OrderId", orderId);
+        httpHelper.post(Constants.OVERDUE_DETAIL, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 15添加逾期情况
+     *
+     * @param context  the context
+     * @param orderId  the order id
+     * @param remark   the remark
+     * @param callback the callback
+     */
+    public static void AddOverDue(Context context, String orderId, String remark,
+                                  SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("OrderId", orderId);
+        params.put("Remark", remark);
+        httpHelper.post(Constants.ADD_OVERDUE, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 16贷后跟进详情
+     *
+     * @param context  the context
+     * @param orderId  the order id
+     * @param callback the callback
+     */
+    public static void getLoanFollowDetail(Context context, String orderId, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("OrderId", orderId);
+        httpHelper.post(Constants.POSTLOAN_FOLLOW, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 17获取订单确认信息
+     *
+     * @param context  the context
+     * @param orderId  the order id
+     * @param callback the callback
+     */
+    public static void getOrderCofirmInfo(Context context, String orderId, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("OrderId", orderId);
+        httpHelper.post(Constants.ORDER_CONFIRM, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 18月度业绩
+     *
+     * @param context  the context
+     * @param callback the callback
+     */
+    public static void getMonthAchievement(Context context, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        httpHelper.post(Constants.MONTH_ACHIEVEMENT, null, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 19年度业绩
+     *
+     * @param context  the context
+     * @param callback the callback
+     */
+    public static void getYearAchievement(Context context, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        httpHelper.post(Constants.YEAR_ACHIEVEMENT, null, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 20订单取消
+     *
+     * @param context  the context
+     * @param orderId  the order id
+     * @param callback the callback
+     */
+    public static void orderCancle(Context context, String orderId, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("OrderId", orderId);
+        httpHelper.post(Constants.CANCLE_ORDER, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 21流程详情
+     *
+     * @param context  the context
+     * @param orderId  the order id
+     * @param callback the callback
+     */
+    public static void getProcessDetail(Context context, String orderId, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("OrderId", orderId);
+        httpHelper.post(Constants.PROCESS_DETAIL, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 22上传资料后提交
+     *
+     * @param context  the context
+     * @param orderId  the order id
+     * @param list     the list
+     * @param callback the callback
+     */
+    public static void setOrderFile(Context context, String orderId, List<String> list,
+                                    SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("FileIds", list);
+        params.put("OrderId", orderId);
+        httpHelper.post(Constants.SET_ORDER_FILE, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {

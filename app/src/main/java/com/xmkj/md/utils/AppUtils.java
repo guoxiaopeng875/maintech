@@ -44,7 +44,7 @@ public class AppUtils {
      * 跳到指定页面，并清空之前的activity栈
      */
     public static void jumpAndClearTask(Context ctx, Class<?> target) {
-        Intent intent = new Intent(ctx, target).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(ctx, target).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         ctx.startActivity(intent);
     }
 
@@ -429,16 +429,16 @@ public class AppUtils {
      * 拍照图片
      ***/
     public static void captureImage(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            doTakePhotoIn7(activity);
-        } else {
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            // 指定照片保存路径（SD卡），image.jpg为一个临时文件，每次拍照后这个图片都会被替换
-            Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "image.jpg"));
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-            intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);//保存照片的质量
-            activity.startActivityForResult(intent, Constants.IMAGE_CAPTURE);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+//            doTakePhotoIn7(activity);
+//        } else {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // 指定照片保存路径（SD卡），image.jpg为一个临时文件，每次拍照后这个图片都会被替换
+        Uri uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), "image.jpg"));
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);//保存照片的质量
+        activity.startActivityForResult(intent, Constants.IMAGE_CAPTURE);
+//        }
     }
 
     public static void doTakePhotoIn7(Activity activity) {

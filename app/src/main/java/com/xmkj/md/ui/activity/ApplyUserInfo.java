@@ -82,7 +82,16 @@ public class ApplyUserInfo extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_cancel_apply_info:
-                AppUtils.jumpAndClearTask(ApplyUserInfo.this, Main.class);
+                if (TextUtils.isEmpty(mOrderId)){
+                    AppUtils.jumpAndClearTask(ApplyUserInfo.this, Main.class);
+                    return;
+                }
+                MdHttpHelper.orderCancle(ApplyUserInfo.this, mOrderId, new MdHttpHelper.SuccessCallback() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        AppUtils.jumpAndClearTask(ApplyUserInfo.this, Main.class);
+                    }
+                });
                 break;
             case R.id.btn_submit_user_info:
                 onSubmit();
