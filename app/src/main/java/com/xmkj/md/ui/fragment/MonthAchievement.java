@@ -26,6 +26,7 @@ import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.model.AchievementBean;
 import com.xmkj.md.ui.activity.Achievement;
+import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -60,6 +61,7 @@ public class MonthAchievement extends BaseFragment {
 
     @Override
     protected void initData() {
+//        MdHttpHelper.getMonthAchievement();
         initChart();
 
     }

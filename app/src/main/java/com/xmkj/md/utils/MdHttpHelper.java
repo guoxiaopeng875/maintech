@@ -62,24 +62,6 @@ public class MdHttpHelper {
     private static AppData mAppData = AppData.GetInstance(MyApplication.getContext());
 
     /**
-     * 获取月度业绩
-     */
-    public static void getMonthlyData(Context context, SuccessCallback<AchievementBean> callback) {
-        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
-        httpHelper.post(Constants.MINE_INFO, null, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
-            @Override
-            public void onSuccess(Response response, BaseBean dataBean) {
-                if (dataBean.isSuccess()) {
-                    JSONObject dataObj = (JSONObject) dataBean.getData();
-                    callback.onSuccess(AchievementBean.getAchievement(dataObj));
-                    return;
-                }
-                ToastUtils.showToast(context, dataBean.getMessage());
-            }
-        });
-    }
-
-    /**
      * 1获取推荐码
      *
      * @param context  the context
@@ -491,13 +473,14 @@ public class MdHttpHelper {
      * @param context  the context
      * @param callback the callback
      */
-    public static void getMonthAchievement(Context context, SuccessCallback callback) {
+    public static void getMonthAchievement(Context context, SuccessCallback<AchievementBean> callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         httpHelper.post(Constants.MONTH_ACHIEVEMENT, null, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {
-                    callback.onSuccess(dataBean.getData());
+                    JSONObject dataObj = (JSONObject) dataBean.getData();
+                    callback.onSuccess(AchievementBean.getAchievement(dataObj));
                     return;
                 }
                 ToastUtils.showToast(context, dataBean.getMessage());
