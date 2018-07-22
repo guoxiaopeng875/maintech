@@ -1,6 +1,7 @@
 package com.xmkj.md;
 
 import com.xmkj.md.model.AchievementBean;
+import com.xmkj.md.model.MonthlyAchievementBean;
 import com.xmkj.md.model.WithdrawRecordBean;
 
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class BeanTest {
 
     @Test
     public void testAchievementGetMark() {
-        AchievementBean achievementBean = new AchievementBean();
+        MonthlyAchievementBean achievementBean = new MonthlyAchievementBean();
         achievementBean.setLoanAmount(1000f);
         achievementBean.setMonth(10f);
         achievementBean.setDay(10f);

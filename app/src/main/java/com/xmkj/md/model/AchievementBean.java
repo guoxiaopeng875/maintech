@@ -1,6 +1,11 @@
 package com.xmkj.md.model;
 
-import com.xmkj.md.utils.StringUtils;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 作者: 郭晓鹏
@@ -8,26 +13,21 @@ import com.xmkj.md.utils.StringUtils;
  * 地点: 深圳
  */
 
-public class AchievementBean {
-    // 月份
-    private float month;
-    private float day;
-    // 放款金额
+public class AchievementBean<T> {
+    // 总的放款金额
     private float loanAmount;
 
-    // 放款量
+    // 总的放款量
     private int count;
 
-    public String getMark() {
-        return (int)month + "月" + (int)day + "日 " + count + "单 ￥" + StringUtils.numberFormat(loanAmount + "");
+    private List<T> data;
+
+    public List<T> getData() {
+        return data;
     }
 
-    public float getMonth() {
-        return month;
-    }
-
-    public void setMonth(float month) {
-        this.month = month;
+    public void setData(List<T> data) {
+        this.data = data;
     }
 
     public float getLoanAmount() {
@@ -38,13 +38,6 @@ public class AchievementBean {
         this.loanAmount = loanAmount;
     }
 
-    public float getDay() {
-        return day;
-    }
-
-    public void setDay(float day) {
-        this.day = day;
-    }
 
     public int getCount() {
         return count;
@@ -52,5 +45,40 @@ public class AchievementBean {
 
     public void setCount(int count) {
         this.count = count;
+    }
+
+    // jsonObject转成月度业绩
+    public static AchievementBean<MonthlyAchievementBean> getAchievement(JSONObject dataObj) {
+        AchievementBean<MonthlyAchievementBean> achievement = new AchievementBean<>();
+        List<MonthlyAchievementBean> mAchievements = new ArrayList<>();
+        try {
+            Iterator iterator = dataObj.keys();
+            while (iterator.hasNext()) {
+                String key = (String) iterator.next();
+                Object value = dataObj.get(key);
+                if (!(value instanceof JSONObject)) {
+                    switch (key) {
+                        case "Count":
+                            achievement.setCount((int) value);
+                        case "Sum":
+                            achievement.setLoanAmount((int) value);
+                    }
+                    continue;
+                }
+                JSONObject dayData = (JSONObject) value;
+                MonthlyAchievementBean mAchievement = new MonthlyAchievementBean();
+                int day = dayData.getInt("Day");
+                mAchievement.setCount(dayData.getInt("Count"));
+                mAchievement.setDay(day);
+                mAchievement.setLoanAmount(dayData.getInt("SumMoney"));
+                mAchievements.add(mAchievement);
+//            System.out.println(mAchievement.getDay());
+            }
+            Collections.sort(mAchievements);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        achievement.setData(mAchievements);
+        return achievement;
     }
 }

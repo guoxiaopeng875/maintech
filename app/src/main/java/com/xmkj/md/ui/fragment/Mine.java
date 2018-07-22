@@ -86,7 +86,7 @@ public class Mine extends BaseFragment {
                 mTvName.setText(data.wrapRealName());
                 mTvPhone.setText(data.wrapPhone());
                 mTvCode.setText(data.getPromotionCode());
-                mTvTag.setText(data.getSignature());
+                mTvTag.setText(data.getEnunciation());
             }
         });
     }

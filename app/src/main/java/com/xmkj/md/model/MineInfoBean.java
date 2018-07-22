@@ -11,7 +11,7 @@ public class MineInfoBean {
 
     /**
      * UserId : 5b3f3a7da9702215009b52b8
-     * Name : 罗晓山
+     * RealName : 罗晓山
      * Address : null
      * Phone : null
      * Email : null
@@ -22,7 +22,7 @@ public class MineInfoBean {
      * City : 北京市
      * County : 东城区
      * PromotionCode : 123456
-     * Signature : null
+     * Enunciation : null
      * CardBank : null
      * CardBranch : null
      * CardHost : null
@@ -30,7 +30,7 @@ public class MineInfoBean {
      */
 
     private String UserId;
-    private String Name;
+    private String RealName;
     private String Address;
     private String Phone;
     private String Email;
@@ -41,17 +41,17 @@ public class MineInfoBean {
     private String City;
     private String County;
     private String PromotionCode;
-    private String Signature;
+    private String Enunciation;
     private String CardBank;
     private String CardBranch;
     private String CardHost;
     private String CardNumber;
 
     public String wrapRealName() {
-        if (Name == null) {
+        if (RealName == null) {
             return "";
         }
-        return StringUtils.formatName(Name);
+        return StringUtils.formatName(RealName);
     }
 
     public String wrapPhone() {
@@ -69,12 +69,12 @@ public class MineInfoBean {
         this.UserId = UserId;
     }
 
-    public String getName() {
-        return Name;
+    public String getRealName() {
+        return RealName;
     }
 
-    public void setName(String RealName) {
-        this.Name = RealName;
+    public void setRealName(String RealName) {
+        this.RealName = RealName;
     }
 
     public String getAddress() {
@@ -157,12 +157,12 @@ public class MineInfoBean {
         this.PromotionCode = PromotionCode;
     }
 
-    public String getSignature() {
-        return Signature;
+    public String getEnunciation() {
+        return Enunciation;
     }
 
-    public void setSignature(String Enunciation) {
-        this.Signature = Enunciation;
+    public void setEnunciation(String Enunciation) {
+        this.Enunciation = Enunciation;
     }
 
     public String getCardBank() {
