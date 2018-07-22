@@ -104,6 +104,12 @@
             android:name=".ui.activity.BeginApply"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.CostDetail"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
+
+
 
 
         <activity

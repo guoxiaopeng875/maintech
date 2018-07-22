@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/x36"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/iv_indicate_process"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:src="@mipmap/ic_process_line_indicate"
+        android:visibility="invisible"/>
+
+
+    <LinearLayout
+        android:id="@+id/rl_process"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_indicate_process"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/line_one_process"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x2"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/green87" />
+
+        <ImageView
+            android:id="@+id/iv_point_process"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_process_line_point" />
+
+        <View
+            android:id="@+id/line_two_process"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/x2"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:background="@color/green87" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_status_process"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:ems="1"
+        android:layout_below="@+id/rl_process"
+        android:textSize="13sp"
+        android:textColor="@color/black87"/>
+
+
+</RelativeLayout>

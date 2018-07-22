@@ -1,12 +1,21 @@
 package com.xmkj.md.ui.activity;
 
+import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.model.BusinessDetailBean;
+import com.xmkj.md.model.ProcessDetailHorizontalBean;
+import com.xmkj.md.ui.adapter.ProcessDetailHorizontalAdapter;
+import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.DataUtil;
 import com.xmkj.md.utils.MdHttpHelper;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -35,7 +44,14 @@ public class BusinessDetail extends BaseActivity {
     TextView mTvTime;
     @BindView(R.id.tv_cost_detail)
     TextView mTvCost;
+    @BindView(R.id.tv_status_business_detail)
+    TextView mTvStatus;
+    @BindView(R.id.rv_process_business_detail)
+    RecyclerView mRvProcess;
+
+
     private String mOrderId;
+    private ProcessDetailHorizontalAdapter mProcessDetailHorizontalAdapter;
 
     @Override
     protected int getLayoutId() {
@@ -49,7 +65,10 @@ public class BusinessDetail extends BaseActivity {
 
     @Override
     public void initData() {
-        mOrderId = getIntent().getExtras().getString("orderId");
+        Bundle bundle = getIntent().getExtras();
+        if (bundle != null) {
+            mOrderId = bundle.getString("orderId");
+        }
         getDetail();
     }
 
@@ -67,12 +86,28 @@ public class BusinessDetail extends BaseActivity {
                 mTvIdcard.setText(data.getIdCard());
                 mTvType.setText(data.getBuinessTypeName());
                 mTvCompany.setText(data.getPlatformName());
-                mTvMoney.setText(String.valueOf(data.getPayAmount()));
-                mTvCommission.setText(String.valueOf(data.getCommissionMoney()));
+                mTvMoney.setText("¥  " + String.valueOf(data.getPayAmount()));
+                mTvCommission.setText("¥  " + String.valueOf(data.getCommissionMoney()));
+                mTvCost.setText("¥  " + String.valueOf(data.getSumMoney()));
                 mTvTime.setText(data.getCreateTime());
-                mTvCost.setText(String.valueOf(data.getSumMoney()));
+                mTvStatus.setText(DataUtil.getOrderStatus(data.getStatus()));
+                setProcessData(data.getStatus());
             }
         });
+    }
+
+    private void setProcessData(int statusCode) {
+        if (statusCode == 998 || statusCode == 999) {
+            mRvProcess.setVisibility(View.GONE);
+            return;
+        }
+        List<ProcessDetailHorizontalBean> list = DataUtil.getProcessDetailHorizontalData();
+        mProcessDetailHorizontalAdapter = new ProcessDetailHorizontalAdapter
+                (R.layout.item_process_detail_view_horizontal, statusCode, list);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRvProcess.setLayoutManager(linearLayoutManager);
+        mRvProcess.setAdapter(mProcessDetailHorizontalAdapter);
     }
 
 
@@ -83,15 +118,14 @@ public class BusinessDetail extends BaseActivity {
                 finish();
                 break;
             case R.id.rl_cost_detail://费用
-                MdHttpHelper.getCostDetail(BusinessDetail.this, mOrderId, new MdHttpHelper.SuccessCallback() {
-                    @Override
-                    public void onSuccess(Object data) {
-
-                    }
-                });
+                Bundle bundle = new Bundle();
+                bundle.putString("orderId", mOrderId);
+                AppUtils.jump2Next(BusinessDetail.this, CostDetail.class, bundle, false);
                 break;
             case R.id.rl_account_detail://佣金结算
                 break;
         }
     }
+
+
 }
