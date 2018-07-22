@@ -8,7 +8,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_businessdetail"
         style="@style/toolbar_common"
-        android:background="@color/green87">
+        android:background="@color/toolbar_bg">
 
         <ImageButton
             android:id="@+id/ib_back_businessdetail"
@@ -19,258 +19,290 @@
             android:text="业务详情" />
     </android.support.v7.widget.Toolbar>
 
-    <View style="@style/line_black12_d8" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <RelativeLayout style="@style/md_rl_d40">
-
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="客户姓名"
-            android:textColor="@color/black54"
-            android:textSize="15sp" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_custom_name_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="--"
-            android:textColor="@color/black87"
-            android:textSize="15sp" />
-    </RelativeLayout>
+            <View style="@style/line_black12_d8" />
 
-    <View style="@style/line_black12_dp" />
+            <RelativeLayout style="@style/md_rl_d40">
 
-    <RelativeLayout style="@style/md_rl_d40">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="客户姓名"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="联系方式"
-            android:textColor="@color/black54"
-            android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv_custom_name_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="--"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_phone_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="--"
-            android:textColor="@color/black87"
-            android:textSize="15sp" />
-    </RelativeLayout>
+            <View style="@style/line_black12_dp" />
 
-    <View style="@style/line_black12_dp" />
+            <RelativeLayout style="@style/md_rl_d40">
 
-    <RelativeLayout style="@style/md_rl_d40">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="联系方式"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="身份证号码"
-            android:textColor="@color/black54"
-            android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv_phone_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="--"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_idcard_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="--"
-            android:textColor="@color/black87"
-            android:textSize="15sp" />
-    </RelativeLayout>
+            <View style="@style/line_black12_dp" />
 
-    <View style="@style/line_black12_d8" />
+            <RelativeLayout style="@style/md_rl_d40">
 
-    <RelativeLayout style="@style/md_rl_d40">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="身份证号码"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="业务类型"
-            android:textColor="@color/black54"
-            android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv_idcard_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="--"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_type_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="--"
-            android:textColor="@color/black87"
-            android:textSize="15sp" />
-    </RelativeLayout>
+            <View style="@style/line_black12_d8" />
 
-    <View style="@style/line_black12_dp" />
+            <RelativeLayout style="@style/md_rl_d40">
 
-    <RelativeLayout style="@style/md_rl_d40">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="业务类型"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="平台方"
-            android:textColor="@color/black54"
-            android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv_type_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="--"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_company_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="--"
-            android:textColor="@color/black87"
-            android:textSize="15sp" />
-    </RelativeLayout>
+            <View style="@style/line_black12_dp" />
 
-    <View style="@style/line_black12_dp" />
+            <RelativeLayout style="@style/md_rl_d40">
 
-    <RelativeLayout style="@style/md_rl_d40">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="平台方"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="放款金额"
-            android:textColor="@color/black54"
-            android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv_company_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="--"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_money_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="--"
-            android:textColor="@color/black87"
-            android:textSize="15sp" />
-    </RelativeLayout>
+            <View style="@style/line_black12_dp" />
 
-    <View style="@style/line_black12_dp" />
+            <RelativeLayout style="@style/md_rl_d40">
 
-    <RelativeLayout style="@style/md_rl_d40">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="放款金额"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="佣金金额"
-            android:textColor="@color/black54"
-            android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv_money_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="--"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_commission_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="--"
-            android:textColor="@color/black87"
-            android:textSize="15sp" />
-    </RelativeLayout>
+            <View style="@style/line_black12_dp" />
 
-    <View style="@style/line_black12_d8" />
+            <RelativeLayout style="@style/md_rl_d40">
 
-    <RelativeLayout style="@style/md_rl_d40">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="佣金金额"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="保单时间"
-            android:textColor="@color/black54"
-            android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv_commission_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="--"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_time_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:text="--"
-            android:textColor="@color/black87"
-            android:textSize="15sp" />
-    </RelativeLayout>
+            <View style="@style/line_black12_d8" />
 
-    <View style="@style/line_black12_dp" />
+            <RelativeLayout style="@style/md_rl_d40">
 
-    <RelativeLayout
-        android:id="@+id/rl_cost_detail"
-        style="@style/md_rl_d40">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="保单时间"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="费用"
-            android:textColor="@color/black54"
-            android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv_time_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="--"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_cost_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/iv_arr_cost"
-            android:layout_marginRight="@dimen/x8"
-            android:layout_centerVertical="true"
-            android:text="--"
-            android:textColor="@color/black87"
-            android:textSize="15sp" />
+            <View style="@style/line_black12_dp" />
 
-        <ImageView
-            android:id="@+id/iv_arr_cost"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/ic_arrow_right" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_cost_detail"
+                style="@style/md_rl_d40">
 
-    <View style="@style/line_black12_d8" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="费用"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
 
-    <RelativeLayout
-        android:id="@+id/rl_account_detail"
-        style="@style/md_rl_d40">
+                <TextView
+                    android:id="@+id/tv_cost_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x8"
+                    android:layout_toLeftOf="@+id/iv_arr_cost"
+                    android:text="--"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:text="订单流程"
-            android:textColor="@color/black54"
-            android:textSize="15sp" />
+                <ImageView
+                    android:id="@+id/iv_arr_cost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/ic_arrow_right" />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x10"
-            android:layout_toLeftOf="@+id/iv_arr_process"
-            android:text="佣金结算"
-            android:textColor="@color/black87"
-            android:textSize="15sp" />
+            <View style="@style/line_black12_d8" />
 
-        <ImageView
-            android:id="@+id/iv_arr_process"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/ic_arrow_right" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/rl_account_detail"
+                style="@style/md_rl_d40">
 
-    <View style="@style/line_black12_dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="订单流程"
+                    android:textColor="@color/black54"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tv_status_business_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/x10"
+                    android:layout_toLeftOf="@+id/iv_arr_process"
+                    android:text="佣金结算"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/iv_arr_process"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/ic_arrow_right" />
+            </RelativeLayout>
+
+            <View style="@style/line_black12_dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_process_business_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginRight="@dimen/x15"
+                android:layout_marginTop="@dimen/x8"
+                android:layout_marginBottom="@dimen/x8"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

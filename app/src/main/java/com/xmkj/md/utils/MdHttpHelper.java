@@ -21,6 +21,7 @@ import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.BaseResponseBean;
 import com.xmkj.md.model.BusinessDetailBean;
 import com.xmkj.md.model.ContactsBean;
+import com.xmkj.md.model.CostDetailBean;
 import com.xmkj.md.model.FiledirsBean;
 import com.xmkj.md.model.HomeDataBean;
 import com.xmkj.md.model.MineInfoBean;
@@ -348,9 +349,9 @@ public class MdHttpHelper {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
         params.put("OrderId", orderId);
-        httpHelper.post(Constants.COST_DETAIL, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+        httpHelper.post(Constants.COST_DETAIL, params, new SpotsCallback<BaseBean<CostDetailBean>>(context, MSG_LOADING) {
             @Override
-            public void onSuccess(Response response, BaseBean dataBean) {
+            public void onSuccess(Response response, BaseBean<CostDetailBean> dataBean) {
                 if (dataBean.isSuccess()) {
                     callback.onSuccess(dataBean.getData());
                     return;

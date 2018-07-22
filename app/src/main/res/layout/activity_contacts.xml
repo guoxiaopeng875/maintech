@@ -5,29 +5,16 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_contacts"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/toolbar_bg"
-        android:minHeight="?attr/actionBarSize">
+        style="@style/toolbar_common"
+        android:background="@color/toolbar_bg">
 
         <ImageButton
             android:id="@+id/ib_back_contacts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:background="@null"
-            android:padding="@dimen/x8"
-            android:src="@mipmap/ic_back_white" />
+            style="@style/toolbar_back_white" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_gravity="center"
-            android:text="通讯录"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
+            style="@style/toolbar_title"
+            android:text="通讯录" />
     </android.support.v7.widget.Toolbar>
 
     <com.scwang.smartrefresh.layout.SmartRefreshLayout
