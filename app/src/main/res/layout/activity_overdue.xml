@@ -7,10 +7,10 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_overdue"
         style="@style/toolbar_common"
-        android:background="@color/green87">
+        android:background="@color/toolbar_bg">
 
         <ImageButton
-            android:id="@+id/ib_back_followup"
+            android:id="@+id/ib_back_overdue"
             style="@style/toolbar_back_white" />
 
         <TextView
@@ -46,7 +46,8 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="张薇"
+                    android:textStyle="bold"
+                    android:text="--"
                     android:textColor="@color/black87"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -64,11 +65,13 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/tv_phone_overdue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="13800138000"
+                    android:textStyle="bold"
+                    android:text="--"
                     android:textColor="@color/black87"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -81,16 +84,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="客户姓名"
+                    android:text="身份证号码"
                     android:textColor="@color/black54"
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/tv_idcard_overdue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="440589196710097880"
+                    android:textStyle="bold"
+                    android:text="--"
                     android:textColor="@color/black87"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -103,16 +108,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="业务类型A"
+                    android:text="业务类型"
                     android:textColor="@color/black54"
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/tv_type_overdue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="回租类型A"
+                    android:textStyle="bold"
+                    android:text="--"
                     android:textColor="@color/black87"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -130,11 +137,13 @@
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/tv_platform_overdue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="深圳三金财富"
+                    android:textStyle="bold"
+                    android:text="--"
                     android:textColor="@color/black87"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -147,16 +156,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="返款金额"
+                    android:text="放款金额"
                     android:textColor="@color/black54"
                     android:textSize="15sp" />
 
                 <TextView
+                    android:id="@+id/tv_money_overdue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:text="¥200,000"
+                    android:textStyle="bold"
+                    android:text="--"
                     android:textColor="@color/black87"
                     android:textSize="15sp" />
             </RelativeLayout>
@@ -166,63 +177,65 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x8"
                 android:background="@color/white"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/x15"
-                android:paddingRight="@dimen/x15">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/x10"
-                    android:text="跟进说明"
+                    android:layout_marginBottom="@dimen/x5"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:layout_marginRight="@dimen/x15"
+                    android:text="逾期情况"
                     android:textColor="@color/black54"
                     android:textSize="15sp" />
 
-
-                <TextView
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_overdue_detail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/x12"
-                    android:text="打卡机奥凯电缆可否考虑你们了你们了现场来看，那种，美女蓝卡队IJFKAWJEFKLASLDKFALDFLANV"
-                    android:textColor="@color/black87"
-                    android:textColorHint="@color/black54"
-                    android:textSize="15sp" />
+                    android:nestedScrollingEnabled="false"/>
+
             </LinearLayout>
 
             <RelativeLayout
                 style="@style/md_rl_d40_white"
-                android:layout_marginTop="@dimen/x1">
+                android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/tv_add_overdue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:text="该客户本月再次逾期，跟进中"
-                    android:textColor="@color/black87"
-                    android:textSize="15sp" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                style="@style/md_rl_d40_white"
-                android:layout_marginTop="@dimen/x1">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:gravity="center_vertical"
+                    android:layout_marginTop="@dimen/x8"
+                    android:layout_marginBottom="@dimen/x8"
                     android:drawableLeft="@mipmap/ic_add"
-                    android:text="添加逾期情况，跟进中"
+                    android:drawablePadding="@dimen/x5"
+                    android:gravity="center_vertical"
+                    android:text="添加逾期情况"
                     android:textColor="@color/black87"
                     android:textSize="15sp" />
+
+                <EditText
+                    android:id="@+id/et_add_overdue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_add_overdue"
+                    android:hint="请输入"
+                    android:layout_marginTop="@dimen/x10"
+                    android:layout_marginBottom="@dimen/x8"
+                    android:maxLength="300"
+                    android:textColor="@color/black87"
+                    android:textSize="15sp"
+                    android:textColorHint="@color/black54"
+                    android:background="@null"
+                    android:visibility="gone"/>
             </RelativeLayout>
 
             <Button
                 android:id="@+id/btn_submit_overdue"
                 style="@style/md_btn"
-                android:layout_marginTop="@dimen/x20"
                 android:layout_marginBottom="@dimen/x20"
+                android:layout_marginTop="@dimen/x20"
                 android:text="提交" />
 
         </LinearLayout>

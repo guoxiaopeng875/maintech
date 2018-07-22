@@ -39,10 +39,10 @@ public class DataUtil {
                 orderStatus = "财务放款";
                 break;
             case 21:
-                orderStatus = "佣金结算";
+                orderStatus = "结算中";
                 break;
             case 31:
-                orderStatus = "还款";
+                orderStatus = "还款中";
                 break;
             case 60:
                 orderStatus = "结束";
@@ -51,7 +51,7 @@ public class DataUtil {
                 orderStatus = "已取消";
                 break;
             case 999:
-                orderStatus = "已拒绝";
+                orderStatus = "已结清";
                 break;
             default:
                 orderStatus = "";

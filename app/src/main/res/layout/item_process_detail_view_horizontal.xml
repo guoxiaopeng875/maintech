@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:src="@mipmap/ic_process_line_indicate"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
 
 
     <LinearLayout
@@ -48,11 +48,13 @@
         android:id="@+id/tv_status_process"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/rl_process"
         android:layout_centerHorizontal="true"
         android:ems="1"
-        android:layout_below="@+id/rl_process"
-        android:textSize="13sp"
-        android:textColor="@color/black87"/>
+        android:textColor="@color/black87"
+        android:textSize="13sp" />
+
+
 
 
 </RelativeLayout>

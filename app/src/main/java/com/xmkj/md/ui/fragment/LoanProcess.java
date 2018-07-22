@@ -1,6 +1,7 @@
 package com.xmkj.md.ui.fragment;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -11,13 +12,11 @@ import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
-import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.DataListBean;
-import com.xmkj.md.model.OrderBean;
-import com.xmkj.md.model.PageBean;
 import com.xmkj.md.model.LoanProcessBean;
+import com.xmkj.md.ui.activity.FollowUp;
 import com.xmkj.md.ui.adapter.LoanProcessAdapter;
-import com.xmkj.md.utils.ToastUtils;
+import com.xmkj.md.utils.AppUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -85,7 +84,9 @@ public class LoanProcess extends BaseFragment {
     public void setListener() {
         if (mLoanProcessAdapter != null) {
             mLoanProcessAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-                ToastUtils.showToast(position + view.getId());
+                Bundle bundle = new Bundle();
+                bundle.putString("orderId", mLoanProcessAdapter.getData().get(position).getOrderId());
+                AppUtils.jump2Next(getActivity(), FollowUp.class, bundle, false);
             });
         }
         if (mSrlLoan != null) {

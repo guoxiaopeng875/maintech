@@ -24,10 +24,11 @@ import com.xmkj.md.model.BusinessDetailBean;
 import com.xmkj.md.model.ContactsBean;
 import com.xmkj.md.model.CostDetailBean;
 import com.xmkj.md.model.FiledirsBean;
+import com.xmkj.md.model.FollowUpDetailBean;
 import com.xmkj.md.model.HomeDataBean;
 import com.xmkj.md.model.MineInfoBean;
-import com.xmkj.md.model.MonthlyAchievementBean;
 import com.xmkj.md.model.MyBusinessBean;
+import com.xmkj.md.model.OverdueDetailBean;
 import com.xmkj.md.model.PlatformBean;
 import com.xmkj.md.model.ProcessDetailBean;
 import com.xmkj.md.model.RecommendCodeBean;
@@ -37,10 +38,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -380,9 +378,9 @@ public class MdHttpHelper {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
         params.put("OrderId", orderId);
-        httpHelper.post(Constants.OVERDUE_DETAIL, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+        httpHelper.post(Constants.OVERDUE_DETAIL, params, new SpotsCallback<BaseBean<OverdueDetailBean>>(context, MSG_LOADING) {
             @Override
-            public void onSuccess(Response response, BaseBean dataBean) {
+            public void onSuccess(Response response, BaseBean<OverdueDetailBean> dataBean) {
                 if (dataBean.isSuccess()) {
                     callback.onSuccess(dataBean.getData());
                     return;
@@ -401,13 +399,13 @@ public class MdHttpHelper {
      * @param remark   the remark
      * @param callback the callback
      */
-    public static void AddOverDue(Context context, String orderId, String remark,
+    public static void addOverdue(Context context, String orderId, String remark,
                                   SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
         params.put("OrderId", orderId);
         params.put("Remark", remark);
-        httpHelper.post(Constants.ADD_OVERDUE, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+        httpHelper.post(Constants.ADD_OVERDUE, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {
@@ -431,9 +429,9 @@ public class MdHttpHelper {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
         params.put("OrderId", orderId);
-        httpHelper.post(Constants.POSTLOAN_FOLLOW, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+        httpHelper.post(Constants.POSTLOAN_FOLLOW, params, new SpotsCallback<BaseBean<FollowUpDetailBean>>(context, MSG_LOADING) {
             @Override
-            public void onSuccess(Response response, BaseBean dataBean) {
+            public void onSuccess(Response response, BaseBean<FollowUpDetailBean> dataBean) {
                 if (dataBean.isSuccess()) {
                     callback.onSuccess(dataBean.getData());
                     return;
@@ -583,6 +581,36 @@ public class MdHttpHelper {
                 ToastUtils.showToast(context, dataBean.getMessage());
             }
         });
+    }
+
+
+    /**
+     * 23贷后跟进提交
+     *
+     * @param context         the context
+     * @param orderId         the order id
+     * @param list            the list
+     * @param feedbackOpinion the feedback opinion
+     * @param callback        the callback
+     */
+    public static void setMortgagefollowFile(Context context, String orderId, List<String> list,
+                                             String feedbackOpinion, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("FileIds", list);
+        params.put("OrderId", orderId);
+        params.put("FeedbackOpinion", feedbackOpinion);
+        httpHelper.post(Constants.LOAN_FOLLOW_COMMIT, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+
     }
 
 
