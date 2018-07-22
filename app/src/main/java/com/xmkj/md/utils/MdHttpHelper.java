@@ -16,6 +16,7 @@ import com.squareup.okhttp.Response;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
+import com.xmkj.md.model.AchievementBean;
 import com.xmkj.md.model.AddOrderInfoBean;
 import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.BaseResponseBean;
@@ -25,15 +26,21 @@ import com.xmkj.md.model.CostDetailBean;
 import com.xmkj.md.model.FiledirsBean;
 import com.xmkj.md.model.HomeDataBean;
 import com.xmkj.md.model.MineInfoBean;
+import com.xmkj.md.model.MonthlyAchievementBean;
 import com.xmkj.md.model.MyBusinessBean;
 import com.xmkj.md.model.PlatformBean;
 import com.xmkj.md.model.ProcessDetailBean;
 import com.xmkj.md.model.RecommendCodeBean;
 import com.xmkj.md.widget.MyProgressDialog;
 
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -54,7 +61,6 @@ public class MdHttpHelper {
     private static Handler mHandler;
     private static Gson mGson = new Gson();
     private static AppData mAppData = AppData.GetInstance(MyApplication.getContext());
-
 
     /**
      * 1获取推荐码
@@ -468,13 +474,14 @@ public class MdHttpHelper {
      * @param context  the context
      * @param callback the callback
      */
-    public static void getMonthAchievement(Context context, SuccessCallback callback) {
+    public static void getMonthAchievement(Context context, SuccessCallback<AchievementBean> callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         httpHelper.post(Constants.MONTH_ACHIEVEMENT, null, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {
-                    callback.onSuccess(dataBean.getData());
+                    JSONObject dataObj = (JSONObject) dataBean.getData();
+                    callback.onSuccess(AchievementBean.getAchievement(dataObj));
                     return;
                 }
                 ToastUtils.showToast(context, dataBean.getMessage());

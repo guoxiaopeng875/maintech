@@ -26,6 +26,7 @@ import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.model.AchievementBean;
 import com.xmkj.md.ui.activity.Achievement;
+import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -60,6 +61,7 @@ public class MonthAchievement extends BaseFragment {
 
     @Override
     protected void initData() {
+//        MdHttpHelper.getMonthAchievement();
         initChart();
 
     }
@@ -70,7 +72,7 @@ public class MonthAchievement extends BaseFragment {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 AchievementBean data = (AchievementBean) e.getData();
-                mMarkMonth.setText(data.getMark());
+//                mMarkMonth.setText(data.getMark());
             }
 
             @Override
@@ -88,8 +90,8 @@ public class MonthAchievement extends BaseFragment {
         List<AchievementBean> dataObj = new ArrayList<>();
         for (int i = 0; i < 12; i++) {
             AchievementBean achievementBean = new AchievementBean();
-            achievementBean.setMonth(i + 1);
-            achievementBean.setLoanAmount((float) Math.random());
+//            achievementBean.setMonth(i + 1);
+            achievementBean.setLoanAmount((float) Math.random()*10000);
             dataObj.add(achievementBean);
         }
         lineData = initSingleLineChart(dataObj);
@@ -100,7 +102,7 @@ public class MonthAchievement extends BaseFragment {
         List<Entry> entries = new ArrayList<>();
         for (AchievementBean data : dataObj) {
             // turn your data into Entry objects
-            entries.add(new Entry(data.getMonth(), data.getLoanAmount(), data));
+//            entries.add(new Entry(data.getMonth(), data.getLoanAmount(), data));
         }
         //设置折线的样式
         LineDataSet dataSet = new LineDataSet(entries, "");
@@ -128,9 +130,7 @@ public class MonthAchievement extends BaseFragment {
         lineChart.setDrawGridBackground(false); //表格颜色
         lineChart.setGridBackgroundColor(Color.GRAY & 0x70FFFFFF); //表格的颜色，设置一个透明度
         lineChart.setBackgroundColor(Color.WHITE); //设置背景颜色
-        // 设置不可缩放
-        lineChart.setDoubleTapToZoomEnabled(false);
-        lineChart.setPinchZoom(false);
+
         lineChart.setData(lineData);
 
         // 隐藏图表下面的label
@@ -155,13 +155,15 @@ public class MonthAchievement extends BaseFragment {
 //        axisLeft.setTextSize(10f); //字体大小
         //axisLeft.setAxisMaxValue(800f); //最大值
         axisLeft.setLabelCount(5, false); //显示格数
-        axisLeft.setGridColor(R.color.black54); //网格线颜色
+        axisLeft.setGridColor(R.color.black12); //网格线颜色
         YAxis axisRight = lineChart.getAxisRight(); //y轴右边标示
         axisRight.setDrawAxisLine(false);
         axisRight.setDrawGridLines(false);
         axisRight.setDrawLabels(false);
 
-        lineChart.setPadding(0, 0, 0, 10);
+        // 设置不可缩放
+        lineChart.setDoubleTapToZoomEnabled(false);
+        lineChart.setPinchZoom(false);
         lineChart.invalidate();
     }
 
@@ -177,7 +179,7 @@ public class MonthAchievement extends BaseFragment {
         public void refreshContent(Entry e, Highlight highlight) {
 //            tvContent.setText("" + e.getVal());
             AchievementBean data = (AchievementBean) e.getData();
-            mMarkMonth.setText(data.getMark());
+//            mMarkMonth.setText(data.getMark());
         }
 
         /* * offset 是以点到的那个点(0,0) 中心然后向右下角画出来 * 所以如果要显示在点上方 * X=宽度的一半，负数 * Y=高度的负数 */

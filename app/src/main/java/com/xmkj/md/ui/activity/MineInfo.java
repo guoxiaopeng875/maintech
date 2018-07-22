@@ -36,9 +36,9 @@ public class MineInfo extends BaseActivity {
 
     @Override
     public void initView() {
-        mTvName.setText(mMineInfoData.getName());
+        mTvName.setText(mMineInfoData.getRealName());
         mTvPhone.setText(mMineInfoData.getPhone());
-        String enunciation = mMineInfoData.getSignature();
+        String enunciation = mMineInfoData.getEnunciation();
         if (enunciation != null && enunciation.length() > 0) {
             mEtTag.setText(enunciation);
             mEtTag.setSelection(enunciation.length());
@@ -57,7 +57,7 @@ public class MineInfo extends BaseActivity {
 
     private void setMineInfo() {
         String tag = mEtTag.getText().toString().trim();
-        MdHttpHelper.setMineInfo(this, mMineInfoData.getName(),
+        MdHttpHelper.setMineInfo(this, mMineInfoData.getRealName(),
                 mMineInfoData.getPhone(), tag, new MdHttpHelper.SuccessCallback() {
                     @Override
                     public void onSuccess(Object data) {
