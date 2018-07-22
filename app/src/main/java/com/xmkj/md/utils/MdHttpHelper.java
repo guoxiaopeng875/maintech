@@ -27,6 +27,7 @@ import com.xmkj.md.model.HomeDataBean;
 import com.xmkj.md.model.MineInfoBean;
 import com.xmkj.md.model.MyBusinessBean;
 import com.xmkj.md.model.PlatformBean;
+import com.xmkj.md.model.ProcessDetailBean;
 import com.xmkj.md.model.RecommendCodeBean;
 import com.xmkj.md.widget.MyProgressDialog;
 
@@ -538,9 +539,9 @@ public class MdHttpHelper {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
         params.put("OrderId", orderId);
-        httpHelper.post(Constants.PROCESS_DETAIL, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+        httpHelper.post(Constants.PROCESS_DETAIL, params, new SpotsCallback<BaseBean<List<ProcessDetailBean>>>(context, MSG_LOADING) {
             @Override
-            public void onSuccess(Response response, BaseBean dataBean) {
+            public void onSuccess(Response response, BaseBean<List<ProcessDetailBean>> dataBean) {
                 if (dataBean.isSuccess()) {
                     callback.onSuccess(dataBean.getData());
                     return;

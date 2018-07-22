@@ -111,18 +111,19 @@ public class BusinessDetail extends BaseActivity {
     }
 
 
-    @OnClick({R.id.ib_back_businessdetail, R.id.rl_cost_detail, R.id.rl_account_detail})
+    @OnClick({R.id.ib_back_businessdetail, R.id.rl_cost_detail, R.id.rl_process_detail})
     public void onViewClicked(View view) {
+        Bundle bundle = new Bundle();
+        bundle.putString("orderId", mOrderId);
         switch (view.getId()) {
             case R.id.ib_back_businessdetail:
                 finish();
                 break;
             case R.id.rl_cost_detail://费用
-                Bundle bundle = new Bundle();
-                bundle.putString("orderId", mOrderId);
                 AppUtils.jump2Next(BusinessDetail.this, CostDetail.class, bundle, false);
                 break;
-            case R.id.rl_account_detail://佣金结算
+            case R.id.rl_process_detail://订单流程
+                AppUtils.jump2Next(BusinessDetail.this, ProcessDetail.class, bundle, false);
                 break;
         }
     }

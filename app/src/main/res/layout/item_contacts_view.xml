@@ -14,9 +14,9 @@
         android:gravity="center"
         android:layout_centerVertical="true"
         android:textStyle="bold"
-        android:textColor="@color/white"
+        android:textColor="@color/white87"
         android:textSize="25sp"
-        android:background="@drawable/shape_text_bg"/>
+        android:background="@drawable/shape_round_gray"/>
 
     <TextView
         android:id="@+id/tv_name_contacts"

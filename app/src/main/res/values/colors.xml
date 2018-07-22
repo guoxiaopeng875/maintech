@@ -22,6 +22,10 @@
     <color name="black54">#8a000000</color>
     <color name="black38">#61000000</color>
     <color name="black12">#1F000000</color>
+    <color name="white87">#deffffff</color>
+    <color name="gray_aab8b3">#aab8b3</color>
+
+
     <color name="line_login">#1f000000</color>
     <color name="md_bg">#eee</color>
     <color name="green87">#de05bb75</color>

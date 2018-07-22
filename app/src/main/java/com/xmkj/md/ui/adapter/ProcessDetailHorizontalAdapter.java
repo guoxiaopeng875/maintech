@@ -45,7 +45,6 @@ public class ProcessDetailHorizontalAdapter extends BaseQuickAdapter<ProcessDeta
         } else {
             helper.setImageResource(R.id.iv_point_process, R.mipmap.ic_process_line_point_unactive);
         }
-
     }
 
 }
