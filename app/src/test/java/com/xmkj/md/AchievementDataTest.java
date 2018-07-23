@@ -2,7 +2,6 @@ package com.xmkj.md;
 
 import com.xmkj.md.model.AchievementBean;
 import com.xmkj.md.model.MonthlyAchievementBean;
-import com.xmkj.md.utils.MdHttpHelper;
 
 import org.json.JSONObject;
 import org.junit.Test;
@@ -23,7 +22,7 @@ public class AchievementDataTest {
     public void testGetAchievement() throws Exception {
         JSONObject obj = new JSONObject(jsonStr());
         JSONObject dataObj = obj.getJSONObject("Data");
-        AchievementBean<MonthlyAchievementBean> achievement = AchievementBean.getAchievement(dataObj);
+        AchievementBean<MonthlyAchievementBean> achievement = AchievementBean.getMonthlyAchievement(dataObj);
         List<MonthlyAchievementBean> data = achievement.getData();
         assertEquals(2, achievement.getCount());
         assertEquals(1793500, (int) achievement.getLoanAmount());

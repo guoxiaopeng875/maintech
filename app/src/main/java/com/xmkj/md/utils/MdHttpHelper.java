@@ -35,8 +35,6 @@ import com.xmkj.md.model.ProcessDetailBean;
 import com.xmkj.md.model.RecommendCodeBean;
 import com.xmkj.md.widget.MyProgressDialog;
 
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -480,7 +478,7 @@ public class MdHttpHelper {
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {
                     LinkedTreeMap dataObj = (LinkedTreeMap) dataBean.getData();
-                    callback.onSuccess(AchievementBean.getAchievement(DataUtil.map2JSONObj(dataObj)));
+                    callback.onSuccess(AchievementBean.getMonthlyAchievement(DataUtil.map2JSONObj(dataObj)));
                     return;
                 }
                 ToastUtils.showToast(context, dataBean.getMessage());
@@ -500,7 +498,8 @@ public class MdHttpHelper {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {
-                    callback.onSuccess(dataBean.getData());
+                    LinkedTreeMap dataObj = (LinkedTreeMap) dataBean.getData();
+                    callback.onSuccess(AchievementBean.getYearlyAchievement(DataUtil.map2JSONObj(dataObj)));
                     return;
                 }
                 ToastUtils.showToast(context, dataBean.getMessage());

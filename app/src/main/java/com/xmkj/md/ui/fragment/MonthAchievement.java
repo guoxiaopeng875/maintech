@@ -1,28 +1,23 @@
 package com.xmkj.md.ui.fragment;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.MarkerView;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.MPPointF;
-import com.orhanobut.logger.Logger;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.model.AchievementBean;
 import com.xmkj.md.model.MonthlyAchievementBean;
+import com.xmkj.md.utils.LineChartUtil;
 import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.StringUtils;
 
@@ -30,7 +25,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.Unbinder;
 
 /**
  * Created by 晴天 on 2018/7/5.
@@ -47,8 +41,6 @@ public class MonthAchievement extends BaseFragment {
     TextView mTvCountMonth;
     @BindView(R.id.tv_amount_month)
     TextView mTvAmountMonth;
-
-    private LineData lineData;
 
 
     @Override
@@ -101,8 +93,8 @@ public class MonthAchievement extends BaseFragment {
         Description description = new Description();
         description.setText("");
         mLineChart.setDescription(description);
-        lineData = initSingleLineChart(dataObj);
-        initDataStyle(mLineChart, lineData, dataObj.size());
+        LineData lineData = initSingleLineChart(dataObj);
+        initDataStyle(mLineChart, lineData);
     }
 
     private LineData initSingleLineChart(List<MonthlyAchievementBean> dataObj) {
@@ -112,70 +104,12 @@ public class MonthAchievement extends BaseFragment {
 //            Logger.d(data.getDay());
             entries.add(new Entry(data.getDay(), data.getLoanAmount(), data));
         }
-        //设置折线的样式
-        LineDataSet dataSet = new LineDataSet(entries, "");
-        //用y轴的集合来设置参数
-        dataSet.setDrawCircles(true);  //设置有圆点
-        dataSet.setLineWidth(2f); // 线宽
-        dataSet.setCircleRadius(3f);// 显示的圆形大小
-        dataSet.setColor(getResources().getColor(R.color.md_green));// 折线显示颜色
-        dataSet.setCircleColor(getResources().getColor(R.color.md_green));// 圆形折点的颜色
-        dataSet.setValueTextColor(getResources().getColor(R.color.transparent)); //数值显示的颜色
-        dataSet.setValueTextSize(8f);     //数值显示的大小
-        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
-        dataSets.add(dataSet);
-        //构建一个LineData  将dataSets放入
-        return new LineData(dataSets);
+        return LineChartUtil.initSingleLineChart(entries, this.getContext());
     }
 
-    private void initDataStyle(LineChart lineChart, LineData lineData, int size) {
-        size = 31;
-        //设置点击折线点时，显示其数值
-//        MyMakerView mv = new MyMakerView(context, R.layout.item_mark_layout);
-//        mLineChart.setMarkerView(mv);
-        // 隐藏label
-        lineChart.setDrawBorders(false); //在折线图上添加边框
-        //lineChart.setDescription("时间/数据"); //数据描述
-        lineChart.setDrawGridBackground(false); //表格颜色
-        lineChart.setGridBackgroundColor(Color.GRAY & 0x70FFFFFF); //表格的颜色，设置一个透明度
-        lineChart.setBackgroundColor(Color.WHITE); //设置背景颜色
-
-        lineChart.setData(lineData);
-
-        // 隐藏图表下面的label
-        lineChart.getLegend().setEnabled(false);
-
-        // 设置x轴
-//        lineChart.setVisibleXRange(0, 12);   //x轴可显示的坐标范围
-        XAxis xAxis = lineChart.getXAxis();  //x轴的标示
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); //x轴位置
-        xAxis.setTextColor(getResources().getColor(R.color.black54));    //字体的颜色
-        xAxis.setLabelCount(size, false);
-        xAxis.setTextSize(10f); //字体大小
-        xAxis.setGridColor(Color.GRAY);//网格线颜色
-        xAxis.setValueFormatter(new XValueFormatter(size));
-        xAxis.setAxisMaximum(size);
-//        xAxis.setDrawGridLines(false); //不显示网格线
-
-        // 设置y轴
-        YAxis axisLeft = lineChart.getAxisLeft(); //y轴左边标示
-        axisLeft.setDrawGridLines(false);
-        axisLeft.setDrawLabels(false);// 隐藏y轴左边标识
-//        axisLeft.setTextColor(Color.GRAY); //字体颜色
-//        axisLeft.setTextSize(10f); //字体大小
-        //axisLeft.setAxisMaxValue(800f); //最大值
-        axisLeft.setLabelCount(size, false); //显示格数
-        axisLeft.setAxisMinimum(0); // 原点起始值
-        axisLeft.setGridColor(R.color.black12); //网格线颜色
-        YAxis axisRight = lineChart.getAxisRight(); //y轴右边标示
-        axisRight.setDrawAxisLine(false);
-        axisRight.setDrawGridLines(false);
-        axisRight.setDrawLabels(false);
-
-        // 设置不可缩放
-        lineChart.setDoubleTapToZoomEnabled(false);
-        lineChart.setPinchZoom(false);
-        lineChart.invalidate();
+    private void initDataStyle(LineChart lineChart, LineData lineData) {
+        int size = 31;
+        LineChartUtil.initDataStyle(lineChart, lineData, size, new XValueFormatter(size), getContext());
     }
 
     // 点击圆点显示的view

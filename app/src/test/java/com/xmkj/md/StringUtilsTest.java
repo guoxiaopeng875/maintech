@@ -65,6 +65,18 @@ public class StringUtilsTest {
     }
 
     @Test
+    public void testEndOfYear() {
+        String str = StringUtils.endOfYear();
+        assertEquals("2018.12.31", str);
+    }
+
+    @Test
+    public void testStartOfYear() {
+        String str = StringUtils.startOfYear();
+        assertEquals("2018.1.1", str);
+    }
+
+    @Test
     public void testGetToday() {
         String str = StringUtils.getToday();
         assertEquals("23", str);

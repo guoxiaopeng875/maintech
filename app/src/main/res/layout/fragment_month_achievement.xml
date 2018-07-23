@@ -19,7 +19,7 @@
         android:id="@+id/line_chart_month"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:layout_marginBottom="@dimen/x10" />
+        android:layout_marginTop="@dimen/x10" />
 
 
     <View style="@style/line_black12_d8" />

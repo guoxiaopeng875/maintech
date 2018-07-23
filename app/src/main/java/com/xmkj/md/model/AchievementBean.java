@@ -59,7 +59,7 @@ public class AchievementBean<T> {
     }
 
     // jsonObject转成月度业绩
-    public static AchievementBean<MonthlyAchievementBean> getAchievement(JSONObject dataObj) {
+    public static AchievementBean<MonthlyAchievementBean> getMonthlyAchievement(JSONObject dataObj) {
         AchievementBean<MonthlyAchievementBean> achievement = new AchievementBean<>();
         List<MonthlyAchievementBean> mAchievements = new ArrayList<>();
         try {
@@ -81,6 +81,41 @@ public class AchievementBean<T> {
                 int day = dayData.getInt("Day");
                 mAchievement.setCount(dayData.getInt("Count"));
                 mAchievement.setDay(day);
+                mAchievement.setLoanAmount(dayData.getInt("SumMoney"));
+                mAchievements.add(mAchievement);
+//            System.out.println(mAchievement.getDay());
+            }
+            Collections.sort(mAchievements);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        achievement.setData(mAchievements);
+        return achievement;
+    }
+
+    // jsonObject转成年度业绩
+    public static AchievementBean<YearlyAchievementBean> getYearlyAchievement(JSONObject dataObj) {
+        AchievementBean<YearlyAchievementBean> achievement = new AchievementBean<>();
+        List<YearlyAchievementBean> mAchievements = new ArrayList<>();
+        try {
+            Iterator iterator = dataObj.keys();
+            while (iterator.hasNext()) {
+                String key = (String) iterator.next();
+                Object value = dataObj.get(key);
+                if (!(value instanceof JSONObject)) {
+                    switch (key) {
+                        case "Count":
+                            achievement.setCount(NumberUtil.doubleObj2Int(value));
+                        case "Sum":
+                            achievement.setLoanAmount(NumberUtil.doubleObj2Int(value));
+                    }
+                    continue;
+                }
+                JSONObject dayData = (JSONObject) value;
+                YearlyAchievementBean mAchievement = new YearlyAchievementBean();
+                int month = dayData.getInt("Month");
+                mAchievement.setCount(dayData.getInt("Count"));
+                mAchievement.setMonth(month);
                 mAchievement.setLoanAmount(dayData.getInt("SumMoney"));
                 mAchievements.add(mAchievement);
 //            System.out.println(mAchievement.getDay());

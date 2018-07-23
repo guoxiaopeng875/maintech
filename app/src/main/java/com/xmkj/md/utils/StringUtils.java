@@ -192,6 +192,24 @@ public class StringUtils {
         return lastDay.format(calendar.getTime());
     }
 
+    // 一年的开始日期
+    public static String startOfYear() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_YEAR,
+                calendar.getActualMinimum(Calendar.DAY_OF_YEAR));
+        SimpleDateFormat firstDay = new SimpleDateFormat("yyyy.M.d", Locale.CHINA);
+        return firstDay.format(calendar.getTime());
+    }
+
+    // 一年的结束日期
+    public static String endOfYear() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_YEAR,
+                calendar.getActualMaximum(Calendar.DAY_OF_YEAR));
+        SimpleDateFormat lastDay = new SimpleDateFormat("yyyy.M.d", Locale.CHINA);
+        return lastDay.format(calendar.getTime());
+    }
+
     // 获取今日
     public static String getToday() {
         SimpleDateFormat fmt = new SimpleDateFormat("d", Locale.CHINA);
