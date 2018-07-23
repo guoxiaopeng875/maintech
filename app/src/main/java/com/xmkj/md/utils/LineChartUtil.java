@@ -43,7 +43,7 @@ public class LineChartUtil {
     }
 
     // 初始化折线图样式
-    public static void initDataStyle(LineChart lineChart, LineData lineData, int size, IAxisValueFormatter f, Context ctx) {
+    public static void initDataStyle(LineChart lineChart, LineData lineData, int size, IAxisValueFormatter f, boolean xLabelForce, Context ctx) {
         Resources res = ctx.getResources();
         //设置点击折线点时，显示其数值
 //        MyMakerView mv = new MyMakerView(context, R.layout.item_mark_layout);
@@ -61,11 +61,11 @@ public class LineChartUtil {
         lineChart.getLegend().setEnabled(false);
 
         // 设置x轴
-        lineChart.setVisibleXRange(0, size-1);   //x轴可显示的坐标范围
+        lineChart.setVisibleXRange(0, size - 1);   //x轴可显示的坐标范围
         XAxis xAxis = lineChart.getXAxis();  //x轴的标示
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); //x轴位置
         xAxis.setTextColor(res.getColor(R.color.black54));    //字体的颜色
-        xAxis.setLabelCount(size, false);
+        xAxis.setLabelCount(size, xLabelForce); // force会影响x轴label的显示
         xAxis.setTextSize(10f); //字体大小
         xAxis.setGridColor(Color.GRAY);//网格线颜色
         xAxis.setValueFormatter(f);

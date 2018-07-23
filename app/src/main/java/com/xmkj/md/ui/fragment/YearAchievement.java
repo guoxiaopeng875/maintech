@@ -107,7 +107,7 @@ public class YearAchievement extends BaseFragment {
 
     private void initDataStyle(LineChart lineChart, LineData lineData) {
         int size = 12;
-        LineChartUtil.initDataStyle(lineChart, lineData, size, new XValueFormatter(size), getContext());
+        LineChartUtil.initDataStyle(lineChart, lineData, size, new XValueFormatter(size), true, getContext());
     }
 
     // x轴文字格式化

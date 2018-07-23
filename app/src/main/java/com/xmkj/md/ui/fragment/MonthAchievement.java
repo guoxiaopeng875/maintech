@@ -109,7 +109,7 @@ public class MonthAchievement extends BaseFragment {
 
     private void initDataStyle(LineChart lineChart, LineData lineData) {
         int size = 31;
-        LineChartUtil.initDataStyle(lineChart, lineData, size, new XValueFormatter(size), getContext());
+        LineChartUtil.initDataStyle(lineChart, lineData, size, new XValueFormatter(size), false, getContext());
     }
 
     // 点击圆点显示的view
