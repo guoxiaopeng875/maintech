@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 import com.orhanobut.logger.Logger;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.MultipartBuilder;
@@ -479,15 +480,14 @@ public class MdHttpHelper {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {
-                    JSONObject dataObj = (JSONObject) dataBean.getData();
-                    callback.onSuccess(AchievementBean.getAchievement(dataObj));
+                    LinkedTreeMap dataObj = (LinkedTreeMap) dataBean.getData();
+                    callback.onSuccess(AchievementBean.getAchievement(DataUtil.map2JSONObj(dataObj)));
                     return;
                 }
                 ToastUtils.showToast(context, dataBean.getMessage());
             }
         });
     }
-
 
     /**
      * 19年度业绩

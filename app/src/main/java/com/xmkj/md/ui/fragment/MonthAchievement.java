@@ -22,9 +22,12 @@ import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.MPPointF;
+import com.orhanobut.logger.Logger;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.model.AchievementBean;
+import com.xmkj.md.model.MineInfoBean;
+import com.xmkj.md.model.MonthlyAchievementBean;
 import com.xmkj.md.ui.activity.Achievement;
 import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.ToastUtils;
@@ -61,8 +64,12 @@ public class MonthAchievement extends BaseFragment {
 
     @Override
     protected void initData() {
-//        MdHttpHelper.getMonthAchievement();
-        initChart();
+        MdHttpHelper.getMonthAchievement(getContext(), new MdHttpHelper.SuccessCallback<AchievementBean>() {
+            @Override
+            public void onSuccess(AchievementBean data) {
+                initChart(data.getData());
+            }
+        });
 
     }
 
@@ -71,8 +78,8 @@ public class MonthAchievement extends BaseFragment {
         mLineChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                AchievementBean data = (AchievementBean) e.getData();
-//                mMarkMonth.setText(data.getMark());
+                MonthlyAchievementBean data = (MonthlyAchievementBean) e.getData();
+                mMarkMonth.setText(data.getMark());
             }
 
             @Override
@@ -82,34 +89,28 @@ public class MonthAchievement extends BaseFragment {
         });
     }
 
-    private void initChart() {
+    private void initChart(List<MonthlyAchievementBean> dataObj) {
         //设置图表的描述
         Description description = new Description();
         description.setText("");
         mLineChart.setDescription(description);
-        List<AchievementBean> dataObj = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            AchievementBean achievementBean = new AchievementBean();
-//            achievementBean.setMonth(i + 1);
-            achievementBean.setLoanAmount((float) Math.random()*10000);
-            dataObj.add(achievementBean);
-        }
         lineData = initSingleLineChart(dataObj);
-        initDataStyle(mLineChart, lineData, getContext());
+        initDataStyle(mLineChart, lineData, dataObj.size());
     }
 
-    private LineData initSingleLineChart(List<AchievementBean> dataObj) {
+    private LineData initSingleLineChart(List<MonthlyAchievementBean> dataObj) {
         List<Entry> entries = new ArrayList<>();
-        for (AchievementBean data : dataObj) {
+        for (MonthlyAchievementBean data : dataObj) {
             // turn your data into Entry objects
-//            entries.add(new Entry(data.getMonth(), data.getLoanAmount(), data));
+            Logger.d(data.getDay());
+            entries.add(new Entry(data.getDay(), data.getLoanAmount(), data));
         }
         //设置折线的样式
         LineDataSet dataSet = new LineDataSet(entries, "");
         //用y轴的集合来设置参数
         dataSet.setDrawCircles(true);  //设置有圆点
-        dataSet.setLineWidth(3f); // 线宽
-        dataSet.setCircleRadius(4f);// 显示的圆形大小
+        dataSet.setLineWidth(2f); // 线宽
+        dataSet.setCircleRadius(3f);// 显示的圆形大小
         dataSet.setColor(getResources().getColor(R.color.md_green));// 折线显示颜色
         dataSet.setCircleColor(getResources().getColor(R.color.md_green));// 圆形折点的颜色
         dataSet.setValueTextColor(getResources().getColor(R.color.transparent)); //数值显示的颜色
@@ -120,7 +121,8 @@ public class MonthAchievement extends BaseFragment {
         return new LineData(dataSets);
     }
 
-    private void initDataStyle(LineChart lineChart, LineData lineData, Context context) {
+    private void initDataStyle(LineChart lineChart, LineData lineData, int size) {
+        size = 31;
         //设置点击折线点时，显示其数值
 //        MyMakerView mv = new MyMakerView(context, R.layout.item_mark_layout);
 //        mLineChart.setMarkerView(mv);
@@ -141,10 +143,11 @@ public class MonthAchievement extends BaseFragment {
         XAxis xAxis = lineChart.getXAxis();  //x轴的标示
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM); //x轴位置
         xAxis.setTextColor(getResources().getColor(R.color.black54));    //字体的颜色
-        xAxis.setLabelCount(12, true);
+        xAxis.setLabelCount(size, false);
         xAxis.setTextSize(10f); //字体大小
         xAxis.setGridColor(Color.GRAY);//网格线颜色
-        xAxis.setValueFormatter(new XValueFormatter());
+        xAxis.setValueFormatter(new XValueFormatter(size));
+        xAxis.setAxisMaximum(size);
 //        xAxis.setDrawGridLines(false); //不显示网格线
 
         // 设置y轴
@@ -154,7 +157,8 @@ public class MonthAchievement extends BaseFragment {
 //        axisLeft.setTextColor(Color.GRAY); //字体颜色
 //        axisLeft.setTextSize(10f); //字体大小
         //axisLeft.setAxisMaxValue(800f); //最大值
-        axisLeft.setLabelCount(5, false); //显示格数
+        axisLeft.setLabelCount(size, false); //显示格数
+        axisLeft.setAxisMinimum(0); // 原点起始值
         axisLeft.setGridColor(R.color.black12); //网格线颜色
         YAxis axisRight = lineChart.getAxisRight(); //y轴右边标示
         axisRight.setDrawAxisLine(false);
@@ -178,8 +182,8 @@ public class MonthAchievement extends BaseFragment {
         @Override
         public void refreshContent(Entry e, Highlight highlight) {
 //            tvContent.setText("" + e.getVal());
-            AchievementBean data = (AchievementBean) e.getData();
-//            mMarkMonth.setText(data.getMark());
+            MonthlyAchievementBean data = (MonthlyAchievementBean) e.getData();
+            mMarkMonth.setText(data.getMark());
         }
 
         /* * offset 是以点到的那个点(0,0) 中心然后向右下角画出来 * 所以如果要显示在点上方 * X=宽度的一半，负数 * Y=高度的负数 */
@@ -195,10 +199,25 @@ public class MonthAchievement extends BaseFragment {
 
     // x轴文字格式化
     class XValueFormatter implements IAxisValueFormatter {
+        private int size;
+
+        XValueFormatter(int size) {
+            this.size = size;
+        }
 
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
-            return (int) value + "月";
+            Logger.d(value);
+            if (value == this.size) {
+                return "5-31";
+            }
+            switch ((int) value) {
+                case 1:
+                    return "5-1";
+                case 15:
+                    return "5-15";
+            }
+            return "";
         }
     }
 

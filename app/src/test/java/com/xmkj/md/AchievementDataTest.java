@@ -30,6 +30,9 @@ public class AchievementDataTest {
         assertEquals(31, data.size());
         MonthlyAchievementBean mAchievement = data.get(0);
         assertEquals(1, (int) mAchievement.getDay());
+        for (int i = 0; i < data.size(); i++) {
+            assertEquals(1, (int) mAchievement.getDay());
+        }
 //        System.out.println(achievements.toString());
     }
 

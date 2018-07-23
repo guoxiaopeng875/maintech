@@ -1,8 +1,13 @@
 package com.xmkj.md.utils;
 
+import com.google.gson.internal.LinkedTreeMap;
 import com.xmkj.md.model.ProcessDetailHorizontalBean;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -109,6 +114,19 @@ public class DataUtil {
             list.add(processDetailHorizontalBean);
         }
         return list;
+    }
+
+    public static JSONObject map2JSONObj(LinkedTreeMap map) {
+        if (map == null) {
+            return null;
+        }
+        JSONObject obj = null;
+        try {
+            obj = new JSONObject(map.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return obj;
     }
 
 

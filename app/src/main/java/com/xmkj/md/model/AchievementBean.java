@@ -59,9 +59,9 @@ public class AchievementBean<T> {
                 if (!(value instanceof JSONObject)) {
                     switch (key) {
                         case "Count":
-                            achievement.setCount((int) value);
+                            achievement.setCount((Integer) value);
                         case "Sum":
-                            achievement.setLoanAmount((int) value);
+                            achievement.setLoanAmount((Integer) value);
                     }
                     continue;
                 }

@@ -41,4 +41,14 @@ public class StringUtilsTest {
         str = StringUtils.formatCellphone("13888888888");
         assertEquals("138 8888 8888", str);
     }
+    @Test
+    public void testGetCurMonth() {
+        String str = StringUtils.getCurMonth();
+        assertEquals("07", str);
+    }
+    @Test
+    public void testStartOfMonth() {
+        String str = StringUtils.startOfMonth();
+        assertEquals("2018.7.1", str);
+    }
 }

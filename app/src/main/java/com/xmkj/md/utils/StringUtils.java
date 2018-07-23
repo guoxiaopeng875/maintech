@@ -166,4 +166,23 @@ public class StringUtils {
         String blankStr = " ";
         return phone.substring(0, 3) + blankStr + phone.substring(3, 7) + blankStr + phone.substring(7);
     }
+
+    // 获取当前月份
+    public static String getCurMonth() {
+        SimpleDateFormat fmt = new SimpleDateFormat("MM", Locale.CHINA);
+        return fmt.format(new Date());
+    }
+
+    // 获取当前月份起始日期
+    public static String startOfMonth() {
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy.M", Locale.CHINA);
+        return fmt.format(new Date()) + ".1";
+    }
+
+    // 获取当前月份结束日期
+    public static String endOfMonth() {
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy.M", Locale.CHINA);
+        return fmt.format(new Date()) + ".1";
+    }
+
 }
