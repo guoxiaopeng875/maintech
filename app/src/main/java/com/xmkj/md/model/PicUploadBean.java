@@ -5,7 +5,9 @@ package com.xmkj.md.model;
  */
 
 public class PicUploadBean {
+
     private String url;
+    private String fileId;
     private boolean isSelect;
 
     public String getUrl() {
@@ -22,6 +24,14 @@ public class PicUploadBean {
 
     public void setSelect(boolean select) {
         isSelect = select;
+    }
+
+    public String getFileId() {
+        return fileId;
+    }
+
+    public void setFileId(String fileId) {
+        this.fileId = fileId;
     }
 
 

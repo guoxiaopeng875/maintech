@@ -258,7 +258,7 @@
             <View style="@style/line_black12_d8" />
 
             <RelativeLayout
-                android:id="@+id/rl_account_detail"
+                android:id="@+id/rl_process_detail"
                 style="@style/md_rl_d40">
 
                 <TextView

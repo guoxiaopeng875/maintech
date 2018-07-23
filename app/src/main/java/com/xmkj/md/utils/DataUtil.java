@@ -44,10 +44,10 @@ public class DataUtil {
                 orderStatus = "财务放款";
                 break;
             case 21:
-                orderStatus = "佣金结算";
+                orderStatus = "结算中";
                 break;
             case 31:
-                orderStatus = "还款";
+                orderStatus = "还款中";
                 break;
             case 60:
                 orderStatus = "结束";
@@ -56,7 +56,7 @@ public class DataUtil {
                 orderStatus = "已取消";
                 break;
             case 999:
-                orderStatus = "已拒绝";
+                orderStatus = "已结清";
                 break;
             default:
                 orderStatus = "";
@@ -83,13 +83,13 @@ public class DataUtil {
             case "财务放款":
                 statusCode = 4;
                 break;
-            case "佣金结算":
+            case "结算中":
                 statusCode = 21;
                 break;
-            case "还款":
+            case "还款中":
                 statusCode = 31;
                 break;
-            case "结束":
+            case "已结清":
                 statusCode = 60;
                 break;
             case "已取消":
@@ -105,7 +105,7 @@ public class DataUtil {
     }
 
     public static List<ProcessDetailHorizontalBean> getProcessDetailHorizontalData() {
-        String[] status = {"报单", "初审", "合同签订", "终审", "财务放款", "佣金结算", "还款", "结束"};
+        String[] status = {"报单", "初审", "合同签订", "终审", "财务放款", "结算中", "还款中", "已结清"};
         List<ProcessDetailHorizontalBean> list = new ArrayList<>();
         for (int i = 0; i < status.length; i++) {
             ProcessDetailHorizontalBean processDetailHorizontalBean = new ProcessDetailHorizontalBean();
