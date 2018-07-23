@@ -110,21 +110,22 @@ public class UpLoadInfo extends BaseActivity {
 
 
     private void uploadPicture(final String fileName) {
-        MdHttpHelper.uploadPicture(this, fileName + ".jpg", new MdHttpHelper.UploadCallBack() {
+        MdHttpHelper.uploadPicture(this, Constants.UPLOAD_FLOWFILE,
+                fileName + ".jpg", new MdHttpHelper.UploadCallBack() {
 
-            @Override
-            public void onSuccess(String json) {
-                UploadInfoUrlBean uploadInfoUrlBean = mGson.fromJson(json, UploadInfoUrlBean.class);
-                mListDirs.get(mParentItemPosition).getListPicUrl().add(uploadInfoUrlBean.getData().getFileUrl());
-                mListDirs.get(mParentItemPosition).setFileDirId(uploadInfoUrlBean.getData().getFileId());
-                mUploadInfoAdapter.notifyDataSetChanged();
-            }
+                    @Override
+                    public void onSuccess(String json) {
+                        UploadInfoUrlBean uploadInfoUrlBean = mGson.fromJson(json, UploadInfoUrlBean.class);
+                        mListDirs.get(mParentItemPosition).getListPicUrl().add(uploadInfoUrlBean.getData().getFileUrl());
+                        mListDirs.get(mParentItemPosition).setFileDirId(uploadInfoUrlBean.getData().getFileId());
+                        mUploadInfoAdapter.notifyDataSetChanged();
+                    }
 
-            @Override
-            public void onFailure() {
+                    @Override
+                    public void onFailure() {
 
-            }
-        });
+                    }
+                });
     }
 
 

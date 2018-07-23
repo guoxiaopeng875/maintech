@@ -86,7 +86,7 @@ public class MdHttpHelper {
     public static void setRecommendCode(Context context, String recommendedCode, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         String url = Constants.SET_RECOMMEND_CODE + "?recommendedCode=" + recommendedCode;
-        httpHelper.post(url, null, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+        httpHelper.post(url, null, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean baseBean) {
                 if (baseBean.isSuccess()) {
@@ -154,7 +154,7 @@ public class MdHttpHelper {
      */
     public static void getHome(Context context, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
-        httpHelper.post(Constants.HOME, null, new SpotsCallback<BaseBean<List<HomeDataBean>>>(context, MSG_UPLOAD) {
+        httpHelper.post(Constants.HOME, null, new SpotsCallback<BaseBean<List<HomeDataBean>>>(context, MSG_LOADING) {
             @Override
             public void onSuccess(Response response, BaseBean<List<HomeDataBean>> dataBean) {
                 if (dataBean.isSuccess()) {
@@ -181,7 +181,7 @@ public class MdHttpHelper {
         params.put("PageIndex", currentPage);
         params.put("PageSize", 10);
         Logger.d(params);
-        httpHelper.post(Constants.CONTACTS, params, new SpotsCallback<BaseBean<List<ContactsBean>>>(context, MSG_UPLOAD) {
+        httpHelper.post(Constants.CONTACTS, params, new SpotsCallback<BaseBean<List<ContactsBean>>>(context, MSG_LOADING) {
             @Override
             public void onSuccess(Response response, BaseBean<List<ContactsBean>> dataBean) {
                 if (dataBean.isSuccess()) {
@@ -257,7 +257,7 @@ public class MdHttpHelper {
         params.put("IdCard", customerIdCard);
         params.put("PlatformId", platformId);
         params.put("BusinessTypeId", BusinessTypeId);
-        httpHelper.post(Constants.ADD_ORDER_INFO, params, new SpotsCallback<BaseBean<AddOrderInfoBean>>(context, MSG_LOADING) {
+        httpHelper.post(Constants.ADD_ORDER_INFO, params, new SpotsCallback<BaseBean<AddOrderInfoBean>>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean<AddOrderInfoBean> dataBean) {
                 if (dataBean.isSuccess()) {
@@ -520,7 +520,7 @@ public class MdHttpHelper {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
         params.put("OrderId", orderId);
-        httpHelper.post(Constants.CANCLE_ORDER, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+        httpHelper.post(Constants.CANCLE_ORDER, params, new SpotsCallback<BaseBean>(context, MSG_CANCLE) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {
@@ -571,7 +571,7 @@ public class MdHttpHelper {
         Map<String, Object> params = new HashMap<>();
         params.put("FileIds", list);
         params.put("OrderId", orderId);
-        httpHelper.post(Constants.SET_ORDER_FILE, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+        httpHelper.post(Constants.SET_ORDER_FILE, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {
@@ -597,7 +597,7 @@ public class MdHttpHelper {
                                              String feedbackOpinion, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
-        params.put("FileIds", list);
+        params.put("FileIds", mGson.toJson(list));
         params.put("OrderId", orderId);
         params.put("FeedbackOpinion", feedbackOpinion);
         httpHelper.post(Constants.LOAN_FOLLOW_COMMIT, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
@@ -615,13 +615,13 @@ public class MdHttpHelper {
 
 
     /**
-     * 图片上传
+     * 25图片上传
      *
      * @param context 上下文
      * @param path    图片上传到服务器后存储的地址
      * @param cb      图片上传回调
      */
-    public static void uploadPicture(final Context context, String path, final UploadCallBack cb) {
+    public static void uploadPicture(final Context context, String url, String path, final UploadCallBack cb) {
         showDialog(context);
         final OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(60, TimeUnit.SECONDS);
@@ -636,7 +636,7 @@ public class MdHttpHelper {
         RequestBody body = multipartBuilder.build();
         Request request = new Request.Builder()
                 .addHeader("Acount-Token-BYKJProjectSimplify", mAppData.getAccessToken())
-                .url(Constants.UPLOAD_FLOWFILE)
+                .url(url)
                 .post(body)
                 .build();
         client.newCall(request).enqueue(new Callback() {

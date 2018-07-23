@@ -29,6 +29,6 @@
             android:layout_width="@dimen/x90"
             android:layout_height="@dimen/x90"
             android:background="@drawable/shape_pic_select_bg"
-            android:visibility="gone"/>
+            android:visibility="gone" />
     </RelativeLayout>
 </RelativeLayout>

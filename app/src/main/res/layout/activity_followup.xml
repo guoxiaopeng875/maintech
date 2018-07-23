@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black12">
+    android:background="@color/white">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_followup"
@@ -26,12 +26,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/black12"
             android:orientation="vertical">
 
-            <RelativeLayout
-                style="@style/md_rl_d40_white"
-                android:layout_marginTop="@dimen/x8">
+            <View style="@style/line_black12_d8" />
+
+            <RelativeLayout style="@style/md_rl_d40_white">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -47,15 +46,15 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:textStyle="bold"
                     android:text="--"
                     android:textColor="@color/black87"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
 
-            <RelativeLayout
-                style="@style/md_rl_d40_white"
-                android:layout_marginTop="@dimen/x1">
+            <View style="@style/line_black12_dp" />
+
+            <RelativeLayout style="@style/md_rl_d40_white">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -71,15 +70,15 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:textStyle="bold"
                     android:text="--"
                     android:textColor="@color/black87"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
 
-            <RelativeLayout
-                style="@style/md_rl_d40_white"
-                android:layout_marginTop="@dimen/x1">
+            <View style="@style/line_black12_dp" />
+
+            <RelativeLayout style="@style/md_rl_d40_white">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -95,15 +94,15 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:textStyle="bold"
                     android:text="--"
                     android:textColor="@color/black87"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
 
-            <RelativeLayout
-                style="@style/md_rl_d40_white"
-                android:layout_marginTop="@dimen/x8">
+            <View style="@style/line_black12_d8" />
+
+            <RelativeLayout style="@style/md_rl_d40_white">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -119,15 +118,15 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:textStyle="bold"
                     android:text="--"
                     android:textColor="@color/black87"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
 
-            <RelativeLayout
-                style="@style/md_rl_d40_white"
-                android:layout_marginTop="@dimen/x8">
+            <View style="@style/line_black12_d8" />
+
+            <RelativeLayout style="@style/md_rl_d40_white">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -143,16 +142,17 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:textStyle="bold"
                     android:text="--"
                     android:textColor="@color/black87"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
             </RelativeLayout>
+
+            <View style="@style/line_black12_d8" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/x8"
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/x15"
@@ -177,8 +177,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/x12"
                         android:background="@null"
-                        android:focusableInTouchMode="true"
                         android:cursorVisible="false"
+                        android:focusableInTouchMode="true"
                         android:hint="请输入"
                         android:maxLength="300"
                         android:textColor="@color/black87"
@@ -188,10 +188,11 @@
 
             </LinearLayout>
 
+            <View style="@style/line_black12_d8" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/x8"
                 android:background="@color/white"
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/x15"
