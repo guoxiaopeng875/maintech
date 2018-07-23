@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 
 import com.xmkj.md.utils.StringUtils;
 
+import java.util.List;
+
 /**
  * 作者: 郭晓鹏
  * 时间: 2018/7/22
@@ -23,7 +25,7 @@ public class MonthlyAchievementBean implements Comparable<MonthlyAchievementBean
     private int count;
 
     public String getMark() {
-        return (int) month + "月" + (int) day + "日 " + count + "单 ￥" + StringUtils.numberFormat(loanAmount + "");
+        return StringUtils.getCurMonth() + "月" + (int) day + "日 " + count + "单 ￥" + StringUtils.numberFormat(loanAmount + "");
     }
 
     public float getMonth() {
@@ -71,5 +73,18 @@ public class MonthlyAchievementBean implements Comparable<MonthlyAchievementBean
                 ", loanAmount=" + loanAmount +
                 ", count=" + count +
                 '}';
+    }
+
+    // 根据今日业绩
+    public static MonthlyAchievementBean getAchievementToday(List<MonthlyAchievementBean> achievements) {
+        if (achievements == null || achievements.size() == 0) {
+            return null;
+        }
+        for (MonthlyAchievementBean a : achievements) {
+            if (StringUtils.getToday().equals((int) a.getDay() + "")) {
+                return a;
+            }
+        }
+        return null;
     }
 }

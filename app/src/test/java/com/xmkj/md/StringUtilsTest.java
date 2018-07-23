@@ -1,5 +1,6 @@
 package com.xmkj.md;
 
+import com.xmkj.md.utils.NumberUtil;
 import com.xmkj.md.utils.StringUtils;
 
 import org.junit.Test;
@@ -22,11 +23,13 @@ public class StringUtilsTest {
         str = StringUtils.numberFormat("10000.12");
         assertEquals("10,000.12", str);
     }
+
     @Test
     public void testFormatTime() {
         String str = StringUtils.formatTime("2018-07-10T22:31:56");
         assertEquals("2018.07.10", str);
     }
+
     @Test
     public void testFormatName() {
         String str = StringUtils.formatName("郭晓鹏");
@@ -34,6 +37,7 @@ public class StringUtilsTest {
         str = StringUtils.formatName("郭");
         assertEquals("郭", str);
     }
+
     @Test
     public void testFormatCellphone() {
         String str = StringUtils.formatCellphone("134123");
@@ -41,14 +45,36 @@ public class StringUtilsTest {
         str = StringUtils.formatCellphone("13888888888");
         assertEquals("138 8888 8888", str);
     }
+
     @Test
     public void testGetCurMonth() {
         String str = StringUtils.getCurMonth();
-        assertEquals("07", str);
+        assertEquals("7", str);
     }
+
     @Test
     public void testStartOfMonth() {
         String str = StringUtils.startOfMonth();
         assertEquals("2018.7.1", str);
+    }
+
+    @Test
+    public void testEndOfMonth() {
+        String str = StringUtils.endOfMonth();
+        assertEquals("2018.7.31", str);
+    }
+
+    @Test
+    public void testGetToday() {
+        String str = StringUtils.getToday();
+        assertEquals("23", str);
+        float day = 23;
+        assertEquals(true, StringUtils.getToday().equals((int) day + ""));
+    }
+
+    @Test
+    public void testDouble2Int() {
+        Object a = 2.1;
+        assertEquals(2, NumberUtil.doubleObj2Int(a));
     }
 }

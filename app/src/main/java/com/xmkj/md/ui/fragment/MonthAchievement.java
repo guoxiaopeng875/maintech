@@ -2,10 +2,6 @@ package com.xmkj.md.ui.fragment;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
@@ -26,17 +22,14 @@ import com.orhanobut.logger.Logger;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.model.AchievementBean;
-import com.xmkj.md.model.MineInfoBean;
 import com.xmkj.md.model.MonthlyAchievementBean;
-import com.xmkj.md.ui.activity.Achievement;
 import com.xmkj.md.utils.MdHttpHelper;
-import com.xmkj.md.utils.ToastUtils;
+import com.xmkj.md.utils.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
@@ -48,6 +41,12 @@ public class MonthAchievement extends BaseFragment {
     LineChart mLineChart;
     @BindView(R.id.tv_mark_month)
     TextView mMarkMonth;
+    @BindView(R.id.tv_date_month)
+    TextView mTvDateMonth;
+    @BindView(R.id.tv_count_month)
+    TextView mTvCountMonth;
+    @BindView(R.id.tv_amount_month)
+    TextView mTvAmountMonth;
 
     private LineData lineData;
 
@@ -67,6 +66,10 @@ public class MonthAchievement extends BaseFragment {
         MdHttpHelper.getMonthAchievement(getContext(), new MdHttpHelper.SuccessCallback<AchievementBean>() {
             @Override
             public void onSuccess(AchievementBean data) {
+                String date = StringUtils.startOfMonth() + "-" + StringUtils.endOfMonth();
+                mTvDateMonth.setText(date);
+                mTvCountMonth.setText(data.wrapCount());
+                mTvAmountMonth.setText(data.wrapLoanAmount());
                 initChart(data.getData());
             }
         });
@@ -90,6 +93,10 @@ public class MonthAchievement extends BaseFragment {
     }
 
     private void initChart(List<MonthlyAchievementBean> dataObj) {
+        MonthlyAchievementBean todayAchieve = MonthlyAchievementBean.getAchievementToday(dataObj);
+        if (todayAchieve != null) {
+            mMarkMonth.setText(todayAchieve.getMark());
+        }
         //设置图表的描述
         Description description = new Description();
         description.setText("");
@@ -102,7 +109,7 @@ public class MonthAchievement extends BaseFragment {
         List<Entry> entries = new ArrayList<>();
         for (MonthlyAchievementBean data : dataObj) {
             // turn your data into Entry objects
-            Logger.d(data.getDay());
+//            Logger.d(data.getDay());
             entries.add(new Entry(data.getDay(), data.getLoanAmount(), data));
         }
         //设置折线的样式
@@ -207,15 +214,16 @@ public class MonthAchievement extends BaseFragment {
 
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
-            Logger.d(value);
+//            Logger.d(value);
+            String curMonth = StringUtils.getCurMonth();
             if (value == this.size) {
-                return "5-31";
+                return curMonth + "-31";
             }
             switch ((int) value) {
                 case 1:
-                    return "5-1";
+                    return curMonth + "-1";
                 case 15:
-                    return "5-15";
+                    return curMonth + "-15";
             }
             return "";
         }

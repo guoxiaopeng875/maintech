@@ -1,5 +1,8 @@
 package com.xmkj.md.model;
 
+import com.xmkj.md.utils.NumberUtil;
+import com.xmkj.md.utils.StringUtils;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -21,6 +24,14 @@ public class AchievementBean<T> {
     private int count;
 
     private List<T> data;
+
+    public String wrapLoanAmount() {
+        return "￥ " + StringUtils.numberFormat(loanAmount + "");
+    }
+
+    public String wrapCount() {
+        return count + " 单";
+    }
 
     public List<T> getData() {
         return data;
@@ -59,9 +70,9 @@ public class AchievementBean<T> {
                 if (!(value instanceof JSONObject)) {
                     switch (key) {
                         case "Count":
-                            achievement.setCount((Integer) value);
+                            achievement.setCount(NumberUtil.doubleObj2Int(value));
                         case "Sum":
-                            achievement.setLoanAmount((Integer) value);
+                            achievement.setLoanAmount(NumberUtil.doubleObj2Int(value));
                     }
                     continue;
                 }

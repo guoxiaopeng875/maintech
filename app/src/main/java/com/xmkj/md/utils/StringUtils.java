@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
@@ -169,20 +170,32 @@ public class StringUtils {
 
     // 获取当前月份
     public static String getCurMonth() {
-        SimpleDateFormat fmt = new SimpleDateFormat("MM", Locale.CHINA);
+        SimpleDateFormat fmt = new SimpleDateFormat("M", Locale.CHINA);
         return fmt.format(new Date());
     }
 
     // 获取当前月份起始日期
     public static String startOfMonth() {
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyy.M", Locale.CHINA);
-        return fmt.format(new Date()) + ".1";
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH,
+                calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+        SimpleDateFormat firstDay = new SimpleDateFormat("yyyy.M.d", Locale.CHINA);
+        return firstDay.format(calendar.getTime());
     }
 
     // 获取当前月份结束日期
     public static String endOfMonth() {
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyy.M", Locale.CHINA);
-        return fmt.format(new Date()) + ".1";
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH,
+                calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+        SimpleDateFormat lastDay = new SimpleDateFormat("yyyy.M.d", Locale.CHINA);
+        return lastDay.format(calendar.getTime());
+    }
+
+    // 获取今日
+    public static String getToday() {
+        SimpleDateFormat fmt = new SimpleDateFormat("d", Locale.CHINA);
+        return fmt.format(new Date());
     }
 
 }
