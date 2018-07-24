@@ -5,6 +5,7 @@ package com.xmkj.md.config;
  */
 public class Constants {
     
+
     public static String BASE_URL = "http://193.112.221.220:81/Api/App";
     public static String PIC_BASE_URL = "http://193.112.221.220:81/";
     public static final String RECOMMEND_CODE = BASE_URL + "/GetRecommendedCode";

@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 import com.orhanobut.logger.Logger;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.MultipartBuilder;
@@ -34,8 +35,6 @@ import com.xmkj.md.model.PlatformBean;
 import com.xmkj.md.model.ProcessDetailBean;
 import com.xmkj.md.model.RecommendCodeBean;
 import com.xmkj.md.widget.MyProgressDialog;
-
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -479,15 +478,14 @@ public class MdHttpHelper {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {
-                    JSONObject dataObj = (JSONObject) dataBean.getData();
-                    callback.onSuccess(AchievementBean.getAchievement(dataObj));
+                    LinkedTreeMap dataObj = (LinkedTreeMap) dataBean.getData();
+                    callback.onSuccess(AchievementBean.getMonthlyAchievement(DataUtil.map2JSONObj(dataObj)));
                     return;
                 }
                 ToastUtils.showToast(context, dataBean.getMessage());
             }
         });
     }
-
 
     /**
      * 19年度业绩
@@ -501,7 +499,8 @@ public class MdHttpHelper {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {
-                    callback.onSuccess(dataBean.getData());
+                    LinkedTreeMap dataObj = (LinkedTreeMap) dataBean.getData();
+                    callback.onSuccess(AchievementBean.getYearlyAchievement(DataUtil.map2JSONObj(dataObj)));
                     return;
                 }
                 ToastUtils.showToast(context, dataBean.getMessage());

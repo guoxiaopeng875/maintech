@@ -6,41 +6,20 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_marginTop="@dimen/x8"
         android:gravity="center_horizontal"
         android:id="@+id/tv_mark_month"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="6月"
         android:textColor="@color/black87"
         android:textSize="14sp">
-        <!--<TextView
-            android:id="@+id/tv_mark_month"
-            android:textColor="@color/black87"
-            android:textSize="14sp"
-            android:text="6月"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_mark_count"
-            android:textColor="@color/black87"
-            android:textSize="14sp"
-            android:text=" 21单 "
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_mark_amount"
-            android:textColor="@color/black87"
-            android:textSize="14sp"
-            android:text="￥20,000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />-->
     </TextView>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/line_chart_month"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:layout_marginBottom="@dimen/x10" />
+        android:layout_marginTop="@dimen/x10" />
 
 
     <View style="@style/line_black12_d8" />
@@ -56,6 +35,7 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_date_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -78,6 +58,7 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_count_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -100,6 +81,7 @@
             android:textSize="15sp" />
 
         <TextView
+            android:id="@+id/tv_amount_month"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
