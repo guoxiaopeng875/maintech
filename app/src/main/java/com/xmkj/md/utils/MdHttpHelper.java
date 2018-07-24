@@ -26,6 +26,7 @@ import com.xmkj.md.model.CostDetailBean;
 import com.xmkj.md.model.FiledirsBean;
 import com.xmkj.md.model.FollowUpDetailBean;
 import com.xmkj.md.model.HomeDataBean;
+import com.xmkj.md.model.InfoConfirmBean;
 import com.xmkj.md.model.MineInfoBean;
 import com.xmkj.md.model.MyBusinessBean;
 import com.xmkj.md.model.OverdueDetailBean;
@@ -453,9 +454,9 @@ public class MdHttpHelper {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
         params.put("OrderId", orderId);
-        httpHelper.post(Constants.ORDER_CONFIRM, params, new SpotsCallback<BaseBean>(context, MSG_LOADING) {
+        httpHelper.post(Constants.ORDER_CONFIRM, params, new SpotsCallback<BaseBean<InfoConfirmBean>>(context, MSG_LOADING) {
             @Override
-            public void onSuccess(Response response, BaseBean dataBean) {
+            public void onSuccess(Response response, BaseBean<InfoConfirmBean> dataBean) {
                 if (dataBean.isSuccess()) {
                     callback.onSuccess(dataBean.getData());
                     return;
@@ -569,7 +570,7 @@ public class MdHttpHelper {
                                     SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
-        params.put("FileIds", list);
+        params.put("FileIds", mGson.toJson(list));
         params.put("OrderId", orderId);
         httpHelper.post(Constants.SET_ORDER_FILE, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
             @Override

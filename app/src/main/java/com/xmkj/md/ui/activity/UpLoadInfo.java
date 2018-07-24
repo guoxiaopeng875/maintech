@@ -1,6 +1,7 @@
 package com.xmkj.md.ui.activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -18,7 +19,9 @@ import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.PhotoUtil;
 import com.xmkj.md.utils.StatusBarSettingUtils;
+import com.xmkj.md.utils.ToastUtils;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -117,7 +120,7 @@ public class UpLoadInfo extends BaseActivity {
                     public void onSuccess(String json) {
                         UploadInfoUrlBean uploadInfoUrlBean = mGson.fromJson(json, UploadInfoUrlBean.class);
                         mListDirs.get(mParentItemPosition).getListPicUrl().add(uploadInfoUrlBean.getData().getFileUrl());
-                        mListDirs.get(mParentItemPosition).setFileDirId(uploadInfoUrlBean.getData().getFileId());
+                        mListDirs.get(mParentItemPosition).getListFileId().add(uploadInfoUrlBean.getData().getFileId());
                         mUploadInfoAdapter.notifyDataSetChanged();
                     }
 
@@ -139,7 +142,16 @@ public class UpLoadInfo extends BaseActivity {
                 AppUtils.jumpAndClearTask(UpLoadInfo.this, Main.class);
                 break;
             case R.id.btn_next_upload_info:
-                //MdHttpHelper.setOrderFile(UpLoadInfo.this,mOrderId,);
+                for (FiledirsBean.FileDirListBean fileDirListBean : mListDirs){
+                    if (fileDirListBean.getListPicUrl().size() == 0){
+                        ToastUtils.showToast(UpLoadInfo.this,"请按要求上传文件");
+                        return;
+                    }
+                }
+                Bundle bundle = new Bundle();
+                bundle.putString("orderId", mOrderId);
+                bundle.putSerializable("picList", (Serializable) mUploadInfoAdapter.getData());
+                AppUtils.jump2Next(UpLoadInfo.this, InfoConfirm.class, bundle, false);
                 break;
         }
     }
