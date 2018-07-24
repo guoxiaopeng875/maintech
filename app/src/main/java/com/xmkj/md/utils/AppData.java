@@ -53,5 +53,17 @@ public class AppData {
         return sp.getString("accessToken", "");
     }
 
+    /**
+     * 用户手机号
+     *
+     * @param phone the phone
+     */
+    public void setPhone(String phone) {
+        sp.edit().putString("phone", phone).commit();
+    }
+
+    public String getPhone() {
+        return sp.getString("phone", "");
+    }
 
 }

@@ -570,7 +570,7 @@ public class MdHttpHelper {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
         params.put("FileIds", mGson.toJson(list));
-        params.put("OrderId", orderId);
+        params.put("OrderId", "\"\"" + orderId + "\"\"");
         httpHelper.post(Constants.SET_ORDER_FILE, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
@@ -598,8 +598,8 @@ public class MdHttpHelper {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
         params.put("FileIds", mGson.toJson(list));
-        params.put("OrderId", orderId);
-        params.put("FeedbackOpinion", feedbackOpinion);
+        params.put("FeedbackOpinion", "\"\"" + feedbackOpinion + "\"\"");
+        params.put("OrderId", "\"\"" + orderId + "\"\"");
         httpHelper.post(Constants.LOAN_FOLLOW_COMMIT, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
@@ -610,6 +610,10 @@ public class MdHttpHelper {
                 ToastUtils.showToast(context, dataBean.getMessage());
             }
         });
+
+    }
+
+    public static void changeOrderConfirm(){
 
     }
 

@@ -56,6 +56,7 @@ public class Login extends BaseActivity {
             public void onSuccess(Response response, BaseBean<UserBean> user) {
                 // 设置token
                 AppData.GetInstance(mContext).setAccessToken(user.getData().getToken());
+                AppData.GetInstance(mContext).setPhone(user.getData().getUserInfo().getPhone());
                 AppUtils.jump2Next(Login.this, Main.class);
             }
         });

@@ -1,11 +1,13 @@
 package com.xmkj.md.ui.activity;
 
 import android.view.View;
+import android.widget.TextView;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.RecommendCodeBean;
+import com.xmkj.md.utils.AppData;
 import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.ToastUtils;
 import com.xmkj.md.widget.VerifyCodeView;
@@ -20,6 +22,8 @@ import butterknife.OnClick;
 public class RecommendCode extends BaseActivity {
     @BindView(R.id.vcv_recommend)
     VerifyCodeView mVcv;
+    @BindView(R.id.tv_phone_recommend_code)
+    TextView mTvPhone;
 
     @Override
     protected int getLayoutId() {
@@ -33,6 +37,7 @@ public class RecommendCode extends BaseActivity {
 
     @Override
     public void initData() {
+        mTvPhone.setText(AppData.GetInstance(this).getPhone());
         MdHttpHelper.getRecommendCode(this, new MdHttpHelper.SuccessCallback<RecommendCodeBean.DataBean>() {
             @Override
             public void onSuccess(RecommendCodeBean.DataBean data) {
