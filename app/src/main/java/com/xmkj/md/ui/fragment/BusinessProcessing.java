@@ -11,11 +11,9 @@ import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
-import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.DataListBean;
-import com.xmkj.md.model.PageBean;
 import com.xmkj.md.model.OrderBean;
-import com.xmkj.md.ui.adapter.PendingItemsAdapter;
+import com.xmkj.md.ui.adapter.BusinessProcessingAdapter;
 import com.xmkj.md.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -34,7 +32,7 @@ public class BusinessProcessing extends BaseFragment {
     RecyclerView mRvProcessing;
     @BindView(R.id.srl_processing)
     SmartRefreshLayout mSrlProcessing;
-    private PendingItemsAdapter mPendingItemsAdapter;
+    private BusinessProcessingAdapter mPendingItemsAdapter;
     private int pageIndex = 1;
     private static final int PAGE_SIZE = 10;
     private Context mContext;
@@ -51,7 +49,7 @@ public class BusinessProcessing extends BaseFragment {
     @Override
     public void initData() {
         mContext = this.getContext();
-        mPendingItemsAdapter = new PendingItemsAdapter(R.layout.item_pending_view, new ArrayList<>());
+        mPendingItemsAdapter = new BusinessProcessingAdapter(R.layout.item_pending_view, new ArrayList<>());
         mRvProcessing.setLayoutManager(new LinearLayoutManager(mContext));
         mRvProcessing.setAdapter(mPendingItemsAdapter);
         mSrlProcessing.autoRefresh();
