@@ -16,9 +16,9 @@ public class CommissionBean {
      * SettleSurplus : 125545
      */
 
-    private int RealSurplus;
-    private int WithdrawSurplus;
-    private int SettleSurplus;
+    private float RealSurplus;
+    private float WithdrawSurplus;
+    private float SettleSurplus;
 
     public String wrapRealSurplus() {
         return StringUtils.numberFormat(RealSurplus + "");
@@ -32,27 +32,27 @@ public class CommissionBean {
         return "￥ " + StringUtils.numberFormat(SettleSurplus + "");
     }
 
-    public int getRealSurplus() {
+    public float getRealSurplus() {
         return RealSurplus;
     }
 
-    public void setRealSurplus(int RealSurplus) {
+    public void setRealSurplus(float RealSurplus) {
         this.RealSurplus = RealSurplus;
     }
 
-    public int getWithdrawSurplus() {
+    public float getWithdrawSurplus() {
         return WithdrawSurplus;
     }
 
-    public void setWithdrawSurplus(int WithdrawSurplus) {
+    public void setWithdrawSurplus(float WithdrawSurplus) {
         this.WithdrawSurplus = WithdrawSurplus;
     }
 
-    public int getSettleSurplus() {
+    public float getSettleSurplus() {
         return SettleSurplus;
     }
 
-    public void setSettleSurplus(int SettleSurplus) {
+    public void setSettleSurplus(float SettleSurplus) {
         this.SettleSurplus = SettleSurplus;
     }
 }
