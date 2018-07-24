@@ -1,5 +1,6 @@
 package com.xmkj.md.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -11,9 +12,10 @@ import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
 import com.xmkj.md.model.BaseBean;
-import com.xmkj.md.model.PageBean;
 import com.xmkj.md.model.OrderBean;
+import com.xmkj.md.model.PageBean;
 import com.xmkj.md.ui.adapter.PendingItemsAdapter;
+import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.StatusBarSettingUtils;
 import com.xmkj.md.utils.ToastUtils;
 
@@ -89,11 +91,11 @@ public class PendingItems extends BaseActivity {
     public void setListener() {
         if (mPendingItemsAdapter != null) {
             mPendingItemsAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-                ToastUtils.showToast(position + view.getId());
                 switch (view.getId()) {
                     case R.id.btn_status_pending:
-                        // TODO 根据按钮状态跳到不同页面
-                        ToastUtils.showToast(mPendingItemsAdapter.getData().get(position).getBtnName());
+                        Bundle bundle = new Bundle();
+                        bundle.putString("orderId", mPendingItemsAdapter.getData().get(position).getOrderId());
+                        AppUtils.jump2Next(PendingItems.this, UpLoadInfo.class, bundle, false);
                         break;
                 }
             });

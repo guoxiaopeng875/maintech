@@ -67,7 +67,7 @@ public class InfoConfirm extends BaseActivity {
         mOrderId = bundle.getString("orderId");
         mListDirs = (List<FiledirsBean.FileDirListBean>) bundle.getSerializable("picList");
         mRvInfoConfirm.setLayoutManager(new LinearLayoutManager(this));
-        mInfoConfirmAdapter = new InfoConfirmAdapter(this,R.layout.item_uploadinfo,mListDirs);
+        mInfoConfirmAdapter = new InfoConfirmAdapter(this, R.layout.item_uploadinfo, mListDirs);
         mRvInfoConfirm.setAdapter(mInfoConfirmAdapter);
         getOrderCofirmInfo();
     }
@@ -118,7 +118,7 @@ public class InfoConfirm extends BaseActivity {
     private void submit() {
         String remark = mEtRemark.getText().toString().trim();
         List<String> fileIds = new ArrayList<>();
-        for (FiledirsBean.FileDirListBean fileDirListBean : mListDirs){
+        for (FiledirsBean.FileDirListBean fileDirListBean : mListDirs) {
             fileIds.addAll(fileDirListBean.getListFileId());
         }
         MdHttpHelper.setOrderFile(this, mOrderId, fileIds, new MdHttpHelper.SuccessCallback() {

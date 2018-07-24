@@ -610,11 +610,42 @@ public class MdHttpHelper {
                 ToastUtils.showToast(context, dataBean.getMessage());
             }
         });
-
     }
 
-    public static void changeOrderConfirm(){
 
+    /**
+     * 24修改确认信息
+     *
+     * @param context        the context
+     * @param orderId        the order id
+     * @param platformId     the platform id
+     * @param businessTypeId the business type id
+     * @param customerName   the customer name
+     * @param mobilePhone    the mobile phone
+     * @param idCard         the id card
+     * @param callback       the callback
+     */
+    public static void changeOrderConfirm(Context context, String orderId, String platformId,
+                                          String businessTypeId, String customerName, String mobilePhone,
+                                          String idCard, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("OrderId", orderId);
+        params.put("PlatformId", platformId);
+        params.put("BusinessTypeId", businessTypeId);
+        params.put("CustomerName", customerName);
+        params.put("MobilePhone", mobilePhone);
+        params.put("IdCard", idCard);
+        httpHelper.post(Constants.CHANGE_ORDER_CONFIRM, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
     }
 
 
