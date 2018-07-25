@@ -22,7 +22,7 @@ public class WithdrawDataListBean<T> {
     private int AmountSum;
 
     public String wrapAmountSum() {
-        return StringUtils.numberFormat(AmountSum + "");
+        return StringUtils.numberFormat(AmountSum);
     }
 
     public List<T> getDataList() {

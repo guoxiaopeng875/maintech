@@ -24,7 +24,7 @@ public class YearlyAchievementBean implements Comparable<YearlyAchievementBean> 
     private int count;
 
     public String getMark() {
-        return (int) this.getMonth() + "月 " + count + "单 ￥" + StringUtils.numberFormat(loanAmount + "");
+        return (int) this.getMonth() + "月 " + count + "单 ￥" + StringUtils.numberFormat(loanAmount);
     }
 
     public float getMonth() {

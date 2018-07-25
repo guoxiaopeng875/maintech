@@ -26,7 +26,7 @@ public class AchievementBean<T> {
     private List<T> data;
 
     public String wrapLoanAmount() {
-        return "￥ " + StringUtils.numberFormat(loanAmount + "");
+        return "￥ " + StringUtils.numberFormat(loanAmount);
     }
 
     public String wrapCount() {

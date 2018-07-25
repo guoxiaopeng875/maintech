@@ -99,13 +99,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/quota_left"
-                    android:textColor="@color/white"
-                    android:textSize="24.2sp"
-                    android:textStyle="bold" />
+                    android:src="@mipmap/quote_left" />
 
                 <TextView
                     android:id="@+id/tv_tag_mine"
@@ -118,13 +115,10 @@
                     android:textColor="@color/white"
                     android:textSize="13.2sp" />
 
-                <TextView
+                <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:text="@string/quota_right"
-                    android:textColor="@color/white"
-                    android:textSize="24.2sp"
-                    android:textStyle="bold" />
+                    android:src="@mipmap/quote_right" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
