@@ -143,6 +143,13 @@ public class StringUtils {
         return fmtStr;
     }
 
+    public static String numberFormat(String amount) {
+        if ("".equals(amount) || !isNumber(amount)) {
+            return "";
+        }
+        return numberFormat(Float.valueOf(amount));
+    }
+
     public static String formatTime(String dateStr) {
         String targetDate = "";
         try {

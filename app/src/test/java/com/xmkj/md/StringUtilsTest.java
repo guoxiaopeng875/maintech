@@ -22,6 +22,7 @@ public class StringUtilsTest {
         assertEquals("100", str);
         float f = 101023800;
         assertEquals("101,023,800", StringUtils.numberFormat(f));
+        assertEquals("", StringUtils.numberFormat(""));
     }
 
     @Test
