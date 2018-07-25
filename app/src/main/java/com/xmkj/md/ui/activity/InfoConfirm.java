@@ -9,13 +9,16 @@ import android.widget.TextView;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
+import com.xmkj.md.config.Constants;
 import com.xmkj.md.model.FiledirsBean;
 import com.xmkj.md.model.InfoConfirmBean;
+import com.xmkj.md.model.MessageEvent;
+import com.xmkj.md.model.OrderInfoBean;
 import com.xmkj.md.ui.adapter.InfoConfirmAdapter;
 import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.EventBusUtil;
 import com.xmkj.md.utils.MdHttpHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,6 +49,7 @@ public class InfoConfirm extends BaseActivity {
     private String mOrderId;
     private List<FiledirsBean.FileDirListBean> mListDirs;
     private InfoConfirmAdapter mInfoConfirmAdapter;
+    private OrderInfoBean mOrderInfo;
 
 
     @Override
@@ -60,16 +64,21 @@ public class InfoConfirm extends BaseActivity {
 
     @Override
     public void initData() {
-        Bundle bundle = getIntent().getExtras();
-        if (bundle == null) {
-            return;
+        if (mOrderInfo != null) {
+            mOrderId = mOrderInfo.getOrderId();
+            mListDirs = mOrderInfo.getList();
+            mTvType.setText(mOrderInfo.getBusinessTypeName());
+            mTvCompany.setText(mOrderInfo.getPlatformName());
+            mTvName.setText(mOrderInfo.getCustomerName());
+            mTvMobile.setText(mOrderInfo.getMobilePhone());
+            mTvIdcard.setText(mOrderInfo.getIdCard());
+            mRvInfoConfirm.setLayoutManager(new LinearLayoutManager(this));
+            mInfoConfirmAdapter = new InfoConfirmAdapter(this, R.layout.item_uploadinfo, mListDirs);
+            mRvInfoConfirm.setAdapter(mInfoConfirmAdapter);
+            if (mOrderInfo.getPlatformId() == null) {
+                getOrderCofirmInfo();
+            }
         }
-        mOrderId = bundle.getString("orderId");
-        mListDirs = (List<FiledirsBean.FileDirListBean>) bundle.getSerializable("picList");
-        mRvInfoConfirm.setLayoutManager(new LinearLayoutManager(this));
-        mInfoConfirmAdapter = new InfoConfirmAdapter(this, R.layout.item_uploadinfo, mListDirs);
-        mRvInfoConfirm.setAdapter(mInfoConfirmAdapter);
-        getOrderCofirmInfo();
     }
 
     @Override
@@ -83,6 +92,14 @@ public class InfoConfirm extends BaseActivity {
                 new MdHttpHelper.SuccessCallback<InfoConfirmBean>() {
                     @Override
                     public void onSuccess(InfoConfirmBean infoConfirmBean) {
+                        mOrderInfo.setPlatformName(infoConfirmBean.getPlatformName());
+                        mOrderInfo.setPlatformId(infoConfirmBean.getPlatformId());
+                        mOrderInfo.setBusinessTypeName(infoConfirmBean.getBusinessTypeName());
+                        mOrderInfo.setBusinessTypeId(infoConfirmBean.getBusinessTypeId());
+                        mOrderInfo.setCustomerName(infoConfirmBean.getCustomerName());
+                        mOrderInfo.setMobilePhone(infoConfirmBean.getMobilePhone());
+                        mOrderInfo.setIdCard(infoConfirmBean.getIdCard());
+
                         mTvType.setText(infoConfirmBean.getBusinessTypeName());
                         mTvCompany.setText(infoConfirmBean.getPlatformName());
                         mTvName.setText(infoConfirmBean.getCustomerName());
@@ -104,10 +121,16 @@ public class InfoConfirm extends BaseActivity {
                 cancel();
                 break;
             case R.id.tv_business_and_company_change://业务类型和平台修改
+                EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_CHANGE_PLATFORM, mOrderInfo));
+                AppUtils.jump2Next(InfoConfirm.this, BeginApply.class);
                 break;
             case R.id.tv_baseinfo_change://客户基本信息修改
+                EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_CHANGE_CUSTOMINFO, mOrderInfo));
+                AppUtils.jump2Next(InfoConfirm.this, ApplyUserInfo.class);
                 break;
             case R.id.tv_file_change://上传文件修改
+                EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_CHANGE_FILE, mOrderInfo));
+                AppUtils.jump2Next(InfoConfirm.this, UpLoadInfo.class);
                 break;
             case R.id.btn_confirm://确认报单
                 submit();
@@ -117,14 +140,13 @@ public class InfoConfirm extends BaseActivity {
 
     private void submit() {
         String remark = mEtRemark.getText().toString().trim();
-        List<String> fileIds = new ArrayList<>();
-        for (FiledirsBean.FileDirListBean fileDirListBean : mListDirs) {
-            fileIds.addAll(fileDirListBean.getListFileId());
-        }
-        MdHttpHelper.setOrderFile(this, mOrderId, fileIds, new MdHttpHelper.SuccessCallback() {
+        mOrderInfo.setRemark(remark);
+        MdHttpHelper.setOrderFile(this, mOrderInfo, new MdHttpHelper.SuccessCallback() {
             @Override
             public void onSuccess(Object data) {
-
+                Bundle bundle = new Bundle();
+                bundle.putString("from", "infoConfirm");
+                AppUtils.jump2Next(InfoConfirm.this, QuicklyApplySuccess.class, bundle, false);
             }
         });
     }
@@ -136,6 +158,25 @@ public class InfoConfirm extends BaseActivity {
                 AppUtils.jumpAndClearTask(InfoConfirm.this, Main.class);
             }
         });
+    }
+
+    @Override
+    protected boolean isRegisterEventBus() {
+        return true;
+    }
+
+    @Override
+    protected void receiveStickyEvent(MessageEvent event) {
+        super.receiveStickyEvent(event);
+        switch (event.getCode()) {
+            case Constants.CODE_ORDER_INFO:
+                mOrderInfo = (OrderInfoBean) event.getData();
+                break;
+            case Constants.CODE_CHANGE_ORDER_INFO:
+                mOrderInfo = (OrderInfoBean) event.getData();
+                initData();
+                break;
+        }
     }
 
 

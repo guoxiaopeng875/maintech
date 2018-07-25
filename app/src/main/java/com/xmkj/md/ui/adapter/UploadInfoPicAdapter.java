@@ -29,13 +29,15 @@ public class UploadInfoPicAdapter extends BaseAdapter {
     private List<PicUploadBean> mList_url;
     private Activity mActivity;
     private OnGetPhotoListener mOnGetPhotoListener;
+    private OnPicDeleteLintener mOnPicDeleteLintener;
     private int mParentItemPostion;
 
-    public UploadInfoPicAdapter(Activity activity, int parentItemPosition, List<PicUploadBean> list, OnGetPhotoListener onGetPhotoListener) {
+    public UploadInfoPicAdapter(Activity activity, int parentItemPosition, List<PicUploadBean> list, OnGetPhotoListener onGetPhotoListener,OnPicDeleteLintener onPicDeleteLintener) {
         mActivity = activity;
         mList_url = list;
         mParentItemPostion = parentItemPosition;
         mOnGetPhotoListener = onGetPhotoListener;
+        mOnPicDeleteLintener = onPicDeleteLintener;
         if (mList_url == null) {
             mList_url = new ArrayList<>();
         }
@@ -118,8 +120,10 @@ public class UploadInfoPicAdapter extends BaseAdapter {
         holder.ibDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mList_url.remove(position);
-                notifyDataSetChanged();
+                if (mOnPicDeleteLintener != null){
+                    notifyDataSetChanged();
+                    mOnPicDeleteLintener.onPicDelete(mList_url.get(position));
+                }
             }
         });
         return view;
@@ -145,5 +149,9 @@ public class UploadInfoPicAdapter extends BaseAdapter {
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
+    }
+
+    public interface OnPicDeleteLintener{
+        void onPicDelete(PicUploadBean picUploadBean);
     }
 }

@@ -20,4 +20,14 @@
         android:text="@string/apply_success"
         android:textColor="@color/black87"
         android:textSize="22sp" />
+
+    <TextView
+        android:id="@+id/tv_back_scs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/x40"
+        android:text="返回"
+        android:textColor="@color/text_blue"
+        android:textSize="@dimen/x25" />
 </LinearLayout>

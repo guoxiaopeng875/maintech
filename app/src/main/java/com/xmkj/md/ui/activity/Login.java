@@ -1,5 +1,6 @@
 package com.xmkj.md.ui.activity;
 
+import android.text.TextUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,6 +15,7 @@ import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.UserBean;
 import com.xmkj.md.utils.AppData;
 import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.ToastUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -42,6 +44,7 @@ public class Login extends BaseActivity {
 
     @Override
     public void initData() {
+
     }
 
     // 调登录接口
@@ -67,10 +70,17 @@ public class Login extends BaseActivity {
         mBtnLogin.setOnClickListener(view -> {
             String account = mEtAccountLogin.getText().toString();
             String pwd = mEtPwdLogin.getText().toString();
-            account = "马和顺";
+//            if (TextUtils.isEmpty(account)){
+//                ToastUtils.showToast(Login.this,"请输入账号");
+//                return;
+//            }
+//            if (TextUtils.isEmpty(pwd)){
+//                ToastUtils.showToast(Login.this,"请输入密码");
+//                return;
+//            }
+            account = "周杰伦";
             pwd = "123456";
             doLogin(account, pwd);
-            //AppUtils.jump2Next(Login.this, Achievement.class);
         });
         mIvBackLogin.setOnClickListener(view -> AppUtils.finishActivity(this));
     }

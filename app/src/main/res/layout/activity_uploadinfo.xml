@@ -39,18 +39,18 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/toolbar_contacts">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
-            android:orientation="vertical"
             android:paddingLeft="@dimen/x10"
             android:paddingRight="@dimen/x10">
 
             <TextView
+                android:id="@+id/text_uoloadinfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x10"
@@ -60,8 +60,10 @@
                 android:textStyle="bold" />
 
             <RelativeLayout
+                android:id="@+id/rl_notify_uploadinfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/text_uoloadinfo"
                 android:layout_marginTop="@dimen/x10"
                 android:background="@drawable/shape_balck12_bg"
                 android:paddingBottom="@dimen/x10"
@@ -108,9 +110,10 @@
                 android:id="@+id/rv_uploadinfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/x70"
-                android:nestedScrollingEnabled="false" />
-        </LinearLayout>
+                android:layout_below="@+id/rl_notify_uploadinfo"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="@dimen/x70"/>
+        </RelativeLayout>
     </ScrollView>
 
     <Button
