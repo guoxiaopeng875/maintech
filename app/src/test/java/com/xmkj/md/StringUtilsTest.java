@@ -16,12 +16,12 @@ import static org.junit.Assert.*;
 public class StringUtilsTest {
     @Test
     public void testNumberFormat() {
-        String str = StringUtils.numberFormat("1200000");
+        String str = StringUtils.numberFormat(1200000);
         assertEquals("1,200,000", str);
-        str = StringUtils.numberFormat("100");
+        str = StringUtils.numberFormat(100);
         assertEquals("100", str);
-        str = StringUtils.numberFormat("10000.12");
-        assertEquals("10,000.12", str);
+        float f = 101023800;
+        assertEquals("101,023,800", StringUtils.numberFormat(f));
     }
 
     @Test

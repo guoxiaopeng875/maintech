@@ -31,7 +31,7 @@ public class BusinessFinishAdapter extends BaseQuickAdapter<OrderBean, BaseViewH
     }
 
     private String getFormatAmount(String amountStr) {
-        return "￥ " + StringUtils.numberFormat(amountStr);
+        return "￥ " + StringUtils.numberFormat(Float.valueOf(amountStr));
     }
 
 }

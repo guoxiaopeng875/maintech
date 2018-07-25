@@ -132,12 +132,15 @@ public class StringUtils {
         return true;
     }
 
-    public static String numberFormat(String amount) {
-        if (!isNumber(amount)) {
-            return amount;
+    public static String numberFormat(float amount) {
+        String fmtStr = "";
+        try {
+            NumberFormat nf = new DecimalFormat("#,###.##");
+            fmtStr = nf.format(amount);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        NumberFormat nf = new DecimalFormat("#,###.##");
-        return nf.format(Float.valueOf(amount));
+        return fmtStr;
     }
 
     public static String formatTime(String dateStr) {

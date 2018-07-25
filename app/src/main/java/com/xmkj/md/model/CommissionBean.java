@@ -21,15 +21,15 @@ public class CommissionBean {
     private float SettleSurplus;
 
     public String wrapRealSurplus() {
-        return StringUtils.numberFormat(RealSurplus + "");
+        return StringUtils.numberFormat(RealSurplus);
     }
 
     public String wrapWithdrawSurplus() {
-        return "￥ " + StringUtils.numberFormat(WithdrawSurplus + "");
+        return "￥ " + StringUtils.numberFormat(WithdrawSurplus);
     }
 
     public String wrapSettleSurplus() {
-        return "￥ " + StringUtils.numberFormat(SettleSurplus + "");
+        return "￥ " + StringUtils.numberFormat(SettleSurplus);
     }
 
     public float getRealSurplus() {

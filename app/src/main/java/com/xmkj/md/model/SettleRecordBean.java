@@ -50,7 +50,7 @@ public class SettleRecordBean {
         if (CommissionMoney == 0) {
             return "￥ 0.00";
         }
-        return "￥ " + StringUtils.numberFormat(CommissionMoney+"");
+        return "￥ " + StringUtils.numberFormat(CommissionMoney);
     }
 
 

@@ -42,7 +42,7 @@ public class WithdrawRecordBean {
     }
 
     public String wrapAmount() {
-        return "￥ " + StringUtils.numberFormat(Amount+"");
+        return "￥ " + StringUtils.numberFormat(Amount);
     }
 
     public String wrapCard() {
