@@ -1,6 +1,5 @@
 package com.xmkj.md.ui.activity;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -11,14 +10,14 @@ import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
-import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.DataListBean;
+import com.xmkj.md.model.MessageEvent;
 import com.xmkj.md.model.OrderBean;
-import com.xmkj.md.model.PageBean;
+import com.xmkj.md.model.OrderInfoBean;
 import com.xmkj.md.ui.adapter.PendingItemsAdapter;
 import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.EventBusUtil;
 import com.xmkj.md.utils.StatusBarSettingUtils;
-import com.xmkj.md.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,9 +93,11 @@ public class PendingItems extends BaseActivity {
             mPendingItemsAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 switch (view.getId()) {
                     case R.id.btn_status_pending:
-                        Bundle bundle = new Bundle();
-                        bundle.putString("orderId", mPendingItemsAdapter.getData().get(position).getOrderId());
-                        AppUtils.jump2Next(PendingItems.this, UpLoadInfo.class, bundle, false);
+                        OrderInfoBean orderInfoBean = new OrderInfoBean();
+                        OrderBean orderBean = mPendingItemsAdapter.getData().get(position);
+                        orderInfoBean.setOrderId(orderBean.getOrderId());
+                        EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, orderInfoBean));
+                        AppUtils.jump2Next(PendingItems.this, UpLoadInfo.class);
                         break;
                 }
             });

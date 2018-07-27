@@ -1,5 +1,6 @@
 package com.xmkj.md.ui.activity;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -92,7 +93,9 @@ public class QuicklyApply extends BaseActivity {
 
             @Override
             public void onSuccess(Response response, BaseResponseBean items) {
-                AppUtils.jump2Next(mContext, QuicklyApplySuccess.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("from", "quicklyApplySuccess");
+                AppUtils.jump2Next(QuicklyApply.this, QuicklyApplySuccess.class, bundle, false);
             }
         });
     }

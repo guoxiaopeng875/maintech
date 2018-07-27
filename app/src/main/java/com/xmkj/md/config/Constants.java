@@ -4,7 +4,6 @@ package com.xmkj.md.config;
  * Created by 晴天 on 2017/12/6.
  */
 public class Constants {
-    
 
 
     public static String BASE_URL = "http://193.112.221.220:81/Api/App";
@@ -18,8 +17,9 @@ public class Constants {
     public static final String CONTACTS = BASE_URL + "/GetContacts";
     public static final String PLATFORM = BASE_URL + "/AppGetPlatformList";
     public static final String BUSINESS = BASE_URL + "/AppGetBusinesstypeList";
-    public static final String ADD_ORDER_INFO = BASE_URL + "/AddAppOrderInfo";
-    public static final String FILEDIRS = BASE_URL + "/GetFlowFileDir";
+    public static final String ADD_ORDER_INFO = BASE_URL + "/AddAppOrderId";
+    public static final String FILEDIRS1 = BASE_URL + "/GetFlowFileDir";
+    public static final String FILEDIRS2 = BASE_URL + "/GetAddOrderFileDir";
     public static final String MINE_BUSINESS = BASE_URL + "/GetMyBusiness";
     public static final String BUSINESS_DETAIL = BASE_URL + "/GetMyBusinessDetails";//业务详情
     public static final String UPLOAD_FLOWFILE = BASE_URL + "/AppUploadFlowFile";//上传订单流程文件
@@ -52,6 +52,11 @@ public class Constants {
     public static final int CODE_BANK_INFO = 0x000002;
     public static final int CODE_ORDERID_UPDATE = 0X000003;//修改报单确认信息用的orderId
     public static final int CODE_PLATFORM_BUSINESS = 0X000004;//业务平台Id,业务类型
+    public static final int CODE_ORDER_INFO = 0X000005;//报单填写的信息
+    public static final int CODE_ORDER_CHANGE_PLATFORM = 0X000006;//修改平台和业务类型
+    public static final int CODE_ORDER_CHANGE_CUSTOMINFO = 0X000007;//修改客户信息
+    public static final int CODE_ORDER_CHANGE_FILE = 0X000008;//修改上传的文件
+    public static final int CODE_CHANGE_ORDER_INFO = 0X000009;//修改确认信息后，需要刷新页面
 
 
 }

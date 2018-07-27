@@ -4,6 +4,7 @@ package com.xmkj.md.utils;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
@@ -30,6 +31,7 @@ import com.xmkj.md.model.HomeDataBean;
 import com.xmkj.md.model.InfoConfirmBean;
 import com.xmkj.md.model.MineInfoBean;
 import com.xmkj.md.model.MyBusinessBean;
+import com.xmkj.md.model.OrderInfoBean;
 import com.xmkj.md.model.OverdueDetailBean;
 import com.xmkj.md.model.PlatformBean;
 import com.xmkj.md.model.ProcessDetailBean;
@@ -38,6 +40,7 @@ import com.xmkj.md.widget.MyProgressDialog;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -257,7 +260,7 @@ public class MdHttpHelper {
         params.put("IdCard", customerIdCard);
         params.put("PlatformId", platformId);
         params.put("BusinessTypeId", BusinessTypeId);
-        httpHelper.post(Constants.ADD_ORDER_INFO, params, new SpotsCallback<BaseBean<AddOrderInfoBean>>(context, MSG_UPLOAD) {
+        httpHelper.post(Constants.ADD_ORDER_INFO, null, new SpotsCallback<BaseBean<AddOrderInfoBean>>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean<AddOrderInfoBean> dataBean) {
                 if (dataBean.isSuccess()) {
@@ -272,15 +275,23 @@ public class MdHttpHelper {
     /**
      * 10需要上传资料的文件夹列表
      *
-     * @param context  the context
-     * @param orderId  the order id
-     * @param callback the callback
+     * @param context   the context
+     * @param orderInfo the orderInfo
+     * @param callback  the callback
      */
-    public static void getFileDirs(Context context, String orderId, SuccessCallback callback) {
+    public static void getFileDirs(Context context, OrderInfoBean orderInfo, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
-        params.put("orderId", orderId);
-        httpHelper.post(Constants.FILEDIRS, params, new SpotsCallback<BaseBean<FiledirsBean>>(context, MSG_LOADING) {
+        String url;
+        if (orderInfo.getPlatformId() == null) {
+            params.put("OrderId", orderInfo.getOrderId());
+            url = Constants.FILEDIRS1;
+        } else {
+            url = Constants.FILEDIRS2;
+            params.put("PlatformId", orderInfo.getPlatformId());
+            params.put("BusinessTypeId", orderInfo.getBusinessTypeId());
+        }
+        httpHelper.post(url, params, new SpotsCallback<BaseBean<FiledirsBean>>(context, MSG_LOADING) {
             @Override
             public void onSuccess(Response response, BaseBean<FiledirsBean> dataBean) {
                 if (dataBean.isSuccess()) {
@@ -560,17 +571,29 @@ public class MdHttpHelper {
     /**
      * 22上传资料后提交
      *
-     * @param context  the context
-     * @param orderId  the order id
-     * @param list     the list
-     * @param callback the callback
+     * @param context   the context
+     * @param orderInfo the orderInfo
+     * @param callback  the callback
      */
-    public static void setOrderFile(Context context, String orderId, List<String> list,
-                                    SuccessCallback callback) {
+
+    public static void setOrderFile(Context context, OrderInfoBean orderInfo, SuccessCallback callback) {
+        List<String> fileIds = new ArrayList<>();
+        for (FiledirsBean.FileDirListBean fileDirListBean : orderInfo.getList()) {
+            fileIds.addAll(fileDirListBean.getListFileId());
+        }
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
-        params.put("FileIds", mGson.toJson(list));
-        params.put("OrderId", "\"\"" + orderId + "\"\"");
+        params.put("FileIds", mGson.toJson(fileIds));
+        //params.put("OrderId", "\"\"" + orderId + "\"\"");
+        params.put("OrderId", orderInfo.getOrderId());
+        params.put("CustomerName", orderInfo.getCustomerName());
+        params.put("MobilePhone", orderInfo.getMobilePhone());
+        params.put("IdCard", orderInfo.getIdCard());
+        params.put("PlatformId", orderInfo.getPlatformId());
+        params.put("BusinessTypeId", orderInfo.getBusinessTypeId());
+        if (!TextUtils.isEmpty(orderInfo.getRemark())) {
+            params.put("Remark", orderInfo.getRemark());
+        }
         httpHelper.post(Constants.SET_ORDER_FILE, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {

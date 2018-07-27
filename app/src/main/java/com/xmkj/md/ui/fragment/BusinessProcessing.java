@@ -12,9 +12,13 @@ import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
 import com.xmkj.md.model.DataListBean;
+import com.xmkj.md.model.MessageEvent;
 import com.xmkj.md.model.OrderBean;
+import com.xmkj.md.model.OrderInfoBean;
+import com.xmkj.md.ui.activity.UpLoadInfo;
 import com.xmkj.md.ui.adapter.BusinessProcessingAdapter;
-import com.xmkj.md.utils.ToastUtils;
+import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.EventBusUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -82,11 +86,12 @@ public class BusinessProcessing extends BaseFragment {
     public void setListener() {
         if (mPendingItemsAdapter != null) {
             mPendingItemsAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-                ToastUtils.showToast(position + view.getId());
                 switch (view.getId()) {
                     case R.id.btn_status_pending:
-                        // TODO 根据按钮状态跳到不同页面
-                        ToastUtils.showToast(mPendingItemsAdapter.getData().get(position).getBtnName());
+                        OrderInfoBean orderInfoBean = new OrderInfoBean();
+                        orderInfoBean.setOrderId(mPendingItemsAdapter.getData().get(position).getOrderId());
+                        EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, orderInfoBean));
+                        AppUtils.jump2Next(getActivity(), UpLoadInfo.class);
                         break;
                 }
             });

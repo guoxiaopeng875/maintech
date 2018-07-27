@@ -1,6 +1,5 @@
 package com.xmkj.md.ui.activity;
 
-import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -18,7 +17,9 @@ import com.xmkj.md.http.SpotsCallback;
 import com.xmkj.md.model.AddOrderInfoBean;
 import com.xmkj.md.model.BaseResponseBean;
 import com.xmkj.md.model.MessageEvent;
+import com.xmkj.md.model.OrderInfoBean;
 import com.xmkj.md.utils.AppUtils;
+import com.xmkj.md.utils.EventBusUtil;
 import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.StringUtils;
 import com.xmkj.md.utils.ToastUtils;
@@ -52,6 +53,7 @@ public class ApplyUserInfo extends BaseActivity {
     private String mOrderId;
     private String mPlatformId;
     private String mBusinessTypeId;
+    private OrderInfoBean mOrderInfo;
 
     @Override
     protected int getLayoutId() {
@@ -65,6 +67,15 @@ public class ApplyUserInfo extends BaseActivity {
 
     @Override
     public void initData() {
+        if (mOrderInfo != null) {
+            String customName = mOrderInfo.getCustomerName();
+            String phone = mOrderInfo.getMobilePhone();
+            String idcard = mOrderInfo.getIdCard();
+            mEtNameApply.setText(customName != null ? customName : "");
+            mEtCellphoneApply.setText(phone != null ? phone : "");
+            mEtCustomerIdNo.setText(idcard != null ? idcard : "");
+            mBtnSubmitUserInfo.setText(customName != null ? "确认" : "下一步");
+        }
     }
 
     @Override
@@ -82,7 +93,7 @@ public class ApplyUserInfo extends BaseActivity {
                 finish();
                 break;
             case R.id.btn_cancel_apply_info:
-                if (TextUtils.isEmpty(mOrderId)){
+                if (TextUtils.isEmpty(mOrderId)) {
                     AppUtils.jumpAndClearTask(ApplyUserInfo.this, Main.class);
                     return;
                 }
@@ -112,11 +123,16 @@ public class ApplyUserInfo extends BaseActivity {
             ToastUtils.showToast("请输入正确手机号");
             return;
         }
-        if (TextUtils.isEmpty(mOrderId)) {
+        if (TextUtils.equals("下一步", mBtnSubmitUserInfo.getText().toString())) {
             addOrderInfo(customerName, phone, customerIdCard);
             return;
         }
-        changeInfo(customerName, phone, customerIdCard);
+        mOrderInfo.setCustomerName(customerName);
+        mOrderInfo.setMobilePhone(phone);
+        mOrderInfo.setIdCard(customerIdCard);
+        EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_CHANGE_ORDER_INFO, mOrderInfo));
+        finish();
+        //changeInfo(customerName, phone, customerIdCard);
     }
 
     private void addOrderInfo(String customerName, String phone, String customerIdCard) {
@@ -124,9 +140,16 @@ public class ApplyUserInfo extends BaseActivity {
                 mPlatformId, mBusinessTypeId, new MdHttpHelper.SuccessCallback<AddOrderInfoBean>() {
                     @Override
                     public void onSuccess(AddOrderInfoBean data) {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("orderId", data.getOrderId());
-                        AppUtils.jump2Next(ApplyUserInfo.this, UpLoadInfo.class, bundle, false);
+                        if (mOrderInfo == null) {
+                            ToastUtils.showToast(ApplyUserInfo.this, "orderInfo为空");
+                            return;
+                        }
+                        mOrderInfo.setOrderId(data.getOrderId());
+                        mOrderInfo.setCustomerName(customerName);
+                        mOrderInfo.setMobilePhone(phone);
+                        mOrderInfo.setIdCard(customerIdCard);
+                        EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, mOrderInfo));
+                        AppUtils.jump2Next(ApplyUserInfo.this, UpLoadInfo.class);
                     }
                 });
     }
@@ -204,10 +227,10 @@ public class ApplyUserInfo extends BaseActivity {
             case Constants.CODE_ORDERID_UPDATE:
                 mOrderId = (String) event.getData();
                 break;
-            case Constants.CODE_PLATFORM_BUSINESS:
-                Bundle bundle = (Bundle) event.getData();
-                mPlatformId = bundle.getString("platformId");
-                mBusinessTypeId = bundle.getString("businessTypeId");
+            case Constants.CODE_ORDER_INFO:
+            case Constants.CODE_ORDER_CHANGE_CUSTOMINFO:
+                mOrderInfo = (OrderInfoBean) event.getData();
+                mOrderId = mOrderInfo.getOrderId();
                 break;
             default:
                 break;

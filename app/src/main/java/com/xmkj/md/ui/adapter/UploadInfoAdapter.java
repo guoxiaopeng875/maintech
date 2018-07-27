@@ -37,7 +37,15 @@ public class UploadInfoAdapter extends BaseQuickAdapter<FiledirsBean.FileDirList
             list.add(picUploadBean);
         }
         UploadInfoPicAdapter uploadInfoPicAdapter = new UploadInfoPicAdapter(mActivity,
-                helper.getLayoutPosition(), list, mOnGetPhotoListener);
+                helper.getLayoutPosition(), list, mOnGetPhotoListener,
+                new UploadInfoPicAdapter.OnPicDeleteLintener() {
+                    @Override
+                    public void onPicDelete(PicUploadBean picUploadBean) {
+                        getData().get(helper.getLayoutPosition())
+                                .getListPicUrl().remove(picUploadBean.getUrl());
+                        notifyDataSetChanged();
+                    }
+                });
         helper.setText(R.id.tv_infotype_uploadinfo, item.getFileDirName())
                 .setAdapter(R.id.gv_infopic_uploadinfo, uploadInfoPicAdapter);
     }
