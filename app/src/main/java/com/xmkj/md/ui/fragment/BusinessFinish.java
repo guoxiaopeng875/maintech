@@ -1,6 +1,7 @@
 package com.xmkj.md.ui.fragment;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -11,12 +12,11 @@ import com.xmkj.md.base.BaseFragment;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
-import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.DataListBean;
-import com.xmkj.md.model.PageBean;
 import com.xmkj.md.model.OrderBean;
+import com.xmkj.md.ui.activity.BusinessDetail;
 import com.xmkj.md.ui.adapter.BusinessFinishAdapter;
-import com.xmkj.md.utils.ToastUtils;
+import com.xmkj.md.utils.AppUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,8 +52,8 @@ public class BusinessFinish extends BaseFragment {
     public void initData() {
         mContext = this.getContext();
         mPendingItemsAdapter = new BusinessFinishAdapter(R.layout.item_business_finish_view, new ArrayList<>());
-        mRvProcessing.setLayoutManager(new LinearLayoutManager(mContext));
         mRvProcessing.setAdapter(mPendingItemsAdapter);
+        mRvProcessing.setLayoutManager(new LinearLayoutManager(mContext));
         mSrlProcessing.autoRefresh();
     }
 
@@ -83,8 +83,10 @@ public class BusinessFinish extends BaseFragment {
     @Override
     public void setListener() {
         if (mPendingItemsAdapter != null) {
-            mPendingItemsAdapter.setOnItemChildClickListener((adapter, view, position) -> {
-                ToastUtils.showToast(position + view.getId());
+            mPendingItemsAdapter.setOnItemClickListener((adapter, view, position) -> {
+                Bundle bundle = new Bundle();
+                bundle.putString("orderId", mPendingItemsAdapter.getData().get(position).getOrderId());
+                AppUtils.jump2Next(getActivity(), BusinessDetail.class, bundle, false);
             });
         }
         if (mSrlProcessing != null) {

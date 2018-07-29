@@ -88,8 +88,10 @@ public class MdHttpHelper {
      */
     public static void setRecommendCode(Context context, String recommendedCode, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
-        String url = Constants.SET_RECOMMEND_CODE + "?recommendedCode=" + recommendedCode;
-        httpHelper.post(url, null, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
+        String url = Constants.SET_RECOMMEND_CODE;
+        Map<String, Object> params = new HashMap<>();
+        params.put("recommendedCode", recommendedCode);
+        httpHelper.post(url, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean baseBean) {
                 if (baseBean.isSuccess()) {
@@ -134,9 +136,9 @@ public class MdHttpHelper {
                                    String tag, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
-        params.put("Name", name);
+        params.put("RealName", name);
         params.put("Phone", phone);
-        params.put("signature", tag);
+        params.put("Enunciation", tag);
         httpHelper.post(Constants.SET_MINE_INFO, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
@@ -179,8 +181,10 @@ public class MdHttpHelper {
     public static void getContacts(Context context, int currentPage, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
-        params.put("PageTrem.Phone", "");
-        params.put("PageTrem.Name", "");
+        Map<String, Object> map = new HashMap<>();
+        map.put("Phone", "");
+        map.put("Name", "");
+        params.put("PageTrem", map);
         params.put("PageIndex", currentPage);
         params.put("PageSize", 10);
         Logger.d(params);
@@ -242,25 +246,19 @@ public class MdHttpHelper {
     /**
      * 9报单
      *
-     * @param context        the context
-     * @param customerName   the customer name
-     * @param phone          the phone
-     * @param customerIdCard the customer id card
-     * @param platformId     the platform id
-     * @param BusinessTypeId the business type id
-     * @param callback       the callback
+     * @param context  the context
+     * @param callback the callback
      */
-    public static void addOrderInfo(Context context, String customerName, String phone,
-                                    String customerIdCard, String platformId, String BusinessTypeId,
+    public static void addOrderInfo(Context context, OrderInfoBean orderInfoBean,
                                     SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
-        params.put("CustomerName", customerName);
-        params.put("MobilePhone", phone);
-        params.put("IdCard", customerIdCard);
-        params.put("PlatformId", platformId);
-        params.put("BusinessTypeId", BusinessTypeId);
-        httpHelper.post(Constants.ADD_ORDER_INFO, null, new SpotsCallback<BaseBean<AddOrderInfoBean>>(context, MSG_UPLOAD) {
+        params.put("CustomerName", orderInfoBean.getCustomerName());
+        params.put("MobilePhone", orderInfoBean.getMobilePhone());
+        params.put("IdCard", orderInfoBean.getIdCard());
+        params.put("PlatformId", orderInfoBean.getPlatformId());
+        params.put("BusinessTypeId", orderInfoBean.getBusinessTypeId());
+        httpHelper.post(Constants.ADD_ORDER_INFO, params, new SpotsCallback<BaseBean<AddOrderInfoBean>>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean<AddOrderInfoBean> dataBean) {
                 if (dataBean.isSuccess()) {
@@ -282,16 +280,8 @@ public class MdHttpHelper {
     public static void getFileDirs(Context context, OrderInfoBean orderInfo, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
-        String url;
-        if (orderInfo.getPlatformId() == null) {
-            params.put("OrderId", orderInfo.getOrderId());
-            url = Constants.FILEDIRS1;
-        } else {
-            url = Constants.FILEDIRS2;
-            params.put("PlatformId", orderInfo.getPlatformId());
-            params.put("BusinessTypeId", orderInfo.getBusinessTypeId());
-        }
-        httpHelper.post(url, params, new SpotsCallback<BaseBean<FiledirsBean>>(context, MSG_LOADING) {
+        params.put("OrderId", orderInfo.getOrderId());
+        httpHelper.post(Constants.FILEDIRS1, params, new SpotsCallback<BaseBean<FiledirsBean>>(context, MSG_LOADING) {
             @Override
             public void onSuccess(Response response, BaseBean<FiledirsBean> dataBean) {
                 if (dataBean.isSuccess()) {
@@ -314,7 +304,9 @@ public class MdHttpHelper {
     public static void getMyBusiness(Context context, int currentPage, String customerName, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
-        params.put("PageTrem.CustomerName", customerName);
+        Map<String, Object> map = new HashMap<>();
+        map.put("CustomerName", customerName);
+        params.put("PageTrem", map);
         params.put("PageIndex", currentPage);
         params.put("PageSize", 20);
         httpHelper.post(Constants.MINE_BUSINESS, params, new SpotsCallback<BaseBean<List<MyBusinessBean>>>(context, MSG_LOADING) {
@@ -576,15 +568,51 @@ public class MdHttpHelper {
      * @param callback  the callback
      */
 
-    public static void setOrderFile(Context context, OrderInfoBean orderInfo, SuccessCallback callback) {
+    public static void addInfo(Context context, OrderInfoBean orderInfo, SuccessCallback callback) {
+        if (orderInfo == null) {
+            return;
+        }
         List<String> fileIds = new ArrayList<>();
         for (FiledirsBean.FileDirListBean fileDirListBean : orderInfo.getList()) {
-            fileIds.addAll(fileDirListBean.getListFileId());
+            for (FiledirsBean.FileDirListBean.FileListBean fileListBean : fileDirListBean.getFileList()) {
+                fileIds.add(fileListBean.getFileId());
+            }
         }
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
-        params.put("FileIds", mGson.toJson(fileIds));
-        //params.put("OrderId", "\"\"" + orderId + "\"\"");
+        params.put("FileIds", fileIds);
+        params.put("OrderId", orderInfo.getOrderId());
+        httpHelper.post(Constants.ADD_INFO, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+
+    /**
+     * 22完整流程报单后提交
+     *
+     * @param context   the context
+     * @param orderInfo the orderInfo
+     * @param callback  the callback
+     */
+
+    public static void setOrderFile(Context context, OrderInfoBean orderInfo, SuccessCallback callback) {
+        List<String> fileIds = new ArrayList<>();
+        for (FiledirsBean.FileDirListBean fileDirListBean : orderInfo.getList()) {
+            for (FiledirsBean.FileDirListBean.FileListBean fileListBean : fileDirListBean.getFileList()) {
+                fileIds.add(fileListBean.getFileId());
+            }
+        }
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        Map<String, Object> params = new HashMap<>();
+        params.put("FileIds", fileIds);
         params.put("OrderId", orderInfo.getOrderId());
         params.put("CustomerName", orderInfo.getCustomerName());
         params.put("MobilePhone", orderInfo.getMobilePhone());
@@ -594,7 +622,7 @@ public class MdHttpHelper {
         if (!TextUtils.isEmpty(orderInfo.getRemark())) {
             params.put("Remark", orderInfo.getRemark());
         }
-        httpHelper.post(Constants.SET_ORDER_FILE, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
+        httpHelper.post(Constants.ADD_ORDER, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {
@@ -679,7 +707,8 @@ public class MdHttpHelper {
      * @param path    图片上传到服务器后存储的地址
      * @param cb      图片上传回调
      */
-    public static void uploadPicture(final Context context, String url, String path, final UploadCallBack cb) {
+    public static void uploadPicture(final Context context, String url, String path, String fileDirId
+            , String orderId, final UploadCallBack cb) {
         showDialog(context);
         final OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(60, TimeUnit.SECONDS);
@@ -690,7 +719,11 @@ public class MdHttpHelper {
         }
         MultipartBuilder multipartBuilder = new MultipartBuilder().type(MultipartBuilder.FORM);
         File file = PhotoUtil.scal(FileUtils.SDPATH + path);
-        multipartBuilder.addFormDataPart("file", file.getName(), RequestBody.create(null, file));
+        multipartBuilder.addFormDataPart("Files", file.getName(), RequestBody.create(null, file));
+        if (TextUtils.equals(Constants.UPLOAD_FLOWFILE, url)) {
+            multipartBuilder.addFormDataPart("FileDirId", fileDirId);
+            multipartBuilder.addFormDataPart("OrderId", orderId);
+        }
         RequestBody body = multipartBuilder.build();
         Request request = new Request.Builder()
                 .addHeader("Acount-Token-BYKJProjectSimplify", mAppData.getAccessToken())

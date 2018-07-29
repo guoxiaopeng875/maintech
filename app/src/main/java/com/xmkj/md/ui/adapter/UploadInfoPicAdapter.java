@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
+import com.orhanobut.logger.Logger;
 import com.xmkj.md.R;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.model.PicUploadBean;
@@ -91,6 +92,8 @@ public class UploadInfoPicAdapter extends BaseAdapter {
             ImageLoaderUtil.getImageLoader(mActivity).displayImage(Constants.PIC_BASE_URL +
                             mList_url.get(position).getUrl(), holder.pv,
                     ImageLoaderUtil.getDisplayImageOptions(), ImageLoaderUtil.loadingListener);
+            Logger.d(Constants.PIC_BASE_URL +
+                    mList_url.get(position).getUrl());
 
             holder.ibDel.setVisibility(mList_url.get(position).isSelect() ? View.VISIBLE : View.GONE);
             holder.rl.setVisibility(mList_url.get(position).isSelect() ? View.VISIBLE : View.GONE);

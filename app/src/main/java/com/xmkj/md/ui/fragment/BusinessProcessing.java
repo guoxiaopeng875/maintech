@@ -90,6 +90,7 @@ public class BusinessProcessing extends BaseFragment {
                     case R.id.btn_status_pending:
                         OrderInfoBean orderInfoBean = new OrderInfoBean();
                         orderInfoBean.setOrderId(mPendingItemsAdapter.getData().get(position).getOrderId());
+                        orderInfoBean.setTarget(Constants.TARGET_ADD_INFO);
                         EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, orderInfoBean));
                         AppUtils.jump2Next(getActivity(), UpLoadInfo.class);
                         break;
@@ -114,6 +115,19 @@ public class BusinessProcessing extends BaseFragment {
     private void onLoadMore() {
         pageIndex++;
         getProcessingList(false);
+    }
+
+    @Override
+    protected boolean isRegisterEventBus() {
+        return true;
+    }
+
+    @Override
+    protected void receiveEvent(MessageEvent event) {
+        super.receiveEvent(event);
+        if (event.getCode() == Constants.CODE_REFRESH) {
+            mSrlProcessing.autoRefresh();
+        }
     }
 
 }

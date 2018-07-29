@@ -123,21 +123,20 @@ public class ApplyUserInfo extends BaseActivity {
             ToastUtils.showToast("请输入正确手机号");
             return;
         }
-        if (TextUtils.equals("下一步", mBtnSubmitUserInfo.getText().toString())) {
-            addOrderInfo(customerName, phone, customerIdCard);
-            return;
-        }
         mOrderInfo.setCustomerName(customerName);
         mOrderInfo.setMobilePhone(phone);
         mOrderInfo.setIdCard(customerIdCard);
+        if (TextUtils.equals("下一步", mBtnSubmitUserInfo.getText().toString())) {
+            addOrderInfo();
+            return;
+        }
         EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_CHANGE_ORDER_INFO, mOrderInfo));
         finish();
         //changeInfo(customerName, phone, customerIdCard);
     }
 
-    private void addOrderInfo(String customerName, String phone, String customerIdCard) {
-        MdHttpHelper.addOrderInfo(this, customerName, phone, customerIdCard,
-                mPlatformId, mBusinessTypeId, new MdHttpHelper.SuccessCallback<AddOrderInfoBean>() {
+    private void addOrderInfo() {
+        MdHttpHelper.addOrderInfo(this, mOrderInfo ,new MdHttpHelper.SuccessCallback<AddOrderInfoBean>() {
                     @Override
                     public void onSuccess(AddOrderInfoBean data) {
                         if (mOrderInfo == null) {
@@ -145,9 +144,8 @@ public class ApplyUserInfo extends BaseActivity {
                             return;
                         }
                         mOrderInfo.setOrderId(data.getOrderId());
-                        mOrderInfo.setCustomerName(customerName);
-                        mOrderInfo.setMobilePhone(phone);
-                        mOrderInfo.setIdCard(customerIdCard);
+                        mOrderInfo.setList(data.getFileDirList());
+                        mOrderInfo.setTarget(Constants.TARGET_NEXT);
                         EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, mOrderInfo));
                         AppUtils.jump2Next(ApplyUserInfo.this, UpLoadInfo.class);
                     }

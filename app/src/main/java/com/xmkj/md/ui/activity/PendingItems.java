@@ -1,5 +1,6 @@
 package com.xmkj.md.ui.activity;
 
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -10,11 +11,10 @@ import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.config.Constants;
 import com.xmkj.md.http.OkHttpHelper;
 import com.xmkj.md.http.SpotsCallback;
-import com.xmkj.md.model.BaseBean;
+import com.xmkj.md.model.DataListBean;
 import com.xmkj.md.model.MessageEvent;
 import com.xmkj.md.model.OrderBean;
 import com.xmkj.md.model.OrderInfoBean;
-import com.xmkj.md.model.PageBean;
 import com.xmkj.md.ui.adapter.PendingItemsAdapter;
 import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.EventBusUtil;
@@ -61,16 +61,15 @@ public class PendingItems extends BaseActivity {
 
     // 获取代办事项数据
     private void getPendItems(boolean isRefresh) {
-
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(this);
         Map<String, Object> params = new HashMap<>();
         params.put("PageIndex", pageIndex);
         params.put("PageSize", PAGE_SIZE);
         params.put("PageTrem", new Object());
-        httpHelper.post(Constants.BASE_URL + "/GetUpcomingList", params, new SpotsCallback<BaseBean<List<OrderBean>>>(this, "加载中") {
+        httpHelper.post(Constants.BASE_URL + "/GetUpcomingList", params, new SpotsCallback<DataListBean<OrderBean>>(this, "加载中") {
 
             @Override
-            public void onSuccess(Response response, BaseBean<List<OrderBean>> items) {
+            public void onSuccess(Response response, DataListBean<OrderBean> items) {
                 List<OrderBean> orders = items.getData();
                 if (isRefresh) {
                     mPendingItemsAdapter.setNewData(orders);
@@ -88,11 +87,26 @@ public class PendingItems extends BaseActivity {
             mPendingItemsAdapter.setOnItemChildClickListener((adapter, view, position) -> {
                 switch (view.getId()) {
                     case R.id.btn_status_pending:
-                        OrderInfoBean orderInfoBean = new OrderInfoBean();
-                        OrderBean orderBean = mPendingItemsAdapter.getData().get(position);
-                        orderInfoBean.setOrderId(orderBean.getOrderId());
-                        EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, orderInfoBean));
-                        AppUtils.jump2Next(PendingItems.this, UpLoadInfo.class);
+                        switch (mPendingItemsAdapter.getData().get(position).getRequesIndex()) {
+                            case 1://上传资料，上传合同
+                                OrderInfoBean orderInfoBean = new OrderInfoBean();
+                                OrderBean orderBean = mPendingItemsAdapter.getData().get(position);
+                                orderInfoBean.setOrderId(orderBean.getOrderId());
+                                orderInfoBean.setTarget(Constants.TARGET_ADD_INFO);
+                                EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, orderInfoBean));
+                                AppUtils.jump2Next(PendingItems.this, UpLoadInfo.class);
+                                break;
+                            case 2://贷后跟进
+                                Bundle bundle1 = new Bundle();
+                                bundle1.putString("orderId", mPendingItemsAdapter.getData().get(position).getOrderId());
+                                AppUtils.jump2Next(PendingItems.this, FollowUp.class, bundle1, false);
+                                break;
+                            case 3://逾期
+                                Bundle bundle2 = new Bundle();
+                                bundle2.putString("orderId", mPendingItemsAdapter.getData().get(position).getOrderId());
+                                AppUtils.jump2Next(PendingItems.this, Overdue.class, bundle2, false);
+                                break;
+                        }
                         break;
                 }
             });
@@ -122,5 +136,19 @@ public class PendingItems extends BaseActivity {
     public void onViewClicked() {
         finish();
     }
+
+    @Override
+    protected boolean isRegisterEventBus() {
+        return true;
+    }
+
+    @Override
+    protected void receiveEvent(MessageEvent event) {
+        super.receiveEvent(event);
+        if (event.getCode() == Constants.CODE_REFRESH) {
+            mSrlPending.autoRefresh();
+        }
+    }
+
 
 }

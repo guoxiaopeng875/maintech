@@ -102,7 +102,7 @@ public class MyBusiness extends BaseActivity {
                     }
                     mMyBusinessAdapter.setNewData(null);
                     mIsSearch = true;
-                    getMyBusiness(false);
+                    mSrl.autoRefresh();
                     return false;
                 }
                 return false;
@@ -161,8 +161,10 @@ public class MyBusiness extends BaseActivity {
                 }
                 mMyBusinessAdapter.setNewData(null);
                 mIsSearch = true;
-                getMyBusiness(true);
+                mSrl.autoRefresh();
                 break;
         }
     }
+
+
 }

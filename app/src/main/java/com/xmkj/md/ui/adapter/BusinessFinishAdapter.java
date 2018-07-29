@@ -26,8 +26,7 @@ public class BusinessFinishAdapter extends BaseQuickAdapter<OrderBean, BaseViewH
                 .setText(R.id.tv_loan_type_finish, item.getBusinessTypeName())
                 .setText(R.id.tv_loan_status_finish, item.getStatusName())
                 .setText(R.id.tv_loan_amount_finish, getFormatAmount(item.getPayAmount()))
-                .setText(R.id.tv_broker_amount_finish, getFormatAmount(item.getCommissionMoney()))
-                .addOnClickListener(R.id.tv_detail_finish);
+                .setText(R.id.tv_broker_amount_finish, getFormatAmount(item.getCommissionMoney()));
     }
 
     private String getFormatAmount(String amountStr) {

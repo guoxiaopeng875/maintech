@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.orhanobut.logger.Logger;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
@@ -31,6 +32,7 @@ public class OkHttpHelper {
     public static final int TOKEN_MISSING = 401;// token 丢失
     public static final int TOKEN_ERROR = 402; // token 错误
     public static final int TOKEN_EXPIRE = 403; // token 过期
+    public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     public static final String TAG = "OkHttpHelper===";
     private static OkHttpHelper mInstance;
     private OkHttpClient mHttpClient;
@@ -269,9 +271,10 @@ public class OkHttpHelper {
     private Request buildRequest(String url, HttpMethodType methodType, Map<String, Object> params) {
         Request.Builder builder = new Request.Builder().url(url);
         if (methodType == HttpMethodType.POST) {
-            RequestBody body = builderFormData(params);
-            builder.post(body);
-            Logger.i(TAG + "URL===" + url);
+            RequestBody jsonBody = RequestBody.create(JSON, builderFormData(params));
+            //RequestBody body = builderFormData(params);
+            builder.post(jsonBody);
+            Logger.i(TAG + "URL===" + builderFormData(params));
         } else if (methodType == HttpMethodType.GET) {
             url = buildUrlParams(url, params);
             Logger.i(TAG + "URL===" + url);
@@ -308,7 +311,7 @@ public class OkHttpHelper {
         return url;
     }
 
-    private RequestBody builderFormData(Map<String, Object> params) {
+    private String builderFormData(Map<String, Object> params) {
         FormEncodingBuilder builder = new FormEncodingBuilder();
         if (params != null) {
             Logger.d(params);
@@ -316,7 +319,7 @@ public class OkHttpHelper {
                 builder.add(entry.getKey(), entry.getValue() == null ? "" : entry.getValue().toString());
             }
         }
-        return builder.build();
+        return mGson.toJson(params);
     }
 
     enum HttpMethodType {

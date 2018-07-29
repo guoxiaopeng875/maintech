@@ -83,7 +83,6 @@ public class FollowUp extends BaseActivity {
                 return false;
             }
         });
-
     }
 
     @Override
@@ -122,7 +121,7 @@ public class FollowUp extends BaseActivity {
     }
 
     private void uploadPicture(final String fileName) {
-        MdHttpHelper.uploadPicture(this, Constants.UPLOAD_FILE, fileName + ".jpg", new MdHttpHelper.UploadCallBack() {
+        MdHttpHelper.uploadPicture(this, Constants.UPLOAD_FILE, fileName + ".jpg", "", "", new MdHttpHelper.UploadCallBack() {
 
             @Override
             public void onSuccess(String json) {

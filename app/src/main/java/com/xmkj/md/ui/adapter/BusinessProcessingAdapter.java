@@ -57,7 +57,7 @@ public class BusinessProcessingAdapter extends BaseQuickAdapter<OrderBean, BaseV
                 .setText(R.id.tv_date_pending, item.wrapCreateTime())
                 .setText(R.id.tv_loan_type_pending, item.getBusinessTypeName())
                 .setText(R.id.tv_loan_status_pending, item.getStatusName())
-                .setText(R.id.btn_status_pending, btnName)
+                .setText(R.id.btn_status_pending, "办理")
                 .addOnClickListener(R.id.btn_status_pending);
     }
 

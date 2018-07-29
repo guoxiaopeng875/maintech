@@ -73,8 +73,18 @@ public class UpLoadInfo extends BaseActivity {
         mRv.setLayoutManager(new LinearLayoutManager(this));
         mRv.setAdapter(mUploadInfoAdapter);
         if (mOrderInfo != null) {
+            switch (mOrderInfo.getTarget()) {
+                case Constants.TARGET_ADD_INFO:
+                    mBtUploadInfo.setText("完成");
+                    break;
+                case Constants.TARGET_NEXT:
+                    mBtUploadInfo.setText("下一步");
+                    break;
+                case Constants.TARGET_CHANGE:
+                    mBtUploadInfo.setText("完成");
+                    break;
+            }
             mOrderId = mOrderInfo.getOrderId();
-            mBtUploadInfo.setText(mOrderInfo.getList() == null ? "下一步" : "确认");
             if (mOrderInfo.getList() != null) {
                 mUploadInfoAdapter.setNewData(mOrderInfo.getList());
                 mUploadInfoAdapter.notifyDataSetChanged();
@@ -126,13 +136,15 @@ public class UpLoadInfo extends BaseActivity {
 
     private void uploadPicture(final String fileName) {
         MdHttpHelper.uploadPicture(this, Constants.UPLOAD_FLOWFILE,
-                fileName + ".jpg", new MdHttpHelper.UploadCallBack() {
+                fileName + ".jpg", mUploadInfoAdapter.getData().get(mParentItemPosition).getFileDirId(), mOrderId, new MdHttpHelper.UploadCallBack() {
 
                     @Override
                     public void onSuccess(String json) {
                         UploadInfoUrlBean uploadInfoUrlBean = mGson.fromJson(json, UploadInfoUrlBean.class);
-                        mUploadInfoAdapter.getData().get(mParentItemPosition).getListPicUrl().add(uploadInfoUrlBean.getData().getFileUrl());
-                        mUploadInfoAdapter.getData().get(mParentItemPosition).getListFileId().add(uploadInfoUrlBean.getData().getFileId());
+                        FiledirsBean.FileDirListBean.FileListBean fileListBean = new FiledirsBean.FileDirListBean.FileListBean();
+                        fileListBean.setFileId(uploadInfoUrlBean.getData().getFileId());
+                        fileListBean.setFileUrl(uploadInfoUrlBean.getData().getFileUrl());
+                        mUploadInfoAdapter.getData().get(mParentItemPosition).getFileList().add(fileListBean);
                         mUploadInfoAdapter.notifyDataSetChanged();
                     }
 
@@ -151,29 +163,32 @@ public class UpLoadInfo extends BaseActivity {
                 AppUtils.jumpAndClearTask(UpLoadInfo.this, Main.class);
                 break;
             case R.id.ib_back_contacts:
-                if (!TextUtils.equals("确认", mBtUploadInfo.getText().toString()) ){
+                if (mOrderInfo.getTarget() != Constants.TARGET_CHANGE) {
                     finish();
                     break;
                 }
-            case R.id.btn_next_upload_info://返回按钮
+            case R.id.btn_next_upload_info:
                 for (FiledirsBean.FileDirListBean fileDirListBean : mUploadInfoAdapter.getData()) {
-                    Logger.d(fileDirListBean.getListPicUrl().size() + "===" + fileDirListBean.getFileDirName());
-                    if (fileDirListBean.getListPicUrl().size() == 0) {
+                    Logger.d(fileDirListBean.getFileList().size() + "===" + fileDirListBean.getFileDirName());
+                    if (fileDirListBean.getFileList().size() == 0) {
                         ToastUtils.showToast(UpLoadInfo.this, "请按要求上传文件");
                         return;
                     }
                 }
-                if (TextUtils.equals("确认", mBtUploadInfo.getText().toString())) {
-                    mOrderInfo.setList(mUploadInfoAdapter.getData());
-                    EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_CHANGE_ORDER_INFO, mOrderInfo));
-                    finish();
-                    return;
-                }
                 mOrderInfo.setList(mUploadInfoAdapter.getData());
-                EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, mOrderInfo));
-                AppUtils.jump2Next(UpLoadInfo.this, InfoConfirm.class);
-                break;
-
+                switch (mOrderInfo.getTarget()) {
+                    case Constants.TARGET_ADD_INFO:
+                        addInfo();
+                        break;
+                    case Constants.TARGET_NEXT:
+                        EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, mOrderInfo));
+                        AppUtils.jump2Next(UpLoadInfo.this, InfoConfirm.class);
+                        break;
+                    case Constants.TARGET_CHANGE:
+                        EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_CHANGE_ORDER_INFO, mOrderInfo));
+                        finish();
+                        break;
+                }
         }
     }
 
@@ -192,4 +207,16 @@ public class UpLoadInfo extends BaseActivity {
                 break;
         }
     }
+
+    private void addInfo() {
+        MdHttpHelper.addInfo(this, mOrderInfo, new MdHttpHelper.SuccessCallback() {
+            @Override
+            public void onSuccess(Object data) {
+                ToastUtils.showToast(UpLoadInfo.this, "提交成功");
+                EventBusUtil.sendEvent(new MessageEvent(Constants.CODE_REFRESH));
+                finish();
+            }
+        });
+    }
+
 }

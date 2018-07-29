@@ -33,6 +33,8 @@ public class OrderBean {
     // 逾期天数
     private int LiquidatedDay;
 
+    private int RequesIndex;
+
 
     public String getCreateDateTimeStamp() {
         return CreateDateTimeStamp;
@@ -140,6 +142,14 @@ public class OrderBean {
 
     public void setBtnName(String btnName) {
         BtnName = btnName;
+    }
+
+    public int getRequesIndex() {
+        return RequesIndex;
+    }
+
+    public void setRequesIndex(int requesIndex) {
+        RequesIndex = requesIndex;
     }
 
 }

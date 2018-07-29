@@ -19,6 +19,7 @@ public class OrderInfoBean implements Serializable {
     private String businessTypeName;
     private String remark;
     private List<FiledirsBean.FileDirListBean> list;
+    private int target;
 
 
     public String getCustomerName() {
@@ -101,6 +102,13 @@ public class OrderInfoBean implements Serializable {
         this.businessTypeName = businessTypeName;
     }
 
+    public int getTarget() {
+        return target;
+    }
+
+    public void setTarget(int target) {
+        this.target = target;
+    }
 
 
 

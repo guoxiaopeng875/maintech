@@ -51,7 +51,7 @@ public class BeginApply extends BaseActivity {
 
     @Override
     public void initView() {
-        mBtNext.setText(mOrderInfo == null ? "下一步" : "确认");
+
     }
 
     @Override
@@ -121,22 +121,28 @@ public class BeginApply extends BaseActivity {
             ToastUtils.showToast(this, "请选择业务类型");
             return;
         }
-        if (mOrderInfo == null){
+        if (mOrderInfo == null) {
             OrderInfoBean orderInfoBean = new OrderInfoBean();
             orderInfoBean.setPlatformId(group_platform.getId());
             orderInfoBean.setPlatformName(group_platform.getSelect());
             orderInfoBean.setBusinessTypeId(group_business.getId());
             orderInfoBean.setBusinessTypeName(group_business.getSelect());
             EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, orderInfoBean));
-            AppUtils.jump2Next(this, ApplyUserInfo.class);
-        }else {
-            mOrderInfo.setPlatformId(group_platform.getId());
-            mOrderInfo.setPlatformName(group_platform.getSelect());
-            mOrderInfo.setBusinessTypeId(group_business.getId());
-            mOrderInfo.setBusinessTypeName(group_business.getSelect());
+        } else {
+            if (group_platform.getId() == null) {
+                mOrderInfo.setPlatformId(mOrderInfo.getPlatformId());
+                mOrderInfo.setPlatformName(mOrderInfo.getPlatformName());
+                mOrderInfo.setBusinessTypeId(mOrderInfo.getBusinessTypeId());
+                mOrderInfo.setBusinessTypeName(mOrderInfo.getBusinessTypeName());
+            } else {
+                mOrderInfo.setPlatformId(group_platform.getId());
+                mOrderInfo.setPlatformName(group_platform.getSelect());
+                mOrderInfo.setBusinessTypeId(group_business.getId());
+                mOrderInfo.setBusinessTypeName(group_business.getSelect());
+            }
             EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_CHANGE_ORDER_INFO, mOrderInfo));
-            finish();
         }
+        AppUtils.jump2Next(this, ApplyUserInfo.class);
     }
 
     @Override
@@ -177,4 +183,7 @@ public class BeginApply extends BaseActivity {
             mOrderInfo = (OrderInfoBean) event.getData();
         }
     }
+
+
+
 }

@@ -6,8 +6,8 @@ package com.xmkj.md.config;
 public class Constants {
 
 
-    public static String BASE_URL = "http://193.112.221.220:81/Api/App";
-    public static String PIC_BASE_URL = "http://193.112.221.220:81/";
+    public static String BASE_URL = "http://192.168.0.12:33503/Api/App";
+    public static String PIC_BASE_URL = "http://192.168.0.12:33503/";
 
     public static final String RECOMMEND_CODE = BASE_URL + "/GetRecommendedCode";
     public static final String SET_RECOMMEND_CODE = BASE_URL + "/UpdateRecommendedCode";
@@ -18,13 +18,14 @@ public class Constants {
     public static final String PLATFORM = BASE_URL + "/AppGetPlatformList";
     public static final String BUSINESS = BASE_URL + "/AppGetBusinesstypeList";
     public static final String ADD_ORDER_INFO = BASE_URL + "/AddAppOrderId";
+    public static final String ADD_ORDER = BASE_URL + "/AppAddOrder";
     public static final String FILEDIRS1 = BASE_URL + "/GetFlowFileDir";
     public static final String FILEDIRS2 = BASE_URL + "/GetAddOrderFileDir";
     public static final String MINE_BUSINESS = BASE_URL + "/GetMyBusiness";
     public static final String BUSINESS_DETAIL = BASE_URL + "/GetMyBusinessDetails";//业务详情
     public static final String UPLOAD_FLOWFILE = BASE_URL + "/AppUploadFlowFile";//上传订单流程文件
     public static final String UPLOAD_FILE = BASE_URL + "/AppUploadFile";//上传跟进文件
-    public static final String SET_ORDER_FILE = BASE_URL + "/AppSetOrderFile";//文件上传后整体提交
+    public static final String ADD_INFO = BASE_URL + "/AppSetOrderFile";//文件上传后整体提交
     public static final String OVERDUE_DETAIL = BASE_URL + "/OverdueQueryDetails";//逾期详情
     public static final String ADD_OVERDUE = BASE_URL + "/AddOverdueQueryDetails";//添加逾期
     public static final String ORDER_CONFIRM = BASE_URL + "/GetOrderConfirmed";//订单确认信息
@@ -57,6 +58,11 @@ public class Constants {
     public static final int CODE_ORDER_CHANGE_CUSTOMINFO = 0X000007;//修改客户信息
     public static final int CODE_ORDER_CHANGE_FILE = 0X000008;//修改上传的文件
     public static final int CODE_CHANGE_ORDER_INFO = 0X000009;//修改确认信息后，需要刷新页面
+    public static final int CODE_REFRESH = 0X000010;//需要刷新
+
+    public static final int TARGET_ADD_INFO = 1;//添加资料
+    public static final int TARGET_NEXT = 2;//下一步
+    public static final int TARGET_CHANGE = 3;//修改资料
 
 
 }

@@ -26,8 +26,8 @@ public class InfoConfirmAdapter extends BaseQuickAdapter<FiledirsBean.FileDirLis
     @Override
     protected void convert(BaseViewHolder helper, FiledirsBean.FileDirListBean item) {
         List<String> list = new ArrayList<>();
-        for (String url : item.getListPicUrl()) {
-            list.add(url);
+        for (FiledirsBean.FileDirListBean.FileListBean fileListBean : item.getFileList()) {
+            list.add(fileListBean.getFileUrl());
         }
         InfoConfirmPicAdapter infoConfirmPicAdapter = new InfoConfirmPicAdapter(mContext, list);
         helper.setText(R.id.tv_infotype_uploadinfo, item.getFileDirName())

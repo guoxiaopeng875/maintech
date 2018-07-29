@@ -8,7 +8,7 @@ import java.util.List;
  * Created by 晴天 on 2018/7/15.
  */
 
-public class FiledirsBean implements Serializable{
+public class FiledirsBean implements Serializable {
 
     private List<FileDirListBean> FileDirList;
 
@@ -20,7 +20,7 @@ public class FiledirsBean implements Serializable{
         this.FileDirList = FileDirList;
     }
 
-    public static class FileDirListBean implements Serializable{
+    public static class FileDirListBean implements Serializable {
         /**
          * FileDirId : 5852370ca0a6b37918aad4ae
          * FileDirName : 融资租赁申请书
@@ -28,8 +28,7 @@ public class FiledirsBean implements Serializable{
 
         private String FileDirId;
         private String FileDirName;
-        private List<String> listPicUrl = new ArrayList<>();
-        private List<String> listFileId = new ArrayList<>();
+        private List<FileListBean> FileList = new ArrayList<>();
 
         public String getFileDirId() {
             return FileDirId;
@@ -47,22 +46,45 @@ public class FiledirsBean implements Serializable{
             this.FileDirName = FileDirName;
         }
 
-        public List<String> getListPicUrl() {
-            return listPicUrl;
+        public List<FileListBean> getFileList() {
+            return FileList;
         }
 
-        public void setListPicUrl(List<String> listPicUrl) {
-            this.listPicUrl = listPicUrl;
-        }
-
-        public List<String> getListFileId() {
-            return listFileId;
-        }
-
-        public void setListFileId(List<String> listFileId) {
-            this.listFileId = listFileId;
+        public void setFileList(List<FileListBean> listPicUrl) {
+            this.FileList = listPicUrl;
         }
 
 
+        public static class FileListBean {
+            private String FileId;
+            private String FileName;
+            private String FileUrl;
+
+            public String getFileId() {
+                return FileId;
+            }
+
+            public void setFileId(String fileId) {
+                FileId = fileId;
+            }
+
+            public String getFileName() {
+                return FileName;
+            }
+
+            public void setFileName(String fileName) {
+                FileName = fileName;
+            }
+
+            public String getFileUrl() {
+                return FileUrl;
+            }
+
+            public void setFileUrl(String fileUrl) {
+                FileUrl = fileUrl;
+            }
+        }
     }
+
+
 }
