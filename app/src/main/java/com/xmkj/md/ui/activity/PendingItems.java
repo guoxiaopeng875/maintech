@@ -67,22 +67,16 @@ public class PendingItems extends BaseActivity {
         params.put("PageIndex", pageIndex);
         params.put("PageSize", PAGE_SIZE);
         params.put("PageTrem", new Object());
-        httpHelper.post(Constants.BASE_URL + "/GetUpcomingList", params, new SpotsCallback<BaseBean<PageBean<OrderBean>>>(this, "加载中") {
+        httpHelper.post(Constants.BASE_URL + "/GetUpcomingList", params, new SpotsCallback<BaseBean<List<OrderBean>>>(this, "加载中") {
 
             @Override
-            public void onSuccess(Response response, BaseBean<PageBean<OrderBean>> items) {
-                List<OrderBean> orders = items.getData().getPageValues();
+            public void onSuccess(Response response, BaseBean<List<OrderBean>> items) {
+                List<OrderBean> orders = items.getData();
                 if (isRefresh) {
                     mPendingItemsAdapter.setNewData(orders);
                     mSrlPending.finishRefresh();
                 } else {
                     finishLoadMore(mPendingItemsAdapter, orders, mSrlPending);
-//                    mPendingItemsAdapter.addData(orders);
-//                    if (orders.size() == 0) {
-//                        mSrlPending.finishLoadMoreWithNoMoreData();
-//                        return;
-//                    }
-//                    mSrlPending.finishLoadMore();
                 }
             }
         });

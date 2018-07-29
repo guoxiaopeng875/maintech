@@ -21,6 +21,7 @@ public class OrderBean {
     private String CustomerName;
     private String PlatformName;
     private String BusinessTypeName;
+    private String CreateDateTimeStamp;
     private String CreateTime;
     private int Status;
     private String StatusName;
@@ -31,6 +32,16 @@ public class OrderBean {
     private String CommissionMoney;
     // 逾期天数
     private int LiquidatedDay;
+
+
+    public String getCreateDateTimeStamp() {
+        return CreateDateTimeStamp;
+    }
+
+    public void setCreateDateTimeStamp(String createDateTimeStamp) {
+        CreateDateTimeStamp = createDateTimeStamp;
+    }
+
 
     public String wrapOverdueDay() {
         return "逾期 " + LiquidatedDay + " 天";

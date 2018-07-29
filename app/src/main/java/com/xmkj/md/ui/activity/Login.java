@@ -70,14 +70,7 @@ public class Login extends BaseActivity {
         mBtnLogin.setOnClickListener(view -> {
             String account = mEtAccountLogin.getText().toString();
             String pwd = mEtPwdLogin.getText().toString();
-//            if (TextUtils.isEmpty(account)){
-//                ToastUtils.showToast(Login.this,"请输入账号");
-//                return;
-//            }
-//            if (TextUtils.isEmpty(pwd)){
-//                ToastUtils.showToast(Login.this,"请输入密码");
-//                return;
-//            }
+//
             account = "周杰伦";
             pwd = "123456";
             doLogin(account, pwd);

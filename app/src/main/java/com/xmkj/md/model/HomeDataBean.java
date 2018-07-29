@@ -5,22 +5,23 @@ package com.xmkj.md.model;
  */
 public class HomeDataBean {
 
+
     /**
-     * MessageAppId : 5b4304146c95a3060ce2b68f
-     * Title : 中国经济
-     * Content : <p>中国经济十分严重</p>
-     * IsEnable : true
-     * CreateDate : 2018-07-09T14:43:33
-     * FilePath : Upload\MessageFile\5b4304146c95a3060ce2b68f.html
+     * MessageAppId : 5b593c11bbb40c2450dd46b1
+     * Title : 新易融
+     * SubTitle : 超低首付，超低利息，超长租期，超低月供！
+     * FilePath : Upload\MessageFile\5b593c11bbb40c2450dd46b1.html
+     * Content : <p>超低首付，超低利息，超长租期，超低月供！</p>
+     * TxtContent : 超低首付，超低利息，超长租期，超低月供！
      */
 
+    private int type;
     private String MessageAppId;
     private String Title;
-    private String Content;
-    private boolean IsEnable;
-    private String CreateDate;
+    private String SubTitle;
     private String FilePath;
-    private int type;
+    private String Content;
+    private String TxtContent;
 
     public int getType() {
         return type;
@@ -46,28 +47,12 @@ public class HomeDataBean {
         this.Title = Title;
     }
 
-    public String getContent() {
-        return Content;
+    public String getSubTitle() {
+        return SubTitle;
     }
 
-    public void setContent(String Content) {
-        this.Content = Content;
-    }
-
-    public boolean isIsEnable() {
-        return IsEnable;
-    }
-
-    public void setIsEnable(boolean IsEnable) {
-        this.IsEnable = IsEnable;
-    }
-
-    public String getCreateDate() {
-        return CreateDate;
-    }
-
-    public void setCreateDate(String CreateDate) {
-        this.CreateDate = CreateDate;
+    public void setSubTitle(String SubTitle) {
+        this.SubTitle = SubTitle;
     }
 
     public String getFilePath() {
@@ -76,6 +61,22 @@ public class HomeDataBean {
 
     public void setFilePath(String FilePath) {
         this.FilePath = FilePath;
+    }
+
+    public String getContent() {
+        return Content;
+    }
+
+    public void setContent(String Content) {
+        this.Content = Content;
+    }
+
+    public String getTxtContent() {
+        return TxtContent;
+    }
+
+    public void setTxtContent(String TxtContent) {
+        this.TxtContent = TxtContent;
     }
 
 }

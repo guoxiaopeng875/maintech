@@ -59,10 +59,10 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (mList.get(position).getType() == 0) {
             ((LeftViewHolder) holder).tvTitle.setText(mList.get(position).getTitle());
-            ((LeftViewHolder) holder).tvContent.setText(mList.get(position).getContent());
+            ((LeftViewHolder) holder).tvContent.setText(mList.get(position).getSubTitle());
         } else {
             ((RightViewHolder) holder).tvTitle.setText(mList.get(position).getTitle());
-            ((RightViewHolder) holder).tvContent.setText(mList.get(position).getContent());
+            ((RightViewHolder) holder).tvContent.setText(mList.get(position).getSubTitle());
         }
         switch (position) {
             case 0:
