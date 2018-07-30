@@ -3,6 +3,7 @@ package com.xmkj.md.ui.activity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
@@ -89,7 +90,11 @@ public class BusinessDetail extends BaseActivity {
                 mTvMoney.setText("¥  " + String.valueOf(data.getPayAmount()));
                 mTvCommission.setText("¥  " + String.valueOf(data.getCommissionMoney()));
                 mTvCost.setText("¥  " + String.valueOf(data.getSumMoney()));
-                mTvTime.setText(data.getCreateTime());
+                String time = data.getCreateTime();
+                if (time != null && time.contains("T")){
+                    time = time.replace("T"," ");
+                }
+                mTvTime.setText(time);
                 mTvStatus.setText(DataUtil.getOrderStatus(data.getStatus()));
                 setProcessData(data.getStatus());
             }

@@ -66,6 +66,7 @@ public class Home extends BaseFragment {
 
     @Override
     public void setListener() {
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             sr.setOnScrollChangeListener(new View.OnScrollChangeListener() {
                 @Override

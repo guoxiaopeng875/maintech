@@ -1,17 +1,20 @@
 package com.xmkj.md.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.orhanobut.logger.Logger;
 import com.xmkj.md.R;
 import com.xmkj.md.model.HomeDataBean;
-import com.xmkj.md.utils.ToastUtils;
+import com.xmkj.md.ui.activity.H5Detail;
+import com.xmkj.md.utils.AppUtils;
 
 import java.util.List;
 
@@ -60,9 +63,27 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if (mList.get(position).getType() == 0) {
             ((LeftViewHolder) holder).tvTitle.setText(mList.get(position).getTitle());
             ((LeftViewHolder) holder).tvContent.setText(mList.get(position).getSubTitle());
+            ((LeftViewHolder) holder).rlContent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, H5Detail.class);
+                    intent.putExtra("url", mList.get(position).getFilePath());
+                    intent.putExtra("title",mList.get(position).getTitle());
+                    mContext.startActivity(intent);
+                }
+            });
         } else {
             ((RightViewHolder) holder).tvTitle.setText(mList.get(position).getTitle());
             ((RightViewHolder) holder).tvContent.setText(mList.get(position).getSubTitle());
+            ((RightViewHolder) holder).rlContent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, H5Detail.class);
+                    intent.putExtra("url", mList.get(position).getFilePath());
+                    intent.putExtra("title",mList.get(position).getTitle());
+                    mContext.startActivity(intent);
+                }
+            });
         }
         switch (position) {
             case 0:
@@ -106,12 +127,14 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public ImageView ivNum;
         public TextView tvTitle;
         public TextView tvContent;
+        public RelativeLayout rlContent;
 
         public LeftViewHolder(View v) {
             super(v);
             ivNum = v.findViewById(R.id.iv_num_textleft);
             tvTitle = v.findViewById(R.id.tv_title_left);
             tvContent = v.findViewById(R.id.tv_content_left);
+            rlContent = v.findViewById(R.id.rl_content_left);
         }
     }
 
@@ -120,12 +143,14 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         public ImageView ivNum;
         public TextView tvTitle;
         public TextView tvContent;
+        public RelativeLayout rlContent;
 
         public RightViewHolder(View v) {
             super(v);
             ivNum = v.findViewById(R.id.iv_num_textright);
             tvTitle = v.findViewById(R.id.tv_title_right);
             tvContent = v.findViewById(R.id.tv_content_right);
+            rlContent = v.findViewById(R.id.rl_content_right);
         }
     }
 

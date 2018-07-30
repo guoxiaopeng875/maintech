@@ -6,8 +6,8 @@ package com.xmkj.md.config;
 public class Constants {
 
 
-    public static String BASE_URL = "http://192.168.0.12:33503/Api/App";
-    public static String PIC_BASE_URL = "http://192.168.0.12:33503/";
+    public static String BASE_URL = "http://193.112.221.220:81/Api/App";
+    public static String PIC_BASE_URL = "http://193.112.221.220:81/";
 
     public static final String RECOMMEND_CODE = BASE_URL + "/GetRecommendedCode";
     public static final String SET_RECOMMEND_CODE = BASE_URL + "/UpdateRecommendedCode";
@@ -37,6 +37,7 @@ public class Constants {
     public static final String COST_DETAIL = BASE_URL + "/GetCostDetails";//费用详情
     public static final String PROCESS_DETAIL = BASE_URL + "/GetProcessDetails";//流程详情
     public static final String LOAN_FOLLOW_COMMIT = BASE_URL + "/AppSetMortgagefollowFile";//提交贷后跟进
+    public static final String LOGOUT = BASE_URL + "/AppLoginOut";
 
     public static final int IMAGE_CAPTURE = 1001;// 拍照
     public static final int IMAGE_SELECT = 1002;// 从相册选择

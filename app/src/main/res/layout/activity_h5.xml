@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_h5"
+        style="@style/toolbar_common"
+        android:background="@color/toolbar_bg">
+
+        <ImageButton
+            android:id="@+id/ib_back_h5"
+            style="@style/toolbar_back_white" />
+
+        <TextView
+            android:id="@+id/tv_title_h5"
+            style="@style/toolbar_title"
+            android:text="资讯" />
+    </android.support.v7.widget.Toolbar>
+
+    <WebView
+        android:id="@+id/wv_h5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

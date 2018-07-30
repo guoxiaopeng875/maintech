@@ -71,8 +71,8 @@ public class Login extends BaseActivity {
             String account = mEtAccountLogin.getText().toString();
             String pwd = mEtPwdLogin.getText().toString();
 
-            account = "周杰伦";
-            pwd = "123456";
+//            account = "周杰伦";
+//            pwd = "123456";
             doLogin(account, pwd);
         });
         mIvBackLogin.setOnClickListener(view -> AppUtils.finishActivity(this));

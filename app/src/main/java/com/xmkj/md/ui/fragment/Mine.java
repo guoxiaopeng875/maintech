@@ -91,7 +91,9 @@ public class Mine extends BaseFragment {
         });
     }
 
-    @OnClick({R.id.ll_commission_mine, R.id.ll_mybusiness_mine, R.id.ll_contacts_mine, R.id.ll_mine_info_mine, R.id.ll_recommend_code_mine, R.id.ll_achievement_mine})
+    @OnClick({R.id.ll_commission_mine, R.id.ll_mybusiness_mine, R.id.ll_contacts_mine,
+            R.id.ll_mine_info_mine, R.id.ll_recommend_code_mine, R.id.ll_achievement_mine,
+            R.id.btn_logout_mine})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_commission_mine:
@@ -113,6 +115,9 @@ public class Mine extends BaseFragment {
                 break;
             case R.id.ll_achievement_mine://我的业绩
                 AppUtils.jump2Next(getActivity(), Achievement.class);
+                break;
+            case R.id.btn_logout_mine:
+                MdHttpHelper.logout(getContext());
                 break;
         }
     }

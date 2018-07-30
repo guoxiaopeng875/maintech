@@ -36,6 +36,7 @@ import com.xmkj.md.model.OverdueDetailBean;
 import com.xmkj.md.model.PlatformBean;
 import com.xmkj.md.model.ProcessDetailBean;
 import com.xmkj.md.model.RecommendCodeBean;
+import com.xmkj.md.ui.activity.Splash;
 import com.xmkj.md.widget.MyProgressDialog;
 
 import java.io.File;
@@ -697,6 +698,23 @@ public class MdHttpHelper {
                 ToastUtils.showToast(context, dataBean.getMessage());
             }
         });
+    }
+
+
+    public static void logout(Context context) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        httpHelper.post(Constants.LOGOUT, null, new SpotsCallback<BaseBean>(context, MSG_LOGOUT) {
+            @Override
+            public void onSuccess(Response response, BaseBean dataBean) {
+                if (dataBean.isSuccess()) {
+                    ToastUtils.showToast(context,"退出登录成功");
+                    AppUtils.jumpAndClearTask(context, Splash.class);
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+
     }
 
 

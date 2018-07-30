@@ -1,6 +1,7 @@
 package com.xmkj.md.ui.activity;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -50,7 +51,11 @@ public class Main extends BaseActivity {
 
     @Override
     public void initData() {
-
+//        DisplayMetrics dm = new DisplayMetrics();
+//        getWindowManager().getDefaultDisplay().getMetrics(dm);
+//        int width = dm.widthPixels;
+//        int height = dm.heightPixels;
+//        ToastUtils.showToast("当前手机的分辨率宽==="+width+"高度==="+height);
     }
 
     @Override

@@ -16,261 +16,284 @@
             android:text="@string/mine" />
     </android.support.v7.widget.Toolbar>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/toolbar_bg"
-        android:paddingBottom="@dimen/x8"
-        android:paddingTop="@dimen/x8">
-
-        <ImageView
-            android:id="@+id/iv_avatar_mine"
-            style="@style/margin_start_x13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:src="@mipmap/avatar_default" />
-
+        android:layout_height="match_parent">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/x13"
-            android:layout_toEndOf="@id/iv_avatar_mine"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <!--姓名，推荐码-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/toolbar_bg"
+                android:paddingBottom="@dimen/x8"
+                android:paddingTop="@dimen/x8">
+
+                <ImageView
+                    android:id="@+id/iv_avatar_mine"
+                    style="@style/margin_start_x13"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/avatar_default" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x13"
+                    android:layout_toEndOf="@id/iv_avatar_mine"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/tv_name_mine"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="18.7sp"
-                        android:textStyle="bold" />
+                        android:layout_height="wrap_content">
+                        <!--姓名，推荐码-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
 
-                    <TextView
+                            <TextView
+                                android:id="@+id/tv_name_mine"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="18.7sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/x3"
+                                android:background="@drawable/shape_mine"
+                                android:gravity="center"
+                                android:paddingBottom="@dimen/x3"
+                                android:paddingEnd="@dimen/x7"
+                                android:paddingStart="@dimen/x7"
+                                android:paddingTop="@dimen/x3"
+                                android:text="@string/code_mine"
+                                android:textColor="@color/white"
+                                android:textSize="12.1sp" />
+                        </LinearLayout>
+                        <!--手机号，推荐码-->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/x8"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_phone_mine"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/white"
+                                android:textSize="18.7sp" />
+
+                            <TextView
+                                android:id="@+id/tv_code_mine"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:padding="@dimen/x3"
+                                android:textColor="@color/white"
+                                android:textSize="15.4sp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/x3"
-                        android:background="@drawable/shape_mine"
-                        android:gravity="center"
-                        android:paddingBottom="@dimen/x3"
-                        android:paddingEnd="@dimen/x7"
-                        android:paddingStart="@dimen/x7"
-                        android:paddingTop="@dimen/x3"
-                        android:text="@string/code_mine"
-                        android:textColor="@color/white"
-                        android:textSize="12.1sp" />
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/quote_left" />
+
+                        <TextView
+                            android:id="@+id/tv_tag_mine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="@dimen/x2"
+                            android:layout_marginEnd="@dimen/x3"
+                            android:layout_marginStart="@dimen/x3"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/white"
+                            android:textSize="13.2sp" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:src="@mipmap/quote_right" />
+                    </LinearLayout>
                 </LinearLayout>
-                <!--手机号，推荐码-->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/x8"
-                    android:orientation="vertical">
+            </RelativeLayout>
 
-                    <TextView
-                        android:id="@+id/tv_phone_mine"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="18.7sp" />
-
-                    <TextView
-                        android:id="@+id/tv_code_mine"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/x3"
-                        android:textColor="@color/white"
-                        android:textSize="15.4sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-            </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x7"
+                android:background="@drawable/shape_shadow" />
+            <!--我的佣金-->
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:id="@+id/ll_commission_mine"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x46"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/x13">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@mipmap/quote_left" />
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_my_commission" />
 
                 <TextView
-                    android:id="@+id/tv_tag_mine"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="@dimen/x2"
-                    android:layout_marginEnd="@dimen/x3"
-                    android:layout_marginStart="@dimen/x3"
-                    android:gravity="center_vertical"
-                    android:textColor="@color/white"
-                    android:textSize="13.2sp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x13"
+                    android:text="@string/my_commission"
+                    android:textColor="@color/black87"
+                    android:textSize="15.4sp" />
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:id="@+id/ll_mybusiness_mine"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x46"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/x13">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:src="@mipmap/quote_right" />
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_my_business" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x13"
+                    android:text="@string/my_business"
+                    android:textColor="@color/black87"
+                    android:textSize="15.4sp" />
             </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:id="@+id/ll_achievement_mine"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x46"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/x13">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_my_chart" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x13"
+                    android:text="@string/my_chart"
+                    android:textColor="@color/black87"
+                    android:textSize="15.4sp" />
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:id="@+id/ll_contacts_mine"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x46"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/x13">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_my_contact" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x13"
+                    android:text="@string/my_contacts"
+                    android:textColor="@color/black87"
+                    android:textSize="15.4sp" />
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:id="@+id/ll_mine_info_mine"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x46"
+                android:layout_marginTop="@dimen/x6"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/x13">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_my_profile" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x13"
+                    android:text="@string/my_profile"
+                    android:textColor="@color/black87"
+                    android:textSize="15.4sp" />
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <LinearLayout
+                android:id="@+id/ll_recommend_code_mine"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x46"
+                android:background="@color/white"
+                android:gravity="center_vertical"
+                android:paddingStart="@dimen/x13">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_my_recommend" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/x13"
+                    android:text="@string/my_recommend"
+                    android:textColor="@color/black87"
+                    android:textSize="15.4sp" />
+            </LinearLayout>
+
+            <View style="@style/line" />
+
+            <Button
+                android:id="@+id/btn_logout_mine"
+                style="@style/md_btn"
+                android:layout_marginLeft="@dimen/x40"
+                android:layout_marginRight="@dimen/x40"
+                android:layout_alignParentBottom="true"
+                android:text="退出登录" />
+
         </LinearLayout>
-    </RelativeLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x7"
-        android:background="@drawable/shape_shadow" />
-    <!--我的佣金-->
-    <LinearLayout
-        android:id="@+id/ll_commission_mine"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x46"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:paddingStart="@dimen/x13">
+    </ScrollView>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_my_commission" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/x13"
-            android:text="@string/my_commission"
-            android:textColor="@color/black87"
-            android:textSize="15.4sp" />
-    </LinearLayout>
 
-    <View style="@style/line" />
-
-    <LinearLayout
-        android:id="@+id/ll_mybusiness_mine"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x46"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:paddingStart="@dimen/x13">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_my_business" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/x13"
-            android:text="@string/my_business"
-            android:textColor="@color/black87"
-            android:textSize="15.4sp" />
-    </LinearLayout>
-
-    <View style="@style/line" />
-
-    <LinearLayout
-        android:id="@+id/ll_achievement_mine"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x46"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:paddingStart="@dimen/x13">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_my_chart" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/x13"
-            android:text="@string/my_chart"
-            android:textColor="@color/black87"
-            android:textSize="15.4sp" />
-    </LinearLayout>
-
-    <View style="@style/line" />
-
-    <LinearLayout
-        android:id="@+id/ll_contacts_mine"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x46"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:paddingStart="@dimen/x13">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_my_contact" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/x13"
-            android:text="@string/my_contacts"
-            android:textColor="@color/black87"
-            android:textSize="15.4sp" />
-    </LinearLayout>
-
-    <View style="@style/line" />
-
-    <LinearLayout
-        android:id="@+id/ll_mine_info_mine"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x46"
-        android:layout_marginTop="@dimen/x6"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:paddingStart="@dimen/x13">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_my_profile" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/x13"
-            android:text="@string/my_profile"
-            android:textColor="@color/black87"
-            android:textSize="15.4sp" />
-    </LinearLayout>
-
-    <View style="@style/line" />
-
-    <LinearLayout
-        android:id="@+id/ll_recommend_code_mine"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x46"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:paddingStart="@dimen/x13">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_my_recommend" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/x13"
-            android:text="@string/my_recommend"
-            android:textColor="@color/black87"
-            android:textSize="15.4sp" />
-    </LinearLayout>
-
-    <View style="@style/line" />
 
 </LinearLayout>

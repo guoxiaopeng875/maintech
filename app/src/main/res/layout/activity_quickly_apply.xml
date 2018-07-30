@@ -101,9 +101,11 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:background="@null"
+                    android:maxLength="11"
+                    android:singleLine="true"
                     android:gravity="center_vertical"
                     android:inputType="phone"
-                    android:textColor="@color/black54"
+                    android:textColor="@color/black87"
                     android:textSize="15.4sp"
                     android:textStyle="bold" />
 
@@ -133,6 +135,8 @@
                     android:layout_height="0dp"
                     android:layout_weight="1"
                     android:background="@null"
+                    android:maxLength="11"
+                    android:inputType="number"
                     android:gravity="center_vertical"
                     android:singleLine="true"
                     android:textColor="@color/black87"

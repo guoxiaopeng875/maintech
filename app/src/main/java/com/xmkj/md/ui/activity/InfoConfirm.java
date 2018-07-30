@@ -125,6 +125,7 @@ public class InfoConfirm extends BaseActivity {
                 AppUtils.jump2Next(InfoConfirm.this, BeginApply.class);
                 break;
             case R.id.tv_baseinfo_change://客户基本信息修改
+                mOrderInfo.setTarget(Constants.TARGET_CHANGE);
                 EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_CHANGE_CUSTOMINFO, mOrderInfo));
                 AppUtils.jump2Next(InfoConfirm.this, ApplyUserInfo.class);
                 break;

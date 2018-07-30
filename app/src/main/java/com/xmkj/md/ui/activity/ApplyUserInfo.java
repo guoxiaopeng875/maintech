@@ -8,14 +8,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.squareup.okhttp.Response;
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
 import com.xmkj.md.config.Constants;
-import com.xmkj.md.http.OkHttpHelper;
-import com.xmkj.md.http.SpotsCallback;
 import com.xmkj.md.model.AddOrderInfoBean;
-import com.xmkj.md.model.BaseResponseBean;
 import com.xmkj.md.model.MessageEvent;
 import com.xmkj.md.model.OrderInfoBean;
 import com.xmkj.md.utils.AppUtils;
@@ -23,9 +19,6 @@ import com.xmkj.md.utils.EventBusUtil;
 import com.xmkj.md.utils.MdHttpHelper;
 import com.xmkj.md.utils.StringUtils;
 import com.xmkj.md.utils.ToastUtils;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -74,7 +67,15 @@ public class ApplyUserInfo extends BaseActivity {
             mEtNameApply.setText(customName != null ? customName : "");
             mEtCellphoneApply.setText(phone != null ? phone : "");
             mEtCustomerIdNo.setText(idcard != null ? idcard : "");
-            mBtnSubmitUserInfo.setText(customName != null ? "确认" : "下一步");
+            switch (mOrderInfo.getTarget()) {
+                case Constants.TARGET_NEXT:
+                    mBtnSubmitUserInfo.setText("下一步");
+                    break;
+                case Constants.TARGET_CHANGE:
+                    mBtnSubmitUserInfo.setText("完成");
+                    break;
+            }
+
         }
     }
 
@@ -126,48 +127,31 @@ public class ApplyUserInfo extends BaseActivity {
         mOrderInfo.setCustomerName(customerName);
         mOrderInfo.setMobilePhone(phone);
         mOrderInfo.setIdCard(customerIdCard);
-        if (TextUtils.equals("下一步", mBtnSubmitUserInfo.getText().toString())) {
+        if (mOrderInfo.getTarget() == Constants.TARGET_NEXT) {
             addOrderInfo();
             return;
         }
         EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_CHANGE_ORDER_INFO, mOrderInfo));
         finish();
-        //changeInfo(customerName, phone, customerIdCard);
     }
 
     private void addOrderInfo() {
-        MdHttpHelper.addOrderInfo(this, mOrderInfo ,new MdHttpHelper.SuccessCallback<AddOrderInfoBean>() {
-                    @Override
-                    public void onSuccess(AddOrderInfoBean data) {
-                        if (mOrderInfo == null) {
-                            ToastUtils.showToast(ApplyUserInfo.this, "orderInfo为空");
-                            return;
-                        }
-                        mOrderInfo.setOrderId(data.getOrderId());
-                        mOrderInfo.setList(data.getFileDirList());
-                        mOrderInfo.setTarget(Constants.TARGET_NEXT);
-                        EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, mOrderInfo));
-                        AppUtils.jump2Next(ApplyUserInfo.this, UpLoadInfo.class);
-                    }
-                });
-    }
-
-    /***修改报单客户信息***/
-    private void changeInfo(String customerName, String phone, String customerIdCard) {
-        OkHttpHelper httpHelper = OkHttpHelper.getInstance(this);
-        Map<String, Object> params = new HashMap<>();
-        params.put("OrderId", mOrderId);
-        params.put("CustomerName", customerName);
-        params.put("MobilePhone", phone);
-        params.put("IdCard", customerIdCard);
-        httpHelper.post(Constants.BASE_URL + "/UpdateOrderConfirmed", params, new SpotsCallback<BaseResponseBean>(this, "加载中") {
-
+        MdHttpHelper.addOrderInfo(this, mOrderInfo, new MdHttpHelper.SuccessCallback<AddOrderInfoBean>() {
             @Override
-            public void onSuccess(Response response, BaseResponseBean items) {
-                ToastUtils.showToast("下一步");
+            public void onSuccess(AddOrderInfoBean data) {
+                if (mOrderInfo == null) {
+                    ToastUtils.showToast(ApplyUserInfo.this, "orderInfo为空");
+                    return;
+                }
+                mOrderInfo.setOrderId(data.getOrderId());
+                mOrderInfo.setList(data.getFileDirList());
+                mOrderInfo.setTarget(Constants.TARGET_NEXT);
+                EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, mOrderInfo));
+                AppUtils.jump2Next(ApplyUserInfo.this, UpLoadInfo.class);
             }
         });
     }
+
 
     // 改变提交按钮的样式
     private void changeSubBtn() {

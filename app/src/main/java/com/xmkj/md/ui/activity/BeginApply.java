@@ -127,6 +127,7 @@ public class BeginApply extends BaseActivity {
             orderInfoBean.setPlatformName(group_platform.getSelect());
             orderInfoBean.setBusinessTypeId(group_business.getId());
             orderInfoBean.setBusinessTypeName(group_business.getSelect());
+            orderInfoBean.setTarget(Constants.TARGET_NEXT);
             EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, orderInfoBean));
         } else {
             if (group_platform.getId() == null) {
@@ -140,7 +141,8 @@ public class BeginApply extends BaseActivity {
                 mOrderInfo.setBusinessTypeId(group_business.getId());
                 mOrderInfo.setBusinessTypeName(group_business.getSelect());
             }
-            EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_CHANGE_ORDER_INFO, mOrderInfo));
+            mOrderInfo.setTarget(Constants.TARGET_NEXT);
+            EventBusUtil.sendStickyEvent(new MessageEvent(Constants.CODE_ORDER_INFO, mOrderInfo));
         }
         AppUtils.jump2Next(this, ApplyUserInfo.class);
     }
@@ -183,7 +185,6 @@ public class BeginApply extends BaseActivity {
             mOrderInfo = (OrderInfoBean) event.getData();
         }
     }
-
 
 
 }

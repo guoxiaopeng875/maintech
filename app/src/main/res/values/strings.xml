@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MD</string>
+    <string name="app_name">铭德融租</string>
     <string name="splash_quick_apply">快速报单</string>
     <string name="splash_login">员工用户登录</string>
     <string name="login_user">用户登录</string>

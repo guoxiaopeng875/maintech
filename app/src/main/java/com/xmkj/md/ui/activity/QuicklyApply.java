@@ -84,6 +84,10 @@ public class QuicklyApply extends BaseActivity {
             ToastUtils.showToastStrings("请填写完整信息");
             return;
         }
+        if (code.length() != 6 && code.length() != 11){
+            ToastUtils.showToast(this,"推荐码必须为6或11位数");
+            return;
+        }
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(this);
         Map<String, Object> params = new HashMap<>();
         params.put("CustomerName", name);
