@@ -66,4 +66,31 @@ public class AppData {
         return sp.getString("phone", "");
     }
 
+    /**
+     * 登录账户
+     *
+     * @param account the account
+     */
+    public void setAccount(String account) {
+        sp.edit().putString("account", account).commit();
+    }
+
+    public String getAccount() {
+        return sp.getString("account", null);
+    }
+
+    /**
+     * 登录账户密码
+     *
+     * @param pwd the pwd
+     */
+    public void setLoginPwd(String pwd) {
+        sp.edit().putString("pwd", pwd).commit();
+    }
+
+    public String getLoginPwd() {
+        return sp.getString("pwd", null);
+    }
+
+
 }

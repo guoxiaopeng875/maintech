@@ -66,9 +66,30 @@
                 <RelativeLayout style="@style/md_rl_info_confirm">
 
                     <TextView
+                        android:id="@+id/text_product_comfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="产品类型"
+                        android:textColor="@color/black54"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_product_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text_product_comfirm"
+                        android:layout_marginTop="@dimen/x6"
+                        android:text="--"
+                        android:textColor="@color/black87"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
                         android:id="@+id/text_type_comfirm"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_product_confirm"
+                        android:layout_marginTop="@dimen/x15"
                         android:text="业务类型"
                         android:textColor="@color/black54"
                         android:textSize="12sp" />
@@ -99,6 +120,27 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/text_company_comfirm"
+                        android:layout_marginTop="@dimen/x6"
+                        android:text="--"
+                        android:textColor="@color/black87"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/text_cartype_comfirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_company_confirm"
+                        android:layout_marginTop="@dimen/x15"
+                        android:text="车辆类型"
+                        android:textColor="@color/black54"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_cartype_confirm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/text_cartype_comfirm"
                         android:layout_marginTop="@dimen/x6"
                         android:text="--"
                         android:textColor="@color/black87"

@@ -32,6 +32,8 @@ public class Login extends BaseActivity {
     @BindView(R.id.btn_login)
     Button mBtnLogin;
 
+    private AppData mAppData;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_login;
@@ -44,7 +46,15 @@ public class Login extends BaseActivity {
 
     @Override
     public void initData() {
-
+        mAppData = AppData.GetInstance(mGlobalContext);
+        if (!TextUtils.isEmpty(mAppData.getAccount())) {
+            mEtAccountLogin.setText(mAppData.getAccount());
+        }
+        if (!TextUtils.isEmpty(mAppData.getLoginPwd())) {
+            mEtPwdLogin.setText(mAppData.getLoginPwd());
+            mEtPwdLogin.setSelection(mAppData.getLoginPwd().length());
+            return;
+        }
     }
 
     // 调登录接口
@@ -58,8 +68,10 @@ public class Login extends BaseActivity {
             @Override
             public void onSuccess(Response response, BaseBean<UserBean> user) {
                 // 设置token
-                AppData.GetInstance(mContext).setAccessToken(user.getData().getToken());
-                AppData.GetInstance(mContext).setPhone(user.getData().getUserInfo().getPhone());
+                mAppData.setAccessToken(user.getData().getToken());
+                mAppData.setPhone(user.getData().getUserInfo().getPhone());
+                mAppData.setAccount(account);
+                mAppData.setLoginPwd(pwd);
                 AppUtils.jump2Next(Login.this, Main.class);
             }
         });
@@ -70,6 +82,14 @@ public class Login extends BaseActivity {
         mBtnLogin.setOnClickListener(view -> {
             String account = mEtAccountLogin.getText().toString();
             String pwd = mEtPwdLogin.getText().toString();
+            if (TextUtils.isEmpty(account)) {
+                ToastUtils.showToast("请输入账号");
+                return;
+            }
+            if (TextUtils.isEmpty(pwd)) {
+                ToastUtils.showToast("请输入密码");
+                return;
+            }
 
 //            account = "周杰伦";
 //            pwd = "123456";

@@ -80,6 +80,7 @@ public class RecyclerAdapter extends SecondaryListAdapter<RecyclerAdapter.GroupI
         } else {
             holder.ivArr.setImageResource(R.mipmap.ic_arrow_up);
         }
+        notifyDataSetChanged();
     }
 
     @Override

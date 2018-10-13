@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.xmkj.md.R;
 import com.xmkj.md.base.BaseActivity;
@@ -17,6 +18,7 @@ import com.xmkj.md.model.OrderInfoBean;
 import com.xmkj.md.utils.AppUtils;
 import com.xmkj.md.utils.EventBusUtil;
 import com.xmkj.md.utils.MdHttpHelper;
+import com.xmkj.md.utils.ResourcesUtils;
 import com.xmkj.md.utils.StringUtils;
 import com.xmkj.md.utils.ToastUtils;
 
@@ -41,12 +43,28 @@ public class ApplyUserInfo extends BaseActivity {
     EditText mEtCustomerIdNo;
     @BindView(R.id.btn_submit_user_info)
     Button mBtnSubmitUserInfo;
+    @BindView(R.id.et_company_apply)
+    EditText mEtCompany;
+    @BindView(R.id.et_price_apply)
+    EditText mEtPrice;
+    @BindView(R.id.et_time_apply)
+    EditText mEtTime;
+    @BindView(R.id.bt_custom)
+    Button mBtnCustom;
+    @BindView(R.id.bt_company)
+    Button mBtnCompany;
+    @BindView(R.id.ll_company_info)
+    LinearLayout mLlCompanyInfo;
     // 提交按钮是否可以点击
     private boolean btnClickable = false;
     private String mOrderId;
     private String mPlatformId;
     private String mBusinessTypeId;
     private OrderInfoBean mOrderInfo;
+    private int mOrderType;
+    private final int ORDER_TYPE_CUSTOM = 0;
+    private final int ORDER_TYPE_COMPANY = 1;
+
 
     @Override
     protected int getLayoutId() {
@@ -87,7 +105,7 @@ public class ApplyUserInfo extends BaseActivity {
         mEtCustomerIdNo.addTextChangedListener(listener);
     }
 
-    @OnClick({R.id.iv_back_user_info, R.id.btn_cancel_apply_info, R.id.btn_submit_user_info})
+    @OnClick({R.id.iv_back_user_info, R.id.btn_cancel_apply_info, R.id.btn_submit_user_info, R.id.bt_custom, R.id.bt_company})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.iv_back_user_info:
@@ -108,7 +126,22 @@ public class ApplyUserInfo extends BaseActivity {
             case R.id.btn_submit_user_info:
                 onSubmit();
                 break;
+            case R.id.bt_custom:
+                showCompanyInfo(false);
+                break;
+            case R.id.bt_company:
+                showCompanyInfo(true);
+                break;
         }
+    }
+
+    private void showCompanyInfo(boolean isShow) {
+        mOrderType = isShow ? ORDER_TYPE_COMPANY : ORDER_TYPE_CUSTOM;
+        mLlCompanyInfo.setVisibility(isShow ? View.VISIBLE : View.GONE);
+        mBtnCustom.setTextColor(ResourcesUtils.getColor(isShow ? R.color.black87 : R.color.white));
+        mBtnCustom.setBackgroundColor(ResourcesUtils.getColor(isShow ? R.color.black12 : R.color.green87));
+        mBtnCompany.setTextColor(ResourcesUtils.getColor(isShow ? R.color.white : R.color.black87));
+        mBtnCompany.setBackgroundColor(ResourcesUtils.getColor(isShow ? R.color.green87 : R.color.black12));
     }
 
     // 调用提交接口
@@ -120,13 +153,34 @@ public class ApplyUserInfo extends BaseActivity {
         String customerName = mEtNameApply.getText().toString().trim();
         String phone = mEtCellphoneApply.getText().toString();
         String customerIdCard = mEtCustomerIdNo.getText().toString().trim();
+        String company = mEtCompany.getText().toString().trim();
+        String price = mEtPrice.getText().toString().trim();
+        String time = mEtTime.getText().toString().trim();
         if (!StringUtils.isPhoneNumberValid(phone)) {
             ToastUtils.showToast("请输入正确手机号");
             return;
         }
+        if (mOrderType == ORDER_TYPE_COMPANY) {//公司单
+            if (TextUtils.isEmpty(company)) {
+                ToastUtils.showToast("请输入公司名");
+                return;
+            }
+            if (TextUtils.isEmpty(price)) {
+                ToastUtils.showToast("请输入车辆价格");
+                return;
+            }
+            if (TextUtils.isEmpty(time)) {
+                ToastUtils.showToast("请输入期数");
+                return;
+            }
+            mOrderInfo.setCompany(company);
+            mOrderInfo.setPrice(price);
+            mOrderInfo.setTime(time);
+        }
         mOrderInfo.setCustomerName(customerName);
         mOrderInfo.setMobilePhone(phone);
         mOrderInfo.setIdCard(customerIdCard);
+
         if (mOrderInfo.getTarget() == Constants.TARGET_NEXT) {
             addOrderInfo();
             return;

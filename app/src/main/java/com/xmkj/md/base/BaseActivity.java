@@ -1,5 +1,6 @@
 package com.xmkj.md.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -36,11 +37,13 @@ import me.yokeyword.fragmentation.SupportActivity;
 public abstract class BaseActivity extends SupportActivity {
 
     protected final String TAG = this.getClass().getSimpleName() + "===";//日志输出标志
+    public Context mGlobalContext;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mGlobalContext = getApplicationContext();
         setContentView(getLayoutId());
         StatusBarSettingUtils.setStatusBarColor(this, R.color.toolbar_bg);
         if (isRegisterEventBus()) {

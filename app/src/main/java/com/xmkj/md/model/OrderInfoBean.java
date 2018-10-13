@@ -10,6 +10,9 @@ import java.util.List;
 public class OrderInfoBean implements Serializable {
 
     private String orderId;
+    private String productName;
+    private String productId;
+    private String CarType;
     private String customerName;
     private String mobilePhone;
     private String idCard;
@@ -20,7 +23,34 @@ public class OrderInfoBean implements Serializable {
     private String remark;
     private List<FiledirsBean.FileDirListBean> list;
     private int target;
+    private String company;
+    private String price;
+    private String time;
 
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getCarType() {
+        return CarType;
+    }
+
+    public void setCarType(String carType) {
+        CarType = carType;
+    }
 
     public String getCustomerName() {
         return customerName;
@@ -110,6 +140,29 @@ public class OrderInfoBean implements Serializable {
         this.target = target;
     }
 
+    public String getCompany() {
+        return company;
+    }
+
+    public void setCompany(String company) {
+        this.company = company;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
 
 
 

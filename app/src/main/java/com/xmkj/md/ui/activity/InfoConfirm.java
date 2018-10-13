@@ -36,6 +36,10 @@ public class InfoConfirm extends BaseActivity {
     TextView mTvCompany;
     @BindView(R.id.tv_name_confirm)
     TextView mTvName;
+    @BindView(R.id.tv_product_confirm)
+    TextView mTvProduct;
+    @BindView(R.id.tv_cartype_confirm)
+    TextView mTvCarType;
     @BindView(R.id.tv_mobile_confirm)
     TextView mTvMobile;
     @BindView(R.id.tv_idcard_confirm)
@@ -70,6 +74,8 @@ public class InfoConfirm extends BaseActivity {
             mTvType.setText(mOrderInfo.getBusinessTypeName());
             mTvCompany.setText(mOrderInfo.getPlatformName());
             mTvName.setText(mOrderInfo.getCustomerName());
+            mTvProduct.setText(mOrderInfo.getProductName());
+            mTvCarType.setText(mOrderInfo.getCarType());
             mTvMobile.setText(mOrderInfo.getMobilePhone());
             mTvIdcard.setText(mOrderInfo.getIdCard());
             mRvInfoConfirm.setLayoutManager(new LinearLayoutManager(this));

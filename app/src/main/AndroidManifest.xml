@@ -114,6 +114,10 @@
             android:name=".ui.activity.H5Detail"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.Product"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait" />
 
 
 

@@ -23,6 +23,7 @@ import com.xmkj.md.model.AddOrderInfoBean;
 import com.xmkj.md.model.BaseBean;
 import com.xmkj.md.model.BaseResponseBean;
 import com.xmkj.md.model.BusinessDetailBean;
+import com.xmkj.md.model.CarTypeListBean;
 import com.xmkj.md.model.ContactsBean;
 import com.xmkj.md.model.CostDetailBean;
 import com.xmkj.md.model.FiledirsBean;
@@ -35,6 +36,7 @@ import com.xmkj.md.model.OrderInfoBean;
 import com.xmkj.md.model.OverdueDetailBean;
 import com.xmkj.md.model.PlatformBean;
 import com.xmkj.md.model.ProcessDetailBean;
+import com.xmkj.md.model.ProductListBean;
 import com.xmkj.md.model.RecommendCodeBean;
 import com.xmkj.md.ui.activity.Splash;
 import com.xmkj.md.widget.MyProgressDialog;
@@ -207,9 +209,11 @@ public class MdHttpHelper {
      * @param context  the context
      * @param callback the callback
      */
-    public static void getPlatForm(Context context, SuccessCallback callback) {
+    public static void getPlatForm(Context context, String productId, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
-        httpHelper.post(Constants.PLATFORM, null, new SpotsCallback<BaseBean<List<PlatformBean>>>(context, MSG_LOADING) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("productId", productId);
+        httpHelper.post(Constants.PLATFORM, params, new SpotsCallback<BaseBean<List<PlatformBean>>>(context, MSG_LOADING) {
             @Override
             public void onSuccess(Response response, BaseBean<List<PlatformBean>> dataBean) {
                 if (dataBean.isSuccess()) {
@@ -649,9 +653,9 @@ public class MdHttpHelper {
                                              String feedbackOpinion, SuccessCallback callback) {
         OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
         Map<String, Object> params = new HashMap<>();
-        params.put("FileIds", mGson.toJson(list));
-        params.put("FeedbackOpinion", "\"\"" + feedbackOpinion + "\"\"");
-        params.put("OrderId", "\"\"" + orderId + "\"\"");
+        params.put("FileIds", list);
+        params.put("FeedbackOpinion", feedbackOpinion);
+        params.put("OrderId", orderId);
         httpHelper.post(Constants.LOAN_FOLLOW_COMMIT, params, new SpotsCallback<BaseBean>(context, MSG_UPLOAD) {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
@@ -707,15 +711,44 @@ public class MdHttpHelper {
             @Override
             public void onSuccess(Response response, BaseBean dataBean) {
                 if (dataBean.isSuccess()) {
-                    ToastUtils.showToast(context,"退出登录成功");
+                    ToastUtils.showToast(context, "退出登录成功");
                     AppUtils.jumpAndClearTask(context, Splash.class);
                     return;
                 }
                 ToastUtils.showToast(context, dataBean.getMessage());
             }
         });
-
     }
+
+    public static void getProductList(Context context, SuccessCallback callback) {
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        httpHelper.post(Constants.PRODUCT_LIST, null, new SpotsCallback<BaseBean<List<ProductListBean.DataBean>>>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean<List<ProductListBean.DataBean>> dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
+
+    public static void getCarTypeList(Context context,SuccessCallback callback){
+        OkHttpHelper httpHelper = OkHttpHelper.getInstance(context);
+        httpHelper.post(Constants.CAR_TYPE_LIST, null, new SpotsCallback<BaseBean<List<CarTypeListBean.DataBean>>>(context, MSG_LOADING) {
+            @Override
+            public void onSuccess(Response response, BaseBean<List<CarTypeListBean.DataBean>> dataBean) {
+                if (dataBean.isSuccess()) {
+                    callback.onSuccess(dataBean.getData());
+                    return;
+                }
+                ToastUtils.showToast(context, dataBean.getMessage());
+            }
+        });
+    }
+
 
 
     /**

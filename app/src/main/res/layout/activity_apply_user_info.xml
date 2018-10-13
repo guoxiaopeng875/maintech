@@ -14,7 +14,6 @@
             style="@style/toolbar_back_green" />
 
         <Button
-            android:textStyle="bold"
             android:id="@+id/btn_cancel_apply_info"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -23,7 +22,8 @@
             android:gravity="center"
             android:text="@string/cancel_apply"
             android:textColor="@color/black87"
-            android:textSize="15.4sp" />
+            android:textSize="15.4sp"
+            android:textStyle="bold" />
     </android.support.v7.widget.Toolbar>
 
 
@@ -36,6 +36,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:id="@+id/bt_custom"
+                    android:layout_width="@dimen/x80"
+                    android:layout_height="@dimen/x38"
+                    android:text="个人"
+                    android:textSize="15sp"
+                    android:textColor="@color/white"
+                    android:background="@color/green87"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless" />
+
+                <Button
+                    android:id="@+id/bt_company"
+                    android:layout_width="@dimen/x80"
+                    android:layout_height="@dimen/x38"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:text="公司"
+                    android:textSize="15sp"
+                    android:textColor="@color/black87"
+                    android:background="@color/black12"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless"/>
+            </LinearLayout>
 
             <TextView
                 style="@style/md_title"
@@ -138,6 +164,113 @@
             </LinearLayout>
 
             <View style="@style/line" />
+
+            <LinearLayout
+                android:id="@+id/ll_company_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+                <LinearLayout
+                    style="@style/margin_start_x13"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x73"
+                    android:layout_marginTop="@dimen/x13"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="公司名称"
+                        android:textColor="@color/black54"
+                        android:textSize="15.4sp" />
+
+                    <EditText
+                        android:id="@+id/et_company_apply"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:textColor="@color/black87"
+                        android:textSize="15.4sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View style="@style/line" />
+
+                <LinearLayout
+                    style="@style/margin_start_x13"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x73"
+                    android:layout_marginTop="@dimen/x13"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="车辆价格"
+                        android:textColor="@color/black54"
+                        android:textSize="15.4sp" />
+
+                    <EditText
+                        android:id="@+id/et_price_apply"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:singleLine="true"
+                        android:textColor="@color/black87"
+                        android:textSize="15.4sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View style="@style/line" />
+
+                <LinearLayout
+                    style="@style/margin_start_x13"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x73"
+                    android:layout_marginTop="@dimen/x13"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="申请期数"
+                        android:textColor="@color/black54"
+                        android:textSize="15.4sp" />
+
+                    <EditText
+                        android:id="@+id/et_time_apply"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textColor="@color/black87"
+                        android:textSize="15.4sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <View
+                    style="@style/line"
+                    android:layout_marginBottom="@dimen/x60" />
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>

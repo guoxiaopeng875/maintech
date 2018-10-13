@@ -100,7 +100,7 @@ public class Main extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tab_post_icon:
-                AppUtils.jump2Next(Main.this, BeginApply.class);
+                AppUtils.jump2Next(Main.this, Product.class);
                 this.overridePendingTransition(R.anim.activity_open, R.anim.activity_noanimate);
                 break;
         }
